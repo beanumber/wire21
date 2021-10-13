@@ -1,0 +1,139 @@
+---
+title: "Tools for Sports Analytics"
+authors:
+  - name: Benjamin S. Baumer
+    thanks: Use footnote for providing further information about author (webpage, alternative address)---*not* for acknowledging funding agencies. Optional.
+    department: Statistical & Data Sciences
+    affiliation: Smith College
+    location: Northampton, MA 01063
+    email: bbaumer@smith.edu
+    ORCID: 0000-0002-3279-0516
+  - name: Gregory J. Matthews
+    department: Mathematics and Statistics
+    affiliation: Loyola University Chicago
+    location: Chicago, IL 60660
+    email: gmatthews1@luc.edu
+    ORCID: 0000-0002-8413-5097
+abstract: |
+  The abstract should be a concise (less than 250 words) description of the article and its implications. It should include all keywords associated with your article, as keywords increase its discoverability.
+keywords:
+  - sports analytics
+  - R packages
+  - sports data
+  - datasets
+bibliography: [refs.bib, pkgs.bib]
+biblio-style: unsrt   # use apa for WIRE
+output: rticles::arxiv_article
+---
+
+
+```{r setup, echo=FALSE, message=FALSE}
+knitr::opts_chunk$set(
+  echo = FALSE,
+  message = FALSE,
+  fig.align = 'center'
+)
+library(tidyverse)
+```
+
+```{r pkg}
+knitr::write_bib(
+  c(
+    "Lahman", "pitchRx", "retrosheet",
+    "teamcolors",
+    "ggplot2"
+  ),
+  file = "pkgs.bib"
+)
+```
+
+```{=latex}
+\newcommand{\pkg}[1]{\textbf{#1}}
+```
+
+**Remember that you are writing for an interdisciplinary audience. Please be sure to discuss interdisciplinary themes, issues, debates, etc. where appropriate.** Note that the WIREs are forums for review articles, rather than primary literature describing the results of original research.
+
+## Article Title
+
+The title should not exceed 20 words. Please be original and try to include keywords, especially before a colon if applicable, as they will increase the discoverability of your article. [Tips on Search Engine Optimization](https://authorservices.wiley.com/author-resources/Journal-Authors/Prepare/writing-for-seo.html)
+
+## Article Category
+
+- Overview
+
+
+## Graphical/Visual Abstract and Caption
+
+Include an attractive full color image to go under the text abstract and in the online Table of Contents.
+You will also need to upload this as a separate file during submission.
+It may be a figure or panel from the article or may be specifically designed as a visual summary. While original images are preferred, if you need to look for a thematically appropriate stock image, you can go to pixabay.com (not affiliated with Wiley) to find a free stock image with a CC0 license. Another option you have is to utilize professional illustrators with Wiley’s Graphical Abstract Design service.
+
+Size: The minimum resolution is 300 dpi. Please keep the image as simple as possible because it will be displayed in multiple sizes. Multiple panels and text other than labels are strongly discouraged.
+
+Caption: This is a narrative sentence to convey the article's essence and wider implications to a non-specialist audience. The maximum length is 50 words, but consider using 280 characters or less to facilitate social media sharing, which can increase the discoverability of your article.
+
+# Introduction
+
+Introduce your topic in ~2 paragraphs, ~750 words.
+
+While Wiley does consider articles on preprint servers (ArXiv, bioRxiv, psyArXiv, SocArXiv, engrXiv, etc.) for submission to primary research journals, preprint articles should not be cited in WIREs manuscripts as review articles should discuss and draw conclusions only from peer-reviewed research. Remember that original research/unpublished work should also not be included as it has not yet been peer-reviewed and could put the work in jeopardy of getting published in the primary press.
+
+- [CRAN Task View SportsAnalytics](https://github.com/beanumber/ctv-sportsanalytics)
+
+# Baseball
+
+@marchi2018analyzing
+
+@R-Lahman, @R-pitchRx, @R-retrosheet
+
+# Basketball
+
+# Football
+
+## American
+
+## Australian Rules
+
+## Rugby
+
+# Hockey
+
+# Soccer
+
+# Chess
+
+Figure \ref{fig:chess-startup} shows a rendering of the starting chess board obtained via the \pkg{chess} package. 
+
+```{r chess-startup, fig.cap="The starting chess board printed via the \\pkg{chess} package."}
+library(chess)
+game() %>%
+  plot()
+```
+
+
+# Other sports
+
+# APIs
+
+# Color palettes
+
+@R-teamcolors provides color palettes for professional and amateur sports teams, as well as color and fill scale functions compatible with \pkg{ggplot2} [@R-ggplot2].
+Figure \ref{fig:teamcolors} illustrates team color palettes for professional sports leagues. 
+
+
+```{r teamcolors, warning=FALSE, fig.cap="Professional sports team color palettes provided by the \\pkg{teamcolors} package. ", fig.height=9}
+teamcolors::show_team_col()
+```
+
+
+# Conclusion
+
+Sum up the key conclusions of your review, highlighting the most promising scientific developments, directions for future research, applications, etc. The conclusion should be ~2 paragraphs, ~750 words total.
+
+
+
+# Acknowledgments
+
+List contributions from individuals who do not meet the criteria for authorship (for example, to recognize people who provided technical help, collation of data, writing assistance, acquisition of funding, or a department chairperson who provided general support), with permission from the individual. Thanks to anonymous reviewers are not appropriate.
+
+# References {-}

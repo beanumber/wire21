@@ -1,3 +1,9 @@
+# Derivative files
+*.pdf
+*.log
+README.html
+sports_analytics.tex
+
 # History files
 .Rhistory
 .Rapp.history
