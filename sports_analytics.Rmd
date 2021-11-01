@@ -1,5 +1,5 @@
 ---
-title: "Tools for Sports Analytics"
+title: "Big Ideas in Sports Analytics and Statistical Tools for their Investigation"
 authors:
   - name: Benjamin S. Baumer
     thanks: Use footnote for providing further information about author (webpage, alternative address)---*not* for acknowledging funding agencies. Optional.
@@ -15,7 +15,7 @@ authors:
     email: gmatthews1@luc.edu
     ORCID: 0000-0002-8413-5097
 abstract: |
-  The abstract should be a concise (less than 250 words) description of the article and its implications. It should include all keywords associated with your article, as keywords increase its discoverability.
+  Sports analytics---broadly defined as the pursuit of improvement in athletic performance through the analysis of data---has expanded its footprint both in the professional sports industry and in academia over the past 30 years. We connect four(?) big ideas that are common across multiple sports, and explore both the shared similarities and individual idiosyncracies of analytical approaches in each sport. While our focus is on the concepts underlying each type of analysis, any implementation necessarily involves both statistical methodologies and sources of data. Where appropriate, we outline how data, models, and knowledge of the sport combine to generate actionable insights. This paper should serve as a useful overview for anyone becoming interested in the study of sports analytics. 
 keywords:
   - sports analytics
   - R packages
@@ -51,11 +51,13 @@ knitr::write_bib(
 \newcommand{\pkg}[1]{\textbf{#1}}
 ```
 
+
+> Charge: Given your expertise and background, a review article from your group related to the topic of Statistical tools for sports analytics (e.g. baseball) would significantly contribute to WIREs Computational Statistics.
+>
+> The article should critically present the current state-of-the-art research, include opposing viewpoints, and identify challenges and opportunities.
+
+
 **Remember that you are writing for an interdisciplinary audience. Please be sure to discuss interdisciplinary themes, issues, debates, etc. where appropriate.** Note that the WIREs are forums for review articles, rather than primary literature describing the results of original research.
-
-## Article Title
-
-The title should not exceed 20 words. Please be original and try to include keywords, especially before a colon if applicable, as they will increase the discoverability of your article. [Tips on Search Engine Optimization](https://authorservices.wiley.com/author-resources/Journal-Authors/Prepare/writing-for-seo.html)
 
 ## Article Category
 
@@ -64,43 +66,61 @@ The title should not exceed 20 words. Please be original and try to include keyw
 
 ## Graphical/Visual Abstract and Caption
 
-Include an attractive full color image to go under the text abstract and in the online Table of Contents.
+> Include an attractive full color image to go under the text abstract and in the online Table of Contents.
 You will also need to upload this as a separate file during submission.
 It may be a figure or panel from the article or may be specifically designed as a visual summary. While original images are preferred, if you need to look for a thematically appropriate stock image, you can go to pixabay.com (not affiliated with Wiley) to find a free stock image with a CC0 license. Another option you have is to utilize professional illustrators with Wiley’s Graphical Abstract Design service.
 
-Size: The minimum resolution is 300 dpi. Please keep the image as simple as possible because it will be displayed in multiple sizes. Multiple panels and text other than labels are strongly discouraged.
+> Size: The minimum resolution is 300 dpi. Please keep the image as simple as possible because it will be displayed in multiple sizes. Multiple panels and text other than labels are strongly discouraged.
 
-Caption: This is a narrative sentence to convey the article's essence and wider implications to a non-specialist audience. The maximum length is 50 words, but consider using 280 characters or less to facilitate social media sharing, which can increase the discoverability of your article.
+> Caption: This is a narrative sentence to convey the article's essence and wider implications to a non-specialist audience. The maximum length is 50 words, but consider using 280 characters or less to facilitate social media sharing, which can increase the discoverability of your article.
 
 # Introduction
 
-Introduce your topic in ~2 paragraphs, ~750 words.
+> Introduce your topic in ~2 paragraphs, ~750 words.
 
-While Wiley does consider articles on preprint servers (ArXiv, bioRxiv, psyArXiv, SocArXiv, engrXiv, etc.) for submission to primary research journals, preprint articles should not be cited in WIREs manuscripts as review articles should discuss and draw conclusions only from peer-reviewed research. Remember that original research/unpublished work should also not be included as it has not yet been peer-reviewed and could put the work in jeopardy of getting published in the primary press.
+> While Wiley does consider articles on preprint servers (ArXiv, bioRxiv, psyArXiv, SocArXiv, engrXiv, etc.) for submission to primary research journals, preprint articles should not be cited in WIREs manuscripts as review articles should discuss and draw conclusions only from peer-reviewed research. Remember that original research/unpublished work should also not be included as it has not yet been peer-reviewed and could put the work in jeopardy of getting published in the primary press.
+
+
+
 
 - [CRAN Task View SportsAnalytics](https://github.com/beanumber/ctv-sportsanalytics)
 
-# Baseball
+# The expected value of a possession
+
+In many sports, the first step towards an analytical understanding of the game is the estimation of the expected value of a possession at any given point in the game. 
+@lindsey1963investigation makes what is likely the most impactful such line of inquiry in baseball, leading to the analysis of all types of common strategies. 
+
+For example, many baseball teams elect to attempt a sacrifice bunt with a runner on first and no one out in the inning, with the goal of moving the runner to second base, at the cost of the batter being out. 
+@lindsey1963investigation used play-by-play data to compute an empirical estimate for the mean number of runs scored in the remainder of the inning for each of these two situations. 
+His, and many subsequent analyses [@tango2007book], conclude that the sacrifice bunt is rarely worth it, because most teams would be expected to score more runs with a runner on first and no outs than they would with a runner on second and one out. 
+
+Mathematically, we define $X$ to be a random variable indicating the number of runs (points) that a team will score in the remainder of a period, or game. 
+Let $s$ be a tuple that encodes the *state* of a game. 
+Then our task is to estimate:
+$$
+  \mathbb{E}[X | s] \,,
+$$
+for any state $s$. 
+In baseball, $s$ is typically determined by two factors: the configuration of the runners on base (there are 8 possibilities) and the number of outs (3 possibilities). 
+Thus, there $24 = 8 \cdot 3$ basic states of an inning in baseball. 
+The collection of estimates $\mathbb{E}[X | s]$ for all 24 states is called the *expected run matrix* and it is foundational in baseball analytics. 
+See [blah] for examples of analytical findings that are based on the expected run matrix. 
+
+However, this concept is easily extended to other sports. 
+In American football, $s$ is determined by down, yardage to the next first down, and field position. 
+Numerous papers (see @lopez2020bigger for details) have used the analysis of the expected number of points to improve fourth down strategy. 
+
+Even in sports where the concept of a state is not so easy to define, like basketball, the value of a possession can be estimated with player tracking data [@cervone2016multiresolution].
+
+## Win probability
+
+A related, but different, concept is the notion of *win probability*, which is simply an estimate of the probability that either team will win the game, given its current state. 
+
+## Other stuff
 
 @marchi2018analyzing
 
 @R-Lahman, @R-pitchRx, @R-retrosheet
-
-# Basketball
-
-# Football
-
-## American
-
-## Australian Rules
-
-## Rugby
-
-# Hockey
-
-# Soccer
-
-# Chess
 
 Figure \ref{fig:chess-startup} shows a rendering of the starting chess board obtained via the \pkg{chess} package. 
 
@@ -110,10 +130,6 @@ game() %>%
   plot()
 ```
 
-
-# Other sports
-
-# APIs
 
 # Color palettes
 
