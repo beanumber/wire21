@@ -131,8 +131,8 @@ Figure \ref{fig:chess-startup} shows a rendering of the starting chess board obt
 
 ```{r chess-startup, fig.cap="The starting chess board printed via the \\pkg{chess} package."}
 library(chess)
-game() %>%
-  plot()
+Sys.setenv(RETICULATE_PYTHON = "my_env/bin/python")
+game() %>% plot()
 ```
 
 
