@@ -19,6 +19,10 @@ authors:
     affiliation: Loyola University Chicago
     location: Chicago, IL 60660
     email: nnguyen22@luc.edu
+  - name: Katherine Evans
+    affiliation: Monumental Basketball
+    location: Washington, DC 20003
+    email: kevans@monumentalsports.com
 abstract: |
   Sports analytics---broadly defined as the pursuit of improvement in athletic performance through the analysis of data---has expanded its footprint both in the professional sports industry and in academia over the past 30 years. We connect four(?) big ideas that are common across multiple sports, and explore both the shared similarities and individual idiosyncracies of analytical approaches in each sport. While our focus is on the concepts underlying each type of analysis, any implementation necessarily involves both statistical methodologies and sources of data. Where appropriate, we outline how data, models, and knowledge of the sport combine to generate actionable insights. This paper should serve as a useful overview for anyone becoming interested in the study of sports analytics. 
 keywords:
