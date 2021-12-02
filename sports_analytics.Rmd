@@ -110,16 +110,30 @@ $$
   \mathbb{E}[X | s] \,,
 $$
 for any state $s$. 
+
 In baseball, $s$ is typically determined by two factors: the configuration of the runners on base (there are 8 possibilities) and the number of outs (3 possibilities). 
 Thus, there $24 = 8 \cdot 3$ basic states of an inning in baseball. 
+
 The collection of estimates $\mathbb{E}[X | s]$ for all 24 states is called the *expected run matrix* and it is foundational in baseball analytics. 
+
 See [blah] for examples of analytical findings that are based on the expected run matrix. 
 
 However, this concept is easily extended to other sports. 
 In American football, $s$ is determined by down, yardage to the next first down, and field position. 
+
 Numerous papers (see @lopez2020bigger for details) have used the analysis of the expected number of points to improve fourth down strategy. 
 
+@Pattani2012 describes ESPN's expected points metric.  
+
+@CarrollPalmer1998 The hidden game of football.  Mentioned by Pattani and popularizing the idea of EPA.  
+
+@nflwar, which uses an expected points model as part of the nfl war framework, uses down (1-4, seconds remaining in half, yards from endzone, yards to go (log), indicator for goal to go (GTG), and indicator for under 2 minutes (UTM).
+
+@CarterMachol1971 estimate the expected points for 1st and 10 given a yard line (broken up into 10 yard chunks centered at a given yardline (e.g. 5, 15, 25, 35, etc. )).  This is wild that they did this in 1971!
+
 Even in sports where the concept of a state is not so easy to define, like basketball, the value of a possession can be estimated with player tracking data [@cervone2016multiresolution].
+
+
 
 ## Win probability
 
@@ -135,7 +149,7 @@ Figure \ref{fig:chess-startup} shows a rendering of the starting chess board obt
 
 ```{r chess-startup, fig.cap="The starting chess board printed via the \\pkg{chess} package."}
 library(chess)
-Sys.setenv(RETICULATE_PYTHON = "my_env/bin/python3")
+#Sys.setenv(RETICULATE_PYTHON = "my_env/bin/python3")
 game() %>% plot()
 ```
 
