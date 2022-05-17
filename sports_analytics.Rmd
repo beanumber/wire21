@@ -133,7 +133,9 @@ Numerous papers (see @lopez2020bigger for details) have used the analysis of the
 
 Even in sports where the concept of a state is not so easy to define, like basketball, the value of a possession can be estimated with player tracking data [@cervone2016multiresolution].
 
+@fernandez2021epvsoccer A framework for the fine-grained evaluation of the instantaneous expected value of soccer possessions
 
+@decroos2019playeraction Actions Speak Louder than Goals: Valuing Player Actions in Soccer
 
 ## Win probability
 
