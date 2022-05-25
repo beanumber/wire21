@@ -128,11 +128,20 @@ Numerous papers (see @lopez2020bigger for details) have used the analysis of the
 
 Even in sports where the concept of a state is not so easy to define, like basketball, the value of a possession can be estimated with player tracking data [@cervone2016multiresolution].
 
+@fernandez2021epvsoccer A framework for the fine-grained evaluation of the instantaneous expected value of soccer possessions
 
+@decroos2019playeraction Actions Speak Louder than Goals: Valuing Player Actions in Soccer
 
 ## Win probability
 
 A related, but different, concept is the notion of *win probability*, which is simply an estimate of the probability that either team will win the game, given its current state. 
+
+Some refs (cite later)
+
+https://www.degruyter.com/document/doi/10.1515/jqas-2013-0100/html
+https://www.taylorfrancis.com/chapters/edit/10.1201/9781315166070-14/situational-success-evaluating-decision-making-football-keith-goldner
+http://stat.wharton.upenn.edu/~stjensen/papers/shanejensen.basketball2016.pdf
+https://arxiv.org/pdf/2204.11777.pdf
 
 ## Other stuff
 
