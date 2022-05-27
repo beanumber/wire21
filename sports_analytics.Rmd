@@ -77,7 +77,7 @@ knitr::write_bib(
 
 > Include an attractive full color image to go under the text abstract and in the online Table of Contents.
 You will also need to upload this as a separate file during submission.
-It may be a figure or panel from the article or may be specifically designed as a visual summary. While original images are preferred, if you need to look for a thematically appropriate stock image, you can go to pixabay.com (not affiliated with Wiley) to find a free stock image with a CC0 license. Another option you have is to utilize professional illustrators with Wiley’s Graphical Abstract Design service.
+It may be a figure or panel from the article or may be specifically designed as a visual summary. While original images are preferred, if you need to look for a thematically appropriate stock image, you can go to pixabay.com (not affiliated with Wiley) to find a free stock image with a CC0 license. Another option you have is to utilize professional illustrators with Wiley’s Graphical Abstract Design service.
 
 > Size: The minimum resolution is 300 dpi. Please keep the image as simple as possible because it will be displayed in multiple sizes. Multiple panels and text other than labels are strongly discouraged.
 
@@ -139,9 +139,29 @@ A related, but different, concept is the notion of *win probability*, which is s
 Some refs (cite later)
 
 https://www.degruyter.com/document/doi/10.1515/jqas-2013-0100/html
+
 https://www.taylorfrancis.com/chapters/edit/10.1201/9781315166070-14/situational-success-evaluating-decision-making-football-keith-goldner
+
 http://stat.wharton.upenn.edu/~stjensen/papers/shanejensen.basketball2016.pdf
+
 https://arxiv.org/pdf/2204.11777.pdf
+
+https://content.iospress.com/download/journal-of-sports-analytics/jsa231?id=journal-of-sports-analytics%2Fjsa231
+
+https://content.iospress.com/download/journal-of-sports-analytics/jsa279?id=journal-of-sports-analytics%2Fjsa279
+
+https://content.iospress.com/articles/journal-of-sports-analytics/jsa190294?resultNumber=10&totalResults=1420&start=10&q=win+probability&resultsPageSize=10&rows=10#jsa-5-jsa190294-g009
+
+https://www.degruyter.com/document/doi/10.1515/jqas-2019-0096/html
+
+https://www.degruyter.com/document/doi/10.1515/jqas-2019-0089/html
+
+https://www.degruyter.com/document/doi/10.1515/jqas-2019-0056/html
+
+https://wires.onlinelibrary.wiley.com/doi/epdf/10.1002/wics.1358?saml_referrer
+
+https://wires.onlinelibrary.wiley.com/doi/epdf/10.1002/wics.1483
+
 
 ## Other stuff
 
