@@ -50,7 +50,8 @@ knitr::write_bib(
   c(
     "Lahman", "pitchRx", "retrosheet",
     "teamcolors",
-    "ggplot2"
+    "ggplot2",
+    "BradleyTerry2"
   ),
   file = "pkgs.bib"
 )
@@ -107,7 +108,7 @@ for any state $s$.
 
 For simplicity, we start with baseball due to the discrete nature of the sport.  In baseball, $s$ is typically determined by two factors: the configuration of the runners on base (there are 8 possibilities) and the number of outs (3 possibilities). Thus, there $24 = 8 \cdot 3$ basic states of an inning in baseball (25, if you include the absorbing state of 3 outs), and we are often interested in the number of runs that will be scored from some state until the end of the inning.  Thus in this example using baseball, $\mathbb{E}[X | s] \,$ is the expected number of runs scored between now and the end of the inning given that the inning is currently in state $s$.  The collection of estimates $\mathbb{E}[X | s]$ for all 24 states is called the *expected run matrix*, and it is foundational in baseball analytics. 
 
-Early work on this topic can be found in @lindsey1963investigation, which used play-by-play data to compute an empirical estimate for the mean number of runs scored in the remainder of the inning for each of these 24 possible states of an inning.  This line of work led to work analyzing all types of common baseball strategies.  For example, many baseball teams elect to attempt a sacrifice bunt with a runner on first and no one out in the inning, with the goal of moving the runner to second base, at the cost of the batter being out.  Theirs, and many subsequent analyses [@tango2007book], conclude that the sacrifice bunt is rarely worth it, because most teams would be expected to score more runs with a runner on first and no outs than they would with a runner on second and one out. 
+Early work on this topic can be found in @lindsey1963investigation, which used play-by-play data to compute an empirical estimate for the mean number of runs scored in the remainder of the inning for each of these 24 possible states of an inning.  This line of work led to work analyzing all types of common baseball strategies.  For example, many baseball teams elect to attempt a sacrifice bunt with a runner on first and no one out in the inning, with the goal of moving the runner to second base, at the cost of the batter being out.  Theirs, and many subsequent analyses [@Tango2007book], conclude that the sacrifice bunt is rarely worth it, because most teams would be expected to score more runs with a runner on first and no outs than they would with a runner on second and one out. 
 
 (Comment: Page 10 of this paper (https://www.jstor.org/stable/pdf/167996.pdf) actually have the expected values that were estimated. Do we want to include an example of this table? Might be cool to compare to like the numbers we got from open WAR.)
 
@@ -120,9 +121,9 @@ Numerous papers (see @lopez2020bigger for details) have used the analysis of the
 
 @Pattani2012 describes ESPN's expected points metric.  
 
-@CarrollPalmer1998 The hidden game of football.  Mentioned by Pattani and popularizing the idea of EPA.  
+@CarrollPalmer1988 The hidden game of football.  Mentioned by Pattani and popularizing the idea of EPA.  
 
-@nflwar, which uses an expected points model as part of the nfl war framework, uses down (1-4, seconds remaining in half, yards from endzone, yards to go (log), indicator for goal to go (GTG), and indicator for under 2 minutes (UTM).
+@Yurko2019, which uses an expected points model as part of the nfl war framework, uses down (1-4, seconds remaining in half, yards from endzone, yards to go (log), indicator for goal to go (GTG), and indicator for under 2 minutes (UTM).
 
 @CarterMachol1971 estimate the expected points for 1st and 10 given a yard line (broken up into 10 yard chunks centered at a given yardline (e.g. 5, 15, 25, 35, etc. )).  This is wild that they did this in 1971!
 
@@ -132,36 +133,67 @@ Even in sports where the concept of a state is not so easy to define, like baske
 
 @decroos2019playeraction Actions Speak Louder than Goals: Valuing Player Actions in Soccer
 
-## Win probability
+# Win probability
 
-A related, but different, concept is the notion of *win probability*, which is simply an estimate of the probability that either team will win the game, given its current state. 
+A related, but different, concept is the notion of *win probability*, which is simply an estimate of the probability that either team will win the game, given its current state. Win probability provides a measure of the impact of sports plays and individual player contributions, as discussed in @Albert2015. Given its popularity, recent books on sports analytics often offers multiple chapters entirely on win probability. These include @Albert2001curve, @Schwarz2005numbers, @Tango2007book, @Albert2017handbook, and @Winston2022. In this section, we discuss notable previous work on win probability in baseball, football, basketball, and several other sports. 
 
-Some refs (cite later)
+## Baseball
 
-https://www.degruyter.com/document/doi/10.1515/jqas-2013-0100/html
+@Albert2015 provided a historical overview of the use of win probability in baseball. This notion goes back to at least as early as @Lindsey1961, where the expected win probability after each inning was calculated based on the distribution of runs scored in each inning. @Mills1970 utilized win probability to introduce Player Win Average (PWA), a measure of a player's contribute to the game outcome. In particular, PWA was computed as 
+$$
+PWA = \frac{Win \ Points}{Win \ Points + Loss \ Points},
+$$
+where the win and loss points represent how much the player positively and negatively impact their team's probability of winning after each play.
 
-https://www.taylorfrancis.com/chapters/edit/10.1201/9781315166070-14/situational-success-evaluating-decision-making-football-keith-goldner
+## Football
 
-http://stat.wharton.upenn.edu/~stjensen/papers/shanejensen.basketball2016.pdf
+In football, 
+
+Burke WPA
+
+http://www.advancedfootballanalytics.com/2010/01/win-probability-added-wpa-explained.html
+
+@Lock2014 used random forests as a means for estimating WP before each play in a football game. 
+
+@Yurko2019
+
+@Yam2019 causal
+
+nflscrapr, nflfastR, nflverse
+
+@Yurko2020 going deep
+
+## Basketball
+
+@Stern1994 brownian
+
+@Deshpande2016 bayesian
+
+@McFarlane2019 nba logistic
+
+## Other sports
 
 https://arxiv.org/pdf/2204.11777.pdf
 
-https://content.iospress.com/download/journal-of-sports-analytics/jsa231?id=journal-of-sports-analytics%2Fjsa231
+@Brenzel2019 curling markov
 
-https://content.iospress.com/download/journal-of-sports-analytics/jsa279?id=journal-of-sports-analytics%2Fjsa279
+@Maymin2020 esport!
 
-https://content.iospress.com/articles/journal-of-sports-analytics/jsa190294?resultNumber=10&totalResults=1420&start=10&q=win+probability&resultsPageSize=10&rows=10#jsa-5-jsa190294-g009
+# Team strength
 
-https://www.degruyter.com/document/doi/10.1515/jqas-2019-0096/html
+A popular method for estimating team strength in sports is through pairwise evaluations. Perhaps the most famous probability model for predicting the outcome of a paired comparison is the Bradley-Terry model (BTM) [@Bradley1952]. For a pair of players (or teams) $i$ and $j$, let $\Pi_{ij}$ denote the probability that $i$ is preferred to $j$. Then the BTM is a logistic regression model with parameters $\{\beta_i\}$ such that
 
-https://www.degruyter.com/document/doi/10.1515/jqas-2019-0089/html
+$$
+log\left(\frac{\Pi_{ij}}{\Pi_{ji}}\right) = \beta_i - \beta_j
+$$
 
-https://www.degruyter.com/document/doi/10.1515/jqas-2019-0056/html
+Here, $exp(\beta_i)$ is often viewed as a representation of player $i$'s ability. The BTM can be implemented in `R` [@Rcitation2022] via the \pkg{BradleyTerry2} package [@R-BradleyTerry2].
 
-https://wires.onlinelibrary.wiley.com/doi/epdf/10.1002/wics.1358?saml_referrer
+@Elo1978
 
-https://wires.onlinelibrary.wiley.com/doi/epdf/10.1002/wics.1483
+@Glickman1998 state-space model
 
+@Lopez2018 extension to @Glickman1998's framework
 
 ## Other stuff
 
