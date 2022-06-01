@@ -232,11 +232,54 @@ For example, ...
 
 
 ```{r btm, echo=TRUE}
-library(Lahman)
+library(tidyverse)
 library(BradleyTerry2)
 # show BTM for Pirates vs. Yankees in 1960
 # or Red Sox vs. Yankees in 2003/2004
+library(retrosheet)
+games <- getRetrosheet("game", 2004)
+
+bt_games <- games |>
+  group_by(HmTm, VisTm) |>
+  summarize(
+    home_w = sum(HmRuns > VisRuns),
+    away_w = sum(VisRuns > HmRuns),
+  ) |>
+  mutate(
+    HmTm = factor(HmTm),
+    VisTm = factor(VisTm, levels = levels(HmTm))
+  )
+
+btm <- BTm(
+  outcome = cbind(home_w, away_w), 
+  player1 = HmTm, 
+  player2 = VisTm,
+  data = bt_games, 
+  id = "team"
+)
+btm
+
+bt_games2 <- bt_games |>
+  mutate(
+    HmTm = data.frame(team = HmTm, at_home = 1),
+    VisTm = data.frame(team = VisTm, at_home = 0)
+  )
+
+btm2 <- btm |>
+  update(formula = ~ team + at_home, data = bt_games2)
+btm2
 ```
+
+
+```{r}
+btm |>
+  broom::tidy() |>
+  arrange(desc(estimate))
+btm2 |>
+  broom::tidy() |>
+  arrange(desc(estimate))
+```
+
 
 
 @Elo1978
