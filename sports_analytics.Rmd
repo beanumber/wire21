@@ -142,7 +142,7 @@ The inning, or the score of the game, or even the weather, might reasonably be i
 More definitively, the identity of the current batter, pitcher, or batter on deck, might also affect the estimate of $\mathbb{E}[X | s]$. 
 Indeed, @Tango2007book show that when a particularly weak-hitting batter is up (i.e., the pitcher), a sacrifice bunt becomes much more effective strategy.  
 
-See [blah] for examples of analytical findings that are based on the expected run matrix. 
+See @Albert2001curve for a fuller discussion of the use of the expected run matrix in baseball. 
 
 ## In other sports
 
