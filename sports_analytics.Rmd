@@ -150,6 +150,7 @@ The concept of estimating the value of the state of a game is easily extended to
 In American football, $s$ is determined by down, yardage to the next first down, and field position. 
 
 Numerous papers (see @lopez2020bigger for details) have used the analysis of the expected number of points to improve fourth down strategy. 
+@goldner2017situational uses a similar framework.
 
 @Pattani2012 describes ESPN's expected points metric.  
 
@@ -162,6 +163,8 @@ Numerous papers (see @lopez2020bigger for details) have used the analysis of the
 ## Sports with continuous states
 
 Even in sports where the concept of a state is not so easy to define, like basketball, the value of a possession can be estimated with player tracking data [@cervone2016multiresolution].
+
+See also @bornn2017studying.
 
 @fernandez2021epvsoccer A framework for the fine-grained evaluation of the instantaneous expected value of soccer possessions
 
@@ -196,6 +199,8 @@ http://www.advancedfootballanalytics.com/2010/01/win-probability-added-wpa-expla
 nflscrapr, nflfastR, nflverse
 
 @Yurko2020 going deep
+
+@goldner2017situational
 
 ## Basketball
 
@@ -236,9 +241,12 @@ library(BradleyTerry2)
 
 @Elo1978
 
-@Glickman1998 state-space model
+@Glickman1998 state-space model. 
+See also @glickman2017estimating.
 
 @Lopez2018 extension to @Glickman1998's framework
+
+In soccer, @koning2017rating
 
 ## Other stuff
 
