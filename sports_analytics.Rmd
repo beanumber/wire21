@@ -99,22 +99,54 @@ It may be a figure or panel from the article or may be specifically designed as 
 
 In many sports, the first step towards an analytical understanding of the game is the estimation of the expected value of a game state at any given point in a sporting contest. 
 
-Mathematically, we define $X$ to be a random variable indicating the the value of a particular game state for a team over some determined amount of time (e.g. remainder of game, quarter, period, or inning). Let $s$ be a tuple that encodes the *state* of a game. 
+Mathematically, we define $X$ to be a random variable indicating the the value of a particular game state for a team over some determined amount of time (e.g. remainder of game, quarter, period, or inning). 
+Let $s \in S$ be a tuple that encodes the *state* of a game. 
 Then our task is to estimate:
 $$
   \mathbb{E}[X | s] \,,
 $$
-for any state $s$. 
+for any state $s \in S$, where $S$ is the set of all possible states. 
 
-For simplicity, we start with baseball due to the discrete nature of the sport.  In baseball, $s$ is typically determined by two factors: the configuration of the runners on base (there are 8 possibilities) and the number of outs (3 possibilities). Thus, there $24 = 8 \cdot 3$ basic states of an inning in baseball (25, if you include the absorbing state of 3 outs), and we are often interested in the number of runs that will be scored from some state until the end of the inning.  Thus in this example using baseball, $\mathbb{E}[X | s] \,$ is the expected number of runs scored between now and the end of the inning given that the inning is currently in state $s$.  The collection of estimates $\mathbb{E}[X | s]$ for all 24 states is called the *expected run matrix*, and it is foundational in baseball analytics. 
+## In baseball, the expected run matrix
 
-Early work on this topic can be found in @lindsey1963investigation, which used play-by-play data to compute an empirical estimate for the mean number of runs scored in the remainder of the inning for each of these 24 possible states of an inning.  This line of work led to work analyzing all types of common baseball strategies.  For example, many baseball teams elect to attempt a sacrifice bunt with a runner on first and no one out in the inning, with the goal of moving the runner to second base, at the cost of the batter being out.  Theirs, and many subsequent analyses [@Tango2007book], conclude that the sacrifice bunt is rarely worth it, because most teams would be expected to score more runs with a runner on first and no outs than they would with a runner on second and one out. 
+For clarity, we start with baseball due to the discrete nature of the sport. 
+In baseball, $s$ is typically determined by two factors: the configuration of the runners on base (there are 8 possibilities) and the number of outs (3 possibilities). 
+Thus, there $|S| = 24 = 8 \cdot 3$ basic states of an inning in baseball (25, if you include the absorbing state of 3 outs), and we are often interested in the number of runs that will be scored from some state until the end of the inning. 
+In this example using baseball, $\mathbb{E}[X | s] \,$ is the expected number of runs scored between now and the end of the inning given that the inning is currently in state $s$. 
+The collection of estimates $\mathbb{E}[X | s]$ for all 24 states is called the *expected run matrix* [^matrix], and it is foundational in baseball analytics. 
+Figure \ref{fig:lindsey} shows a reproduction of Lindsey's original expected run matrix. 
 
-(Comment: Page 10 of this paper (https://www.jstor.org/stable/pdf/167996.pdf) actually have the expected values that were estimated. Do we want to include an example of this table? Might be cool to compare to like the numbers we got from open WAR.)
+[^matrix]: There is no inherent dimensionality to $\mathbb{E}[X | s]$. The *matrix* nomenclature stems from its values typically being displayed in $8 \times 3$ grid. However, when computing with $\mathbb{E}[X | s]$, it is most often convenient to treat it as a $24 \times 1$ vector. 
+
+
+```{r lindsey, out.width="90%", fig.cap="Table 1 from Lindsey's original paper. The column labelled $E(T, B)$ gives the expected run matrix as a vector, based on Lindsey's analysis of Major League Baseball data from 1959 and 1960. "}
+knitr::include_graphics("lindsey_table1.png")
+```
+
+
+Early work on this topic can be found in @lindsey1963investigation, who used play-by-play data to compute an empirical estimate for the mean number of runs scored in the remainder of the inning for each of these 24 possible states of an inning. 
+This line of work led to analysis of all types of common baseball strategies. 
+For example, many baseball teams elect to attempt a sacrifice bunt with a runner on first and no one out in the inning, with the goal of moving the runner to second base, at the cost of the batter being out. 
+@Tango2007book (and many subsequent analyses), conclude that the sacrifice bunt is rarely worth it, because most teams would be expected to score more runs with a runner on first and no outs than they would with a runner on second and one out. 
+
+It is worth emphasizing that the values in $\mathbb{E}[X | s]$ are estimates, and the precision of those estimates has many subtleties. 
+
+First, the values within the expected run matrix change over time. 
+For example, any estimation of the values in the expected run matrix based on data from a high-scoring era (e.g., the early 2000s) will yield different values than equivalent analysis in a low-scoring era. 
+In a high run-scoring environment, where there are many home runs, the value of a walk may be higher, since a player who walks is more likely to score on a subsequent home run. 
+Conversely, in a low run-scoring environment, stolen bases and sacrifice bunts may be comparatively more valuable. 
+Thus, a careful estimate of $\mathbb{E}[X | s]$ would include a time parameter $t$, indicating when the estimate is appropriate. 
+
+Second, the characterization of $S$ as having 24 states is only the simplest possible. 
+The inning, or the score of the game, or even the weather, might reasonably be incorporated into $S$, as those conditions might reasonably affect the estimate of $\mathbb{E}[X | s]$. 
+More definitively, the identity of the current batter, pitcher, or batter on deck, might also affect the estimate of $\mathbb{E}[X | s]$. 
+Indeed, @Tango2007book show that when a particularly weak-hitting batter is up (i.e., the pitcher), a sacrifice bunt becomes much more effective strategy.  
 
 See [blah] for examples of analytical findings that are based on the expected run matrix. 
 
-However, this concept is easily extended to other sports. 
+## In other sports
+
+The concept of estimating the value of the state of a game is easily extended to other sports. 
 In American football, $s$ is determined by down, yardage to the next first down, and field position. 
 
 Numerous papers (see @lopez2020bigger for details) have used the analysis of the expected number of points to improve fourth down strategy. 
