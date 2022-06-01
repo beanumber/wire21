@@ -213,13 +213,24 @@ https://arxiv.org/pdf/2204.11777.pdf
 
 # Team strength
 
-A popular method for estimating team strength in sports is through pairwise evaluations. Perhaps the most famous probability model for predicting the outcome of a paired comparison is the Bradley-Terry model (BTM) [@Bradley1952]. For a pair of players (or teams) $i$ and $j$, let $\Pi_{ij}$ denote the probability that $i$ is preferred to $j$. Then the BTM is a logistic regression model with parameters $\{\beta_i\}$ such that
+A popular method for estimating team strength in sports is through pairwise evaluations. Perhaps the most famous probability model for predicting the outcome of a paired comparison is the Bradley-Terry model (BTM) [@Bradley1952]. For a pair of players (or teams) $i$ and $j$, let $\Pi_{ij}$ denote the probability that $i$ is preferred to $j$. Then the BTM is a logistic regression model with parameters $\beta_i, \beta_j$ such that
 
 $$
 log\left(\frac{\Pi_{ij}}{\Pi_{ji}}\right) = \beta_i - \beta_j
 $$
 
-Here, $exp(\beta_i)$ is often viewed as a representation of player $i$'s ability. The BTM can be implemented in `R` [@Rcitation2022] via the \pkg{BradleyTerry2} package [@R-BradleyTerry2].
+Here, $\exp{\beta_i}$ is often viewed as a representation of player $i$'s ability. The BTM can be implemented in `R` [@Rcitation2022] via the \pkg{BradleyTerry2} package [@R-BradleyTerry2].
+
+For example, ...
+
+
+```{r btm, echo=TRUE}
+library(Lahman)
+library(BradleyTerry2)
+# show BTM for Pirates vs. Yankees in 1960
+# or Red Sox vs. Yankees in 2003/2004
+```
+
 
 @Elo1978
 
