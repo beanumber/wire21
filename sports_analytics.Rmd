@@ -33,6 +33,8 @@ keywords:
 bibliography: [refs.bib, pkgs.bib]
 biblio-style: unsrt   # use apa for WIRE
 output: rticles::arxiv_article
+header-includes:
+  - \usepackage{amsmath}
 ---
 
 
@@ -48,6 +50,7 @@ library(tidyverse)
 ```{r pkg}
 knitr::write_bib(
   c(
+    "base",
     "Lahman", "pitchRx", "retrosheet",
     "teamcolors",
     "ggplot2",
@@ -92,10 +95,11 @@ It may be a figure or panel from the article or may be specifically designed as 
 
 
 
+See @cochran2017oxford and @Albert2017handbook for overview readers. 
 
-- [CRAN Task View SportsAnalytics](https://github.com/beanumber/ctv-sportsanalytics)
+See @baumer2022ctv for R packages useful for sports analytics. 
 
-# The expected value of a possession
+# The expected value of a possession {#sec:ev}
 
 In many sports, the first step towards an analytical understanding of the game is the estimation of the expected value of a game state at any given point in a sporting contest. 
 
@@ -142,7 +146,7 @@ The inning, or the score of the game, or even the weather, might reasonably be i
 More definitively, the identity of the current batter, pitcher, or batter on deck, might also affect the estimate of $\mathbb{E}[X | s]$. 
 Indeed, @Tango2007book show that when a particularly weak-hitting batter is up (i.e., the pitcher), a sacrifice bunt becomes much more effective strategy.  
 
-See @Albert2001curve for a fuller discussion of the use of the expected run matrix in baseball and @marchi2018analyzing for examples of how to estimate the expected run matrix using Retrosheet data. 
+See @Albert2001curve for a fuller discussion of the use of the expected run matrix in baseball and @marchi2018analyzing for examples of how to estimate the expected run matrix using Retrosheet data and the R statistical computing language [@R-base]. 
 
 ## In other sports with discrete states
 
@@ -169,6 +173,28 @@ See also @bornn2017studying.
 @fernandez2021epvsoccer A framework for the fine-grained evaluation of the instantaneous expected value of soccer possessions
 
 @decroos2019playeraction Actions Speak Louder than Goals: Valuing Player Actions in Soccer
+
+## Optimal strategies that don't maximize expected points
+
+In Section \ref{sec:ev}, we defined the expected value of a possession based on the state $s$ of the game in terms of the expected number of points (runs) $X$ that would be scored in the remainder of some period of time. 
+We then showed how this value could be used to analyze the relative effectiveness of certain strategies, with the simple idea that strategies that yield higher expected values are preferable. 
+Generally, the goal of any sport is to score more points than the other team, which most often means trying to score as many points as possible, leading to a general strategy of maximizing expected points. 
+However, there are situations in which maximizing the number of expected points is *not* the desired strategy. 
+
+For example, in the bottom of the ninth inning of a tied baseball game, the optimal strategy for winning the game is maximizing the probability of scoring *at least one run*, which may differ from the strategy of maximizing expected runs. 
+Mathematically, we distinguish between 
+$$
+  \max{\Pr[X > 0 | s]} \, \text{ and } \, \max{\mathbb{E}[X | s]} \,.
+$$
+Maximizing the probability of scoring is optimal in any sudden-death situation, which has (but currently does not) include overtime in American football [@martin2018markov]. 
+
+The situation gets even more interesting when teams modify both their offensive and defensive strategies simultaneously. 
+For example, in hockey teams will often pull their goalie when trailing in the final period. 
+This strategy severely weakens their defense, but strengthens their offense. 
+The hope is to score a quick goal to get back in the game, but the risk is falling further behind. 
+@beaudoin2010strategies show that NHL coaches do not always employ the optimal strategies. 
+@skinner2011scoring develops a general framework for these desperation strategies, which include the onside kick in American football, pulling the infield and/or outfield in in baseball, and of course, the fabled Hack-a-Shaq strategy in basketball. 
+
 
 # Win probability
 
