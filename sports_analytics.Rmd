@@ -223,6 +223,33 @@ If we let $U$ be the set of all strategies, then we assert that it is not always
 $$
   \underset{u \in U}{\arg \max \,}{\Pr[X > 0 | s]} \neq \underset{u \in U}{\arg \max \,}{\mathbb{E}[X | s]} \,.
 $$
+Consider the situation where runners are on first and third base, and the score is tied in the bottom of the ninth inning with no one out. 
+Table \ref{tab:tied} reveals that the expected number of runs scored in the remainder of the inning is 1.94 runs, while the the probability of scoring zero runs is 0.13. 
+The defense is in a tight spot, facing an 87% probability of losing the game. 
+However, by walking the hitter to load the bases, they create the opportunity to force the lead runner at home and thus reduce the chances of scoring to 82%, even though they raise the expected number of runs scored to 2.22. 
+In this case, the defensive team is wise to pursue the strategy of maximizing the expected number of runs scored, because it *minimizes* the probability of scoring at least one run. 
+
+```{r}
+erm <- erm |>
+  mutate(
+    pr_0 = c(
+      .747, .855, .933,
+      .604, .734, .886, 
+      .381, .610, .788,
+      .120, .307, .738,
+      .395, .571, .791,
+      .130, .367, .717,
+      .180, .270, .668,
+      .180, .303, .671
+    )
+  )
+
+erm |>
+  filter(out == 0, base %in% c(5, 7)) |>
+  mutate(base = int2bin(base)) |>
+  knitr::kable(caption = "Loading the bases can be a rational strategy. In this case, loading the bases maximizes both the expected number of runs scored *and* the probability of not scoring at all. \\label{tab:tied}")
+```
+
 Maximizing the probability of scoring is optimal in any sudden-death situation, which has (but currently does not) included overtime in American football [@martin2018markov]. 
 
 The situation gets even more interesting when teams modify both their offensive and defensive strategies simultaneously. 
