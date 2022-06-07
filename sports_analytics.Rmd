@@ -99,17 +99,17 @@ See @cochran2017oxford and @Albert2017handbook for overview readers.
 
 See @baumer2022ctv for R packages useful for sports analytics. 
 
-# The expected value of a possession {#sec:ev}
+# The expected value of a state {#sec:ev}
 
 In many sports, the first step towards an analytical understanding of the game is the estimation of the expected value of a game state at any given point in a sporting contest. 
 
-Mathematically, we define $X$ to be a random variable indicating the the value of a particular game state for a team over some determined amount of time (e.g. remainder of game, quarter, period, or inning). 
+Mathematically, we define $X$ to be a random variable indicating the the number of points (or runs) that a team will score over some determined amount of time (e.g. remainder of game, quarter, period, or inning). 
 Let $s \in S$ be a tuple that encodes the *state* of a game. 
 Then our task is to estimate:
 $$
-  \mathbb{E}[X | s] \,,
+  \mathbb{E}[X | s] = \sum_{X \geq 0} \Pr[X | s] \cdot X\,,
 $$
-for any state $s \in S$, where $S$ is the set of all possible states. 
+for any state $s \in S$, where $\Pr[X | s]$ is the probability of scoring $X$ points given that the game is in state $s$ and $S$ is the set of all possible states. 
 
 ## In baseball, the expected run matrix
 
@@ -182,11 +182,11 @@ Generally, the goal of any sport is to score more points than the other team, wh
 However, there are situations in which maximizing the number of expected points is *not* the desired strategy. 
 
 For example, in the bottom of the ninth inning of a tied baseball game, the optimal strategy for winning the game is maximizing the probability of scoring *at least one run*, which may differ from the strategy of maximizing expected runs. 
-Mathematically, we distinguish between 
+If we let $U$ be the set of all strategies, then we assert that it is not always the case that the strategy that maximizes the expected number of points will maximize the probability of winning:
 $$
-  \max{\Pr[X > 0 | s]} \, \text{ and } \, \max{\mathbb{E}[X | s]} \,.
+  \underset{u \in U}{\arg \max \,}{\Pr[X > 0 | s]} \neq \underset{u \in U}{\arg \max \,}{\mathbb{E}[X | s]} \,.
 $$
-Maximizing the probability of scoring is optimal in any sudden-death situation, which has (but currently does not) include overtime in American football [@martin2018markov]. 
+Maximizing the probability of scoring is optimal in any sudden-death situation, which has (but currently does not) included overtime in American football [@martin2018markov]. 
 
 The situation gets even more interesting when teams modify both their offensive and defensive strategies simultaneously. 
 For example, in hockey teams will often pull their goalie when trailing in the final period. 
@@ -198,7 +198,26 @@ The hope is to score a quick goal to get back in the game, but the risk is falli
 
 # Win probability
 
-A related, but different, concept is the notion of *win probability*, which is simply an estimate of the probability that either team will win the game, given its current state. Win probability provides a measure of the impact of sports plays and individual player contributions, as discussed in @Albert2015. Given its popularity, recent books on sports analytics often offers multiple chapters entirely on win probability. These include @Albert2001curve, @Schwarz2005numbers, @Tango2007book, @Albert2017handbook, and @Winston2022. In this section, we discuss notable previous work on win probability in baseball, football, basketball, and several other sports. 
+A related, but different, concept is the notion of *win probability*.
+Win probability is simply an estimate of the probability that a team will win the game, given its current state $s$. 
+Extending the mathematical framework we defined in Section \ref{sec:ev}, let $W$ be a binary random variable that indicates a win for a given team. 
+Then, 
+$$
+  \Pr[W | s] \,,
+$$
+is the win probability in the state $s$. 
+
+This win probability is closely related to the expected value of a state. 
+@Albert2015 defines the win probability as:
+$$
+  \Pr[W | s] = \sum_{X \geq 0} \Pr[X | s] \cdot \Pr[W | X, s] \,,
+$$
+where $\Pr[W | X, s]$ is the probability that the team will win the game given that they score $X$ points from state $s$. 
+
+Win probability is easily extended to provide a measure of the impact of sports plays and individual player contributions, as discussed in @Albert2015. 
+Given its popularity, recent books on sports analytics often offers multiple chapters entirely on win probability. 
+These include @Albert2001curve, @Schwarz2005numbers, @Tango2007book, @Albert2017handbook, and @Winston2022. 
+In this section, we discuss notable previous work on win probability in baseball, football, basketball, and several other sports. 
 
 ## Baseball
 
