@@ -118,13 +118,50 @@ In baseball, $s$ is typically determined by two factors: the configuration of th
 Thus, there $|S| = 24 = 8 \cdot 3$ basic states of an inning in baseball (25, if you include the absorbing state of 3 outs), and we are often interested in the number of runs that will be scored from some state until the end of the inning. 
 In this example using baseball, $\mathbb{E}[X | s] \,$ is the expected number of runs scored between now and the end of the inning given that the inning is currently in state $s$. 
 The collection of estimates $\mathbb{E}[X | s]$ for all 24 states is called the *expected run matrix* [^matrix], and it is foundational in baseball analytics. 
-Figure \ref{fig:lindsey} shows a reproduction of Lindsey's original expected run matrix. 
+Figure \ref{fig:lindsey} shows a reproduction of Lindsey's original calculations and Table \ref{tab:erm} shows the expected run matrix in its more familiar form. 
 
 [^matrix]: There is no inherent dimensionality to $\mathbb{E}[X | s]$. The *matrix* nomenclature stems from its values typically being displayed in $8 \times 3$ grid. However, when computing with $\mathbb{E}[X | s]$, it is most often convenient to treat it as a $24 \times 1$ vector. 
 
 
 ```{r lindsey, out.width="90%", fig.cap="Table 1 from Lindsey's original paper. The column labelled $E(T, B)$ gives the expected run matrix as a vector, based on Lindsey's analysis of Major League Baseball data from 1959 and 1960. "}
 knitr::include_graphics("lindsey_table1.png")
+```
+
+
+```{r erm, echo=FALSE}
+lindsey <- c(
+  .461, .243, .102,
+  .813, .498, .219,
+  1.194, .671, .297,
+  1.39, .98, .355,
+  1.471, .939, .403,
+  1.94, 1.115, .532,
+  1.96, 1.56, .687,
+  2.22, 1.642, .823
+)
+erm <- tibble(
+  base = rep(0:7, each = 3),
+  out = rep(0:2, times = 8),
+  runs = lindsey
+)
+```
+
+```{r lindsey-erm}
+int2bin <- function(x) {
+  x |>
+    map(intToBits) |>
+    map(rev) |>
+    map(tail, 3) |>
+    map(str_sub, 2) |>
+    map_chr(paste, collapse = "")
+}
+#int2bin(0:7)
+
+erm |>
+  pivot_wider(names_from = out, values_from = runs) |>
+  mutate(base = int2bin(base)) |>
+  rename(`base\\\\out` = base) |>
+  knitr::kable(caption = "George Lindsey's expected run matrix. Note how (when reading across the rows) the expected runs decrease as outs increase for the same configuration of baserunners, while (when reading down the columns) expected runs generally increase as baserunners advance. \\label{tab:erm}")
 ```
 
 
@@ -268,7 +305,7 @@ https://arxiv.org/pdf/2204.11777.pdf
 A popular method for estimating team strength in sports is through pairwise evaluations. Perhaps the most famous probability model for predicting the outcome of a paired comparison is the Bradley-Terry model (BTM) [@Bradley1952]. For a pair of players (or teams) $i$ and $j$, let $\Pi_{ij}$ denote the probability that $i$ is preferred to $j$. Then the BTM is a logistic regression model with parameters $\beta_i, \beta_j$ such that
 
 $$
-log\left(\frac{\Pi_{ij}}{\Pi_{ji}}\right) = \beta_i - \beta_j
+\log\left(\frac{\Pi_{ij}}{\Pi_{ji}}\right) = \beta_i - \beta_j
 $$
 
 Here, $\exp{\beta_i}$ is often viewed as a representation of player $i$'s ability. The BTM can be implemented in `R` [@Rcitation2022] via the \pkg{BradleyTerry2} package [@R-BradleyTerry2].
@@ -277,12 +314,11 @@ For example, ...
 
 
 ```{r btm, echo=TRUE}
-library(tidyverse)
 library(BradleyTerry2)
 # show BTM for Pirates vs. Yankees in 1960
 # or Red Sox vs. Yankees in 2003/2004
 library(retrosheet)
-games <- getRetrosheet("game", 2004)
+games <- get_retrosheet("game", 2004)
 
 bt_games <- games |>
   group_by(HmTm, VisTm) |>
