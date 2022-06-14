@@ -54,7 +54,9 @@ knitr::write_bib(
     "Lahman", "pitchRx", "retrosheet",
     "teamcolors",
     "ggplot2",
-    "BradleyTerry2"
+    "BradleyTerry2",
+    "nflfastR",
+    "nflverse"
   ),
   file = "pkgs.bib"
 )
@@ -260,7 +262,7 @@ The hope is to score a quick goal to get back in the game, but the risk is falli
 @skinner2011scoring develops a general framework for these desperation strategies, which include the onside kick in American football, pulling the infield and/or outfield in in baseball, and of course, the fabled Hack-a-Shaq strategy in basketball. 
 
 
-# Win probability
+# Win probability {#sec:wp}
 
 A related, but different, concept is the notion of *win probability*.
 Win probability is simply an estimate of the probability that a team will win the game, given its current state $s$. 
@@ -293,19 +295,11 @@ where the win and loss points represent how much the player positively and negat
 
 ## Football
 
-In football, 
+In recent years, a number of statistical methods have been used to build well-calibrated win probability models in American football. @Lock2014 used random forests as a means for estimating win probability before each play in a football game. In addition, @Yurko2019 estimated win probability in the NFL using a generalized additive model, as part of the `nflscrapr` package and nflwar framework. A major highlight of this framework is it is fully reproducible and uses publicly available data. One of @Yurko2019's goals was also to encourage researchers to "use, explore, and improve upon our work", which ultimately inspired \pkg{nflfastR}, known as the successor to `nflscrapr`
 
-Burke WPA
-
-http://www.advancedfootballanalytics.com/2010/01/win-probability-added-wpa-explained.html
-
-@Lock2014 used random forests as a means for estimating WP before each play in a football game. 
-
-@Yurko2019
+(add a wp example from nflfastR)
 
 @Yam2019 causal
-
-nflscrapr, nflfastR, nflverse
 
 @Yurko2020 going deep
 
@@ -326,6 +320,10 @@ https://arxiv.org/pdf/2204.11777.pdf
 @Brenzel2019 curling markov
 
 @Maymin2020 esport!
+
+ann appl stat march 2022 paper on wp in rugby
+
+https://projecteuclid.org/journals/annals-of-applied-statistics/volume-16/issue-1/In-game-win-probabilities-for-the-National-Rugby-League/10.1214/21-AOAS1514.short
 
 # Team strength
 
