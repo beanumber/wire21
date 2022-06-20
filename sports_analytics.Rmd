@@ -321,9 +321,7 @@ https://arxiv.org/pdf/2204.11777.pdf
 
 @Maymin2020 esport!
 
-ann appl stat march 2022 paper on wp in rugby
-
-https://projecteuclid.org/journals/annals-of-applied-statistics/volume-16/issue-1/In-game-win-probabilities-for-the-National-Rugby-League/10.1214/21-AOAS1514.short
+@Guan2022 wp for rugby
 
 # Team strength
 
@@ -386,16 +384,15 @@ btm2 |>
   arrange(desc(estimate))
 ```
 
+Another widely known tool for measuring team strength is the Elo rating system [@Elo1978]. The Elo rating was originally developed for chess, but also has been used to estimate team strength in other sports. 
+
+See @koning2017rating for more information on applications of the Elo rating in soccer.
+
+@Glickman1998 proposed a Bayesian state-space model for paired comparisons for predicting NFL games, allowing team strength parameters to vary over time. In particular, this paper modeled point differential in the NFL by introducing week-to-week and season-to-season as the two primary sources variation in team strengths. See also @glickman2017estimating for more discussion on estimating team strengths in American football.
+
+@Lopez2018 extended @Glickman1998's state-space model to understand randomness in the four major American sports leagues. Betting moneylines were used in place of point differentials in order to estimate team strengths, and this framework also accounts for home advantage.
 
 
-@Elo1978
-
-@Glickman1998 state-space model. 
-See also @glickman2017estimating.
-
-@Lopez2018 extension to @Glickman1998's framework
-
-In soccer, @koning2017rating
 
 ## Other stuff
 
