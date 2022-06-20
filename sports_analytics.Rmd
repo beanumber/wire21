@@ -307,21 +307,21 @@ These two frameworks were also implemented in @Yam2019 with minimal modification
 
 ## Basketball
 
-@Stern1994 brownian
+@Stern1994 used Brownian motion to investigate the scoring process of basketball. The model introduced by @Stern1994 is a probit regression model, which provides an estimate for the probability of winning for a home team, taking into account the score difference between the teams and the current game time. 
 
-@Deshpande2016 bayesian
+@Deshpande2016 extended @Stern1994's framework by applying it in a Bayesian setting.
 
-@McFarlane2019 nba logistic
+@McFarlane2019 used logistic regression to estimate win probability for evaluating end-of-game decisions in the NBA
 
 ## Other sports
 
-https://arxiv.org/pdf/2204.11777.pdf
+Examples of win probability can also be found in other sports, with a diverse range of statistical techniques being used to estimate the probability of winning for a player or team.
 
-@Brenzel2019 curling markov
+@Brenzel2019 used a three-dimensional Markov model to estimate win probability in curling. 
 
-@Maymin2020 esport!
+In esport, @Maymin2020 proposed a well-calibrated in-game win probability model for each specific moment during a game of League of Legends.
 
-@Guan2022 wp for rugby
+More recently, @Guan2022 developed an in-game win probability model for the National Rugby League using a functional data analysis approach. 
 
 # Team strength
 
