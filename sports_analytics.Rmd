@@ -299,7 +299,7 @@ In recent years, a number of statistical methods have been used to build well-ca
 
 @Lock2014 used random forests as a means for estimating win probability before each play in a football game. Covariates included in this win probability model are the current down, score differential, time remaining, adjusted score, point spread, number of timeouts remaining for each team, total points scored, current yardline, and yards to go for a first down.
 
-In addition, @Yurko2019 estimated win probability in the NFL using a generalized additive model (GAM), as part of the `nflscrapr` package and nflWAR framework. This model takes into account the estimated expected points obtained from the model described in \ref{sec:ev}, along with other predictors for time, current half, and timeouts. A major highlight of this framework is it is fully reproducible and uses publicly available data. One of @Yurko2019's goals was also to encourage researchers to "use, explore, and improve upon our work", which ultimately inspired \pkg{nflfastR}, known as the successor to `nflscrapr`
+In addition, @Yurko2019 estimated win probability in the NFL using a generalized additive model (GAM), as part of the `nflscrapr` package and nflWAR framework. This model takes into account the estimated expected points obtained from the model described in \ref{sec:ev}, along with other predictors for time, current half, and timeouts. A major highlight of this framework is it is fully reproducible and uses publicly available data. One of @Yurko2019's goals was also to encourage researchers to "use, explore, and improve upon our work", which ultimately inspired \pkg{nflfastR}, known as the successor to `nflscrapr`.
 
 These two frameworks were also implemented in @Yam2019 with minimal modifications. Specifically, the authors combined both @Lock2014 and @Yurko2019's approaches to estimate the win probability for each play, with an overall goal of assessing fourth down decision making in gridiron football.
 
@@ -307,11 +307,18 @@ These two frameworks were also implemented in @Yam2019 with minimal modification
 
 ## Basketball
 
-@Stern1994 used Brownian motion to investigate the scoring process of basketball. The model introduced by @Stern1994 is a probit regression model, which provides an estimate for the probability of winning for a home team, taking into account the score difference between the teams and the current game time. 
+@Stern1994 used Brownian motion to investigate the scoring process of basketball. Let $p(l, t)$ represents the win probability for the home team given an $l$-point lead after $t$ seconds of game time. The model introduced by @Stern1994 is a probit regression model, which provides an estimate for $p(l, t)$. In particular, 
 
-@Deshpande2016 extended @Stern1994's framework by applying it in a Bayesian setting.
+$$
+p(l, t) = \Phi\left(\frac{l + (1-t)\mu}{\sqrt{(1-t)\sigma^2}}\right)
+,
+$$
 
-@McFarlane2019 used logistic regression to estimate win probability for evaluating end-of-game decisions in the NBA
+Here, a Brownian motion process with drift $\mu$ points advantage for the home team and variance $\sigma^2$ is used to model the score difference between the home and away teams. 
+
+On a related note, @Deshpande2016 extended @Stern1994's framework by applying it in a Bayesian setting. In particular, a Bayesian lasso regression model was proposed to assess the impact of individual players on their team's win probability at a given time of a basketball game. This model assumes independence of observation, constant variability in win probability, and also addresses multicollinearity.
+
+@McFarlane2019 used logistic regression to estimate win probability for evaluating end-of-game decisions in the NBA. The approach takes into account the remaining game time, score difference, and point spread. This basketball win probability model is then applied to the calculation of the End-of-game Tactics Metric (ETM), measuring how the win probability differs between the optimal and on-court actual decisions.
 
 ## Other sports
 
