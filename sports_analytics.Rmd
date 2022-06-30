@@ -208,13 +208,15 @@ Numerous papers (see @lopez2020bigger for details) have used the analysis of the
 
 ## Sports with continuous states
 
-Even in sports where the concept of a state is not so easy to define, like basketball, the value of a possession can be estimated with player tracking data [@cervone2016multiresolution].
+Even in sports where the concept of a state is not so easy to define, like basketball, the value of a possession can be estimated with player tracking data. @cervone2016multiresolution introduces expected possession value (EPV), providing a continuous-time estimate of the expected number of points for the offensive team on a given possession using player and ball locations.  
 
 See also @bornn2017studying.
 
+@Yurko2020going football
+
 @fernandez2021epvsoccer A framework for the fine-grained evaluation of the instantaneous expected value of soccer possessions
 
-@decroos2019playeraction Actions Speak Louder than Goals: Valuing Player Actions in Soccer
+(These papers shared the same definitions of EPV)
 
 ## Optimal strategies that don't maximize expected points
 
@@ -393,7 +395,7 @@ tennis_bt |>
   knitr::kable(caption = "Estimated abilities for each player, relative to Wawrinka, obtained from the fitted BTM. \\label{tab:tennisbtm}")
 ```
 
-Table \ref{tab:tennisbtm} shows the estimated coefficients of the fitted BTM. According to the abilities, the players are ranked as follows: 1) Djokovic, 2) Federer, 3) Wawrinka, 4) Murray, 5) Nadal. To obtain win probability, as an illustration, for the Federer-Nadal matchup, an estimate for the probability of a Federer victory is
+Table \ref{tab:tennisbtm} shows the estimated coefficients of the fitted BTM. According to the abilities, the players are ranked as follows: 1) Djokovic, 2) Federer, 3) Wawrinka, 4) Nadal, 5) Murray To obtain win probability, as an illustration, for the Federer-Nadal matchup, an estimate for the probability of a Federer victory is
 $$
 \hat\Pi_{24} = \frac{exp(\hat\beta_2 - \hat\beta_4)}{1 + exp(\hat\beta_2 - \hat\beta_4)} = \frac{exp(1.136 + 0.062)}{1 + exp(1.136 + 0.062)} = 0.768
 $$
