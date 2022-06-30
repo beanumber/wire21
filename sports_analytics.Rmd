@@ -303,7 +303,47 @@ In addition, @Yurko2019 estimated win probability in the NFL using a generalized
 
 These two frameworks were also implemented in @Yam2019 with minimal modifications. Specifically, the authors combined both @Lock2014 and @Yurko2019's approaches to estimate the win probability for each play, with an overall goal of assessing fourth down decision making in gridiron football.
 
-(add a wp example from nflfastR or nflscapr)
+Figure \ref{fig:nflfastr_wp}
+
+```{r}
+# win prob for Minneapolis Miracle
+library(teamcolors)
+
+vikings <- teamcolors |> 
+  filter(league == "nfl", name == "Minnesota Vikings") |> 
+  pull(primary)
+
+saints <- teamcolors |> 
+  filter(league == "nfl", name == "New Orleans Saints") |> 
+  pull(primary)
+```
+
+```{r nflfastr_wp, fig.cap="WP for MIN vs NO (add more later)"}
+library(nflfastR)
+load_pbp(2017) |> 
+  filter(season_type == "POST",
+         home_team == "MIN",
+         away_team == "NO",
+         !is.na(home_wp),
+         !is.na(away_wp)) |>
+  select(game_seconds_remaining, home_wp, away_wp) |> 
+  pivot_longer(!game_seconds_remaining,
+               names_to = "team",
+               values_to = "wp") |> 
+  ggplot(aes(game_seconds_remaining, wp, color = team)) +
+  geom_line(size = 2) +
+  scale_x_reverse(breaks = seq(0, 3600, 900)) + 
+  scale_color_manual(values = c(saints, vikings), 
+                     labels = c("New Orleans Saints", "Minnesota Vikings")) +
+  # geom_hline(yintercept = 0.5, color = "gray", linetype = "dashed") +
+  # geom_vline(xintercept = seq(0, 2700, 900), linetype = "dashed", color = "gray") + 
+  labs(x = "Time Remaining (seconds)",
+       y = "Win Probability",
+       color = NULL) +
+  theme_bw() +
+  theme(legend.position = "top")
+```
+
 
 ## Basketball
 
