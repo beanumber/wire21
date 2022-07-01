@@ -98,8 +98,6 @@ It may be a figure or panel from the article or may be specifically designed as 
 
 > While Wiley does consider articles on preprint servers (ArXiv, bioRxiv, psyArXiv, SocArXiv, engrXiv, etc.) for submission to primary research journals, preprint articles should not be cited in WIREs manuscripts as review articles should discuss and draw conclusions only from peer-reviewed research. Remember that original research/unpublished work should also not be included as it has not yet been peer-reviewed and could put the work in jeopardy of getting published in the primary press.
 
-
-
 See @cochran2017oxford and @Albert2017handbook for overview readers. 
 
 See @baumer2022ctv for R packages useful for sports analytics. 
@@ -208,7 +206,11 @@ Numerous papers (see @lopez2020bigger for details) have used the analysis of the
 
 ## Sports with continuous states
 
-Even in sports where the concept of a state is not so easy to define, like basketball, the value of a possession can be estimated with player tracking data. @cervone2016multiresolution introduces expected possession value (EPV), providing a continuous-time estimate of the expected number of points for the offensive team on a given possession using player and ball locations.  
+Even in sports where the concept of a state is not so easy to define, like basketball, the value of a possession can be estimated with player tracking data. 
+
+(a few sentences on tracking data)
+
+@cervone2016multiresolution introduces expected possession value (EPV), providing a continuous-time estimate of the expected number of points for the offensive team on a given possession using player and ball locations.  
 
 See also @bornn2017studying.
 
