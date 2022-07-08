@@ -15,10 +15,10 @@ authors:
     email: gmatthews1@luc.edu
     ORCID: 0000-0002-8413-5097
   - name: Quang Nguyen
-    department: Mathematics and Statistics
-    affiliation: Loyola University Chicago
-    location: Chicago, IL 60660
-    email: nnguyen22@luc.edu
+    department: Statistics & Data Science
+    affiliation: Carnegie Mellon University
+    location: Pittsburgh, PA 15213
+    email: nmquang@cmu.edu
   - name: Katherine Evans
     affiliation: Monumental Basketball
     location: Washington, DC 20003
@@ -31,7 +31,9 @@ keywords:
   - sports data
   - datasets
 bibliography: [refs.bib, pkgs.bib]
-biblio-style: unsrt   # use apa for WIRE
+biblio-style: unsrt   
+# use apa for WIRE
+csl: apa.csl
 output: rticles::arxiv_article
 header-includes:
   - \usepackage{amsmath}
@@ -59,7 +61,7 @@ knitr::write_bib(
     "ggplot2",
     "BradleyTerry2",
     "nflfastR",
-    "nflscrapr",
+    # "nflscrapr", no longer supported, can no longer be installed
     "nflverse",
     "xgboost"
   ),
@@ -315,12 +317,12 @@ These are flexible models that have high predictability, can account for nonline
 @Lock2014 use random forests as a means for estimating win probability before each play in a football game. 
 Covariates included in this win probability model are the current down, score differential, time remaining, adjusted score, point spread, number of timeouts remaining for each team, total points scored, current yardline, and yards to go for a first down. 
 
-In addition, @Yurko2019 estimate win probability in the NFL using a generalized additive model (GAM), as part of the \pkg{nflscrapr} package (@R-nflscrapr) and nflWAR framework. 
+In addition, @Yurko2019 estimate win probability in the NFL using a generalized additive model (GAM), as part of the **nflscrapR** package [@R-nflscrapR] and nflWAR framework. 
 This model takes into account the estimated expected points obtained from the model described in Section \ref{sec:ev}, along with other predictors for time, current half, and timeouts. 
 The two win probability frameworks proposed by @Lock2014 and @Yurko2019 were also implemented in @Yam2019 with minimal modifications. Specifically, the authors combined both approaches to estimate the win probability for each play, with an overall goal of assessing fourth down decision-making in gridiron football.
 
 A vital highlight of @Yurko2019's win probability model is that it is fully reproducible and uses publicly available data. 
-One of @Yurko2019's goals was also to encourage researchers to "use, explore, and improve upon our work," which ultimately inspired \pkg{nflfastR} (@R-nflfastR), now considered the successor to \pkg{nflscrapr}. 
+One of @Yurko2019's goals was also to encourage researchers to "use, explore, and improve upon our work," which ultimately inspired \pkg{nflfastR} (@R-nflfastR), now considered the successor to **nflscrapR**. 
 
 Figure \ref{fig:nflfastr_wp} shows a win probability graph for the January 14, 2018 NFL Playoffs Divisional Round matchup between the New Orleans Saints and the Minnesota Vikings. 
 We obtain the estimated probability of winning for each team using the \pkg{nflfastR} R package, which implements a gradient boosting model via the \pkg{xgboost} library (@R-xgboost) for estimating win probabilities. 
@@ -430,6 +432,13 @@ The BTM can be implemented in `R` [@Rcitation2022] via the \pkg{BradleyTerry2} p
 As an example, we consider the data given in @agresti2018introduction (page 247) on tennis results from 2014--2018 for five men's professional players Novak Djokovic, Roger Federer, Andy Murray, Rafael Nadal, and Stan Wawrinka. 
 We fit a BTM to estimate the win probability for each pair of players and obtain a ranking for this group of five.
 
+Table \ref{tab:tennisbtm} shows the estimated coefficients of the fitted BTM. 
+According to the abilities, between 2014 and 2018 the players are ranked as follows: 1) Djokovic, 2) Federer, 3) Wawrinka, 4) Nadal, 5) Murray.
+To obtain win probabilities, as an illustration, for the Federer-Nadal matchup, an estimate for the probability of a Federer victory is:
+$$
+\hat\Pi_{24} = \frac{exp(\hat\beta_2 - \hat\beta_4)}{1 + exp(\hat\beta_2 - \hat\beta_4)} = \frac{exp(1.136 + 0.062)}{1 + exp(1.136 + 0.062)} = 0.768
+$$
+
 ```{r}
 tennis <- dplyr::tibble(
   Djokovic = c(NA, 9, 14, 9, 4),
@@ -447,16 +456,8 @@ tennis_bt |>
   update(refcat = "Wawrinka") |> 
   BradleyTerry2::BTabilities() |> 
   round(3) |> 
-  knitr::kable(caption = "Estimated abilities for each player, relative to Wawrinka, obtained from the fitted BTM. \\label{tab:tennisbtm}")
+  knitr::kable(caption = "Estimated abilities for each player, relative to Wawrinka, obtained from the fitted Bradley-Terry model. \\label{tab:tennisbtm}")
 ```
-
-Table \ref{tab:tennisbtm} shows the estimated coefficients of the fitted BTM. 
-According to the abilities, the players are ranked as follows: 1) Djokovic, 2) Federer, 3) Wawrinka, 4) Nadal, 5) Murray.
-To obtain win probability, as an illustration, for the Federer-Nadal matchup, an estimate for the probability of a Federer victory is:
-$$
-\hat\Pi_{24} = \frac{exp(\hat\beta_2 - \hat\beta_4)}{1 + exp(\hat\beta_2 - \hat\beta_4)} = \frac{exp(1.136 + 0.062)}{1 + exp(1.136 + 0.062)} = 0.768
-$$
-
 
 ```{r btm, eval=FALSE}
 library(BradleyTerry2)
@@ -506,11 +507,11 @@ btm2 |>
 Another widely known tool for measuring team strength is the Elo rating system [@Elo1978], which was originally developed for chess, but also has been used to estimate team strength in other sports. 
 See @koning2017rating for more information on applications of the Elo rating in soccer. 
 
-@Glickman1998 proposed a Bayesian state-space model for paired comparisons for predicting NFL games, allowing team strength parameters to vary over time. 
-In particular, they modeled point differential in the NFL by introducing week-to-week and season-to-season as the two primary sources variation in team strengths. 
+@Glickman1998 propose a Bayesian state-space model for paired comparisons for predicting NFL games, allowing team strength parameters to vary over time. 
+In particular, they model point differential in the NFL by introducing week-to-week and season-to-season as the two primary sources variation in team strengths. 
 See also @glickman2017estimating for more discussion on estimating team strengths in American football. 
-More recently, @Lopez2018 extended @Glickman1998's state-space model to understand randomness in the four major American sports leagues. 
-Betting moneylines were used in place of point differentials in order to estimate team strengths, and this framework also accounts for home advantage.
+More recently, @Lopez2018 extend @Glickman1998's state-space model to understand randomness in the four major American sports leagues. 
+Betting moneylines are used in place of point differentials in order to estimate team strengths, and this framework also accounts for home advantage.
 
 ## Other stuff
 
@@ -525,9 +526,6 @@ Figure \ref{fig:chess-startup} shows a rendering of the starting chess board obt
 #Sys.setenv(RETICULATE_PYTHON = "my_env/bin/python3")
 #game() %>% plot()
 ```
-
-
-# Color palettes
 
 @R-teamcolors provides color palettes for professional and amateur sports teams, as well as color and fill scale functions compatible with \pkg{ggplot2} [@R-ggplot2].
 Figure \ref{fig:teamcolors} illustrates team color palettes for professional sports leagues. 
