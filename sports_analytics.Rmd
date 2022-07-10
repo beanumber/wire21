@@ -210,19 +210,16 @@ Numerous papers (see @lopez2020bigger for details) have used the analysis of the
 
 ## Sports with continuous states
 
-Even in sports where the concept of a state is not so easy to define, like basketball, the value of a possession can be estimated with player tracking data. 
+Even in sports where the concept of a state is not so easy to define, the value of a possession can be estimated, with the help of tracking data. Over the past decade or so, professional sports leagues have collected tracking data which record the locations of all players and the ball (or puck) throughout a game. This sophisticated type of data allows researchers to produce advanced analyses of the captured spatio-temporal information and better understand the game, which is much more difficult to be accomplished with pre-existing resources such as box-score results and play-by-play data.
 
-(a few sentences on tracking data)
+In basketball, @cervone2014pointwise and @cervone2016multiresolution introduces expected possession value (EPV) as an assessment of a player's on-court performance. This metric is a continuous-time estimate of the expected number of points for the offensive team on a given possession using player and ball locations. The EPV takes into account all possible outcomes (a shot attempt, a pass, etc.) for a given player with the ball, with different weights being assigned to each decision. See also @bornn2017studying for more information on how tracking data have enabled advanced statistical analyses of basketball in recent years.
 
-@cervone2016multiresolution introduces expected possession value (EPV), providing a continuous-time estimate of the expected number of points for the offensive team on a given possession using player and ball locations.  
+more basketball @Sicilia2019DeepHoops
 
-See also @bornn2017studying.
-
-@Yurko2020going football
+@Yurko2020going uses tracking data provided by the 2019 NFL Big Data Bowl (citation) to model the expected yards gained for a ball-carrier during the course of a play. As opposed to only giving a single estimate for the expected yards gained, the authors use conditional density estimation to obtain a probability distribution for the number of yards gained during the play. 
 
 @fernandez2021epvsoccer A framework for the fine-grained evaluation of the instantaneous expected value of soccer possessions
 
-(These papers shared the same definitions of EPV)
 
 ## Optimal strategies that don't maximize expected points
 
