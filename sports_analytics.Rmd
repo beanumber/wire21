@@ -195,20 +195,27 @@ See @Albert2001curve for a fuller discussion of the use of the expected run matr
 ## In other sports with discrete states
 
 The concept of estimating the value of the state of a game is easily extended to other sports. 
-In American football, $s$ is determined by down, yardage to the next first down, and field position. 
+For example, in American football, $s$ is determined by factors such as down, yardage to the next first down, and field position. 
 
-@CarterMachol1971 estimate the expected points for 1st and 10 given a yard line (broken up into 10 yard chunks centered at a given yardline (e.g. 5, 15, 25, 35, etc. )).  This is wild that they did this in 1971!
+The first effort of estimating expected points of possession in football goes back to @Carter1971operations. 
+In this technical note, the authors estimate the expected points for 1st and 10 plays in the NFL given any yard line on the football field. 
+Due to limitations regarding the amount of data collected, the football field is broken into 10-yard strips, centered at their midpoints (e.g. 5, 15, 25, 35, etc.), and the expected points are calculated for each of those field positions. 
+Early work on expected point values in football also includes @Carroll1988hidden, which popularizing the idea of play evaluation using expected points and expected points added.
+
+@goldner2012markov and @goldner2017situational proposes a Markov model for estimating expected points in football. 
+In particular, the author considers a football drive as an *absorbing Markov chain*, consisting of distinct *absorbing states* touchdowns, field goals, and other play outcomes. 
+For any given play, the expected points is calculated using the absorption probabilities for different scoring events.
+
+A more in-depth overview of the history of expected points is provided in @Yurko2019nflwar (Section 1.1). 
+Most importantly, this paper uses publicly available data provided by the **nflscrapR** package [@R-nflscrapR] to model the expected points on a play-by-play level in football. 
+The authors introduce a multinomial logistic regression approach, which takes into account the current down, time remaining, yards from endzone, yards to go, and the indicators for goal to go and whether the time remaining in the half is less than two minutes. 
+This model estimates the probabilities of the following possible scoring outcomes after each play: no score, safety, field goal, and touchdown for both the offensive and defensive teams, all of which have a point value. 
+The expected points for a play can then be calculated accordingly, by taking the sum of the products of the scoring event point values and their associated probabilities.
+
+(A paragraph on applications of expected points on decision making, fourth down strategy, with an example)
 
 Numerous papers (see @lopez2020bigger for details) have used the analysis of the expected number of points to improve fourth down strategy. 
-@goldner2017situational uses a similar framework.
 
-
-@CarrollPalmer1988 The hidden game of football.  Mentioned by Pattani and popularizing the idea of EPA.  
-
-@Yurko2019, which uses an expected points model as part of the nfl war framework, uses down (1-4, seconds remaining in half, yards from endzone, yards to go (log), indicator for goal to go (GTG), and indicator for under 2 minutes (UTM)
-
-multinomial logistic regression
-next score r.v.
 
 ## Sports with continuous states
 
@@ -234,7 +241,7 @@ As an extension to pre-existing approaches, the authors use conditional density 
 Accordingly, the probability of various types of outcome at the end of a play such as a touchdown or a first-down gain can be computed from the yards gained distribution.
 
 The notion of EPV has also been extended to soccer recently.
-@fernandez2021framework uses deep learning methods to examine the instantaneous expected value of soccer possessions. 
+@fernandez2021framework implement deep learning methods to examine the instantaneous expected value of soccer possessions. 
 This approach considers passes, ball drives, and shots in soccer as the main set of actions used to compute expected possession value. 
 
 
@@ -331,12 +338,12 @@ These are flexible models that have high predictability, can account for nonline
 @Lock2014 use random forests as a means for estimating win probability before each play in a football game. 
 Covariates included in this win probability model are the current down, score differential, time remaining, adjusted score, point spread, number of timeouts remaining for each team, total points scored, current yardline, and yards to go for a first down. 
 
-In addition, @Yurko2019 estimate win probability in the NFL using a generalized additive model (GAM), as part of the **nflscrapR** package [@R-nflscrapR] and nflWAR framework. 
+In addition, @Yurko2019nflwar estimate win probability in the NFL using a generalized additive model (GAM), as part of the **nflscrapR** package [@R-nflscrapR] and nflWAR framework. 
 This model takes into account the estimated expected points obtained from the model described in Section \ref{sec:ev}, along with other predictors for time, current half, and timeouts. 
-The two win probability frameworks proposed by @Lock2014 and @Yurko2019 were also implemented in @Yam2019 with minimal modifications. Specifically, the authors combined both approaches to estimate the win probability for each play, with an overall goal of assessing fourth down decision-making in gridiron football.
+The two win probability frameworks proposed by @Lock2014 and @Yurko2019nflwar were also implemented in @Yam2019 with minimal modifications. Specifically, the authors combined both approaches to estimate the win probability for each play, with an overall goal of assessing fourth down decision-making in gridiron football.
 
-A vital highlight of @Yurko2019's win probability model is that it is fully reproducible and uses publicly available data. 
-One of @Yurko2019's goals was also to encourage researchers to "use, explore, and improve upon our work," which ultimately inspired \pkg{nflfastR} (@R-nflfastR), now considered the successor to **nflscrapR**. 
+A vital highlight of @Yurko2019nflwar's win probability model is that it is fully reproducible and uses publicly available data. 
+One of @Yurko2019nflwar's goals was also to encourage researchers to "use, explore, and improve upon our work," which ultimately inspired \pkg{nflfastR} (@R-nflfastR), now considered the successor to **nflscrapR**. 
 
 Figure \ref{fig:nflfastr_wp} shows a win probability graph for the January 14, 2018 NFL Playoffs Divisional Round matchup between the New Orleans Saints and the Minnesota Vikings. 
 We obtain the estimated probability of winning for each team using the \pkg{nflfastR} R package, which implements a gradient boosting model via the \pkg{xgboost} library (@R-xgboost) for estimating win probabilities. 
@@ -518,7 +525,7 @@ btm2 |>
   arrange(desc(estimate))
 ```
 
-Another widely known tool for measuring team strength is the Elo rating system [@Elo1978], which was originally developed for chess, but also has been used to estimate team strength in other sports. 
+Another widely known tool for measuring team strength is the Elo rating system [@Elo1978]. The Elo rating was originally developed for chess, but also has been used to estimate team strength in other sports. 
 See @koning2017rating for more information on applications of the Elo rating in soccer. 
 
 @Glickman1998 propose a Bayesian state-space model for paired comparisons for predicting NFL games, allowing team strength parameters to vary over time. 
