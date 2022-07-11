@@ -197,30 +197,45 @@ See @Albert2001curve for a fuller discussion of the use of the expected run matr
 The concept of estimating the value of the state of a game is easily extended to other sports. 
 In American football, $s$ is determined by down, yardage to the next first down, and field position. 
 
+@CarterMachol1971 estimate the expected points for 1st and 10 given a yard line (broken up into 10 yard chunks centered at a given yardline (e.g. 5, 15, 25, 35, etc. )).  This is wild that they did this in 1971!
+
 Numerous papers (see @lopez2020bigger for details) have used the analysis of the expected number of points to improve fourth down strategy. 
 @goldner2017situational uses a similar framework.
 
-@Pattani2012 describes ESPN's expected points metric.  
 
 @CarrollPalmer1988 The hidden game of football.  Mentioned by Pattani and popularizing the idea of EPA.  
 
-@Yurko2019, which uses an expected points model as part of the nfl war framework, uses down (1-4, seconds remaining in half, yards from endzone, yards to go (log), indicator for goal to go (GTG), and indicator for under 2 minutes (UTM).
+@Yurko2019, which uses an expected points model as part of the nfl war framework, uses down (1-4, seconds remaining in half, yards from endzone, yards to go (log), indicator for goal to go (GTG), and indicator for under 2 minutes (UTM)
 
-@CarterMachol1971 estimate the expected points for 1st and 10 given a yard line (broken up into 10 yard chunks centered at a given yardline (e.g. 5, 15, 25, 35, etc. )).  This is wild that they did this in 1971!
+multinomial logistic regression
+next score r.v.
 
 ## Sports with continuous states
 
-Even in sports where the concept of a state is not so easy to define, the value of a possession can be estimated, with the help of tracking data. Over the past decade or so, professional sports leagues have collected tracking data which record the locations of all players and the ball (or puck) throughout a game. This sophisticated type of data allows researchers to produce advanced analyses of the captured spatio-temporal information and better understand the game, which is much more difficult to be accomplished with pre-existing resources such as box-score results and play-by-play data.
+Even in sports where the concept of a state is not so easy to define, the value of a possession can be estimated, with the help of tracking data. 
+Over the past decade or so, professional sports leagues have collected tracking data which record the locations of all players and the ball (or puck) throughout a game. 
+This sophisticated type of data allows researchers to produce advanced analyses of the captured spatio-temporal information and better understand the game, which is much more difficult to be accomplished with pre-existing resources such as traditional box-score results and play-by-play data.
 
-In basketball, @cervone2014pointwise and @cervone2016multiresolution introduce expected possession value (EPV) as an assessment of a player's on-court performance. This metric is a continuous-time estimate of the expected number of points for the offensive team on a given possession using player and ball locations. The EPV takes into account all possible outcomes (a shot attempt, a pass, etc.) for a given player with the ball, with different weights being assigned to each decision. 
+In basketball, @cervone2014pointwise and @cervone2016multiresolution introduce expected possession value (EPV) as an assessment of a player's on-court performance. 
+This metric is a continuous-time estimate of the expected number of points for the offensive team on a given possession using player and ball locations. 
+The EPV takes into account all possible outcomes (a shot attempt, a pass, etc.) for a given player with the ball, with different weights being assigned to each decision. 
+Consequently, the authors derive a metric called EPV-Added (EPVA), measuring a player's EPV contribution in a given situation relative to a league-average player.
 
-Another framework for estimating expected points in basketball was proposed by @Sicilia2019DeepHoops. The authors first consider a classification model which returns the probabilities for whether a player would commit a foul (shooting and non-shooting), turnover, or attempt a shot. The values associated with each of those "terminal actions" are then utilized to compute the expected points within a basketball play.
+(include code demo? https://github.com/dcervone/EPVDemo)
+
+Another framework for estimating expected points in basketball was proposed by @Sicilia2019DeepHoops. 
+The authors first consider a classification model which returns the probabilities for whether a player would commit a foul (shooting and non-shooting), turnover, or attempt a shot. 
+The values associated with each of those "terminal actions" are then utilized to compute the expected points within a basketball play.
 
 See also @bornn2017studying for more information on how tracking data have enabled advanced statistical analyses of basketball in recent years.
 
-In American football, @Yurko2020going use tracking data provided by the 2019 NFL Big Data Bowl (citation) to model the expected yards gained for a ball-carrier during the course of a play. As an extension to pre-existing approaches, the authors use conditional density estimation to obtain a probability distribution for the number of yards gained during the play, rather than only producing a single estimate for the expected yards gained. Accordingly, the probability of various types of outcome at the end of a play such as a touchdown or a first-down gain can be computed from the yards gained distribution.
+In American football, @Yurko2020going use tracking data provided by the 2019 NFL Big Data Bowl (citation) to model the expected yards gained for a ball-carrier during the course of a play. 
+As an extension to pre-existing approaches, the authors use conditional density estimation to obtain a probability distribution for the number of yards gained during the play, rather than only producing a single estimate for the expected yards gained. 
+Accordingly, the probability of various types of outcome at the end of a play such as a touchdown or a first-down gain can be computed from the yards gained distribution.
 
-The notion of EPV has also been extended to soccer recently. @fernandez2021framework uses deep learning methods to examine the  instantaneous expected value of soccer possessions. This approach considers passes, ball drives, and shots in soccer as the main set of actions used to compute expected possession value. 
+The notion of EPV has also been extended to soccer recently.
+@fernandez2021framework uses deep learning methods to examine the instantaneous expected value of soccer possessions. 
+This approach considers passes, ball drives, and shots in soccer as the main set of actions used to compute expected possession value. 
 
 
 ## Optimal strategies that don't maximize expected points
