@@ -194,25 +194,25 @@ See @Albert2001curve for a fuller discussion of the use of the expected run matr
 
 ## In other sports with discrete states
 
-The concept of estimating the value of the state of a game is easily extended to other sports. 
-For example, in American football, $s$ is determined by factors such as down, yardage to the next first down, and field position. 
+The concept of estimating the value of the state of a game is easily extended to other sports. For example, in American football, $s$ is determined by factors such as down, yardage to the next first down, time remaining in the game, and field position. 
 
-The first effort of estimating expected points of possession in football goes back to @Carter1971operations. 
-In this technical note, the authors estimate the expected points for 1st and 10 plays in the NFL given any yard line on the football field. 
-Due to limitations regarding the amount of data collected, the football field is broken into 10-yard strips, centered at their midpoints (e.g. 5, 15, 25, 35, etc.), and the expected points are calculated for each of those field positions. 
-Early work on expected point values in football also includes @Carroll1988hidden, which popularizing the idea of play evaluation using expected points and expected points added.
+The first effort of estimating expected points of possession in football goes back to @Carter1971operations. In this technical note, the authors estimate the expected points for 1st and 10 plays in the NFL given any yard line on the football field. Due to limitations regarding the amount of data collected, the football field is broken into 10-yard strips, centered at their midpoints (e.g. 5, 15, 25, 35, etc.), and the expected points are calculated for each of those field positions. Other early work on expected point values in American football can be found in @Carroll1988hidden, which popularized the idea of play evaluation using expected points and expected points added.
 
-@goldner2012markov and @goldner2017situational proposes a Markov model for estimating expected points in football. 
-In particular, the author considers a football drive as an *absorbing Markov chain*, consisting of distinct *absorbing states* touchdowns, field goals, and other play outcomes. 
-For any given play, the expected points is calculated using the absorption probabilities for different scoring events.
+@goldner2012markov and @goldner2017situational proposes a Markov model for estimating expected points in football. In particular, the author considers a football drive as an *absorbing Markov chain*, consisting of distinct *absorbing states* touchdowns, field goals, and other play outcomes. For any given play, the expected points is calculated using the absorption probabilities for different scoring events.
 
-A more in-depth overview of the history of expected points is provided in @Yurko2019nflwar (Section 1.1). 
-Most importantly, this paper uses publicly available data provided by the **nflscrapR** package [@R-nflscrapR] to model the expected points on a play-by-play level in football. 
+A more in-depth overview of the history of expected points is provided in @Yurko2019nflwar (Section 1.1).  Most importantly, this paper uses publicly available data provided by the **nflscrapR** package [@R-nflscrapR] to model the expected points on a play-by-play level in football.
+
 The authors introduce a multinomial logistic regression approach, which takes into account the current down, time remaining, yards from endzone, yards to go, and the indicators for goal to go and whether the time remaining in the half is less than two minutes. 
-This model estimates the probabilities of the following possible scoring outcomes after each play: no score, safety, field goal, and touchdown for both the offensive and defensive teams, all of which have a point value. 
-The expected points for a play can then be calculated accordingly, by taking the sum of the products of the scoring event point values and their associated probabilities.
+
+This model estimates the probabilities of the following possible scoring outcomes after each play: no score, safety, field goal, and touchdown for both the offensive and defensive teams, all of which have a point value. The expected points for a play can then be calculated accordingly, by taking the sum of the products of the scoring event point values and their associated probabilities.
 
 (A paragraph on applications of expected points on decision making, fourth down strategy, with an example)
+
+4th down strategy papers based on expected points.  
+@Yam2019: 
+@Romer2006: Examines 4th down decisions in the NFL using expected points.  Focuses only on the first quarter.  Teams don't go for it enough is they are trying to maximize their probability of winning the game.  
+@pelechrinis2019 Present an expected points framework where they adjust for the strength of the defence.  
+<!-- New york times article: https://www.nytimes.com/2014/09/05/upshot/4th-down-when-to-go-for-it-and-why.html?_r=0 -->
 
 Numerous papers (see @lopez2020bigger for details) have used the analysis of the expected number of points to improve fourth down strategy. 
 
