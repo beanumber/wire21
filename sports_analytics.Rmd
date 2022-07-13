@@ -231,7 +231,7 @@ Consequently, the authors derive a metric called EPV-Added (EPVA), measuring a p
 (include code demo? https://github.com/dcervone/EPVDemo)
 
 Another framework for estimating expected points in basketball was proposed by @Sicilia2019DeepHoops. 
-The authors first consider a classification model which returns the probabilities for whether a player would commit a foul (shooting and non-shooting), turnover, or attempt a shot. 
+The authors offer a different point of view on expected points, where they first consider a classification model which returns the probabilities for whether a player would commit a foul (shooting and non-shooting), turnover, or attempt a shot. 
 The values associated with each of those "terminal actions" are then utilized to compute the expected points within a basketball play.
 
 See also @bornn2017studying for more information on how tracking data have enabled advanced statistical analyses of basketball in recent years.
