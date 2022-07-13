@@ -211,8 +211,17 @@ This model estimates the probabilities of the following possible scoring outcome
 4th down strategy papers based on expected points.  
 @Yam2019: 
 @Romer2006: Examines 4th down decisions in the NFL using expected points.  Focuses only on the first quarter.  Teams don't go for it enough is they are trying to maximize their probability of winning the game.  
-@pelechrinis2019 Present an expected points framework where they adjust for the strength of the defence.  
+@pelechrinis2019 Present an expected points framework where they adjust for the strength of the defense.  
 <!-- New york times article: https://www.nytimes.com/2014/09/05/upshot/4th-down-when-to-go-for-it-and-why.html?_r=0 -->
+
+@Alamar2010 Evaluation of play calling in the NFL based on expected points.  
+https://www.degruyter.com/document/doi/10.2202/1559-0410.1235/html
+
+@urschel2011 Examines decsions on kick offs (surprise on sides or regular kick off AND accept touchback or return kick) using an expected points frame work.  Shows that teams are moderately risk and loss averse.
+
+@White2002 Evaluated quaraterback usein gtiered multinomial regression in an expected points framework. They use a simple expected points model with down, to go, and to goal as predictors.   
+https://www.eng.buffalo.edu/~jzhuang/Papers/JQAS_NFL_2011.pdf
+
 
 Numerous papers (see @lopez2020bigger for details) have used the analysis of the expected number of points to improve fourth down strategy. 
 
