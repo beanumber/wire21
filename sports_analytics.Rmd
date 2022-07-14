@@ -2,7 +2,7 @@
 title: "Big Ideas in Sports Analytics and Statistical Tools for their Investigation"
 authors:
   - name: Benjamin S. Baumer
-    thanks: Use footnote for providing further information about author (webpage, alternative address)---*not* for acknowledging funding agencies. Optional.
+#    thanks: Use footnote for providing further information about author (webpage, alternative address)---*not* for acknowledging funding agencies. Optional.
     department: Statistical & Data Sciences
     affiliation: Smith College
     location: Northampton, MA 01063
@@ -92,15 +92,43 @@ knitr::write_bib(
 
 # Introduction
 
+<!--
+
 > Introduce your topic in ~2 paragraphs, ~750 words.
 
 > While Wiley does consider articles on preprint servers (ArXiv, bioRxiv, psyArXiv, SocArXiv, engrXiv, etc.) for submission to primary research journals, preprint articles should not be cited in WIREs manuscripts as review articles should discuss and draw conclusions only from peer-reviewed research. Remember that original research/unpublished work should also not be included as it has not yet been peer-reviewed and could put the work in jeopardy of getting published in the primary press.
 
-See @cochran2017oxford and @Albert2017handbook for overview readers. 
+-->
 
-See @baumer2022ctv for R packages useful for sports analytics. 
+Insights derived from the analysis of data have transformed the world of sports over the last few decades. 
+While baseball---a naturally discrete sport with more than a century's worth of professional data---may be the sport with the deepest relationship with sports analytics, one would be hard-pressed to identify a professional sport today in which sports analytics is not having an impact. 
 
-# The expected value of a state {#sec:ev}
+In basketball, analytics has driven a shift in the conventional wisdom about shot selection. 
+Most teams are shooting more three-pointers, settling for fewer long two-point shots, deploying more versatile defenders, and relying less on the strategy of pounding the ball into the paint in an attempt to get a high-percentage shot. [CITATION NEEDED?]
+In American football, teams are going for it on fourth down far more often than in the past, a direct result of statistical analysis showing that most teams were previously overly conservative. [LOPEZ?]
+And of course in baseball, teams are using defensive shifts to maximize the probability of recording an out, encouraging hitters to improve their launch angles, and optimizing pitcher repertoires to minimize contact. 
+
+These are just the most obvious examples of strategic changes that are fueled by insights extracted from data by practitioners of sports analytics.
+Similar insights are now being made in less obvious settings, including esports [@clark2020bayesian; @maymin2021smart]. 
+These insights come both from academia, where researchers typically use public data to produce high-caliber, peer-reviewed scientific work, as well as from industry, where highly-trained analysts work with with players, coaches, and team officials to gain immediate effect thanks to high-resolution, often proprietary data.
+A growing pool of people move seamlessly between these two worlds, leading to the formation of partnerships and the cross-pollination of ideas. 
+
+Every sport is different, with its own set of rules, strategies, methods of data collection, number of players, and the magnitude of the role of chance. 
+At the same time, many sports are similar, either because one evolved from the other, or the structure of the game shares certain attributes. 
+Sports that are closely related anthropologically (NEED EXAMPLE) may or may not share common applications of analytical methods. 
+Conversely, with just a few small tweaks, analytical metrics might work just as well across sports that are unrelated and quite different (e.g., an Elo rating could be equally valid for chess players and ice hockey teams). 
+
+In this paper, we explore three key ideas that have widespread applicability across many sports: the expected value of a game state (Section \ref{sec:ev}), win probability (Section \ref{sec:wp}), and measures of team strength (Section \ref{sec:strength}). 
+In each case, we define the concept mathematically, explain how it originated, and give examples of how it is applied in multiple sports. 
+Our goal is to unify the conceptual threads, while doing some justice to the customizations necessary to make a metric meaningful in a particular sport. 
+We include copious references to original works of scholarship.
+
+Doing the work of sports analytics requires computing with data. 
+While the sources of sports data are too numerous to list, in Section \ref{sec:tools} we highlight a few computational tools that make this kind of work possible. 
+
+We encourage readers to explore @cochran2017oxford and @Albert2017handbook for collections of articles in sports analytics that provide broad coverage of the field. 
+
+# The expected value of a game state {#sec:ev}
 
 In many sports, the first step towards an analytical understanding of the game is the estimation of the expected value of a game state at any given point in a sporting contest. 
 
@@ -444,7 +472,7 @@ In esports, @Maymin2020 uses logistic regression to build a well-calibrated in-g
 More recently, @Guan2022 develops an in-game win probability model for the National Rugby League using functional data analysis. 
 In this approach, the rugby event data are treated as functional, and the win probability is expressed as a function of the match time. 
 
-# Team strength
+# Team strength {#sec:strength}
 
 Another important idea in sports analytics is the estimation of team strength. 
 A popular method for estimating team strength in sports is through pairwise evaluations. 
@@ -543,7 +571,10 @@ See also @glickman2017estimating for more discussion on estimating team strength
 More recently, @Lopez2018 extend @Glickman1998's state-space model to understand randomness in the four major American sports leagues. 
 Betting moneylines are used in place of point differentials in order to estimate team strengths, and this framework also accounts for home advantage.
 
-## Other stuff
+# Tools {#sec:tools}
+
+
+See @baumer2022ctv for R packages useful for sports analytics. 
 
 @marchi2018analyzing
 
