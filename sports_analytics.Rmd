@@ -29,6 +29,7 @@ keywords:
   - sports analytics
   - R packages
   - sports data
+  - pairwise comparisons
   - datasets
 bibliography: [refs.bib, pkgs.bib]
 biblio-style: unsrt   
@@ -73,6 +74,7 @@ knitr::write_bib(
 \newcommand{\pkg}[1]{\textbf{#1}}
 ```
 
+<!--
 
 > Charge: Given your expertise and background, a review article from your group related to the topic of Statistical tools for sports analytics (e.g. baseball) would significantly contribute to WIREs Computational Statistics.
 >
@@ -86,15 +88,7 @@ knitr::write_bib(
 - Overview
 
 
-## Graphical/Visual Abstract and Caption
-
-> Include an attractive full color image to go under the text abstract and in the online Table of Contents.
-You will also need to upload this as a separate file during submission.
-It may be a figure or panel from the article or may be specifically designed as a visual summary. While original images are preferred, if you need to look for a thematically appropriate stock image, you can go to pixabay.com (not affiliated with Wiley) to find a free stock image with a CC0 license. Another option you have is to utilize professional illustrators with Wiley’s Graphical Abstract Design service.
-
-> Size: The minimum resolution is 300 dpi. Please keep the image as simple as possible because it will be displayed in multiple sizes. Multiple panels and text other than labels are strongly discouraged.
-
-> Caption: This is a narrative sentence to convey the article's essence and wider implications to a non-specialist audience. The maximum length is 50 words, but consider using 280 characters or less to facilitate social media sharing, which can increase the discoverability of your article.
+-->
 
 # Introduction
 
@@ -366,16 +360,12 @@ Their probability increased to a perfect 1 when Stefon Diggs scored a game-winni
 # win prob for Minneapolis Miracle
 library(teamcolors)
 
-vikings <- teamcolors |> 
-  filter(league == "nfl", name == "Minnesota Vikings") |> 
-  pull(primary)
-
-saints <- teamcolors |> 
-  filter(league == "nfl", name == "New Orleans Saints") |> 
-  pull(primary)
+miracle <- teamcolors |> 
+  filter(league == "nfl", grepl("Vikings|Saints", name)) |>
+  arrange()
 ```
 
-```{r nflfastr_wp, fig.cap="Win probability graph for Saints vs. Vikings in the 2017--18 NFL Playoffs."}
+```{r nflfastr_wp, fig.cap="Win probability graph for New Orleans Saints vs. Minnesota Vikings in the 2017--18 NFL Playoffs."}
 library(nflfastR)
 x <- load_pbp(2017) |> 
   filter(
@@ -384,19 +374,18 @@ x <- load_pbp(2017) |>
     away_team == "NO",
     !is.na(home_wp),
     !is.na(away_wp)
-  )
-x |>
+  ) |>
   select(game_seconds_remaining, home_wp, away_wp) |> 
   pivot_longer(
     !game_seconds_remaining,
     names_to = "team",
     values_to = "wp"
-  ) |>
-  ggplot(aes(game_seconds_remaining, wp, color = team)) +
-  scale_x_reverse(breaks = seq(0, 3600, 900)) + 
+  )
+
+wp_plot <- ggplot(x, aes(game_seconds_remaining, wp, color = team)) +
   scale_color_manual(
-    values = c(saints, vikings), 
-    labels = c("New Orleans Saints", "Minnesota Vikings")
+    values = setNames(miracle$primary, c("home_wp", "away_wp")), 
+    labels = miracle$name
   ) +
   geom_hline(yintercept = 0.5, color = "gray", linetype = "dashed") +
   geom_vline(
@@ -412,6 +401,17 @@ x |>
   ) +
   theme_bw() +
   theme(legend.position = "top")
+
+library(magick)
+logos <- miracle |>
+  pull(logo) |>
+  map(image_read) |>
+  map(as.raster)
+
+wp_plot + 
+  annotation_raster(logos[[1]], -1010, -1490, 0.76, 0.865) + 
+  annotation_raster(logos[[2]], -1010, -1490, 0.135, 0.24) + 
+  scale_x_reverse()
 ```
 
 
@@ -558,8 +558,8 @@ Figure \ref{fig:chess-startup} shows a rendering of the starting chess board obt
 ```
 
 @R-teamcolors provides color palettes for professional and amateur sports teams, as well as color and fill scale functions compatible with \pkg{ggplot2} [@R-ggplot2].
+The team colors and logos shown in Figure \ref{fig:nflfastr_wp} were provided by the \pkg{teamcolors} package. 
 Figure \ref{fig:teamcolors} illustrates team color palettes for professional sports leagues. 
-
 
 ```{r teamcolors, warning=FALSE, fig.cap="Professional sports team color palettes provided by the \\pkg{teamcolors} package. ", fig.height=9}
 teamcolors::show_team_col()
