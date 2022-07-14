@@ -19,10 +19,6 @@ authors:
     affiliation: Carnegie Mellon University
     location: Pittsburgh, PA 15213
     email: nmquang@cmu.edu
-  - name: Katherine Evans
-    affiliation: Monumental Basketball
-    location: Washington, DC 20003
-    email: kevans@monumentalsports.com
 abstract: |
   Sports analytics---broadly defined as the pursuit of improvement in athletic performance through the analysis of data---has expanded its footprint both in the professional sports industry and in academia over the past 30 years. We connect four(?) big ideas that are common across multiple sports, and explore both the shared similarities and individual idiosyncracies of analytical approaches in each sport. While our focus is on the concepts underlying each type of analysis, any implementation necessarily involves both statistical methodologies and sources of data. Where appropriate, we outline how data, models, and knowledge of the sport combine to generate actionable insights. This paper should serve as a useful overview for anyone becoming interested in the study of sports analytics. 
 keywords:
@@ -144,10 +140,12 @@ for any state $s \in S$, where $\Pr[X | s]$ is the probability of scoring $X$ po
 
 For clarity, we start with baseball due to the discrete nature of the sport. 
 In baseball, $s$ is typically determined by two factors: the configuration of the runners on base (there are 8 possibilities) and the number of outs (3 possibilities). 
-Thus, there $|S| = 24 = 8 \cdot 3$ basic states of an inning in baseball (25, if you include the absorbing state of 3 outs), and we are often interested in the number of runs that will be scored from some state until the end of the inning. 
+Thus, there $|S| = 24 = 8 \cdot 3$ basic states of an inning in baseball[^state], and we are often interested in the number of runs that will be scored from some state until the end of the inning. 
 In this example using baseball, $\mathbb{E}[X | s] \,$ is the expected number of runs scored between now and the end of the inning given that the inning is currently in state $s$. 
 The collection of estimates $\mathbb{E}[X | s]$ for all 24 states is called the *expected run matrix* [^matrix], and it is foundational in baseball analytics. 
-Figure \ref{fig:lindsey} shows a reproduction of Lindsey's original calculations and Table \ref{tab:erm} shows the expected run matrix in its more familiar form. 
+Figure \ref{fig:lindsey} shows a reproduction of George Lindsey's original calculations and Table \ref{tab:erm} shows the expected run matrix in its more familiar form. 
+
+[^state]: 25, if you include the absorbing state of 3 outs.
 
 [^matrix]: There is no inherent dimensionality to $\mathbb{E}[X | s]$. The *matrix* nomenclature stems from its values typically being displayed in $8 \times 3$ grid. However, when computing with $\mathbb{E}[X | s]$, it is most often convenient to treat it as a $24 \times 1$ vector. 
 
@@ -210,23 +208,28 @@ Thus, a careful estimate of $\mathbb{E}[X | s]$ would include a time parameter $
 Second, the characterization of $S$ as having 24 states is only the simplest possible. 
 The inning, or the score of the game, or even the weather, might reasonably be incorporated into $S$, as those conditions might reasonably affect the estimate of $\mathbb{E}[X | s]$. 
 More definitively, the identity of the current batter, pitcher, or batter on deck, might also affect the estimate of $\mathbb{E}[X | s]$. 
-Indeed, @Tango2007book show that when a particularly weak-hitting batter is up (i.e., the pitcher), a sacrifice bunt becomes much more effective strategy.  
+Indeed, @Tango2007book show that when a particularly weak-hitting batter is up (i.e., the pitcher), a sacrifice bunt becomes a more effective strategy.  
 
 See @Albert2001curve for a fuller discussion of the use of the expected run matrix in baseball and @marchi2018analyzing for examples of how to estimate the expected run matrix using Retrosheet data and the R statistical computing language [@R-base]. 
 
-## In other sports with discrete states
+## In American football
 
 The concept of estimating the value of the state of a game is easily extended to other sports. For example, in American football, $s$ is determined by factors such as down, yardage to the next first down, time remaining in the game, and field position. 
 
 The first effort of estimating expected points of possession in football goes back to @Carter1971operations. In this technical note, the authors estimate the expected points for 1st and 10 plays in the NFL given any yard line on the football field. Due to limitations regarding the amount of data collected, the football field is broken into 10-yard strips, centered at their midpoints (e.g. 5, 15, 25, 35, etc.), and the expected points are calculated for each of those field positions. Other early work on expected point values in American football can be found in @Carroll1988hidden, which popularized the idea of play evaluation using expected points and expected points added.
 
-@goldner2012markov and @goldner2017situational proposes a Markov model for estimating expected points in football. In particular, the author considers a football drive as an *absorbing Markov chain*, consisting of distinct *absorbing states* touchdowns, field goals, and other play outcomes. For any given play, the expected points is calculated using the absorption probabilities for different scoring events.
+@goldner2012markov and @goldner2017situational propose a Markov model for estimating expected points in football. 
+In particular, the author consider a football drive as an *absorbing Markov chain*, consisting of distinct *absorbing states* touchdowns, field goals, and other play outcomes. 
+For any given play, the expected points is calculated using the absorption probabilities for different scoring events.
 
-A more in-depth overview of the history of expected points is provided in @Yurko2019nflwar (Section 1.1).  Most importantly, this paper uses publicly available data provided by the **nflscrapR** package [@R-nflscrapR] to model the expected points on a play-by-play level in football.
+A more in-depth overview of the history of expected points is provided in @Yurko2019nflwar (Section 1.1). 
+Most importantly, this paper uses publicly available data provided by the **nflscrapR** package [@R-nflscrapR] to model the expected points on a play-by-play level in football.
 
 The authors introduce a multinomial logistic regression approach, which takes into account the current down, time remaining, yards from endzone, yards to go, and the indicators for goal to go and whether the time remaining in the half is less than two minutes. 
 
 This model estimates the probabilities of the following possible scoring outcomes after each play: no score, safety, field goal, and touchdown for both the offensive and defensive teams, all of which have a point value. The expected points for a play can then be calculated accordingly, by taking the sum of the products of the scoring event point values and their associated probabilities.
+
+### 4th down strategy
 
 (A paragraph on applications of expected points on decision making, fourth down strategy, with an example)
 
@@ -248,30 +251,32 @@ https://www.eng.buffalo.edu/~jzhuang/Papers/JQAS_NFL_2011.pdf
 Numerous papers (see @lopez2020bigger for details) have used the analysis of the expected number of points to improve fourth down strategy. 
 
 
-## Sports with continuous states
+## In sports with continuous states
 
-Even in sports where the concept of a state is not so easy to define, the value of a possession can be estimated, with the help of tracking data. 
+Even in sports where the concept of a state is not so easy to define, the value of a possession can be estimated with the help of tracking data. 
 Over the past decade or so, professional sports leagues have collected tracking data which record the locations of all players and the ball (or puck) throughout a game. 
-This sophisticated type of data allows researchers to produce advanced analyses of the captured spatio-temporal information and better understand the game, which is much more difficult to be accomplished with pre-existing resources such as traditional box-score results and play-by-play data.
+This high-resolution data allows researchers to produce advanced analyses of the captured spatio-temporal information and better understand the game. 
+This is a great leap forward from older resources such as traditional box-score results and play-by-play data.
 
-In basketball, @cervone2014pointwise and @cervone2016multiresolution introduce expected possession value (EPV) as an assessment of a player's on-court performance. 
+In basketball, @cervone2014pointwise and @cervone2016multiresolution introduce expected possession value (EPV) as means toward an assessment of a player's on-court performance. 
 This metric is a continuous-time estimate of the expected number of points for the offensive team on a given possession using player and ball locations. 
 The EPV takes into account all possible outcomes (a shot attempt, a pass, etc.) for a given player with the ball, with different weights being assigned to each decision. 
 Consequently, the authors derive a metric called EPV-Added (EPVA), measuring a player's EPV contribution in a given situation relative to a league-average player.
 
 (include code demo? https://github.com/dcervone/EPVDemo)
+> It might be cool to include one of their graphics here, if can. Or regenerate one. 
 
-Another framework for estimating expected points in basketball was proposed by @Sicilia2019DeepHoops. 
+Another framework for estimating expected points in basketball is proposed by @Sicilia2019DeepHoops. 
 The authors offer a different point of view on expected points, where they first consider a classification model which returns the probabilities for whether a player would commit a foul (shooting and non-shooting), turnover, or attempt a shot. 
-The values associated with each of those "terminal actions" are then utilized to compute the expected points within a basketball play.
+The values associated with each of those "terminal actions" are then used to compute the expected points within a basketball play.
 
 See also @bornn2017studying for more information on how tracking data have enabled advanced statistical analyses of basketball in recent years.
 
-In American football, @Yurko2020going use tracking data provided by the 2019 NFL Big Data Bowl (citation) to model the expected yards gained for a ball-carrier during the course of a play. 
+In American football, @Yurko2020going use tracking data provided by the [2019 NFL Big Data Bowl](https://operations.nfl.com/gameday/analytics/big-data-bowl/past-big-data-bowl-recaps/) to model the expected yards gained for a ball-carrier during the course of a play. 
 As an extension to pre-existing approaches, the authors use conditional density estimation to obtain a probability distribution for the number of yards gained during the play, rather than only producing a single estimate for the expected yards gained. 
-Accordingly, the probability of various types of outcome at the end of a play such as a touchdown or a first-down gain can be computed from the yards gained distribution.
+Accordingly, the probability of various types of outcomes at the end of a play such as a touchdown or a first-down gain can be computed from the yards gained distribution.
 
-The notion of EPV has also been extended to soccer recently.
+The notion of EPV has also been extended to soccer.
 @fernandez2021framework implement deep learning methods to examine the instantaneous expected value of soccer possessions. 
 This approach considers passes, ball drives, and shots in soccer as the main set of actions used to compute expected possession value. 
 
@@ -284,9 +289,9 @@ Generally, the goal of any sport is to score more points than the other team, wh
 However, there are situations in which maximizing the number of expected points is *not* the desired strategy. 
 
 For example, in the bottom of the ninth inning of a tied baseball game, the optimal strategy for winning the game is maximizing the probability of scoring *at least one run*, which may differ from the strategy of maximizing expected runs. 
-If we let $U$ be the set of all strategies, then we assert that it is not always the case that the strategy that maximizes the expected number of points will maximize the probability of winning:
+If we let $U$ be the set of all strategies, then we assert that it is not always the case that the strategy $u$ that maximizes the expected number of points will maximize the probability of winning:
 $$
-  \underset{u \in U}{\arg \max \,}{\Pr[X > 0 | s]} \neq \underset{u \in U}{\arg \max \,}{\mathbb{E}[X | s]} \,.
+  \underset{u \in U}{\arg \max \,}{\Pr[X > 0 | s, u]} \neq \underset{u \in U}{\arg \max \,}{\mathbb{E}[X | s, u]} \,.
 $$
 Consider the situation where runners are on first and third base, and the score is tied in the bottom of the ninth inning with no one out. 
 Table \ref{tab:tied} reveals that the expected number of runs scored in the remainder of the inning is 1.94 runs, while the the probability of scoring zero runs is 0.13. 
@@ -327,7 +332,7 @@ The hope is to score a quick goal to get back in the game, but the risk is falli
 
 # Win probability {#sec:wp}
 
-A related, but different, concept is the notion of *win probability*.
+A related, but different concept is the notion of *win probability*.
 Win probability is simply an estimate of the probability that a team will win the game, given its current state $s$. 
 Extending the mathematical framework we defined in Section \ref{sec:ev}, let $W_i$ be a binary random variable that indicates a win for team $i$. 
 Then, 
@@ -347,7 +352,7 @@ Win probability is easily extended to provide a measure of the impact of sports 
 Given its popularity, recent books on sports analytics often dedicate multiple chapters entirely to win probability. 
 These include @Albert2001curve, @Schwarz2005numbers, @Tango2007book, @Albert2017handbook, and @Winston2022. 
 
-In this section, we discuss notable previous work on win probability in baseball, football, basketball, and several other sports. 
+In this section, we discuss notable previous work on win probability in baseball, American football, basketball, and several other sports. 
 
 ## Baseball
 
@@ -361,7 +366,7 @@ $$
 where the win and loss points represent how much the player positively and negatively impact their team's probability of winning after each play.
 In effect, the win points are the sum of the changes in $\Pr[W_i | s]$ from one state to the next. 
 
-## Football
+## American football
 
 In recent years, a number of statistical methods have been used to build well-calibrated win probability models in American football. 
 These are flexible models that have high predictability, can account for nonlinear interactions between the explanatory variables, require few assumptions, and produce feature importance scores.
@@ -380,7 +385,7 @@ Figure \ref{fig:nflfastr_wp} shows a win probability graph for the January 14, 2
 We obtain the estimated probability of winning for each team using the \pkg{nflfastR} R package, which implements a gradient boosting model via the \pkg{xgboost} library (@R-xgboost) for estimating win probabilities. 
 Minnesota was leading throughout the first three quarters of the game, having win probabilities of 0.869, 0.941, 0.742 at the end of the first, second, and third quarters, respectively. 
 The win probabilities get close to parity late in the fourth quarter, when the Saints took the lead with 3:01 left in the game. 
-The last play of this game, famously known as the [Minneapolis Miracle](https://en.wikipedia.org/wiki/Minneapolis_Miracle), resulted in a drastic swing in win probabilities for both teams. 
+The last play of this game---famously known as the [Minneapolis Miracle](https://en.wikipedia.org/wiki/Minneapolis_Miracle)---resulted in a drastic swing in win probabilities for both teams. 
 With 10 seconds remaining in the game, the Vikings begin the final possession with a 25.3% chance of winning. 
 Their probability increased to a perfect 1 when Stefon Diggs scored a game-winning 61-yard receiving touchdown as the game clock expired.
 
@@ -451,7 +456,7 @@ The model introduced by @Stern1994 is a probit regression model, which provides 
 In particular, 
 $$
 p(l, t) = \Phi\left(\frac{l + (1-t)\mu}{\sqrt{(1-t)\sigma^2}}\right)
-,
+\,.
 $$
 Here, a Brownian motion process with drift $\mu$ points advantage for the home team and variance $\sigma^2$ is used to model the score difference between the home and away teams. 
 
@@ -467,27 +472,27 @@ This basketball win probability model is then applied to the calculation of the 
 
 The idea of win probability is also applied to other sports, with a diverse range of statistical techniques being used to estimate the probability of winning for a player or team. 
 @Brenzel2019 uses three-dimensional Markov models to estimate win probability throughout a curling match. 
-In particular, the authors propose both a homogeneous and heterogeneous Markov models for estimating the chance of winning in curling, with different independence assumptions on the relationship between performance and the current state of the game. 
-In esports, @Maymin2020 uses logistic regression to build a well-calibrated in-game win probability model for each specific moment during a game of League of Legends. 
-More recently, @Guan2022 develops an in-game win probability model for the National Rugby League using functional data analysis. 
+In particular, the authors propose both homogeneous and heterogeneous Markov models for estimating the chance of winning in curling, with different independence assumptions on the relationship between performance and the current state of the game. 
+In esports, @maymin2021smart uses logistic regression to build a well-calibrated in-game win probability model for each specific moment during a game of League of Legends. 
+@Guan2022 develops an in-game win probability model for the National Rugby League using functional data analysis. 
 In this approach, the rugby event data are treated as functional, and the win probability is expressed as a function of the match time. 
 
 # Team strength {#sec:strength}
 
-Another important idea in sports analytics is the estimation of team strength. 
+A third crucial idea in sports analytics is the estimation of team strength. 
 A popular method for estimating team strength in sports is through pairwise evaluations. 
 Perhaps the most famous probability model for predicting the outcome of a paired comparison is the Bradley-Terry model (BTM) [@Bradley1952]. 
 For a pair of players (or teams) $i$ and $j$, let $\Pi_{ij}$ denote the probability that $i$ is preferred to $j$. 
 Then the BTM is a logistic regression model with parameters $\beta_i, \beta_j$ such that
 
 $$
-\log\left(\frac{\Pi_{ij}}{\Pi_{ji}}\right) = \beta_i - \beta_j
+\log\left(\frac{\Pi_{ij}}{\Pi_{ji}}\right) = \beta_i - \beta_j \,.
 $$
 
 Here, $\exp{\beta_i}$ is often viewed as a representation of player $i$'s ability. 
 
-The BTM can be implemented in `R` [@Rcitation2022] via the \pkg{BradleyTerry2} package [@R-BradleyTerry2]. 
-As an example, we consider the data given in @agresti2018introduction (page 247) on tennis results from 2014--2018 for five men's professional players Novak Djokovic, Roger Federer, Andy Murray, Rafael Nadal, and Stan Wawrinka. 
+The BTM can be implemented in `R` [@R-base] via the \pkg{BradleyTerry2} package [@R-BradleyTerry2]. 
+As an example, we consider the data given in @agresti2018introduction (page 247) on tennis results from 2014--2018 for five men's professional players: Novak Djokovic, Roger Federer, Andy Murray, Rafael Nadal, and Stan Wawrinka. 
 We fit a BTM to estimate the win probability for each pair of players and obtain a ranking for this group of five.
 
 Table \ref{tab:tennisbtm} shows the estimated coefficients of the fitted BTM. 
@@ -605,6 +610,6 @@ Sum up the key conclusions of your review, highlighting the most promising scien
 
 # Acknowledgments
 
-List contributions from individuals who do not meet the criteria for authorship (for example, to recognize people who provided technical help, collation of data, writing assistance, acquisition of funding, or a department chairperson who provided general support), with permission from the individual. Thanks to anonymous reviewers are not appropriate.
+We are grateful to Michael Lopez and Katherine Evans for their thoughts on early versions of this paper. 
 
 # References {-}
