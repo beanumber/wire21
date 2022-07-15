@@ -264,14 +264,19 @@ This is a great leap forward from older resources such as traditional box-score 
 In basketball, @cervone2014pointwise and @cervone2016multiresolution introduce expected possession value (EPV) as means toward an assessment of a player's on-court performance. 
 This metric is a continuous-time estimate of the expected number of points for the offensive team on a given possession using player and ball locations. 
 The EPV takes into account all possible outcomes (a shot attempt, a pass, etc.) for a given player with the ball, with different weights being assigned to each decision. 
+The computation of the EPV statistic is done using a Markov model.
 Consequently, the authors derive a metric called EPV-Added (EPVA), measuring a player's EPV contribution in a given situation relative to a league-average player.
 
-A demonstration of the EPV model presented in @cervone2016multiresolution's paper is available on the first author's GitHub at <https://github.com/dcervone/EPVDemo>. As an illustration, using the provided tracking data, Figure \ref{fig:epv-demo} displays a snapshot of a possession during the 2013-14 NBA regular season matchup between the Miami Heat and the Brooklyn Nets on November 1, 2013. Miami is the team on offense in this play, and the possession outcome is a 26-foot three-point miss by Mario Chalmers of the Heat. The plot consists of two elements: 1) (bottom) the player locations on the court at a particular moment in this possession--when the ball just left Chalmers' hands, and 2) (top) a line graph showing how the EPV is continuously changing throughout the play until the three-point attempt. For this entire possession, the estimated EPV for the Miami Heat reaches its peak at $1.276$ at this specific time point.
+A demonstration of the EPV model presented in @cervone2016multiresolution's paper is available on the first author's GitHub at <https://github.com/dcervone/EPVDemo>. 
+As an illustration, using the provided tracking data, Figure \ref{fig:epv-demo} displays a snapshot of a possession during the 2013-14 NBA regular season matchup between the Miami Heat and the Brooklyn Nets on November 1, 2013. Miami is the team on offense in this play, and the possession outcome is a 26-foot three-point miss by Mario Chalmers of the Heat. 
+The plot consists of two elements: 
+1) (bottom) the player locations on the court at a particular moment in this possession--when the ball just left Chalmers' hands, 
+and 2) (top) a line graph showing how the EPV is continuously changing throughout the play until the three-point attempt. For this entire possession, the estimated EPV for the Miami Heat reaches its peak at $1.276$ at this specific time point.
 
 <!-- (include code demo? https://github.com/dcervone/EPVDemo) -->
 <!-- > It might be cool to include one of their graphics here, if can. Or regenerate one.  -->
 
-```{r epv-demo, out.width="100%", fig.cap="Player locations and estimated EPV for a possession during Miami Heat (red) vs. Brooklyn Nets (black) on November 1, 2013. The captured moment is when Miami's Mario Chalmers just releases a three-point shot, which ends up being a miss."}
+```{r epv-demo, out.width="100%", fig.cap="Player locations and estimated EPV for a possession during the Miami Heat (red) vs. Brooklyn Nets (black) NBA game on November 1, 2013. The captured moment is when Miami's Mario Chalmers just releases a three-point shot, which ends up being a miss."}
 # Source: https://github.com/dcervone/EPVDemo/blob/master/gifs/poss_12.gif
 # library(magick)
 # epv <- image_read("https://github.com/dcervone/EPVDemo/blob/master/gifs/poss_12.gif?raw=true")
@@ -463,10 +468,10 @@ wp_plot +
 
 ## Basketball
 
-@Stern1994 uses Brownian motion to investigate the scoring process of basketball. 
+@Stern1994 provides an investigation of in-game win probability and the scoring process in basketball using a Brownian motion model. 
 Let $p(l, t)$ represent the win probability for the home team given an $l$-point lead after $t$ seconds of game time. 
 The model introduced by @Stern1994 is a probit regression model, which provides an estimate for $p(l, t)$. 
-In particular, 
+Specifically, 
 $$
 p(l, t) = \Phi\left(\frac{l + (1-t)\mu}{\sqrt{(1-t)\sigma^2}}\right)
 \,.
@@ -474,10 +479,10 @@ $$
 Here, a Brownian motion process with drift $\mu$ points advantage for the home team and variance $\sigma^2$ is used to model the score difference between the home and away teams. 
 
 On a related note, @Deshpande2016 extend @Stern1994's framework by applying it in a Bayesian setting. 
-In particular, they propose a Bayesian lasso regression model to assess the impact of individual players on their team's win probability at a given time of a basketball game. 
-This model assumes independence of observation, constant variability in win probability, and also addresses multicollinearity.
+In this paper, the authors propose a Bayesian linear regression model to assess the impact of individual players on their team's win probability at any given time of a basketball game. 
+This model assumes independence of observations and constant variability in win probability.
 
-@McFarlane2019 uses logistic regression to estimate win probability for evaluating end-of-game decisions in the NBA. 
+In addition, @McFarlane2019 uses logistic regression to estimate win probability for evaluating end-of-game decisions in the NBA. 
 The approach takes into account the remaining game time, score difference, and point spread. 
 This basketball win probability model is then applied to the calculation of the End-of-game Tactics Metric (ETM), measuring how the win probability differs between the optimal and on-court actual decisions.
 
