@@ -60,7 +60,9 @@ knitr::write_bib(
     "nflfastR",
     # "nflscrapr", no longer supported, can no longer be installed
     "nflverse",
-    "xgboost"
+    "xgboost",
+    "chess", 
+    "chessR"
   ),
   file = "pkgs.bib"
 )
@@ -617,7 +619,15 @@ maybe some kaggle competitions (march madness, cite mike and greg's paper; and b
 
 @R-Lahman, @R-pitchRx, @R-retrosheet
 
-Figure \ref{fig:chess-startup} shows a rendering of the starting chess board obtained via the \pkg{chess} package. 
+Many tools in sports analytics provide the ability to read, write, and plot data stored in a sport-specific format. 
+For example, consider chess, where the sequence of moves in games is often recorded in [Portable Game Notation](https://en.wikipedia.org/wiki/Portable_Game_Notation).
+Software tools can then be built around this well-defined format. 
+The \pkg{chess} package [@R-chess] provides R users with the ability to read, write, display, and manipulate chess data in PGN format. 
+[Application programming interfaces](https://en.wikipedia.org/wiki/API) (APIs) are also common. 
+In chess, the \pkg{chessR} package [@R-chessR] allows R users to download game data from the Chess.com API. 
+This type of infrastructure, where one package is the "workhorse" that facilitates common generic data operations, and other packages layer on specific functionality, is common in sports analytics. 
+
+Figure \ref{fig:chess} shows a rendering of the starting chess board obtained via the \pkg{chess} package, along with the final position in a game recently won by one of the authors (downloaded via the \pkg{chessR} package). 
 
 ```{r chess, fig.show="hold", out.width="49%", fig.cap="At left, the starting chess board printed via the \\pkg{chess} package. At right, the final position for one of the authors' recent wins (a checkmate playing Black)."}
 library(chess)
