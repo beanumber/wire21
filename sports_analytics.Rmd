@@ -610,17 +610,11 @@ Analytical work in sports requires facility with an ever-changing set of computa
 Sources of authoritative data about sports are myriad, and are too numerous to list here. 
 Software tools for sports analytics are similarly numerous. 
 For R, we maintain a [CRAN Task View for Sports Analytics](https://CRAN.R-project.org/view=SportsAnalytics) that catalogs R packages published on the Comprehensive R Archive Network and organizes them by sport [@baumer2022ctv].
+A more general collection of software tools is being curated by the SportsDataverse.org (<https://sportsdataverse.org>).
+
 In the remainder of this section, we highlight a few tools for sports analytics that are of general interest and illustrate a common paradigm for how these tools can be used in conjunction. 
 
-
-<!-- I think we should also mention the sportsdataverse (https://github.com/sportsdataverse, https://sportsdataverse.org) 
-
-maybe some kaggle competitions (march madness, cite mike and greg's paper; and big data bowl)
--->
-
-@marchi2018analyzing
-
-@R-Lahman, @R-pitchRx, @R-retrosheet
+## Case study in how tools fit together: chess
 
 Many tools in sports analytics provide the ability to read, write, and plot data stored in a sport-specific format. 
 For example, consider chess, where the sequence of moves in games is often recorded in [Portable Game Notation](https://en.wikipedia.org/wiki/Portable_Game_Notation).
@@ -651,13 +645,27 @@ m <- extract_moves_as_game(greg[6, ])
 plot(m)
 ```
 
-@R-teamcolors provides color palettes for professional and amateur sports teams, as well as color and fill scale functions compatible with \pkg{ggplot2} [@R-ggplot2].
-The team colors and logos shown in Figure \ref{fig:nflfastr_wp} were provided by the \pkg{teamcolors} package. 
-Figure \ref{fig:teamcolors} illustrates team color palettes for professional sports leagues. 
+## Colors
+
+Each professional sports team has its own brand, most obviously identified by a team logo and set of colors. 
+The \pkg{teamcolors} package [@R-teamcolors] provides color palettes and logos for men's and women's professional and collegiate sports teams, as well as color and fill scale functions compatible with \pkg{ggplot2} [@R-ggplot2].
+The team colors and logos shown in Figure \ref{fig:nflfastr-wp} were provided by the \pkg{teamcolors} package. 
+Figure \ref{fig:teamcolors} illustrates the full array of team color palettes for professional sports leagues. 
 
 ```{r teamcolors, warning=FALSE, fig.cap="Professional sports team color palettes provided by the \\pkg{teamcolors} package. ", fig.height=9}
 teamcolors::show_team_col()
 ```
+
+# Notable competitions and public events
+
+<!-- 
+
+maybe some kaggle competitions (march madness, cite mike and greg's paper; and big data bowl)
+-->
+
+@marchi2018analyzing
+
+@R-Lahman, @R-pitchRx, @R-retrosheet
 
 
 # Conclusion
