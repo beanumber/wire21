@@ -472,7 +472,7 @@ logos <- miracle |>
 wp_plot + 
   annotation_raster(logos[[1]], -1010, -1490, 0.76, 0.865) + 
   annotation_raster(logos[[2]], -1010, -1490, 0.135, 0.24) + 
-  scale_x_reverse()
+  scale_x_reverse(breaks = seq(0, 3600, 900))
 ```
 
 
@@ -610,7 +610,7 @@ Analytical work in sports requires facility with an ever-changing set of computa
 Sources of authoritative data about sports are myriad, and are too numerous to list here. 
 Software tools for sports analytics are similarly numerous. 
 For R, we maintain a [CRAN Task View for Sports Analytics](https://CRAN.R-project.org/view=SportsAnalytics) that catalogs R packages published on the Comprehensive R Archive Network and organizes them by sport [@baumer2022ctv].
-A more general collection of software tools is being curated by the SportsDataverse.org (<https://sportsdataverse.org>).
+A more general collection of software tools is being curated by the SportsDataverse initiative [@gilani2022sportsdataverse].
 
 In the remainder of this section, we highlight a few tools for sports analytics that are of general interest and illustrate a common paradigm for how these tools can be used in conjunction. 
 
@@ -631,8 +631,6 @@ library(chess)
 # Sys.setenv(RETICULATE_PYTHON = "my_env/bin/python3")
 game() |> plot()
 
-# we could plot greg's chess moves
-# doesn't work for me... python/reticulate issues
 library(chessR)
 us <- c("fatgreggy")
 greg <- get_raw_chessdotcom(
