@@ -20,7 +20,7 @@ authors:
     location: Pittsburgh, PA 15213
     email: nmquang@cmu.edu
 abstract: |
-  Sports analytics---broadly defined as the pursuit of improvement in athletic performance through the analysis of data---has expanded its footprint both in the professional sports industry and in academia over the past 30 years. We connect four(?) big ideas that are common across multiple sports, and explore both the shared similarities and individual idiosyncracies of analytical approaches in each sport. While our focus is on the concepts underlying each type of analysis, any implementation necessarily involves both statistical methodologies and sources of data. Where appropriate, we outline how data, models, and knowledge of the sport combine to generate actionable insights. This paper should serve as a useful overview for anyone becoming interested in the study of sports analytics. 
+  Sports analytics---broadly defined as the pursuit of improvement in athletic performance through the analysis of data---has expanded its footprint both in the professional sports industry and in academia over the past 30 years. We connect three big ideas that are common across multiple sports, and explore both the shared similarities and individual idiosyncracies of analytical approaches in each sport. While our focus is on the concepts underlying each type of analysis, any implementation necessarily involves both statistical methodologies and sources of data. Where appropriate, we outline how data, models, and knowledge of the sport combine to generate actionable insights. This paper should serve as a useful overview for anyone becoming interested in the study of sports analytics. 
 keywords:
   - sports analytics
   - R packages
@@ -606,9 +606,12 @@ Betting moneylines are used in place of point differentials in order to estimate
 
 # Tools {#sec:tools}
 
+Analytical work in sports requires facility with an ever-changing set of computational tools for working with data. 
+Sources of authoritative data about sports are myriad, and are too numerous to list here. 
+Software tools for sports analytics are similarly numerous. 
+For R, we maintain a [CRAN Task View for Sports Analytics](https://CRAN.R-project.org/view=SportsAnalytics) that catalogs R packages published on the Comprehensive R Archive Network and organizes them by sport [@baumer2022ctv].
+In the remainder of this section, we highlight a few tools for sports analytics that are of general interest and illustrate a common paradigm for how these tools can be used in conjunction. 
 
-
-See @baumer2022ctv for R packages useful for sports analytics. 
 
 <!-- I think we should also mention the sportsdataverse (https://github.com/sportsdataverse, https://sportsdataverse.org) 
 
