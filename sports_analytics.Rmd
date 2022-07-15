@@ -662,6 +662,7 @@ teamcolors::show_team_col()
 
 - Kaggle March Madness [@lopez2015building]
 - Big Data Bowl
+- Big Data Cup
 - SABR Case competition
 
 ## Conferences
@@ -669,6 +670,7 @@ teamcolors::show_team_col()
 - NESSIS/CASSIS
 - Sloan
 - CMU
+- UConn sports analytics
 
 @marchi2018analyzing
 
