@@ -261,20 +261,20 @@ Over the past decade or so, professional sports leagues have collected tracking 
 This high-resolution data allows researchers to produce advanced analyses of the captured spatio-temporal information and better understand the game. 
 This is a great leap forward from older resources such as traditional box-score results and play-by-play data.
 
-In basketball, @cervone2014pointwise and @cervone2016multiresolution introduce expected possession value (EPV) as means toward an assessment of a player's on-court performance. 
+In basketball, @cervone2014pointwise and @cervone2016multiresolution introduce expected possession value (EPV) as a means toward an assessment of a player's on-court performance. 
 This metric is a continuous-time estimate of the expected number of points for the offensive team on a given possession using player and ball locations. 
 The EPV takes into account all possible outcomes (a shot attempt, a pass, etc.) for a given player with the ball, with different weights being assigned to each decision. 
 The computation of the EPV statistic is done using a Markov model.
 Consequently, the authors derive a metric called EPV-Added (EPVA), measuring a player's EPV contribution in a given situation relative to a league-average player.
 
-A demonstration of the EPV model presented in @cervone2016multiresolution's paper is available on the first author's GitHub at <https://github.com/dcervone/EPVDemo>. 
-As an illustration, using the provided tracking data, Figure \ref{fig:epv-demo} displays a snapshot of a possession during the 2013-14 NBA regular season matchup between the Miami Heat and the Brooklyn Nets on November 1, 2013. Miami is the team on offense in this play, and the possession outcome is a 26-foot three-point miss by Mario Chalmers of the Heat. 
+A demonstration of the EPV model presented in @cervone2016multiresolution is available at <https://github.com/dcervone/EPVDemo>. 
+Figure \ref{fig:epv-demo} illustrates how the provided tracking data informs the evolution of EPV throughout the play. 
+It displays a snapshot of a possession during the NBA regular season matchup between the Miami Heat and the Brooklyn Nets on November 1, 2013. 
+Miami is the team on offense in this possession, whose outcome is a 26-foot three-point miss by Mario Chalmers. 
 The plot consists of two elements: 
-1) (bottom) the player locations on the court at a particular moment in this possession--when the ball just left Chalmers' hands, 
-and 2) (top) a line graph showing how the EPV is continuously changing throughout the play until the three-point attempt. For this entire possession, the estimated EPV for the Miami Heat reaches its peak at $1.276$ at this specific time point.
-
-<!-- (include code demo? https://github.com/dcervone/EPVDemo) -->
-<!-- > It might be cool to include one of their graphics here, if can. Or regenerate one.  -->
+1) (bottom) the player locations on the court at a particular moment in this possession: when the ball just left Chalmers' hands, 
+and 2) (top) a line graph showing how the EPV changes continuously throughout the play until the three-point attempt. 
+For this possession, the estimated EPV for the Miami Heat reaches its peak at $1.276$ points at the moment the shot is taken.
 
 ```{r epv-demo, out.width="100%", fig.cap="Player locations and estimated EPV for a possession during the Miami Heat (red) vs. Brooklyn Nets (black) NBA game on November 1, 2013. The captured moment is when Miami's Mario Chalmers just releases a three-point shot, which ends up being a miss."}
 # Source: https://github.com/dcervone/EPVDemo/blob/master/gifs/poss_12.gif
@@ -283,6 +283,14 @@ and 2) (top) a line graph showing how the EPV is continuously changing throughou
 # image_write(epv[529], "epv_snap.png")
 knitr::include_graphics("epv_snap.png")
 ```
+
+Note that Miami starts the play with an EPV of approximately 1.0 points.
+This indicates their implied average points per possession. 
+Chalmers's shot is worth 3 points, so the EPV of 1.276 points implies that the model estimate of the probability of Chalmers making this shot is 42.5\%. 
+A breakthrough in this work is that this estimate is conditional on the location of the other 9 players on the court!
+
+
+
 
 Another framework for estimating expected points in basketball is proposed by @Sicilia2019DeepHoops. 
 The authors offer a different point of view on expected points, where they first consider a classification model which returns the probabilities for whether a player would commit a foul (shooting and non-shooting), turnover, or attempt a shot. 
