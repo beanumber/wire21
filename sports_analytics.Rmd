@@ -658,10 +658,17 @@ teamcolors::show_team_col()
 
 # Notable competitions and public events
 
-<!-- 
+## Competitions
 
-maybe some kaggle competitions (march madness, cite mike and greg's paper; and big data bowl)
--->
+- Kaggle March Madness [@lopez2015building]
+- Big Data Bowl
+- SABR Case competition
+
+## Conferences
+
+- NESSIS/CASSIS
+- Sloan
+- CMU
 
 @marchi2018analyzing
 
