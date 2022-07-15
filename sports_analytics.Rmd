@@ -292,7 +292,7 @@ See also @bornn2017studying for more information on how tracking data have enabl
 
 In American football, @Yurko2020going use tracking data provided by the [2019 NFL Big Data Bowl](https://operations.nfl.com/gameday/analytics/big-data-bowl/past-big-data-bowl-recaps/) to model the expected yards gained for a ball-carrier during the course of a play. 
 As an extension to pre-existing approaches, the authors use conditional density estimation to obtain a probability distribution for the number of yards gained during the play, rather than only producing a single estimate for the expected yards gained. 
-Accordingly, the probability of various types of outcomes at the end of a play such as a touchdown or a first-down gain can be computed from the yards gained distribution.
+Accordingly, the probability of various types of outcomes at the end of a play such as a touchdown or a first-down gain can be computed from the distribution of the end-of-play yard line.
 
 The notion of EPV has also been extended to soccer.
 @fernandez2021framework implement deep learning methods to examine the instantaneous expected value of soccer possessions. 
@@ -596,8 +596,12 @@ Betting moneylines are used in place of point differentials in order to estimate
 
 # Tools {#sec:tools}
 
-
 See @baumer2022ctv for R packages useful for sports analytics. 
+
+<!-- I think we should also mention the sportsdataverse (https://github.com/sportsdataverse, https://sportsdataverse.org) 
+
+maybe some kaggle competitions (march madness, cite mike and greg's paper; and big data bowl)
+-->
 
 @marchi2018analyzing
 
