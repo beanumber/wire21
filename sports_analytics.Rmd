@@ -214,20 +214,23 @@ See @Albert2001curve for a fuller discussion of the use of the expected run matr
 
 ## In American football
 
-The concept of estimating the value of the state of a game is easily extended to other sports. For example, in American football, $s$ is determined by factors such as down, yardage to the next first down, time remaining in the game, and field position. 
+The concept of estimating the value of the state of a game is easily extended to other sports. 
+For example, in American football, $s$ is determined by factors such as down, yardage to the next first down, time remaining in the game, and field position. 
 
-The first effort of estimating expected points of possession in football goes back to @Carter1971operations. In this technical note, the authors estimate the expected points for 1st and 10 plays in the NFL given any yard line on the football field. Due to limitations regarding the amount of data collected, the football field is broken into 10-yard strips, centered at their midpoints (e.g. 5, 15, 25, 35, etc.), and the expected points are calculated for each of those field positions. Other early work on expected point values in American football can be found in @Carroll1988hidden, which popularized the idea of play evaluation using expected points and expected points added.
+The first effort of estimating expected points of possession in football goes back to @Carter1971operations. 
+In this technical note, the authors estimate the expected points for 1st and 10 plays in the NFL given any yard line on the football field. 
+Due to limitations regarding the amount of data collected, the football field is broken into 10-yard strips, centered at their midpoints (e.g. 5, 15, 25, 35, etc.), and the expected points are calculated for each of those field positions. 
+Other early work on expected point values in American football can be found in @Carroll1988hidden, which popularized the idea of play evaluation using expected points and expected points added.
 
 @goldner2012markov and @goldner2017situational propose a Markov model for estimating expected points in football. 
-In particular, the author consider a football drive as an *absorbing Markov chain*, consisting of distinct *absorbing states* touchdowns, field goals, and other play outcomes. 
+In particular, the author considers a football drive as an *absorbing Markov chain*, consisting of distinct *absorbing states* touchdowns, field goals, and other play outcomes. 
 For any given play, the expected points is calculated using the absorption probabilities for different scoring events.
 
 A more in-depth overview of the history of expected points is provided in @Yurko2019nflwar (Section 1.1). 
 Most importantly, this paper uses publicly available data provided by the **nflscrapR** package [@R-nflscrapR] to model the expected points on a play-by-play level in football.
-
 The authors introduce a multinomial logistic regression approach, which takes into account the current down, time remaining, yards from endzone, yards to go, and the indicators for goal to go and whether the time remaining in the half is less than two minutes. 
-
-This model estimates the probabilities of the following possible scoring outcomes after each play: no score, safety, field goal, and touchdown for both the offensive and defensive teams, all of which have a point value. The expected points for a play can then be calculated accordingly, by taking the sum of the products of the scoring event point values and their associated probabilities.
+This model estimates the probabilities of the following possible scoring outcomes after each play: no score, safety, field goal, and touchdown for both the offensive and defensive teams, all of which have a point value. 
+The expected points for a play can then be calculated accordingly, by summing up the products of the scoring event point values and their associated probabilities.
 
 ### 4th down strategy
 
@@ -263,8 +266,18 @@ This metric is a continuous-time estimate of the expected number of points for t
 The EPV takes into account all possible outcomes (a shot attempt, a pass, etc.) for a given player with the ball, with different weights being assigned to each decision. 
 Consequently, the authors derive a metric called EPV-Added (EPVA), measuring a player's EPV contribution in a given situation relative to a league-average player.
 
-(include code demo? https://github.com/dcervone/EPVDemo)
-> It might be cool to include one of their graphics here, if can. Or regenerate one. 
+A demonstration of the EPV model presented in @cervone2016multiresolution's paper is available on the first author's GitHub at <https://github.com/dcervone/EPVDemo>. As an illustration, using the provided tracking data, Figure \ref{fig:epv-demo} shows a snapshot of a possession during the 2013-14 NBA regular season matchup between the Miami Heat and the Brooklyn Nets on November 1, 2013. Miami is the team on offense in this play, and the possession outcome is a 26-foot three-point miss by Mario Chalmers of the Heat. The plot consists of two elements: 1) (bottom) the player locations on the court at a particular moment in this possession--when the ball just left Chalmers' hands, and 2) (top) a line graph showing how the EPV has continuously changed throughout the play until the three-point attempt. For this entire possession, the estimated EPV for the Miami Heat peaks at this single time point at $1.276$.
+
+<!-- (include code demo? https://github.com/dcervone/EPVDemo) -->
+<!-- > It might be cool to include one of their graphics here, if can. Or regenerate one.  -->
+
+```{r epv-demo, out.width="100%", fig.cap="Player locations and estimated EPV for a possession during Miami Heat (red) vs. Brooklyn Nets (black) on November 1, 2013. The captured moment is when Miami's Mario Chalmers just releases a three-point shot, which ends up being a miss."}
+# Source: https://github.com/dcervone/EPVDemo/blob/master/gifs/poss_12.gif
+# library(magick)
+# epv <- image_read("https://github.com/dcervone/EPVDemo/blob/master/gifs/poss_12.gif?raw=true")
+# image_write(epv[529], "epv_snap.png")
+knitr::include_graphics("epv_snap.png")
+```
 
 Another framework for estimating expected points in basketball is proposed by @Sicilia2019DeepHoops. 
 The authors offer a different point of view on expected points, where they first consider a classification model which returns the probabilities for whether a player would commit a foul (shooting and non-shooting), turnover, or attempt a shot. 
@@ -381,7 +394,7 @@ The two win probability frameworks proposed by @Lock2014 and @Yurko2019nflwar we
 A vital highlight of @Yurko2019nflwar's win probability model is that it is fully reproducible and uses publicly available data. 
 One of @Yurko2019nflwar's goals was also to encourage researchers to "use, explore, and improve upon our work," which ultimately inspired \pkg{nflfastR} (@R-nflfastR), now considered the successor to **nflscrapR**. 
 
-Figure \ref{fig:nflfastr_wp} shows a win probability graph for the January 14, 2018 NFL Playoffs Divisional Round matchup between the New Orleans Saints and the Minnesota Vikings. 
+Figure \ref{fig:nflfastr-wp} shows a win probability graph for the January 14, 2018 NFL Playoffs Divisional Round matchup between the New Orleans Saints and the Minnesota Vikings. 
 We obtain the estimated probability of winning for each team using the \pkg{nflfastR} R package, which implements a gradient boosting model via the \pkg{xgboost} library (@R-xgboost) for estimating win probabilities. 
 Minnesota was leading throughout the first three quarters of the game, having win probabilities of 0.869, 0.941, 0.742 at the end of the first, second, and third quarters, respectively. 
 The win probabilities get close to parity late in the fourth quarter, when the Saints took the lead with 3:01 left in the game. 
@@ -398,7 +411,7 @@ miracle <- teamcolors |>
   arrange()
 ```
 
-```{r nflfastr_wp, fig.cap="Win probability graph for New Orleans Saints vs. Minnesota Vikings in the 2017--18 NFL Playoffs."}
+```{r nflfastr-wp, fig.cap="Win probability graph for New Orleans Saints vs. Minnesota Vikings in the 2017--18 NFL Playoffs."}
 library(nflfastR)
 x <- load_pbp(2017) |> 
   filter(
@@ -471,10 +484,10 @@ This basketball win probability model is then applied to the calculation of the 
 ## Other sports
 
 The idea of win probability is also applied to other sports, with a diverse range of statistical techniques being used to estimate the probability of winning for a player or team. 
-@Brenzel2019 uses three-dimensional Markov models to estimate win probability throughout a curling match. 
+@Brenzel2019 use three-dimensional Markov models to estimate win probability throughout a curling match. 
 In particular, the authors propose both homogeneous and heterogeneous Markov models for estimating the chance of winning in curling, with different independence assumptions on the relationship between performance and the current state of the game. 
 In esports, @maymin2021smart uses logistic regression to build a well-calibrated in-game win probability model for each specific moment during a game of League of Legends. 
-@Guan2022 develops an in-game win probability model for the National Rugby League using functional data analysis. 
+Moreover, @Guan2022 develop an in-game win probability model for the National Rugby League using functional data analysis. 
 In this approach, the rugby event data are treated as functional, and the win probability is expressed as a function of the match time. 
 
 # Team strength {#sec:strength}
@@ -495,13 +508,6 @@ The BTM can be implemented in `R` [@R-base] via the \pkg{BradleyTerry2} package 
 As an example, we consider the data given in @agresti2018introduction (page 247) on tennis results from 2014--2018 for five men's professional players: Novak Djokovic, Roger Federer, Andy Murray, Rafael Nadal, and Stan Wawrinka. 
 We fit a BTM to estimate the win probability for each pair of players and obtain a ranking for this group of five.
 
-Table \ref{tab:tennisbtm} shows the estimated coefficients of the fitted BTM. 
-According to the abilities, between 2014 and 2018 the players are ranked as follows: 1) Djokovic, 2) Federer, 3) Wawrinka, 4) Nadal, 5) Murray.
-To obtain win probabilities, as an illustration, for the Federer-Nadal matchup, an estimate for the probability of a Federer victory is:
-$$
-\hat\Pi_{24} = \frac{exp(\hat\beta_2 - \hat\beta_4)}{1 + exp(\hat\beta_2 - \hat\beta_4)} = \frac{exp(1.136 + 0.062)}{1 + exp(1.136 + 0.062)} = 0.768
-$$
-
 ```{r}
 tennis <- dplyr::tibble(
   Djokovic = c(NA, 9, 14, 9, 4),
@@ -521,6 +527,13 @@ tennis_bt |>
   round(3) |> 
   knitr::kable(caption = "Estimated abilities for each player, relative to Wawrinka, obtained from the fitted Bradley-Terry model. \\label{tab:tennisbtm}")
 ```
+
+Table \ref{tab:tennisbtm} shows the estimated coefficients of the fitted BTM. 
+According to the abilities, between 2014 and 2018 the players are ranked as follows: 1) Djokovic, 2) Federer, 3) Wawrinka, 4) Nadal, 5) Murray.
+To obtain win probabilities, as an illustration, for the Federer-Nadal matchup, an estimate for the probability of a Federer victory is
+$$
+\hat\Pi_{24} = \frac{exp(\hat\beta_2 - \hat\beta_4)}{1 + exp(\hat\beta_2 - \hat\beta_4)} = \frac{exp(1.136 + 0.062)}{1 + exp(1.136 + 0.062)} = 0.768.
+$$
 
 ```{r btm, eval=FALSE}
 library(BradleyTerry2)
