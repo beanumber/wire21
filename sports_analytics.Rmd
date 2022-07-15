@@ -101,7 +101,7 @@ While baseball---a naturally discrete sport with more than a century's worth of 
 
 In basketball, analytics has driven a shift in the conventional wisdom about shot selection. 
 Most teams are shooting more three-pointers, settling for fewer long two-point shots, deploying more versatile defenders, and relying less on the strategy of pounding the ball into the paint in an attempt to get a high-percentage shot [@Schuhmann2021nba3point].
-In American football, teams are going for it on fourth down far more often than in the past, a direct result of statistical analysis showing that most teams were previously overly conservative. [LOPEZ?]
+In American football, teams are going for it on fourth down far more often than in the past, a direct result of statistical analysis showing that most teams were previously overly conservative [@lopez2020bigger].
 And of course in baseball, teams are using defensive shifts to maximize the probability of recording an out, encouraging hitters to improve their launch angles, and optimizing pitcher repertoires to minimize contact. 
 
 These are just the most obvious examples of strategic changes that are fueled by insights extracted from data by practitioners of sports analytics.
