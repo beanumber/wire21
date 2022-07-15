@@ -687,4 +687,6 @@ Sum up the key conclusions of your review, highlighting the most promising scien
 
 We are grateful to Michael Lopez and Katherine Evans for their thoughts on early versions of this paper. 
 
+The R Markdown file that generated this paper, including all R code, is available at <https://github.com/beanumber/wire21>.
+
 # References {-}
