@@ -45,6 +45,7 @@ knitr::opts_chunk$set(
   fig.align = 'center'
 )
 library(tidyverse)
+library(kableExtra)
 ```
 
 ```{r pkg}
@@ -169,9 +170,9 @@ lindsey <- c(
   2.22, 1.642, .823
 )
 erm <- tibble(
-  base = rep(0:7, each = 3),
-  out = rep(0:2, times = 8),
-  runs = lindsey
+  Base = rep(0:7, each = 3),
+  Out = rep(0:2, times = 8),
+  Runs = lindsey
 )
 ```
 
@@ -187,10 +188,11 @@ int2bin <- function(x) {
 #int2bin(0:7)
 
 erm |>
-  pivot_wider(names_from = out, values_from = runs) |>
-  mutate(base = int2bin(base)) |>
-  rename(`base\\\\out` = base) |>
-  knitr::kable(caption = "George Lindsey's expected run matrix. Note how (when reading across the rows) the expected runs decrease as outs increase for the same configuration of baserunners, while (when reading down the columns) expected runs generally increase as baserunners advance. \\label{tab:erm}")
+  pivot_wider(names_from = Out, values_from = Runs) |>
+  mutate(Base = int2bin(Base)) |>
+  kable(booktabs = TRUE, 
+        caption = "George Lindsey's expected run matrix. Note how (when reading across the rows) the expected runs decrease as outs increase for the same configuration of baserunners, while (when reading down the columns) expected runs generally increase as baserunners advance. \\label{tab:erm}") |> 
+  add_header_above(c("", "Out" = 3))
 ```
 
 
@@ -278,7 +280,7 @@ The plot consists of two elements:
 and 2) (top) a line graph showing how the EPV changes continuously throughout the play until the three-point attempt. 
 For this possession, the estimated EPV for the Miami Heat reaches its peak at $1.276$ points at the moment the shot is taken.
 
-```{r epv-demo, out.width="100%", fig.cap="Player locations and estimated EPV for a possession during the Miami Heat (red) vs. Brooklyn Nets (black) NBA game on November 1, 2013. The captured moment is when Miami's Mario Chalmers just releases a three-point shot, which ends up being a miss."}
+```{r epv-demo, out.width="100%", fig.cap="Player locations and estimated EPV for a possession during the Miami Heat (red) vs. Brooklyn Nets (black) NBA game on November 1, 2013. The captured moment is when Miami's Mario Chalmers just releases a three-point shot, which ends up as a missed field goal."}
 # Source: https://github.com/dcervone/EPVDemo/blob/master/gifs/poss_12.gif
 # library(magick)
 # epv <- image_read("https://github.com/dcervone/EPVDemo/blob/master/gifs/poss_12.gif?raw=true")
@@ -330,7 +332,7 @@ In this case, the defensive team is wise to pursue the strategy of maximizing th
 ```{r}
 erm <- erm |>
   mutate(
-    pr_0 = c(
+    Pr_0 = c(
       .747, .855, .933,
       .604, .734, .886, 
       .381, .610, .788,
@@ -343,9 +345,10 @@ erm <- erm |>
   )
 
 erm |>
-  filter(out == 0, base %in% c(5, 7)) |>
-  mutate(base = int2bin(base)) |>
-  knitr::kable(caption = "Loading the bases can be a rational strategy. In this case, loading the bases maximizes both the expected number of runs scored *and* the probability of not scoring at all. \\label{tab:tied}")
+  filter(Out == 0, Base %in% c(5, 7)) |>
+  mutate(Base = int2bin(Base)) |>
+  kable(booktabs = TRUE, 
+        caption = "Loading the bases can be a rational strategy. In this case, loading the bases maximizes both the expected number of runs scored *and* the probability of not scoring at all. \\label{tab:tied}")
 ```
 
 Maximizing the probability of scoring is optimal in any sudden-death situation, which has (but currently does not) included overtime in American football [@martin2018markov]. 
@@ -400,7 +403,7 @@ In recent years, a number of statistical methods have been used to build well-ca
 These are flexible models that have high predictability, can account for nonlinear interactions between the explanatory variables, require few assumptions, and produce feature importance scores.
 
 @Lock2014 use random forests as a means for estimating win probability before each play in a football game. 
-Covariates included in this win probability model are the current down, score differential, time remaining, adjusted score, point spread, number of timeouts remaining for each team, total points scored, current yardline, and yards to go for a first down. 
+Covariates included in this win probability model are the current down, score differential, time remaining, adjusted score, point spread, number of timeouts remaining for each team, total points scored, current yard line, and yards to go for a first down. 
 
 In addition, @Yurko2019nflwar estimate win probability in the NFL using a generalized additive model (GAM), as part of the **nflscrapR** package [@R-nflscrapR] and nflWAR framework. 
 This model takes into account the estimated expected points obtained from the model described in Section \ref{sec:ev}, along with other predictors for time, current half, and timeouts. 
@@ -512,11 +515,9 @@ A popular method for estimating team strength in sports is through pairwise eval
 Perhaps the most famous probability model for predicting the outcome of a paired comparison is the Bradley-Terry model (BTM) [@Bradley1952]. 
 For a pair of players (or teams) $i$ and $j$, let $\Pi_{ij}$ denote the probability that $i$ is preferred to $j$. 
 Then the BTM is a logistic regression model with parameters $\beta_i, \beta_j$ such that
-
 $$
 \log\left(\frac{\Pi_{ij}}{\Pi_{ji}}\right) = \beta_i - \beta_j \,.
 $$
-
 Here, $\exp{\beta_i}$ is often viewed as a representation of player $i$'s ability. 
 
 The BTM can be implemented in `R` [@R-base] via the \pkg{BradleyTerry2} package [@R-BradleyTerry2]. 
@@ -540,7 +541,9 @@ tennis_bt |>
   update(refcat = "Wawrinka") |> 
   BradleyTerry2::BTabilities() |> 
   round(3) |> 
-  knitr::kable(caption = "Estimated abilities for each player, relative to Wawrinka, obtained from the fitted Bradley-Terry model. \\label{tab:tennisbtm}")
+  kable(booktabs = TRUE, 
+        col.names = c("Ability", "SE"),
+        caption = "The estimated abilities (with standard errors) for each tennis player, relative to Wawrinka, obtained from the fitted Bradley-Terry model. \\label{tab:tennisbtm}")
 ```
 
 Table \ref{tab:tennisbtm} shows the estimated coefficients of the fitted BTM. 
