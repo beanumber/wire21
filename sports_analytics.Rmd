@@ -114,8 +114,10 @@ A growing pool of people move seamlessly between these two worlds, leading to th
 
 Every sport is different, with its own set of rules, strategies, methods of data collection, number of players, and the magnitude of the role of chance. 
 At the same time, many sports are similar, either because one evolved from the other, or the structure of the game shares certain attributes. 
-Sports that are closely related anthropologically (NEED EXAMPLE) may or may not share common applications of analytical methods. 
-Conversely, with just a few small tweaks, analytical metrics might work just as well across sports that are unrelated and quite different (e.g., an Elo rating could be equally valid for chess players and ice hockey teams). 
+Sports that are closely related anthropologically may or may not share common applications of analytical methods. 
+For example, although belonging to the same bat-and-ball family, baseball and cricket differ in strategies such as batting order or sacrifice plays.
+Conversely, with just a few small tweaks, analytical metrics might work just as well across sports that are unrelated and quite different.
+For instance, an Elo rating could be equally valid for chess players and ice hockey teams. 
 
 In this paper, we explore three key ideas that have widespread applicability across many sports: the expected value of a game state (Section \ref{sec:ev}), win probability (Section \ref{sec:wp}), and measures of team strength (Section \ref{sec:strength}). 
 In each case, we define the concept mathematically, explain how it originated, and give examples of how it is applied in multiple sports. 
@@ -130,7 +132,6 @@ We encourage readers to explore @cochran2017oxford and @Albert2017handbook for c
 # The expected value of a game state {#sec:ev}
 
 In many sports, the first step towards an analytical understanding of the game is the estimation of the expected value of a game state at any given point in a sporting contest. 
-
 Mathematically, we define $X$ to be a random variable indicating the the number of points (or runs) that a team will score over some determined amount of time (e.g. remainder of game, quarter, period, or inning). 
 Let $s \in S$ be a tuple that encodes the *state* of a game. 
 Then our task is to estimate:
@@ -291,10 +292,7 @@ knitr::include_graphics("epv_snap.png")
 Note that Miami starts the play with an EPV of approximately 1.0 points.
 This indicates their implied average points per possession. 
 Chalmers's shot is worth 3 points, so the EPV of 1.276 points implies that the model estimate of the probability of Chalmers making this shot is 42.5\%. 
-A breakthrough in this work is that this estimate is conditional on the location of the other 9 players on the court!
-
-
-
+A breakthrough in this work is that this estimate is conditional on the locations of the other 9 players on the basketball court!
 
 Another framework for estimating expected points in basketball is proposed by @Sicilia2019DeepHoops. 
 The authors offer a different point of view on expected points, where they first consider a classification model which returns the probabilities for whether a player would commit a foul (shooting and non-shooting), turnover, or attempt a shot. 
@@ -630,20 +628,20 @@ This type of infrastructure, where one package is the "workhorse" that facilitat
 Figure \ref{fig:chess} shows a rendering of the starting chess board obtained via the \pkg{chess} package, along with the final position in a game recently won by one of the authors (downloaded via the \pkg{chessR} package). 
 
 ```{r chess, fig.show="hold", out.width="49%", fig.cap="At left, the starting chess board printed via the \\pkg{chess} package. At right, the final position for one of the authors' recent wins (a checkmate playing Black)."}
-library(chess)
-# Sys.setenv(RETICULATE_PYTHON = "my_env/bin/python3")
-game() |> plot()
-
-library(chessR)
-us <- c("fatgreggy")
-greg <- get_raw_chessdotcom(
-  usernames = us,
-  year_month = 202206
-)
-
-m <- extract_moves_as_game(greg[6, ])
-# plot_moves(m, interactive = FALSE)
-plot(m)
+# library(chess)
+# # Sys.setenv(RETICULATE_PYTHON = "my_env/bin/python3")
+# game() |> plot()
+# 
+# library(chessR)
+# us <- c("fatgreggy")
+# greg <- get_raw_chessdotcom(
+#   usernames = us,
+#   year_month = 202206
+# )
+# 
+# m <- extract_moves_as_game(greg[6, ])
+# # plot_moves(m, interactive = FALSE)
+# plot(m)
 ```
 
 ## Colors
@@ -657,12 +655,12 @@ Figure \ref{fig:teamcolors} illustrates the full array of team color palettes fo
 teamcolors::show_team_col()
 ```
 
-# Notable competitions and public events
+# Opportunities
 
 ## Competitions
 
-- Kaggle March Madness [@lopez2015building]
-- Big Data Bowl
+- Kaggle March Madness [@lopez2015building] (jqas special issue: https://www.degruyter.com/journal/key/jqas/11/1/html)
+- Big Data Bowl (special issue https://www.degruyter.com/journal/key/jqas/16/2/html)
 - Big Data Cup
 - SABR Case competition
 
@@ -681,8 +679,6 @@ teamcolors::show_team_col()
 # Conclusion
 
 Sum up the key conclusions of your review, highlighting the most promising scientific developments, directions for future research, applications, etc. The conclusion should be ~2 paragraphs, ~750 words total.
-
-
 
 # Acknowledgments
 
