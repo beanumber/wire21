@@ -192,6 +192,7 @@ erm |>
   pivot_wider(names_from = Out, values_from = Runs) |>
   mutate(Base = int2bin(Base)) |>
   kable(booktabs = TRUE, 
+        linesep = "",
         caption = "George Lindsey's expected run matrix. Note how (when reading across the rows) the expected runs decrease as outs increase for the same configuration of baserunners, while (when reading down the columns) expected runs generally increase as baserunners advance. \\label{tab:erm}") |> 
   add_header_above(c("", "Out" = 3))
 ```
@@ -304,10 +305,10 @@ In American football, @Yurko2020going use tracking data provided by the [2019 NF
 As an extension to pre-existing approaches, the authors use conditional density estimation to obtain a probability distribution for the number of yards gained during the play, rather than only producing a single estimate for the expected yards gained. 
 Accordingly, the probability of various types of outcomes at the end of a play such as a touchdown or a first-down gain can be computed from the distribution of the end-of-play yard line.
 
-The notion of EPV has also been extended to soccer.
+The notion of EPV has also been extended to association football (soccer.)
 @fernandez2021framework implement deep learning methods to examine the instantaneous expected value of soccer possessions. 
 This approach considers passes, ball drives, and shots in soccer as the main set of actions used to compute expected possession value. 
-
+Many applications can be derived from this framework, including predicting which footballer is most likely to receive the next pass from the current on-ball player.
 
 ## Optimal strategies that don't maximize expected points
 
