@@ -36,7 +36,6 @@ header-includes:
   - \usepackage{amsmath}
 ---
 
-
 ```{r setup, echo=FALSE, message=FALSE}
 knitr::opts_chunk$set(
   echo = FALSE,
@@ -115,7 +114,7 @@ A growing pool of people move seamlessly between these two worlds, leading to th
 Every sport is different, with its own set of rules, strategies, methods of data collection, number of players, and the magnitude of the role of chance. 
 At the same time, many sports are similar, either because one evolved from the other, or the structure of the game shares certain attributes. 
 Sports that are closely related anthropologically may or may not share common applications of analytical methods. 
-For example, although belonging to the same bat-and-ball family, baseball and cricket differ in strategies such as batting order or sacrifice plays.
+For example, despite belonging to the same bat-and-ball family, baseball and cricket differ in strategies such as batting order or sacrifice plays.
 Conversely, with just a few small tweaks, analytical metrics might work just as well across sports that are unrelated and quite different.
 For instance, an Elo rating could be equally valid for chess players and ice hockey teams. 
 
@@ -232,7 +231,7 @@ Other early work on expected point values in American football can be found in @
 In particular, the author considers a football drive as an *absorbing Markov chain*, consisting of distinct *absorbing states* touchdowns, field goals, and other play outcomes. 
 For any given play, the expected points is calculated using the absorption probabilities for different scoring events.
 
-A more in-depth overview of the history of expected points is provided in @Yurko2019nflwar (Section 1.1). 
+A more in-depth overview of the history of expected points in sports is provided in @Yurko2019nflwar (Section 1.1). 
 Most importantly, this paper uses publicly available data provided by the **nflscrapR** package [@R-nflscrapR] to model the expected points on a play-by-play level in football.
 The authors introduce a multinomial logistic regression approach, which takes into account the current down, time remaining, yards from endzone, yards to go, and the indicators for goal to go and whether the time remaining in the half is less than two minutes. 
 This model estimates the probabilities of the following possible scoring outcomes after each play: no score, safety, field goal, and touchdown for both the offensive and defensive teams, all of which have a point value. 
@@ -308,7 +307,7 @@ Accordingly, the probability of various types of outcomes at the end of a play s
 The notion of EPV has also been extended to association football (soccer.)
 @fernandez2021framework implement deep learning methods to examine the instantaneous expected value of soccer possessions. 
 This approach considers passes, ball drives, and shots in soccer as the main set of actions used to compute expected possession value. 
-Many applications can be derived from this framework, including predicting which footballer is most likely to receive the next pass from the current on-ball player.
+Many applications can be derived from this framework, including predicting which footballer on the pitch is most likely to receive the next pass from the current on-ball player.
 
 ## Optimal strategies that don't maximize expected points
 
@@ -629,20 +628,20 @@ This type of infrastructure, where one package is the "workhorse" that facilitat
 Figure \ref{fig:chess} shows a rendering of the starting chess board obtained via the \pkg{chess} package, along with the final position in a game recently won by one of the authors (downloaded via the \pkg{chessR} package). 
 
 ```{r chess, fig.show="hold", out.width="49%", fig.cap="At left, the starting chess board printed via the \\pkg{chess} package. At right, the final position for one of the authors' recent wins (a checkmate playing Black)."}
-# library(chess)
-# # Sys.setenv(RETICULATE_PYTHON = "my_env/bin/python3")
-# game() |> plot()
-# 
-# library(chessR)
-# us <- c("fatgreggy")
-# greg <- get_raw_chessdotcom(
-#   usernames = us,
-#   year_month = 202206
-# )
-# 
-# m <- extract_moves_as_game(greg[6, ])
-# # plot_moves(m, interactive = FALSE)
-# plot(m)
+library(chess)
+# Sys.setenv(RETICULATE_PYTHON = "my_env/bin/python3")
+game() |> plot()
+
+library(chessR)
+us <- c("fatgreggy")
+greg <- get_raw_chessdotcom(
+  usernames = us,
+  year_month = 202206
+)
+
+m <- extract_moves_as_game(greg[6, ])
+# plot_moves(m, interactive = FALSE)
+plot(m)
 ```
 
 ## Colors
