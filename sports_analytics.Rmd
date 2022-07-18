@@ -385,23 +385,30 @@ In this section, we discuss notable previous work on win probability in baseball
 
 ## Baseball
 
-@Albert2015 provides a historical overview of the use of win probability in baseball. 
-This notion goes back to at least as early as @Lindsey1961, where the expected win probability after each inning was calculated based on the distribution of runs scored in each inning. 
-@Mills1970 utilize win probability to introduce Player Win Average (PWA), a measure of a player's contribution to the game outcome. 
+The notion of win probability in baseball goes back to at least as early as @Lindsey1961.
+In this paper, the author calculates the expected win probability after each inning based on the distribution of runs scored in each inning. 
+Inspired by @Lindsey1961's work, @Mills1970 utilize win probability to introduce Player Win Average (PWA), a measure of a player's contribution to the game outcome. 
 In particular, PWA is computed as 
 $$
 PWA = \frac{Win \ Points}{Win \ Points + Loss \ Points},
 $$
 where the win and loss points represent how much the player positively and negatively impact their team's probability of winning after each play.
-In effect, the win points are the sum of the changes in $\Pr[W_i | s]$ from one state to the next. 
+In effect, the win points are the sum of the changes in $\Pr[W_i | s]$ from one state to the next.
+
+Additionally, a mathematical model for estimating win probability in baseball is presented in @Tango2007book. 
+The authors use Markov chains to look at win expectancy throughout the course of a baseball game. 
+This approach considers different states of the game such as base, inning, outs and score, and outputs win probabilities accordingly.
+
+See @Albert2015 for a more detailed historical overview of the use of win probability in baseball. 
 
 ## American football
 
 In recent years, a number of statistical methods have been used to build well-calibrated win probability models in American football. 
 These are flexible models that have high predictability, can account for nonlinear interactions between the explanatory variables, require few assumptions, and produce feature importance scores.
 
-@Lock2014 use random forests as a means for estimating win probability before each play in a football game. 
-Covariates included in this win probability model are the current down, score differential, time remaining, adjusted score, point spread, number of timeouts remaining for each team, total points scored, current yard line, and yards to go for a first down. 
+@Lock2014 use a random forest method to provide a win probability estimate before each play in a football game. 
+Covariates included in this tree-based win probability model are the current down, score differential, time remaining, adjusted score, point spread, number of timeouts remaining for each team, total points scored, current yard line, and yards to go for a first down. 
+According to this model, the difference in score between the two teams is the most important feature for predicting win probabilities at any given moment in an NFL game.
 
 In addition, @Yurko2019nflwar estimate win probability in the NFL using a generalized additive model (GAM), as part of the **nflscrapR** package [@R-nflscrapR] and nflWAR framework. 
 This model takes into account the estimated expected points obtained from the model described in Section \ref{sec:ev}, along with other predictors for time, current half, and timeouts. 
@@ -412,7 +419,7 @@ One of @Yurko2019nflwar's goals was also to encourage researchers to "use, explo
 
 Figure \ref{fig:nflfastr-wp} shows a win probability graph for the January 14, 2018 NFL Playoffs Divisional Round matchup between the New Orleans Saints and the Minnesota Vikings. 
 We obtain the estimated probability of winning for each team using the \pkg{nflfastR} R package, which implements a gradient boosting model via the \pkg{xgboost} library (@R-xgboost) for estimating win probabilities. 
-Minnesota was leading throughout the first three quarters of the game, having win probabilities of 0.869, 0.941, 0.742 at the end of the first, second, and third quarters, respectively. 
+Minnesota was leading throughout the first three quarters of the game, having win probabilities of 0.869, 0.941, and 0.742 at the end of the first, second, and third quarters, respectively. 
 The win probabilities get close to parity late in the fourth quarter, when the Saints took the lead with 3:01 left in the game. 
 The last play of this game---famously known as the [Minneapolis Miracle](https://en.wikipedia.org/wiki/Minneapolis_Miracle)---resulted in a drastic swing in win probabilities for both teams. 
 With 10 seconds remaining in the game, the Vikings begin the final possession with a 25.3% chance of winning. 
@@ -490,12 +497,12 @@ $$
 Here, a Brownian motion process with drift $\mu$ points advantage for the home team and variance $\sigma^2$ is used to model the score difference between the home and away teams. 
 
 On a related note, @Deshpande2016 extend @Stern1994's framework by applying it in a Bayesian setting. 
-In this paper, the authors propose a Bayesian linear regression model to assess the impact of individual players on their team's win probability at any given time of a basketball game. 
+In this paper, the authors propose a Bayesian linear regression model to assess the impact of individual players on their team's chance of winning at any given time of a basketball game. 
 This model assumes independence of observations and constant variability in win probability.
 
 In addition, @McFarlane2019 uses logistic regression to estimate win probability for evaluating end-of-game decisions in the NBA. 
 The approach takes into account the remaining game time, score difference, and point spread. 
-This basketball win probability model is then applied to the calculation of the End-of-game Tactics Metric (ETM), measuring how the win probability differs between the optimal and on-court actual decisions.
+This win probability model is then applied to the calculation of the End-of-game Tactics Metric (ETM), measuring how the chance of winning a basketball game differs between the optimal and on-court actual decisions.
 
 ## Other sports
 
@@ -541,7 +548,8 @@ tennis_bt |>
   round(3) |> 
   kable(booktabs = TRUE, 
         col.names = c("Ability", "SE"),
-        caption = "The estimated abilities (with standard errors) for each tennis player, relative to Wawrinka, obtained from the fitted Bradley-Terry model. \\label{tab:tennisbtm}")
+        caption = "The estimated abilities (with standard errors) for each tennis player, relative to Wawrinka, obtained from the fitted Bradley-Terry model. \\label{tab:tennisbtm}") |> 
+  kable_styling(latex_options = "hold_position")
 ```
 
 Table \ref{tab:tennisbtm} shows the estimated coefficients of the fitted BTM. 
@@ -628,20 +636,20 @@ This type of infrastructure, where one package is the "workhorse" that facilitat
 Figure \ref{fig:chess} shows a rendering of the starting chess board obtained via the \pkg{chess} package, along with the final position in a game recently won by one of the authors (downloaded via the \pkg{chessR} package). 
 
 ```{r chess, fig.show="hold", out.width="49%", fig.cap="At left, the starting chess board printed via the \\pkg{chess} package. At right, the final position for one of the authors' recent wins (a checkmate playing Black)."}
-library(chess)
-# Sys.setenv(RETICULATE_PYTHON = "my_env/bin/python3")
-game() |> plot()
-
-library(chessR)
-us <- c("fatgreggy")
-greg <- get_raw_chessdotcom(
-  usernames = us,
-  year_month = 202206
-)
-
-m <- extract_moves_as_game(greg[6, ])
-# plot_moves(m, interactive = FALSE)
-plot(m)
+# library(chess)
+# # Sys.setenv(RETICULATE_PYTHON = "my_env/bin/python3")
+# game() |> plot()
+# 
+# library(chessR)
+# us <- c("fatgreggy")
+# greg <- get_raw_chessdotcom(
+#   usernames = us,
+#   year_month = 202206
+# )
+# 
+# m <- extract_moves_as_game(greg[6, ])
+# # plot_moves(m, interactive = FALSE)
+# plot(m)
 ```
 
 ## Colors
