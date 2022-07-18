@@ -36,7 +36,6 @@ header-includes:
   - \usepackage{amsmath}
 ---
 
-
 ```{r setup, echo=FALSE, message=FALSE}
 knitr::opts_chunk$set(
   echo = FALSE,
@@ -45,6 +44,7 @@ knitr::opts_chunk$set(
   fig.align = 'center'
 )
 library(tidyverse)
+library(kableExtra)
 ```
 
 ```{r pkg}
@@ -113,8 +113,10 @@ A growing pool of people move seamlessly between these two worlds, leading to th
 
 Every sport is different, with its own set of rules, strategies, methods of data collection, number of players, and the magnitude of the role of chance. 
 At the same time, many sports are similar, either because one evolved from the other, or the structure of the game shares certain attributes. 
-Sports that are closely related anthropologically (NEED EXAMPLE) may or may not share common applications of analytical methods. 
-Conversely, with just a few small tweaks, analytical metrics might work just as well across sports that are unrelated and quite different (e.g., an Elo rating could be equally valid for chess players and ice hockey teams). 
+Sports that are closely related anthropologically may or may not share common applications of analytical methods. 
+For example, despite belonging to the same bat-and-ball family, baseball and cricket differ in strategies such as batting order or sacrifice plays.
+Conversely, with just a few small tweaks, analytical metrics might work just as well across sports that are unrelated and quite different.
+For instance, an Elo rating could be equally valid for chess players and ice hockey teams. 
 
 In this paper, we explore three key ideas that have widespread applicability across many sports: the expected value of a game state (Section \ref{sec:ev}), win probability (Section \ref{sec:wp}), and measures of team strength (Section \ref{sec:strength}). 
 In each case, we define the concept mathematically, explain how it originated, and give examples of how it is applied in multiple sports. 
@@ -129,7 +131,6 @@ We encourage readers to explore @cochran2017oxford and @Albert2017handbook for c
 # The expected value of a game state {#sec:ev}
 
 In many sports, the first step towards an analytical understanding of the game is the estimation of the expected value of a game state at any given point in a sporting contest. 
-
 Mathematically, we define $X$ to be a random variable indicating the the number of points (or runs) that a team will score over some determined amount of time (e.g. remainder of game, quarter, period, or inning). 
 Let $s \in S$ be a tuple that encodes the *state* of a game. 
 Then our task is to estimate:
@@ -169,9 +170,9 @@ lindsey <- c(
   2.22, 1.642, .823
 )
 erm <- tibble(
-  base = rep(0:7, each = 3),
-  out = rep(0:2, times = 8),
-  runs = lindsey
+  Base = rep(0:7, each = 3),
+  Out = rep(0:2, times = 8),
+  Runs = lindsey
 )
 ```
 
@@ -187,10 +188,12 @@ int2bin <- function(x) {
 #int2bin(0:7)
 
 erm |>
-  pivot_wider(names_from = out, values_from = runs) |>
-  mutate(base = int2bin(base)) |>
-  rename(`base\\\\out` = base) |>
-  knitr::kable(caption = "George Lindsey's expected run matrix. Note how (when reading across the rows) the expected runs decrease as outs increase for the same configuration of baserunners, while (when reading down the columns) expected runs generally increase as baserunners advance. \\label{tab:erm}")
+  pivot_wider(names_from = Out, values_from = Runs) |>
+  mutate(Base = int2bin(Base)) |>
+  kable(booktabs = TRUE, 
+        linesep = "",
+        caption = "George Lindsey's expected run matrix. Note how (when reading across the rows) the expected runs decrease as outs increase for the same configuration of baserunners, while (when reading down the columns) expected runs generally increase as baserunners advance. \\label{tab:erm}") |> 
+  add_header_above(c("", "Out" = 3))
 ```
 
 
@@ -228,7 +231,7 @@ Other early work on expected point values in American football can be found in @
 In particular, the author considers a football drive as an *absorbing Markov chain*, consisting of distinct *absorbing states* touchdowns, field goals, and other play outcomes. 
 For any given play, the expected points is calculated using the absorption probabilities for different scoring events.
 
-A more in-depth overview of the history of expected points is provided in @Yurko2019nflwar (Section 1.1). 
+A more in-depth overview of the history of expected points in sports is provided in @Yurko2019nflwar (Section 1.1). 
 Most importantly, this paper uses publicly available data provided by the **nflscrapR** package [@R-nflscrapR] to model the expected points on a play-by-play level in football.
 The authors introduce a multinomial logistic regression approach, which takes into account the current down, time remaining, yards from endzone, yards to go, and the indicators for goal to go and whether the time remaining in the half is less than two minutes. 
 This model estimates the probabilities of the following possible scoring outcomes after each play: no score, safety, field goal, and touchdown for both the offensive and defensive teams, all of which have a point value. 
@@ -278,7 +281,7 @@ The plot consists of two elements:
 and 2) (top) a line graph showing how the EPV changes continuously throughout the play until the three-point attempt. 
 For this possession, the estimated EPV for the Miami Heat reaches its peak at $1.276$ points at the moment the shot is taken.
 
-```{r epv-demo, out.width="100%", fig.cap="Player locations and estimated EPV for a possession during the Miami Heat (red) vs. Brooklyn Nets (black) NBA game on November 1, 2013. The captured moment is when Miami's Mario Chalmers just releases a three-point shot, which ends up being a miss."}
+```{r epv-demo, out.width="100%", fig.cap="Player locations and estimated EPV for a possession during the Miami Heat (red) vs. Brooklyn Nets (black) NBA game on November 1, 2013. The captured moment is when Miami's Mario Chalmers just releases a three-point shot, which ends up as a missed field goal."}
 # Source: https://github.com/dcervone/EPVDemo/blob/master/gifs/poss_12.gif
 # library(magick)
 # epv <- image_read("https://github.com/dcervone/EPVDemo/blob/master/gifs/poss_12.gif?raw=true")
@@ -289,10 +292,7 @@ knitr::include_graphics("epv_snap.png")
 Note that Miami starts the play with an EPV of approximately 1.0 points.
 This indicates their implied average points per possession. 
 Chalmers's shot is worth 3 points, so the EPV of 1.276 points implies that the model estimate of the probability of Chalmers making this shot is 42.5\%. 
-A breakthrough in this work is that this estimate is conditional on the location of the other 9 players on the court!
-
-
-
+A breakthrough in this work is that this estimate is conditional on the locations of the other 9 players on the basketball court!
 
 Another framework for estimating expected points in basketball is proposed by @Sicilia2019DeepHoops. 
 The authors offer a different point of view on expected points, where they first consider a classification model which returns the probabilities for whether a player would commit a foul (shooting and non-shooting), turnover, or attempt a shot. 
@@ -304,10 +304,10 @@ In American football, @Yurko2020going use tracking data provided by the [2019 NF
 As an extension to pre-existing approaches, the authors use conditional density estimation to obtain a probability distribution for the number of yards gained during the play, rather than only producing a single estimate for the expected yards gained. 
 Accordingly, the probability of various types of outcomes at the end of a play such as a touchdown or a first-down gain can be computed from the distribution of the end-of-play yard line.
 
-The notion of EPV has also been extended to soccer.
+The notion of EPV has also been extended to association football (soccer.)
 @fernandez2021framework implement deep learning methods to examine the instantaneous expected value of soccer possessions. 
 This approach considers passes, ball drives, and shots in soccer as the main set of actions used to compute expected possession value. 
-
+Many applications can be derived from this framework, including predicting which footballer on the pitch is most likely to receive the next pass from the current on-ball player.
 
 ## Optimal strategies that don't maximize expected points
 
@@ -330,7 +330,7 @@ In this case, the defensive team is wise to pursue the strategy of maximizing th
 ```{r}
 erm <- erm |>
   mutate(
-    pr_0 = c(
+    Pr_0 = c(
       .747, .855, .933,
       .604, .734, .886, 
       .381, .610, .788,
@@ -343,9 +343,10 @@ erm <- erm |>
   )
 
 erm |>
-  filter(out == 0, base %in% c(5, 7)) |>
-  mutate(base = int2bin(base)) |>
-  knitr::kable(caption = "Loading the bases can be a rational strategy. In this case, loading the bases maximizes both the expected number of runs scored *and* the probability of not scoring at all. \\label{tab:tied}")
+  filter(Out == 0, Base %in% c(5, 7)) |>
+  mutate(Base = int2bin(Base)) |>
+  kable(booktabs = TRUE, 
+        caption = "Loading the bases can be a rational strategy. In this case, loading the bases maximizes both the expected number of runs scored *and* the probability of not scoring at all. \\label{tab:tied}")
 ```
 
 Maximizing the probability of scoring is optimal in any sudden-death situation, which has (but currently does not) included overtime in American football [@martin2018markov]. 
@@ -384,23 +385,30 @@ In this section, we discuss notable previous work on win probability in baseball
 
 ## Baseball
 
-@Albert2015 provides a historical overview of the use of win probability in baseball. 
-This notion goes back to at least as early as @Lindsey1961, where the expected win probability after each inning was calculated based on the distribution of runs scored in each inning. 
-@Mills1970 utilize win probability to introduce Player Win Average (PWA), a measure of a player's contribution to the game outcome. 
+The notion of win probability in baseball goes back to at least as early as @Lindsey1961.
+In this paper, the author calculates the expected win probability after each inning based on the distribution of runs scored in each inning. 
+Inspired by @Lindsey1961's work, @Mills1970 utilize win probability to introduce Player Win Average (PWA), a measure of a player's contribution to the game outcome. 
 In particular, PWA is computed as 
 $$
 PWA = \frac{Win \ Points}{Win \ Points + Loss \ Points},
 $$
 where the win and loss points represent how much the player positively and negatively impact their team's probability of winning after each play.
-In effect, the win points are the sum of the changes in $\Pr[W_i | s]$ from one state to the next. 
+In effect, the win points are the sum of the changes in $\Pr[W_i | s]$ from one state to the next.
+
+Additionally, a mathematical model for estimating win probability in baseball is presented in @Tango2007book. 
+The authors use Markov chains to look at win expectancy throughout the course of a baseball game. 
+This approach considers different states of the game such as base, inning, outs and score, and outputs win probabilities accordingly.
+
+See @Albert2015 for a more detailed historical overview of the use of win probability in baseball. 
 
 ## American football
 
 In recent years, a number of statistical methods have been used to build well-calibrated win probability models in American football. 
 These are flexible models that have high predictability, can account for nonlinear interactions between the explanatory variables, require few assumptions, and produce feature importance scores.
 
-@Lock2014 use random forests as a means for estimating win probability before each play in a football game. 
-Covariates included in this win probability model are the current down, score differential, time remaining, adjusted score, point spread, number of timeouts remaining for each team, total points scored, current yardline, and yards to go for a first down. 
+@Lock2014 use a random forest method to provide a win probability estimate before each play in a football game. 
+Covariates included in this tree-based win probability model are the current down, score differential, time remaining, adjusted score, point spread, number of timeouts remaining for each team, total points scored, current yard line, and yards to go for a first down. 
+According to this model, the difference in score between the two teams is the most important feature for predicting win probabilities at any given moment in an NFL game.
 
 In addition, @Yurko2019nflwar estimate win probability in the NFL using a generalized additive model (GAM), as part of the **nflscrapR** package [@R-nflscrapR] and nflWAR framework. 
 This model takes into account the estimated expected points obtained from the model described in Section \ref{sec:ev}, along with other predictors for time, current half, and timeouts. 
@@ -411,7 +419,7 @@ One of @Yurko2019nflwar's goals was also to encourage researchers to "use, explo
 
 Figure \ref{fig:nflfastr-wp} shows a win probability graph for the January 14, 2018 NFL Playoffs Divisional Round matchup between the New Orleans Saints and the Minnesota Vikings. 
 We obtain the estimated probability of winning for each team using the \pkg{nflfastR} R package, which implements a gradient boosting model via the \pkg{xgboost} library (@R-xgboost) for estimating win probabilities. 
-Minnesota was leading throughout the first three quarters of the game, having win probabilities of 0.869, 0.941, 0.742 at the end of the first, second, and third quarters, respectively. 
+Minnesota was leading throughout the first three quarters of the game, having win probabilities of 0.869, 0.941, and 0.742 at the end of the first, second, and third quarters, respectively. 
 The win probabilities get close to parity late in the fourth quarter, when the Saints took the lead with 3:01 left in the game. 
 The last play of this game---famously known as the [Minneapolis Miracle](https://en.wikipedia.org/wiki/Minneapolis_Miracle)---resulted in a drastic swing in win probabilities for both teams. 
 With 10 seconds remaining in the game, the Vikings begin the final possession with a 25.3% chance of winning. 
@@ -472,7 +480,7 @@ logos <- miracle |>
 wp_plot + 
   annotation_raster(logos[[1]], -1010, -1490, 0.76, 0.865) + 
   annotation_raster(logos[[2]], -1010, -1490, 0.135, 0.24) + 
-  scale_x_reverse()
+  scale_x_reverse(breaks = seq(0, 3600, 900))
 ```
 
 
@@ -489,12 +497,12 @@ $$
 Here, a Brownian motion process with drift $\mu$ points advantage for the home team and variance $\sigma^2$ is used to model the score difference between the home and away teams. 
 
 On a related note, @Deshpande2016 extend @Stern1994's framework by applying it in a Bayesian setting. 
-In this paper, the authors propose a Bayesian linear regression model to assess the impact of individual players on their team's win probability at any given time of a basketball game. 
+In this paper, the authors propose a Bayesian linear regression model to assess the impact of individual players on their team's chance of winning at any given time of a basketball game. 
 This model assumes independence of observations and constant variability in win probability.
 
 In addition, @McFarlane2019 uses logistic regression to estimate win probability for evaluating end-of-game decisions in the NBA. 
 The approach takes into account the remaining game time, score difference, and point spread. 
-This basketball win probability model is then applied to the calculation of the End-of-game Tactics Metric (ETM), measuring how the win probability differs between the optimal and on-court actual decisions.
+This win probability model is then applied to the calculation of the End-of-game Tactics Metric (ETM), measuring how the chance of winning a basketball game differs between the optimal and on-court actual decisions.
 
 ## Other sports
 
@@ -512,11 +520,9 @@ A popular method for estimating team strength in sports is through pairwise eval
 Perhaps the most famous probability model for predicting the outcome of a paired comparison is the Bradley-Terry model (BTM) [@Bradley1952]. 
 For a pair of players (or teams) $i$ and $j$, let $\Pi_{ij}$ denote the probability that $i$ is preferred to $j$. 
 Then the BTM is a logistic regression model with parameters $\beta_i, \beta_j$ such that
-
 $$
 \log\left(\frac{\Pi_{ij}}{\Pi_{ji}}\right) = \beta_i - \beta_j \,.
 $$
-
 Here, $\exp{\beta_i}$ is often viewed as a representation of player $i$'s ability. 
 
 The BTM can be implemented in `R` [@R-base] via the \pkg{BradleyTerry2} package [@R-BradleyTerry2]. 
@@ -540,7 +546,10 @@ tennis_bt |>
   update(refcat = "Wawrinka") |> 
   BradleyTerry2::BTabilities() |> 
   round(3) |> 
-  knitr::kable(caption = "Estimated abilities for each player, relative to Wawrinka, obtained from the fitted Bradley-Terry model. \\label{tab:tennisbtm}")
+  kable(booktabs = TRUE, 
+        col.names = c("Ability", "SE"),
+        caption = "The estimated abilities (with standard errors) for each tennis player, relative to Wawrinka, obtained from the fitted Bradley-Terry model. \\label{tab:tennisbtm}") |> 
+  kable_styling(latex_options = "hold_position")
 ```
 
 Table \ref{tab:tennisbtm} shows the estimated coefficients of the fitted BTM. 
@@ -610,7 +619,7 @@ Analytical work in sports requires facility with an ever-changing set of computa
 Sources of authoritative data about sports are myriad, and are too numerous to list here. 
 Software tools for sports analytics are similarly numerous. 
 For R, we maintain a [CRAN Task View for Sports Analytics](https://CRAN.R-project.org/view=SportsAnalytics) that catalogs R packages published on the Comprehensive R Archive Network and organizes them by sport [@baumer2022ctv].
-A more general collection of software tools is being curated by the SportsDataverse.org (<https://sportsdataverse.org>).
+A more general collection of software tools is being curated by the SportsDataverse initiative [@gilani2022sportsdataverse].
 
 In the remainder of this section, we highlight a few tools for sports analytics that are of general interest and illustrate a common paradigm for how these tools can be used in conjunction. 
 
@@ -626,13 +635,11 @@ This type of infrastructure, where one package is the "workhorse" that facilitat
 
 Figure \ref{fig:chess} shows a rendering of the starting chess board obtained via the \pkg{chess} package, along with the final position in a game recently won by one of the authors (downloaded via the \pkg{chessR} package). 
 
-```{r chess, fig.show="hold", out.width="49%", fig.cap="At left, the starting chess board printed via the \\pkg{chess} package. At right, the final position for one of the authors' recent wins (a checkmate playing Black)."}
+```{r chess, eval=whoami::username() == 'bbaumer', fig.show="hold", out.width="49%", fig.cap="At left, the starting chess board printed via the \\pkg{chess} package. At right, the final position for one of the authors' recent wins (a checkmate playing Black)."}
 library(chess)
 # Sys.setenv(RETICULATE_PYTHON = "my_env/bin/python3")
 game() |> plot()
 
-# we could plot greg's chess moves
-# doesn't work for me... python/reticulate issues
 library(chessR)
 us <- c("fatgreggy")
 greg <- get_raw_chessdotcom(
@@ -656,12 +663,13 @@ Figure \ref{fig:teamcolors} illustrates the full array of team color palettes fo
 teamcolors::show_team_col()
 ```
 
-# Notable competitions and public events
+# Opportunities
 
 ## Competitions
 
-- Kaggle March Madness [@lopez2015building]
-- Big Data Bowl
+- Kaggle March Madness [@lopez2015building] (jqas special issue: https://www.degruyter.com/journal/key/jqas/11/1/html)
+- Big Data Bowl (special issue https://www.degruyter.com/journal/key/jqas/16/2/html)
+- Big Data Cup
 - SABR Case competition
 
 ## Conferences
@@ -669,6 +677,7 @@ teamcolors::show_team_col()
 - NESSIS/CASSIS
 - Sloan
 - CMU
+- UConn sports analytics
 
 @marchi2018analyzing
 
@@ -679,10 +688,10 @@ teamcolors::show_team_col()
 
 Sum up the key conclusions of your review, highlighting the most promising scientific developments, directions for future research, applications, etc. The conclusion should be ~2 paragraphs, ~750 words total.
 
-
-
 # Acknowledgments
 
 We are grateful to Michael Lopez and Katherine Evans for their thoughts on early versions of this paper. 
+
+The R Markdown file that generated this paper, including all R code, is available at <https://github.com/beanumber/wire21>.
 
 # References {-}
