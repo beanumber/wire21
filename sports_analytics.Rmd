@@ -20,7 +20,7 @@ authors:
     location: Pittsburgh, PA 15213
     email: nmquang@cmu.edu
 abstract: |
-  Sports analytics---broadly defined as the pursuit of improvement in athletic performance through the analysis of data---has expanded its footprint both in the professional sports industry and in academia over the past 30 years. We connect three big ideas that are common across multiple sports, and explore both the shared similarities and individual idiosyncracies of analytical approaches in each sport. While our focus is on the concepts underlying each type of analysis, any implementation necessarily involves both statistical methodologies and sources of data. Where appropriate, we outline how data, models, and knowledge of the sport combine to generate actionable insights. This paper should serve as a useful overview for anyone becoming interested in the study of sports analytics. 
+  Sports analytics---broadly defined as the pursuit of improvement in athletic performance through the analysis of data---has expanded its footprint both in the professional sports industry and in academia over the past 30 years. We connect three big ideas that are common across multiple sports, and explore both the shared similarities and individual idiosyncracies of analytical approaches in each sport. While our focus is on the concepts underlying each type of analysis, any implementation necessarily involves statistical methodologies, computational tools, and sources of data. Where appropriate, we outline how data, models, tools, and knowledge of the sport combine to generate actionable insights. This paper should serve as a useful overview for anyone becoming interested in the study of sports analytics. 
 keywords:
   - sports analytics
   - R packages
@@ -686,7 +686,32 @@ teamcolors::show_team_col()
 
 # Conclusion
 
+<!--
 Sum up the key conclusions of your review, highlighting the most promising scientific developments, directions for future research, applications, etc. The conclusion should be ~2 paragraphs, ~750 words total.
+-->
+
+As an applied science, sports analytics may lack a [grand unified theory](https://en.wikipedia.org/wiki/Grand_Unified_Theory) that succinctly characterizes game play across all sports. 
+However, as a maturing discipline, sports analytics has been able to address fundamental questions common to many sports. 
+In this paper, we explicate three of those big questions: 
+
+- Who are the best teams and how good are they? 
+- What is the likelihood of each team winning the game at any given juncture? 
+- Is there a generic framework for evaluating strategies at any given juncture in a game? 
+
+Other fundamental questions, such as:
+
+- How significant is the element of chance in a particular sport? 
+- Given that we know how the best teams are, who are the best players and how can we quantify their relative contributions? 
+- What combinations of players work best together in a particular sport? 
+
+are addressed elsewhere. 
+In particular, see @Lopez2018 for estimations of the element of chance across four major sports. 
+The second question is often addressed using a formulation of *wins above replacement* (WAR)---see @baumer2015openwar and @Yurko2019nflwar for details in baseball and American football. 
+The third question is most compelling in sports like basketball, ice hockey, and soccer, where substitutions are common and it is obvious that different combinations of players with different sets of skills will result in squad of varying strengths and weaknesses.
+The concept of *plus-minus*, and then *adjusted* plus-minus is frequently applied to address this question (see @hvattum2019comprehensive for a comprehensive overview of applications). 
+
+In drawing together these three big ideas in sports analytics, we have also drawn attention to some computational tools for doing the work and opportunities to showcase that work. 
+It is through these exchanges of ideas, tools, models, and data that analytics moves our collective understanding of sports forward.  
 
 # Acknowledgments
 
