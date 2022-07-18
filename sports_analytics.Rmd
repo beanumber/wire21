@@ -66,6 +66,12 @@ knitr::write_bib(
   ),
   file = "pkgs.bib"
 )
+
+xfun::gsub_file(
+  "pkgs.bib",
+  "\\{Jason Zivkovic\\}",
+  "Zivkovic, Jason"
+  )
 ```
 
 ```{=latex}
