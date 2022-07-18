@@ -635,21 +635,21 @@ This type of infrastructure, where one package is the "workhorse" that facilitat
 
 Figure \ref{fig:chess} shows a rendering of the starting chess board obtained via the \pkg{chess} package, along with the final position in a game recently won by one of the authors (downloaded via the \pkg{chessR} package). 
 
-```{r chess, fig.show="hold", out.width="49%", fig.cap="At left, the starting chess board printed via the \\pkg{chess} package. At right, the final position for one of the authors' recent wins (a checkmate playing Black)."}
-# library(chess)
-# # Sys.setenv(RETICULATE_PYTHON = "my_env/bin/python3")
-# game() |> plot()
-# 
-# library(chessR)
-# us <- c("fatgreggy")
-# greg <- get_raw_chessdotcom(
-#   usernames = us,
-#   year_month = 202206
-# )
-# 
-# m <- extract_moves_as_game(greg[6, ])
-# # plot_moves(m, interactive = FALSE)
-# plot(m)
+```{r chess, eval=whoami::username() == 'bbaumer', fig.show="hold", out.width="49%", fig.cap="At left, the starting chess board printed via the \\pkg{chess} package. At right, the final position for one of the authors' recent wins (a checkmate playing Black)."}
+library(chess)
+# Sys.setenv(RETICULATE_PYTHON = "my_env/bin/python3")
+game() |> plot()
+
+library(chessR)
+us <- c("fatgreggy")
+greg <- get_raw_chessdotcom(
+  usernames = us,
+  year_month = 202206
+)
+
+m <- extract_moves_as_game(greg[6, ])
+# plot_moves(m, interactive = FALSE)
+plot(m)
 ```
 
 ## Colors
