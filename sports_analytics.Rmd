@@ -230,8 +230,12 @@ For example, in American football, $s$ is determined by factors such as down, ya
 
 The first effort of estimating expected points of possession in football goes back to @Carter1971operations. 
 In this technical note, the authors estimate the expected points for 1st and 10 plays in the NFL given any yard line on the football field. 
-Due to limitations regarding the amount of data collected, the football field is broken into 10-yard strips, centered at their midpoints (e.g. 5, 15, 25, 35, etc.), and the expected points are calculated for each of those field positions. 
-Other early work on expected point values in American football can be found in @Carroll1988hidden, which popularized the idea of play evaluation using expected points and expected points added.
+Due to limitations regarding the amount of data collected, the football field is broken into 10-yard buckets, centered at their midpoints (e.g. 5, 15, 25, 35, etc.).
+The estimated value for first and 10 situation on those field positions is calculated by averaging the points scored on the next scoring instance.
+
+Other early work on expected point values in American football can be found in @Carroll1988hidden. 
+In particular, the authors extend @Carter1971operations's work and propose a linear model for expected points in the NFL.
+It is determined that every extra 25 yards is associated with 2 more points scored on average for a football team.
 
 @goldner2012markov and @goldner2017situational propose a Markov model for estimating expected points in football. 
 In particular, the author considers a football drive as an *absorbing Markov chain*, consisting of distinct *absorbing states* touchdowns, field goals, and other play outcomes. 
@@ -241,7 +245,6 @@ A more in-depth overview of the history of expected points in sports is provided
 Most importantly, this paper uses publicly available data provided by the **nflscrapR** package [@R-nflscrapR] to model the expected points on a play-by-play level in football.
 The authors introduce a multinomial logistic regression approach, which takes into account the current down, time remaining, yards from endzone, yards to go, and the indicators for goal to go and whether the time remaining in the half is less than two minutes. 
 This model estimates the probabilities of the following possible scoring outcomes after each play: no score, safety, field goal, and touchdown for both the offensive and defensive teams, all of which have a point value.
-
 The expected points for a play can then be calculated accordingly, by summing up the products of the scoring event point values and their associated probabilities.
 
 ### 4th down strategy
