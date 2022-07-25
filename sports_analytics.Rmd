@@ -226,12 +226,11 @@ See @Albert2001curve for a fuller discussion of the use of the expected run matr
 ## In American football
 
 The concept of estimating the value of the state of a game is easily extended to other sports. 
-For example, in American football, $s$ is determined by factors such as down, yardage to the next first down, time remaining in the game, and field position. 
+For example, in American football, $s$ is determined by situational variables at the start of a play such as down, yardage to the next first down, time remaining in the game, and field position. 
 
 The first effort of estimating expected points of possession in football goes back to @Carter1971operations. 
 In this technical note, the authors estimate the expected points for 1st and 10 plays in the NFL given any yard line on the football field. 
-Due to limitations regarding the amount of data collected, the football field is broken into 10-yard buckets, centered at their midpoints (e.g. 5, 15, 25, 35, etc.).
-The estimated value for first and 10 situation on those field positions is calculated by averaging the points scored on the next scoring instance.
+Due to limitations regarding the amount of data collected, the football field is broken into 10-yard buckets, centered at their midpoints (e.g. 5, 15, 25, 35, etc.), before averaging the value of the next scoring instance across the field to obtain the expected points.
 
 Other early work on expected point values in American football can be found in @Carroll1988hidden. 
 In particular, the authors extend @Carter1971operations's work and propose a linear model for expected points in the NFL.
