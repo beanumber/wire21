@@ -715,24 +715,19 @@ teamcolors::show_team_col()
 
 # Opportunities
 
-## Competitions
+Public research in sports analytics is driven in part by several notable competitions. 
+These competitions have been an important source of new ideas and have contributed to the diversification of the field by breaking down barriers to entry. 
 
-- Kaggle March Madness [@lopez2015building] (jqas special issue: https://www.degruyter.com/journal/key/jqas/11/1/html)
-- Big Data Bowl (special issue https://www.degruyter.com/journal/key/jqas/16/2/html)
-- Big Data Cup
-- SABR Case competition
+In 2014, the *Journal of Quantitative Analysis in Sports* teamed up with Kaggle to create a March Madness competition to predict the winners of the NCAA men's basketball tournament. 
+243 entrants competed for the $15,000 cash prize by submitting predicted probabilities for every possible pairwise matchup among the 68 teams in the tournament [@GlickmanSonas2015]. 
+In the [special issue](https://www.degruyter.com/journal/key/jqas/11/1/html) that *JQAS* subsequently published, we learned that the winning entry was based on a fairly simple logistic regression model trained on betting market data [@lopez2015building].
+Thus, the competition not only sparked interest in sports analytics, but resulted in peer-reviewed research that, in that case, demonstrated the value of superior data over sophisticated modeling. 
 
-## Conferences
+Perhaps motivated by his success in the Kaggle March Madness competition, Michael Lopez joined the National Football League and launched the [Big Data Bowl](https://operations.nfl.com/gameday/analytics/big-data-bowl/) in 2019.
+This annual competition has similarly fueled new research directions in American football and a [special issue](https://www.degruyter.com/journal/key/jqas/16/2/html) of *JQAS* [@lopez2020bigger].
+Successful entries and their corresponding publications [@DeshpandeEvans2020; @Yurko2020going; @ChuReyersThomsonWu2020] have launched the careers of several of the most prominent early-career researchers in sports analytics. 
 
-- NESSIS/CASSIS
-- Sloan
-- CMU
-- UConn sports analytics
-
-@marchi2018analyzing
-
-@R-Lahman, @R-pitchRx, @R-retrosheet
-
+Similar competitions include the [Big Data Cup](https://www.stathletes.com/big-data-cup/) for ice hockey and the [SABR Diamond Dollars Case Competition](https://sabr.org/analytics/case) for baseball.
 
 # Conclusion
 
@@ -751,7 +746,7 @@ In this paper, we explicate three of those big questions:
 Other fundamental questions, such as:
 
 - How significant is the element of chance in a particular sport? 
-- Given that we know how the best teams are, who are the best players and how can we quantify their relative contributions? 
+- Given that we know who the best teams are, who are the best players and how can we quantify their relative contributions? 
 - What combinations of players work best together in a particular sport? 
 
 are addressed elsewhere. 
