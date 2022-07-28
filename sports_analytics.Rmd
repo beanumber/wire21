@@ -261,6 +261,13 @@ Recently, @lopez2020bigger presented an introduction to NFL tracking data, and a
 
 @Alamar2010 uses an expected points framework to evaluate play calling in the NFL.  However, rather than evaluate each play on its own, the framework presented here evaluates the play in the context of the drive.  Based on play-by-play data from 2005 through 2008, they find that teams are underutilizing passing plays in some situations.  
 
+@urschel2011 uses expected points to evaluate NFL coaching decisions on kickoffs.  Specifically, they look at surprise on-sides kicks vs regular kickoff and the decision to accept a touchback vs returning kickoff.  Using data from the 2009 NFL season, the conclude, as many have, that coaches in the NFL tend to make conservative decisions.  
+
+
+
+<!-- decsions on kick offs (surprise on sides or regular kick off AND accept touchback or return kick) using an expected points frame work.  Shows that teams are moderately risk and loss averse. -->
+<!-- https://www.eng.buffalo.edu/~jzhuang/Papers/JQAS_NFL_2011.pdf -->
+
 <!-- (A paragraph on applications of expected points on decision making, fourth down strategy, with an example) -->
 
 
@@ -279,8 +286,8 @@ Recently, @lopez2020bigger presented an introduction to NFL tracking data, and a
 
 
 
-@urschel2011 Examines decsions on kick offs (surprise on sides or regular kick off AND accept touchback or return kick) using an expected points frame work.  Shows that teams are moderately risk and loss averse.
-https://www.eng.buffalo.edu/~jzhuang/Papers/JQAS_NFL_2011.pdf
+<!-- @urschel2011 Examines decsions on kick offs (surprise on sides or regular kick off AND accept touchback or return kick) using an expected points frame work.  Shows that teams are moderately risk and loss averse. -->
+<!-- https://www.eng.buffalo.edu/~jzhuang/Papers/JQAS_NFL_2011.pdf -->
 
 
 
