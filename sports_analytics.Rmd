@@ -247,13 +247,15 @@ The authors introduce a multinomial logistic regression approach, which takes in
 This model estimates the probabilities of the following possible scoring outcomes after each play: no score, safety, field goal, and touchdown for both the offensive and defensive teams, all of which have a point value.
 The expected points for a play can then be calculated accordingly, by summing up the products of the scoring event point values and their associated probabilities.
 
-@pelechrinis2019 develops an expected points framework in the same spirit as previous work, but accounts for the strength of the opponents in their method.  They state that by failing to account for opponent strength appropriately, about 124.8 points per team each season (or about 3.8 wins per season) are not credited correctly.  
+In addition, @pelechrinis2019 develops an expected points framework in the same spirit as previous work, but accounts for the strength of the opponents in their method.  They state that by failing to account for opponent strength appropriately, about 124.8 points per team each season (or about 3.8 wins per season) are not credited correctly.  
 
 ### 4th down strategy
 
-The concept of expected points in American football has many applications.  One of the most notable and well-studied is the use of expected points in the evaluation of 4th down strategy, and there is near universal consensus in the literature that NFL teams have been too conservative when making 4th down decisions.  
+The concept of expected points in American football has many applications.
+One of the most notable and well-studied is the use of expected points in the evaluation of 4th down strategy, and there is near universal consensus in the literature that NFL teams have been too conservative when making 4th down decisions. 
+
 @Romer2006 examines 4th down decisions in the NFL using expected points by focusing only on examples from the first quarter of a game (to avoid issues with end-of-half and end-of-game decision making). 
-They conclude that teams don't go for it enough if they are trying to maximize their probability of winning the game. 
+The author concludes that teams don't go for it enough if they are trying to maximize their probability of winning the game. 
 
 Numerous papers (see @lopez2020bigger for details) use the analysis of the expected number of points to improve fourth down strategy. 
 In addition to @Romer2006, later work by @Yam2019 uses win probability (see Section \ref{sec:wp}), rather than expected points, and a casual inference framework to reach similar conclusions that NFL teams are to conservative in going for it on 4th down. 
@@ -263,25 +265,24 @@ Recently, @lopez2020bigger presented an introduction to NFL tracking data, and a
 
 ### Other applications of expected points in American football
 
-@White2002 present a tiered logistic regression method that can be, in general, applied to any regression setting with a polychotomous response.  
+Researchers have also applied the notion of expected points to evaluate other aspects of the game of football, including quarterback performance and coaching decision. 
+
+@White2002 present a tiered logistic regression method that can be, in general, applied to any regression setting with a polychotomous response.
 Using this technique, they estimate the value of NFL plays using a simple expected points model with down, yards to go, and yards to goal as predictors.
-They then use these results to evaluate and rank NFL quarterbacks.  
+Accordingly, the model results can be used to obtain ratings and rankings for NFL passers.
 
-@Alamar2010 uses an expected points framework to evaluate play calling in the NFL. 
-However, rather than evaluate each play on its own, they evaluate the play in the context of the drive. 
-Based on play-by-play data from 2005 through 2008, they find that teams are underutilizing passing plays in some situations.  
+In addition, @Alamar2010 implements an expected points framework to examine play calling in the NFL. 
+However, rather than assessing each play on its own, the author evaluates the play in the context of the drive. 
+Based on play-by-play data from 2005 through 2008, it is determined that teams are under-utilizing passing plays in some situations.  
 
-@urschel2011 use expected points to evaluate NFL coaching decisions on kickoffs. 
-Specifically, they look at surprise on-sides kicks vs. regular kickoff and the decision to accept a touchback vs. returning the kickoff. 
+Another application of expected points is to evaluate kickoff decisions made by football coaches, as demonstrated by @urschel2011.
+Specifically, they look at surprise on-sides kicks versus regular kickoff and the decision to accept a touchback versus returning the kickoff. 
 Using data from the 2009 NFL season, the conclude, as many have, that coaches in the NFL tend to make conservative decisions.  
-
-
 
 <!-- decsions on kick offs (surprise on sides or regular kick off AND accept touchback or return kick) using an expected points frame work.  Shows that teams are moderately risk and loss averse. -->
 <!-- https://www.eng.buffalo.edu/~jzhuang/Papers/JQAS_NFL_2011.pdf -->
 
 <!-- (A paragraph on applications of expected points on decision making, fourth down strategy, with an example) -->
-
 
 <!-- 4th down strategy papers based on expected points.   -->
 <!-- @lopez2020bigger: Talks about how tracking data is important for a more nuanced discussion of 4th down decisions.   -->
@@ -293,19 +294,8 @@ Using data from the 2009 NFL season, the conclude, as many have, that coaches in
 <!-- @Alamar2010 Evaluation of play calling in the NFL based on expected points.   -->
 <!-- https://www.degruyter.com/document/doi/10.2202/1559-0410.1235/html -->
 
-
-
-
-
-
 <!-- @urschel2011 Examines decsions on kick offs (surprise on sides or regular kick off AND accept touchback or return kick) using an expected points frame work.  Shows that teams are moderately risk and loss averse. -->
 <!-- https://www.eng.buffalo.edu/~jzhuang/Papers/JQAS_NFL_2011.pdf -->
-
-
-
-
-
-
 
 ## In sports with continuous states
 
@@ -352,7 +342,7 @@ In American football, @Yurko2020going use tracking data provided by the [2019 NF
 As an extension to pre-existing approaches, the authors use conditional density estimation to obtain a probability distribution for the number of yards gained during the play, rather than only producing a single estimate for the expected yards gained. 
 Accordingly, the probability of various types of outcomes at the end of a play such as a touchdown or a first-down gain can be computed from the distribution of the end-of-play yard line.
 
-The notion of EPV has also been extended to association football (soccer.)
+The notion of EPV has also been extended to association football (soccer).
 @fernandez2021framework implement deep learning methods to examine the instantaneous expected value of soccer possessions. 
 This approach considers passes, ball drives, and shots in soccer as the main set of actions used to compute expected possession value. 
 Many applications can be derived from this framework, including predicting which footballer on the pitch is most likely to receive the next pass from the current on-ball player.
@@ -452,7 +442,6 @@ See @Albert2015 for a more detailed historical overview of the use of win probab
 ## American football
 
 In recent years, a number of statistical methods have been used to build well-calibrated win probability models in American football. 
-
 These are flexible models that have high predictability, can account for nonlinear interactions between the explanatory variables, require few assumptions, and produce feature importance scores.
 
 @Lock2014 use a random forest method to provide a win probability estimate before each play in a football game. 
@@ -547,10 +536,9 @@ Here, a Brownian motion process with drift $\mu$ points advantage for the home t
 
 On a related note, @Deshpande2016 extend @Stern1994's framework by applying it in a Bayesian setting. 
 In this paper, the authors propose a Bayesian linear regression model to assess the impact of individual players on their team's chance of winning at any given time of a basketball game. 
-
 This model assumes independence of observations and constant variability in win probability.
 
-In addition, @McFarlane2019 uses logistic regression to estimate win probability for evaluating end-of-game decisions in the NBA. 
+Moreover, @McFarlane2019 uses logistic regression to estimate win probability for evaluating end-of-game decisions in the NBA. 
 The approach takes into account the remaining game time, score difference, and point spread. 
 This win probability model is then applied to the calculation of the End-of-game Tactics Metric (ETM), measuring how the chance of winning a basketball game differs between the optimal and on-court actual decisions.
 
@@ -676,10 +664,11 @@ In the remainder of this section, we highlight a few tools for sports analytics 
 ## Case study in how tools fit together: chess
 
 Many tools in sports analytics provide the ability to read, write, and plot data stored in a sport-specific format. 
-For example, consider chess, where the sequence of moves in games is often recorded in [Portable Game Notation](https://en.wikipedia.org/wiki/Portable_Game_Notation).
+For example, consider chess, where the sequence of moves in games is often recorded in [Portable Game Notation](https://en.wikipedia.org/wiki/Portable_Game_Notation) (PGN).
 Software tools can then be built around this well-defined format. 
 The \pkg{chess} package [@R-chess] provides R users with the ability to read, write, display, and manipulate chess data in PGN format. 
-[Application programming interfaces](https://en.wikipedia.org/wiki/API) (APIs) are also common. 
+
+[Application programming interfaces](https://en.wikipedia.org/wiki/API) (APIs) are also a common source for data retrieval. 
 In chess, the \pkg{chessR} package [@R-chessR] allows R users to download game data from the Chess.com API. 
 This type of infrastructure, where one package is the "workhorse" that facilitates common generic data operations, and other packages layer on specific functionality, is common in sports analytics. 
 
@@ -706,7 +695,7 @@ plot(m)
 
 Each professional sports team has its own brand, most obviously identified by a team logo and set of colors. 
 The \pkg{teamcolors} package [@R-teamcolors] provides color palettes and logos for men's and women's professional and collegiate sports teams, as well as color and fill scale functions compatible with \pkg{ggplot2} [@R-ggplot2].
-The team colors and logos shown in Figure \ref{fig:nflfastr-wp} were provided by the \pkg{teamcolors} package. 
+The NFL teams' colors and logos shown in Figure \ref{fig:nflfastr-wp} were provided by the \pkg{teamcolors} package. 
 Figure \ref{fig:teamcolors} illustrates the full array of team color palettes for professional sports leagues. 
 
 ```{r teamcolors, warning=FALSE, fig.cap="Professional sports team color palettes provided by the \\pkg{teamcolors} package. ", fig.height=9}
@@ -718,16 +707,17 @@ teamcolors::show_team_col()
 Public research in sports analytics is driven in part by several notable competitions. 
 These competitions have been an important source of new ideas and have contributed to the diversification of the field by breaking down barriers to entry. 
 
-In 2014, the *Journal of Quantitative Analysis in Sports* teamed up with Kaggle to create a March Madness competition to predict the winners of the NCAA men's basketball tournament. 
-243 entrants competed for the $15,000 cash prize by submitting predicted probabilities for every possible pairwise matchup among the 68 teams in the tournament [@GlickmanSonas2015]. 
-In the [special issue](https://www.degruyter.com/journal/key/jqas/11/1/html) that *JQAS* subsequently published, we learned that the winning entry was based on a fairly simple logistic regression model trained on betting market data [@lopez2015building].
-Thus, the competition not only sparked interest in sports analytics, but resulted in peer-reviewed research that, in that case, demonstrated the value of superior data over sophisticated modeling. 
+In 2014, Kaggle launched its first March Machine Learning Mania competition for predicting the outcome of the NCAA men's basketball tournament. 
+243 entrants competed for the $15,000 cash prize by submitting predicted probabilities for every possible pairwise matchup among the 68 college basketball teams in the tournament [@GlickmanSonas2015]. 
+Subsequently, the *Journal of Quantitative Analysis in Sports* (JQAS) released a [special issue on prediction methodology for the NCAA men's basketball tournament](https://www.degruyter.com/journal/key/jqas/11/1/html).
+Among the published papers, we learned that the winning entry was based on a fairly simple logistic regression model trained on betting market data [@lopez2015building].
+Thus, the competition not only sparked interest in sports analytics, but also resulted in peer-reviewed research which, in that case, demonstrated the value of superior data over sophisticated modeling. 
 
 Perhaps motivated by his success in the Kaggle March Madness competition, Michael Lopez joined the National Football League and launched the [Big Data Bowl](https://operations.nfl.com/gameday/analytics/big-data-bowl/) in 2019.
-This annual competition has similarly fueled new research directions in American football and a [special issue](https://www.degruyter.com/journal/key/jqas/16/2/html) of *JQAS* [@lopez2020bigger].
+This annual competition has similarly fueled new research directions in American football and a [special issue on player tracking data in the National Football League (NFL)](https://www.degruyter.com/journal/key/jqas/16/2/html) of *JQAS* [@lopez2020bigger].
 Successful entries and their corresponding publications [@DeshpandeEvans2020; @Yurko2020going; @ChuReyersThomsonWu2020] have launched the careers of several of the most prominent early-career researchers in sports analytics. 
 
-Similar competitions include the [Big Data Cup](https://www.stathletes.com/big-data-cup/) for ice hockey and the [SABR Diamond Dollars Case Competition](https://sabr.org/analytics/case) for baseball.
+Similar competitions that provide opportunities for aspiring researchers to tackle sports analytics problems include the [Big Data Cup](https://www.stathletes.com/big-data-cup/) for ice hockey and the [SABR Diamond Dollars Case Competition](https://sabr.org/analytics/case) for baseball.
 
 # Conclusion
 
