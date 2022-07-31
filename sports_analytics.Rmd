@@ -21,8 +21,8 @@ authors:
     email: nmquang@cmu.edu
 abstract: |
   Sports analytics---broadly defined as the pursuit of improvement in athletic performance through the analysis of data---has expanded its footprint both in the professional sports industry and in academia over the past 30 years. 
-  We connect three big ideas that are common across multiple sports, and explore both the shared similarities and individual idiosyncracies of analytical approaches in each sport. 
-  While our focus is on the concepts underlying each type of analysis, any implementation necessarily involves statistical methodologies, computational tools, and sources of data. 
+  In this paper, we connect three big ideas that are common across multiple sports, and explore both the shared similarities and individual idiosyncracies of analytical approaches in each sport. 
+  While our focus is on the concepts underlying each type of analysis, any implementation necessarily involves statistical methodologies, computational tools, and data sources. 
   Where appropriate, we outline how data, models, tools, and knowledge of the sport combine to generate actionable insights. 
   This paper should serve as a useful overview for anyone becoming interested in the study of sports analytics. 
 keywords:
@@ -110,7 +110,6 @@ xfun::gsub_file(
 
 Insights derived from the analysis of data have transformed the world of sports over the last few decades. 
 While baseball---a naturally discrete sport with more than a century's worth of professional data---may be the sport with the deepest relationship with sports analytics, one would be hard-pressed to identify a professional sport today in which sports analytics is not having an impact. 
-
 In basketball, analytics has driven a shift in the conventional wisdom about shot selection. 
 Most teams are shooting more three-pointers, settling for fewer long two-point shots, deploying more versatile defenders, and relying less on the strategy of pounding the ball into the paint in an attempt to get a high-percentage shot [@Schuhmann2021nba3point].
 In American football, teams are going for it on fourth down far more often than in the past, a direct result of statistical analysis showing that most teams were previously overly conservative [@lopez2020bigger].
@@ -129,7 +128,7 @@ Conversely, with just a few small tweaks, analytical metrics might work just as 
 For instance, an Elo rating could be equally valid for chess players and ice hockey teams. 
 
 In this paper, we explore three key ideas that have widespread applicability across many sports: the expected value of a game state (Section \ref{sec:ev}), win probability (Section \ref{sec:wp}), and measures of team strength (Section \ref{sec:strength}). 
-In each case, we define the concept mathematically, explain how it originated, and give examples of how it is applied in multiple sports. 
+In each case, we define the concept mathematically, explain how it originated, and give examples of its applications in multiple sports. 
 Our goal is to unify the conceptual threads, while doing some justice to the customizations necessary to make a metric meaningful in a particular sport. 
 We include copious references to original works of scholarship.
 
@@ -230,23 +229,22 @@ See @Albert2001curve for a fuller discussion of the use of the expected run matr
 ## In American football
 
 The concept of estimating the value of the state of a game is easily extended to other sports. 
-For example, in American football, $s$ is determined by situational variables at the start of a play such as down, yardage to the next first down, time remaining in the game, and field position. 
+For example, in American football, $s$ is determined by situational variables such as down, yardage to the next first down, time remaining in the game, and field position. 
 
 The first effort of estimating expected points of possession in football goes back to @Carter1971operations. 
-In this technical note, the authors estimate the expected points for 1st and 10 plays in the NFL given any yard line on the football field. 
-Due to limitations regarding the amount of data collected, the football field is broken into 10-yard buckets, centered at their midpoints (e.g. 5, 15, 25, 35, etc.), before averaging the value of the next scoring instance across the field to obtain the expected points.
+In this technical note, the expected points for 1st and 10 plays in the NFL are estimated, given any yard line on the football field. 
+Due to limitations regarding the amount of data collected, the authors divide football field into 10-yard buckets, centered at their midpoints (e.g. 5, 15, 25, 35, etc.), before averaging the value of the next scoring instance across the field to obtain the expected points.
 
-Other early work on expected point values in American football can be found in @Carroll1988hidden. 
+Early work on expected point values in American football can also be found in @Carroll1988hidden.
 In particular, the authors extend @Carter1971operations's work and propose a linear model for expected points in the NFL.
 It is determined that every extra 25 yards is associated with 2 more points scored on average for a football team.
 
-@goldner2012markov and @goldner2017situational propose a Markov model for estimating expected points in football. 
+Another attempt at modeling expected points in football is done by @goldner2012markov and @goldner2017situational, which proposes a Markov framework.
 In particular, the author considers a football drive as an *absorbing Markov chain*, consisting of distinct *absorbing states* touchdowns, field goals, and other play outcomes. 
 For any given play, the expected points are calculated using the absorption probabilities for different scoring events.
 
 A more in-depth overview of the history of expected points in sports is provided in @Yurko2019nflwar (Section 1.1). 
 Most importantly, this paper uses publicly available data provided by the **nflscrapR** package [@R-nflscrapR] to model the expected points on a play-by-play level in football.
-
 The authors introduce a multinomial logistic regression approach, which takes into account the current down, time remaining, yards from endzone, yards to go, and the indicators for goal down situation and whether there are less than two minutes remaining in the half. 
 This model estimates the probabilities of the following possible scoring outcomes after each play: no score, safety, field goal, and touchdown for both the offensive and defensive teams, all of which have a point value.
 The expected points for a play can then be calculated accordingly, by summing up the products of the scoring event point values and their associated probabilities.
@@ -257,7 +255,8 @@ They state that by failing to account for opponent strength appropriately, about
 ### 4th down strategy
 
 The concept of expected points in American football has many applications.
-One of the most notable and well-studied is the use of expected points in the evaluation of 4th down strategy, and there is near universal consensus in the literature that NFL teams have been too conservative when making 4th down decisions. 
+For example, one of the most notable and well-studied topic is the evaluation of 4th down strategy.
+There is near universal consensus in the literature that NFL teams have been too conservative when making 4th down decisions. 
 
 @Romer2006 examines 4th down decisions in the NFL using expected points by focusing only on examples from the first quarter of a game (to avoid issues with end-of-half and end-of-game decision making). 
 The author concludes that teams don't go for it enough if they are trying to maximize their probability of winning the game. 
@@ -277,10 +276,6 @@ Researchers have also applied the notion of expected points to investigate other
 As for quarterback evaluation, @White2002 present a tiered logistic regression method that can be, in general, applied to any regression setting with a polychotomous response.
 Using this technique, they estimate the value of NFL plays using a simple expected points model with down, yards to go, and yards to goal as predictors.
 Accordingly, the model results are utilized to obtain ratings and rankings for NFL passers.
-
-Expected point value is also the main component of a novel quarterback evaluation metric introduced by @Reyers2021quarterback. 
-The authors take advantage of player tracking data to account for different passing and running options available to the quarterback.
-The expected points and probabilities associated with the available options are estimated using the method of ensemble learning via stacking.
 
 In addition, @Alamar2010 implements an expected points framework to examine play calling in the NFL. 
 However, rather than assessing each play on its own, the author evaluates the play in the context of the drive. 
@@ -352,6 +347,10 @@ See also @bornn2017studying for more information on how tracking data have enabl
 In American football, @Yurko2020going use tracking data provided by the [2019 NFL Big Data Bowl](https://operations.nfl.com/gameday/analytics/big-data-bowl/past-big-data-bowl-recaps/) to model the expected yards gained for a ball-carrier during the course of a play. 
 As an extension to pre-existing approaches, the authors use conditional density estimation to obtain a probability distribution for the number of yards gained during the play, rather than only producing a single estimate for the expected yards gained. 
 Accordingly, the probability of various types of outcomes at the end of a play such as a touchdown or a first-down gain can be computed from the distribution of the end-of-play yard line.
+
+Expected point value is also the main component of a novel NFL quarterback evaluation metric introduced by @Reyers2021quarterback. 
+The authors take advantage of player tracking data to account for different passing and running options on the football field that are available to the quarterback.
+The expected points and probabilities associated with the possible quarterback options are estimated using the method of ensemble learning via stacking.
 
 The notion of expected possession value has also been extended to association football (soccer).
 @fernandez2021framework implement deep learning methods to examine the instantaneous expected value of soccer possessions. 
@@ -453,10 +452,10 @@ See @Albert2015 for a more detailed historical overview of the use of win probab
 ## American football
 
 In recent years, a number of statistical methods have been used to build well-calibrated win probability models in American football. 
-These are flexible models that have high predictability, can account for nonlinear interactions between the explanatory variables, require few assumptions, and produce feature importance scores.
+These are flexible algorithms that have high predictability, can account for nonlinear interactions between the explanatory variables, require few assumptions, and produce feature importance scores.
 
-@Lock2014 implement a random forest method to provide a win probability estimate before each play in a football game. 
-Covariates included in this tree-based win probability model are the current down, score differential, time remaining, adjusted score, point spread, number of timeouts remaining for each team, total points scored, current yard line, and yards to go for a first down. 
+@Lock2014 implement a random forest framework to provide a win probability estimate before each play in a football game. 
+Covariates included in this tree-based method are the current down, score differential, time remaining, adjusted score, point spread, number of timeouts remaining for each team, total points scored, current yard line, and yards to go for a first down. 
 According to this model, the difference in score between the two teams is the most important feature for predicting win probabilities at any given moment in an NFL game.
 
 In addition, @Yurko2019nflwar estimate win probability in the NFL using a generalized additive model (GAM), as part of the **nflscrapR** package [@R-nflscrapR] and nflWAR framework. 
@@ -558,9 +557,9 @@ This win probability model is then applied to the calculation of the End-of-game
 The idea of win probability is also applied to other sports, with a diverse range of statistical techniques being used to estimate the probability of winning for a player or team. 
 @Brenzel2019 use three-dimensional Markov models to estimate win probability throughout a curling match. 
 In particular, the authors propose both homogeneous and heterogeneous Markov models for estimating the chance of winning in curling, with different independence assumptions on the relationship between performance and the current state of the game. 
-In esports, @maymin2021smart uses logistic regression to build a well-calibrated in-game win probability model for each specific moment during a game of League of Legends. 
+In esports, @maymin2021smart relies on logistic regression to build a well-calibrated in-game win probability model for each specific moment during a game of League of Legends. 
 Moreover, @Guan2022 develop an in-game win probability model for the National Rugby League using functional data analysis. 
-In this approach, the rugby event data are treated as functional, and the win probability is expressed as a function of the match time. 
+In this approach, the rugby play-by-play event data are treated as functional, and the win probability is expressed as a function of the match time. 
 
 # Team strength {#sec:strength}
 
@@ -705,8 +704,8 @@ plot(m)
 ## Colors
 
 Each professional sports team has its own brand, most obviously identified by a team logo and set of colors. 
-The \pkg{teamcolors} package [@R-teamcolors] provides color palettes and logos for men's and women's professional and collegiate sports teams, as well as color and fill scale functions compatible with \pkg{ggplot2} [@R-ggplot2].
-The NFL teams' colors and logos shown in Figure \ref{fig:nflfastr-wp} were provided by the \pkg{teamcolors} package. 
+The \pkg{teamcolors} R package [@R-teamcolors] provides color palettes and logos for men's and women's professional and collegiate sports teams, as well as color and fill scale functions compatible with \pkg{ggplot2} [@R-ggplot2].
+For instance, the NFL teams' colors and logos shown in Figure \ref{fig:nflfastr-wp} were provided by the \pkg{teamcolors} package. 
 Figure \ref{fig:teamcolors} illustrates the full array of team color palettes for professional sports leagues. 
 
 ```{r teamcolors, warning=FALSE, fig.cap="Professional sports team color palettes provided by the \\pkg{teamcolors} package. ", fig.height=9}
@@ -722,7 +721,7 @@ In 2014, Kaggle launched its first March Machine Learning Mania competition for 
 243 entrants competed for the $15,000 cash prize by submitting predicted probabilities for every possible pairwise matchup among the 68 college basketball teams in the tournament [@GlickmanSonas2015]. 
 Subsequently, the *Journal of Quantitative Analysis in Sports* (JQAS) released a [special issue on prediction methodology for the NCAA men's basketball tournament](https://www.degruyter.com/journal/key/jqas/11/1/html).
 Among the published papers, we learned that the winning entry was based on a fairly simple logistic regression model trained on betting market data [@lopez2015building].
-Thus, the competition not only sparked interest in sports analytics, but also resulted in peer-reviewed research which, in that case, demonstrated the value of superior data over sophisticated modeling. 
+Thus, the competition not only sparked interest in sports analytics, but also resulted in peer-reviewed research which, in that case, demonstrated the value of quality data over sophisticated modeling. 
 
 Perhaps motivated by his success in the Kaggle March Madness competition, Michael Lopez joined the National Football League and launched the [Big Data Bowl](https://operations.nfl.com/gameday/analytics/big-data-bowl/) in 2019.
 This annual competition has similarly fueled new research directions in American football and a [*JQAS* special issue on player tracking data in the National Football League (NFL)](https://www.degruyter.com/journal/key/jqas/16/2/html) of [@lopez2020bigger].
