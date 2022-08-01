@@ -154,7 +154,7 @@ for any state $s \in S$, where $\Pr[X = x | s]$ is the probability of scoring $x
 
 For clarity, we start with baseball due to the discrete nature of the sport. 
 In baseball, $s$ is typically determined by two factors: the configuration of the runners on base (there are 8 possibilities) and the number of outs (3 possibilities). 
-Thus, there $|S| = 24 = 8 \cdot 3$ basic states of an inning in baseball[^state], and we are often interested in the number of runs that will be scored from some state until the end of the inning. 
+Thus, there are $|S| = 24 = 8 \cdot 3$ basic states of an inning in baseball[^state], and we are often interested in the number of runs that will be scored from some state until the end of the inning. 
 In this example using baseball, $\mathbb{E}[X | s] \,$ is the expected number of runs scored between now and the end of the inning given that the inning is currently in state $s$. 
 The collection of estimates $\mathbb{E}[X | s]$ for all 24 states is called the *expected run matrix* [^matrix], and it is foundational in baseball analytics. 
 Figure \ref{fig:lindsey} shows a reproduction of George Lindsey's original calculations and Table \ref{tab:erm} shows the expected run matrix in its more familiar form. 
