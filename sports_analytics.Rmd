@@ -329,9 +329,8 @@ For this possession, the estimated EPV for the Miami Heat reaches its peak at $1
 knitr::include_graphics("epv_snap.png")
 ```
 
-Note that Miami starts the play with an EPV of approximately 1.0 points.
-This indicates their implied average points per possession. 
-Chalmers's shot is worth 3 points, so the EPV of 1.276 points implies that the model estimate of the probability of Chalmers making this shot is 42.5\%. 
+Note that Miami starts the play with an EPV of approximately 1.0 points, which indicates their implied average points per possession. 
+Chalmers' shot is worth 3 points, so the EPV of 1.276 points implies that the model estimate of the probability of Chalmers making this shot is 42.5\%. 
 A breakthrough in this work is that this estimate is conditional on the locations of the other 9 players on the basketball court!
 
 Another framework for estimating expected points in basketball is proposed by @Sicilia2019DeepHoops. 
