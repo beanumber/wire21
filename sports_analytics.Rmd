@@ -109,7 +109,7 @@ xfun::gsub_file(
 -->
 
 Insights derived from the analysis of data have transformed the world of sports over the last few decades. 
-While baseball---a naturally discrete sport with more than a century's worth of professional data---may be the sport with the deepest relationship with sports analytics, one would be hard-pressed to identify a professional sport today in which sports analytics is not having an impact. 
+While baseball---a naturally discrete sport with more than a century's worth of professional data---may be the sport with the longest relationship with sports analytics, one would be hard-pressed to identify a professional sport today in which sports analytics is not having an impact. 
 In basketball, analytics has driven a shift in the conventional wisdom about shot selection. 
 Most teams are shooting more three-pointers, settling for fewer long two-point shots, deploying more versatile defenders, and relying less on the strategy of pounding the ball into the paint in an attempt to get a high-percentage shot [@Schuhmann2021nba3point].
 In American football, teams are going for it on fourth down far more often than in the past, a direct result of statistical analysis showing that most teams were previously overly conservative [@lopez2020bigger].
