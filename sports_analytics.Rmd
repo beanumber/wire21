@@ -145,10 +145,10 @@ Let $s \in S$ be a tuple that encodes the *state* of a game.
 Then our task is to estimate:
 
 \begin{equation}
-  \mathbb{E}[X | s] = \sum_{X \geq 0} \Pr[X | s] \cdot X\,,
+  \mathbb{E}[X | s] = \sum_{x \geq 0} \Pr[X = x | s] \cdot x\,,
 \end{equation}
 
-for any state $s \in S$, where $\Pr[X | s]$ is the probability of scoring $X$ points given that the game is in state $s$ and $S$ is the set of all possible states. 
+for any state $s \in S$, where $\Pr[X = x | s]$ is the probability of scoring $x$ points given that the game is in state $s$ and $S$ is the set of all possible states. 
 
 ## In baseball, the expected run matrix
 
