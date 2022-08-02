@@ -309,7 +309,7 @@ Even in sports where the concept of a state is more difficult to define, the val
 In basketball, @cervone2014pointwise and @cervone2016multiresolution introduce expected possession value (EPV) as a means toward an assessment of a player's on-court performance. 
 This metric is a continuous-time estimate of the expected number of points for the offensive team on a given possession using player and ball locations. 
 The EPV takes into account all possible outcomes (a shot attempt, a pass, etc.) for a given player with the ball, with different weights being assigned to each decision. 
-The computation of the EPV statistic is done using a Markov model.
+The computation of the EPV statistic is done using a (technically discrete) Markov model conditioned on spatial locations.
 Consequently, the authors derive a metric called EPV-Added (EPVA), measuring a player's EPV contribution in a given situation relative to a league-average player.
 
 A demonstration of the EPV model presented in @cervone2016multiresolution is available at <https://github.com/dcervone/EPVDemo>. 
