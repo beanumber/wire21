@@ -389,7 +389,7 @@ erm <- erm |>
 erm |>
   filter(Out == 0, Base %in% c(5, 7)) |>
   mutate(Base = int2bin(Base)) |>
-  rename(`Pr(Scoring)` = Pr_0) |>
+  rename(`Pr(No Runs)` = Pr_0) |>
   kable(
     booktabs = TRUE, 
     caption = "Loading the bases can be a rational strategy. In this case, loading the bases maximizes both the expected number of runs scored and the probability of not scoring at all. \\label{tab:tied}"
@@ -686,7 +686,7 @@ This type of infrastructure, where one package is the "workhorse" that facilitat
 
 Figure \ref{fig:chess} shows a rendering of the starting chess board obtained via the \pkg{chess} package, along with the final position in a game recently won by one of the authors (downloaded via the \pkg{chessR} package). 
 
-```{r chess, eval=whoami::username() == 'bbsdaumer', fig.show="hold", out.width="49%", fig.cap="At left, the starting chess board printed via the \\pkg{chess} package. At right, the final position for one of the authors' recent wins (a checkmate playing Black)."}
+```{r chess, eval=whoami::username() == 'bbaumer', fig.show="hold", out.width="49%", fig.cap="At left, the starting chess board printed via the \\pkg{chess} package. At right, the final position for one of the authors' recent wins (a checkmate playing Black)."}
 library(chess)
 # Sys.setenv(RETICULATE_PYTHON = "my_env/bin/python3")
 game() |> plot()
