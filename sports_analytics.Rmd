@@ -228,7 +228,7 @@ Indeed, @Tango2007book show that when a particularly weak-hitting batter is up (
 
 See @Albert2001curve for a fuller discussion of the use of the expected run matrix in baseball and @marchi2018analyzing for examples of how to estimate the expected run matrix using Retrosheet data and the R statistical computing language [@R-base]. 
 
-## In American football
+## In American football {#sec:football}
 
 The concept of estimating the value of the state of a game is easily extended to other sports. 
 For example, in American football, $s$ is determined by situational variables such as down, yardage to the next first down, time remaining in the game, and field position. 
@@ -340,7 +340,9 @@ The values associated with each of those "terminal actions" are then used to com
 See also @bornn2017studying for more information on how tracking data have enabled advanced statistical analyses of basketball in recent years.
 The strategy of maximizing expected points in basketball has lead directly to the proliferation of three-point shooting in the NBA. 
 
-In American football, @Yurko2020going use tracking data provided by the [2019 NFL Big Data Bowl](https://operations.nfl.com/gameday/analytics/big-data-bowl/past-big-data-bowl-recaps/) (see Section \ref{sec:opportunities}) to model the expected yards gained for a ball-carrier during the course of a play. 
+In Section \ref{sec:football}, we discussed advances in American football analytics based on discrete game states defined by down, yards to first down, field position, etc. 
+The advent of player tracking data makes it possible to analyze American football using continuous states. 
+For example, @Yurko2020going use tracking data provided by the [2019 NFL Big Data Bowl](https://operations.nfl.com/gameday/analytics/big-data-bowl/past-big-data-bowl-recaps/) (see Section \ref{sec:opportunities}) to model the expected yards gained for a ball-carrier during the course of a play. 
 As an extension to pre-existing approaches, the authors use conditional density estimation to obtain a probability distribution for the number of yards gained during the play, rather than only producing a single estimate for the expected yards gained. 
 Accordingly, the probability of various types of outcomes at the end of a play such as a touchdown or a first-down gain can be computed from the distribution of the end-of-play yard line.
 
