@@ -317,7 +317,7 @@ Figure \ref{fig:epv-demo} illustrates how the provided tracking data informs the
 It displays a snapshot of a possession during the NBA regular season matchup between the Miami Heat and the Brooklyn Nets on November 1, 2013. 
 Miami is the team on offense in this possession, whose outcome is a 26-foot three-point miss by Mario Chalmers. 
 The plot consists of two elements: 
-1) (bottom) the player locations on the court at a particular moment in this possession: when the ball just left Chalmers' hands, 
+1) (bottom) the player locations on the court at a particular moment in this possession: when the ball just left Chalmers's hands, 
 and 2) (top) a line graph showing how the EPV changes continuously throughout the play until the three-point attempt. 
 For this possession, the estimated EPV for the Miami Heat reaches its peak at $1.276$ points at the moment the shot is taken.
 
