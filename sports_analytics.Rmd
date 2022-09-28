@@ -151,14 +151,32 @@ Then our task is to estimate:
 
 for any state $s \in S$, where $\Pr[X = x | s]$ is the probability of scoring $x$ points given that the game is in state $s$ and $S$ is the set of all possible states. 
 
-## In baseball, the expected run matrix
+The concept of a state is easier to grasp in a sport that can be modeled as *discrete* (in the sense of [discrete event simulation](https://en.wikipedia.org/wiki/Discrete-event_simulation)). 
+By discrete, we mean a sport that can be easily broken into short, distinct segments of action which are typically summarized categorically. 
+Each of these segments might represent a state $s$. 
+For example, each pitch in baseball is either a ball or a strike. 
+If the ball is put in play, then there may be a complex sequence of movements by the players, but ultimately (within a few seconds) that sequence will end and no more action will be permitted until the next pitch. 
+At the beginning and end of each phase of action, we will know definitively which team is on offense and defense, which runners are on which bases, the score, how many outs there are, etc. 
+Tennis could similarly be viewed as a series of discrete actions defined by each point. 
+To say that a player is winning 6-2, 3-1, 40-15 and serving with one fault committed is to characterize the state of the match.
+In American football, the game can be broken down into a discrete sequence based on each down. 
+Contrast this to sports like lacrosse, soccer, or any variant of hockey, which feature largely running clocks and continuous player movement. 
+In these sports, it is not obvious how to break up the action into discrete chunks. 
 
-For clarity, we start with baseball due to the discrete nature of the sport. 
+In this Section, we illustrate how the fundamental concept of the expected value of a game state leads to compelling findings in a variety of sports.
+
+## Discrete event analysis
+
+First, we explore results derived from the expected value of a state in sports where discrete event analysis is common. 
+We draw primarily on baseball and American football, but applications in other sports (e.g., tennis) are common (see for example, @kovalchik2019calibration). 
+
+### In baseball, the expected run matrix
+
 In baseball, $s$ is typically determined by two factors: the configuration of the runners on base (there are 8 possibilities) and the number of outs (3 possibilities). 
 Thus, there are $|S| = 24 = 8 \cdot 3$ basic states of an inning in baseball[^state], and we are often interested in the number of runs that will be scored from some state until the end of the inning. 
 In this example using baseball, $\mathbb{E}[X | s] \,$ is the expected number of runs scored between now and the end of the inning given that the inning is currently in state $s$. 
 The collection of estimates $\mathbb{E}[X | s]$ for all 24 states is called the *expected run matrix* [^matrix], and it is foundational in baseball analytics. 
-Figure \ref{fig:lindsey} shows a reproduction of George @lindsey1963investigation's original calculations, and Table \ref{tab:erm} shows the expected run matrix in its more familiar form. 
+
 
 [^state]: 25, if you include the absorbing state of 3 outs.
 
@@ -211,7 +229,9 @@ erm |>
 
 Early work on this topic can be found in @lindsey1963investigation, who used play-by-play data to compute an empirical estimate for the mean number of runs scored in the remainder of the inning for each of these 24 possible states of an inning. 
 This line of work led to analysis of all types of common baseball strategies. 
-For example, many baseball teams elect to attempt a sacrifice bunt with a runner on first and no one out in the inning, with the goal of moving the runner to second base, at the cost of the batter being out. 
+For example, many baseball teams elect to attempt a sacrifice bunt with a runner on first and no one out in the inning, with the goal of moving the runner to second base, at the cost of the batter being out. Figure \ref{fig:lindsey} shows a reproduction of @lindsey1963investigation's original calculations, and Table \ref{tab:erm} shows the expected run matrix in its most common form. 
+
+
 @Tango2007book (and many subsequent analyses) conclude that the sacrifice bunt is rarely worth it, because most teams would be expected to score more runs with a runner on first and no outs than they would with a runner on second and one out. 
 
 It is worth emphasizing that the values in $\mathbb{E}[X | s]$ are estimates, and the precision of those estimates has many subtleties. 
@@ -229,7 +249,7 @@ Indeed, @Tango2007book show that when a particularly weak-hitting batter is up (
 
 See @Albert2001curve for a fuller discussion of the use of the expected run matrix in baseball and @marchi2018analyzing for examples of how to estimate the expected run matrix using Retrosheet data and the R statistical computing language [@R-base]. 
 
-## In American football {#sec:football}
+### In American football, expected points {#sec:football}
 
 The concept of estimating the value of the state of a game is easily extended to other sports. 
 For example, in American football, $s$ is determined by situational variables such as down, yardage to the next first down, time remaining in the game, and field position. 
@@ -248,7 +268,7 @@ In particular, the authors extend @Carter1971operations's work and propose a lin
 They determine that every extra 25 yards is associated with 2 more points scored on average for a football team.
 
 Other attempts at modeling expected points in football are @goldner2012markov and @goldner2017situational, who propose a Markov framework.
-In particular, the author considers a football drive as an *absorbing Markov chain*, consisting of distinct *absorbing states* touchdowns, field goals, and other play outcomes. 
+In particular, the author considers a football drive as an *absorbing Markov chain*, consisting of distinct *absorbing states* that include touchdowns, field goals, and other play outcomes. 
 For any given play, the expected points are calculated using the absorption probabilities for different scoring events.
 
 A more in-depth overview of the history of expected points in sports is provided in @Yurko2019nflwar (Section 1.1). 
@@ -262,7 +282,7 @@ They state that by failing to account for opponent strength appropriately, about
 
 <!-- XX Seems massive -->
 
-### 4th down strategy
+### In American football, 4th down strategy
 
 The concept of expected points in American football has many applications.  One of the most notable and well-studied topic is the evaluation of 4th down strategy.
 There is near universal consensus in the literature that NFL teams have been too conservative in the past when making 4th down decisions. 
@@ -270,7 +290,7 @@ There is near universal consensus in the literature that NFL teams have been too
 @Romer2006 examines 4th down decisions in the NFL using expected points by focusing only on examples from the first quarter of a game (to avoid issues with end-of-half and end-of-game decision making). 
 They concluded that teams don't go for it enough if teams are trying to maximize their probability of winning the game. 
 
-Numerous other papers (see @lopez2020bigger for details) use the analysis of the expected number of points to improve fourth down strategy. In addition to @Romer2006, later work by @Yam2019 uses win probability (see Section \ref{sec:wp}), rather than expected points, and a casual inference framework to reach similar conclusions that NFL teams are to conservative in going for it on 4th down.  In addition, they estimate that a better strategy would be worth about 0.4 wins per season on average, a substantial amount in a season with only 16 games. 
+Numerous other papers (see @lopez2020bigger for details) use the analysis of the expected number of points to improve fourth down strategy. In addition to @Romer2006, later work by @Yam2019 uses win probability (see Section \ref{sec:wp}), rather than expected points, and a causal inference framework to reach similar conclusions that NFL teams are too conservative in going for it on 4th down.  In addition, they estimate that a better strategy would be worth about 0.4 wins per season on average, a substantial amount in a season with only 16 games. 
 
 @lopez2020bigger presents an introduction to NFL tracking data, and as an example, examines 4th down behavior.  Rather than looking at the traditional distance to go, which is rounded, they have the exact position of the ball leading to an exact distance to go. They demonstrate that teams are still conservative when choosing to go for it or punting on 4th down, but the effect may be overstated. 
 
@@ -303,9 +323,11 @@ Another application of expected points is to evaluate kickoff decisions made by 
 <!-- @urschel2011 Examines decsions on kick offs (surprise on sides or regular kick off AND accept touchback or return kick) using an expected points frame work.  Shows that teams are moderately risk and loss averse. -->
 <!-- https://www.eng.buffalo.edu/~jzhuang/Papers/JQAS_NFL_2011.pdf -->
 
-## In sports with continuous states
+## Continuous event analysis
 
 Even in sports where the concept of a state is more difficult to define, the value of a possession can be estimated with the help of tracking data.  Over the past decade or so, professional sports leagues have collected tracking data which record the locations of all players and the ball (or puck) throughout a game. This high-resolution data allows researchers to produce advanced analyses of the captured spatiotemporal information and better understand the game.  This is a great leap forward from older resources such as traditional box-score results and play-by-play data.
+
+### In basketball, expected point value
 
 In basketball, @cervone2014pointwise and @cervone2016multiresolution introduce expected possession value (EPV) as a means toward an assessment of a player's on-court performance. 
 This metric is a continuous-time estimate of the expected number of points for the offensive team on a given possession using player and ball locations. 
@@ -339,7 +361,9 @@ The authors offer a different point of view on expected points, where they first
 The values associated with each of those "terminal actions" are then used to compute the expected points within a basketball play.
 
 See also @bornn2017studying for more information on how tracking data have enabled advanced statistical analyses of basketball in recent years.
-The strategy of maximizing expected points in basketball has lead directly to the proliferation of three-point shooting in the NBA. 
+The strategy of maximizing expected points in basketball has led directly to the proliferation of three-point shooting in the NBA. 
+
+### In American football, yards gained
 
 In Section \ref{sec:football}, we discussed advances in American football analytics based on discrete game states defined by down, yards to first down, field position, etc. 
 The advent of player tracking data makes it possible to analyze American football using continuous states. 
@@ -351,12 +375,14 @@ Expected point value is also the main component of a novel NFL quarterback evalu
 The authors take advantage of player tracking data to account for different passing and running options on the football field that are available to the quarterback.
 The expected points and probabilities associated with the possible quarterback options are estimated using the method of ensemble learning via stacking.
 
+### In other sports
+
 The notion of expected possession value has also been extended to association football (soccer).
 @fernandez2021framework implement deep learning methods to examine the instantaneous expected value of soccer possessions. 
 This approach considers passes, ball drives, and shots in soccer as the main set of actions used to compute the EPV metric. 
 Many applications can be derived from this framework, including predicting which footballer on the pitch is most likely to receive the next pass from the current on-ball player.
 
-@kumagai2021hockey presents an EPV metric for ice hockey. 
+@kumagai2021hockey offer an EPV metric for ice hockey. 
 
 ## Optimal strategies that don't maximize expected points
 
@@ -371,12 +397,12 @@ $$
   \underset{u \in U}{\arg \max \,}{\Pr[X > 0 | s, u]} \neq \underset{u \in U}{\arg \max \,}{\mathbb{E}[X | s, u]} \,.
 $$
 Consider the situation where runners are on first and third base, and the score is tied in the bottom of the ninth inning with no one out. 
-Table \ref{tab:tied} (derived from Table \ref{tab:erm}) reveals that the expected number of runs scored in the remainder of the inning is 1.94 runs, while the probability of scoring zero runs is 0.13. 
+Information derived from Table \ref{tab:erm} reveals that the expected number of runs scored in the remainder of the inning is 1.94 runs, while the probability of scoring zero runs is 0.13. 
 The defense is in a tight spot, facing an 87% probability of losing the game. 
 However, by walking the hitter to load the bases, they create the opportunity to force the lead runner at home and thus reduce the chances of scoring to 82%, even though they raise the expected number of runs scored to 2.22. 
 In this case, the *defensive* team is wise to pursue the strategy of maximizing the expected number of runs scored, because it *minimizes* the probability of scoring at least one run. 
 
-```{r}
+```{r, eval=FALSE}
 erm <- erm |>
   mutate(
     Pr_0 = c(
@@ -568,6 +594,9 @@ In this approach, the rugby play-by-play event data are treated as functional, a
 
 A third crucial idea in sports analytics is the estimation of team strength. 
 A popular method for estimating team strength in sports is through pairwise evaluations. 
+
+## Bradley-Terry models
+
 Perhaps the most famous probability model for predicting the outcome of a paired comparison is the Bradley-Terry model (BTM) [@Bradley1952]. 
 For a pair of players (or teams) $i$ and $j$, let $\Pi_{ij}$ denote the probability that $i$ is preferred to $j$. 
 Then the BTM is a logistic regression model with parameters $\beta_i, \beta_j$ such that
@@ -665,17 +694,24 @@ btm2 |>
   arrange(desc(estimate))
 ```
 
+## Elo ratings
+
 Another widely known tool for measuring team strength is the Elo rating system [@Elo1978], which was originally developed for chess, but also has been used to estimate team strength in other sports. 
-See @koning2017rating for more information on applications of the Elo rating in soccer. 
+See @koning2017rating for more information on applications of the Elo rating in soccer, and @kovalchik2019calibration and @kovalchik2016searching for Elo ratings in tennis. 
 Elo ratings are used extensively for rankings of teams in numerous sports by the data journalists at [FiveThirtyEight.com](https://fivethirtyeight.com). 
+
+## Bayesian state-space models
 
 @Glickman1998 propose a Bayesian state-space model for paired comparisons for predicting NFL games, allowing team strength parameters to vary over time. 
 In particular, they model point differential in the NFL by introducing week-to-week and season-to-season as the two primary sources of variation in team strengths. 
 See also @glickman2017estimating for more discussion on estimating team strengths in American football. 
+
 More recently, @Lopez2018 extend @Glickman1998's state-space model to understand randomness in the four major American sports leagues. 
 Betting moneylines are used in place of point differentials in order to estimate team strengths, and this framework also accounts for home advantage.
 Both papers motivate the usefulness of model-based measures of team strength by demonstrating their superiority to low-resolution win-loss records. 
 Apart from sports gambling, having an accurate estimate of team strength is useful to team officials, who are constantly monitoring and forecasting their team's ability. 
+
+@koopman2015dynamic uses a Bayesian state-space model to develop team ratings for English Premier League soccer that improves on bookmaker's odds. 
 
 # Tools {#sec:tools}
 
