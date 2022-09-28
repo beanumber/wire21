@@ -66,7 +66,8 @@ knitr::write_bib(
     "nflverse",
     "xgboost",
     "chess", 
-    "chessR"
+    "chessR",
+    "sportyR"
   ),
   file = "pkgs.bib"
 )
@@ -331,7 +332,7 @@ knitr::include_graphics("epv_snap.png")
 
 Note that Miami starts the play with an EPV of approximately 1.0 points, which indicates their implied average points per possession. 
 Chalmers' shot is worth 3 points, so the EPV of 1.276 points implies that the model estimate of the probability of Chalmers making this shot is 42.5\%. 
-A breakthrough in this work is that this estimate is conditional on the locations of the other 9 players on the basketball court!
+A breakthrough in this work is that this estimate is conditional on the locations of the other 9 players on the basketball court.
 
 Another framework for estimating expected points in basketball is proposed by @Sicilia2019DeepHoops. 
 The authors offer a different point of view on expected points, where they first consider a classification model which returns the probabilities for whether a player would commit a foul (shooting and non-shooting), turnover, or attempt a shot. 
@@ -354,6 +355,8 @@ The notion of expected possession value has also been extended to association fo
 @fernandez2021framework implement deep learning methods to examine the instantaneous expected value of soccer possessions. 
 This approach considers passes, ball drives, and shots in soccer as the main set of actions used to compute the EPV metric. 
 Many applications can be derived from this framework, including predicting which footballer on the pitch is most likely to receive the next pass from the current on-ball player.
+
+@kumagai2021hockey presents an EPV metric for ice hockey. 
 
 ## Optimal strategies that don't maximize expected points
 
@@ -460,7 +463,7 @@ According to this model, the difference in score between the two teams is the mo
 
 In addition, @Yurko2019nflwar estimate win probability in the NFL using a generalized additive model (GAM), as part of the **nflscrapR** package [@R-nflscrapR] and nflWAR framework. 
 This model takes into account the estimated expected points obtained from the model described in Section \ref{sec:ev}, along with other predictors for time, current half, and timeouts. 
-The two win probability frameworks proposed by @Lock2014 and @Yurko2019nflwar were also implemented in @Yam2019 with minimal modifications. Specifically, the authors combined both approaches to estimate the win probability for each play, with an overall goal of assessing fourth down decision-making in gridiron football.
+The two win probability frameworks proposed by @Lock2014 and @Yurko2019nflwar were also implemented in @Yam2019 with minimal modifications. Specifically, the authors combined both approaches to estimate the win probability for each play, with an overall goal of assessing fourth down decision-making in American football.
 
 A vital highlight of @Yurko2019nflwar's win probability model is that it is fully reproducible and uses publicly available data. 
 One of @Yurko2019nflwar's goals was also to encourage researchers to "use, explore, and improve upon our work," which ultimately inspired \pkg{nflfastR} (@R-nflfastR), now considered the successor to **nflscrapR**. 
@@ -545,7 +548,7 @@ $$
 Here, a Brownian motion process with drift $\mu$ points advantage for the home team and variance $\sigma^2$ is used to model the score difference between the home and away teams. 
 
 On a related note, @Deshpande2016 extend @Stern1994's framework by applying it in a Bayesian setting. 
-In this paper, the authors propose a Bayesian linear regression model to assess the impact of individual players on their team's chance of winning at any given time of a basketball game. 
+@Deshpande2016 propose a Bayesian linear regression model to assess the impact of individual players on their team's chance of winning at any given time of a basketball game. 
 This model assumes independence of observations and constant variability in win probability.
 
 Moreover, @McFarlane2019 uses logistic regression to estimate win probability for evaluating end-of-game decisions in the NBA. 
@@ -593,10 +596,18 @@ tennis_bt <- BradleyTerry2::BTm(cbind(win1, win2), player1, player2, data = tenn
 tennis_bt |>
   update(refcat = "Wawrinka") |> 
   BradleyTerry2::BTabilities() |> 
-  round(3) |> 
-  kable(booktabs = TRUE, 
-        col.names = c("Ability", "SE"),
-        caption = "The estimated abilities (with standard errors) for each tennis player, relative to Wawrinka, obtained from the fitted Bradley-Terry model. \\label{tab:tennisbtm}") |> 
+  as_tibble(rownames = "Player") |>
+  arrange(desc(ability)) |>
+  mutate(
+    Ability = as.double(ability),
+    SE = as.double(s.e.)
+  ) |>
+  select(Player, Ability, SE) |>
+  kable(
+    booktabs = TRUE, 
+    digits = 3,
+    caption = "The estimated abilities (with standard errors) for each tennis player, relative to Wawrinka, obtained from the fitted Bradley-Terry model. \\label{tab:tennisbtm}"
+  ) |> 
   kable_styling(latex_options = "hold_position")
 ```
 
@@ -656,6 +667,7 @@ btm2 |>
 
 Another widely known tool for measuring team strength is the Elo rating system [@Elo1978], which was originally developed for chess, but also has been used to estimate team strength in other sports. 
 See @koning2017rating for more information on applications of the Elo rating in soccer. 
+Elo ratings are used extensively for rankings of teams in numerous sports by the data journalists at [FiveThirtyEight.com](https://fivethirtyeight.com). 
 
 @Glickman1998 propose a Bayesian state-space model for paired comparisons for predicting NFL games, allowing team strength parameters to vary over time. 
 In particular, they model point differential in the NFL by introducing week-to-week and season-to-season as the two primary sources of variation in team strengths. 
@@ -688,7 +700,7 @@ This type of infrastructure, where one package is the "workhorse" that facilitat
 
 Figure \ref{fig:chess} shows a rendering of the starting chess board obtained via the \pkg{chess} package, along with the final position in a game recently won by one of the authors (downloaded via the \pkg{chessR} package). 
 
-```{r chess, eval=whoami::username() == 'bbaumer', fig.show="hold", out.width="49%", fig.cap="At left, the starting chess board printed via the \\pkg{chess} package. At right, the final position for one of the authors' recent wins (a checkmate playing Black)."}
+```{r chess, eval=whoami::username() == 'bsbaumer', fig.show="hold", out.width="49%", fig.cap="At left, the starting chess board printed via the \\pkg{chess} package. At right, the final position for one of the authors' recent wins (a checkmate playing Black)."}
 library(chess)
 # Sys.setenv(RETICULATE_PYTHON = "my_env/bin/python3")
 game() |> plot()
@@ -705,7 +717,10 @@ m <- extract_moves_as_game(greg[6, ])
 plot(m)
 ```
 
-## Theming
+## Graphical tools
+
+Creating effective data graphics is a key component of statistical communication, and sports is no exception. 
+We highlight a few packages that assist with the creation of data graphics about sports. 
 
 Each professional sports team has its own brand, most obviously identified by a team logo and set of colors. 
 The \pkg{teamcolors} R package [@R-teamcolors] provides color palettes and logos for men's and women's professional and collegiate sports teams, as well as color and fill scale functions compatible with \pkg{ggplot2} [@R-ggplot2].
@@ -715,6 +730,20 @@ Figure \ref{fig:teamcolors} illustrates the full array of team color palettes fo
 ```{r teamcolors, warning=FALSE, fig.cap="Professional sports team color palettes provided by the \\pkg{teamcolors} package. ", fig.height=9}
 teamcolors::show_team_col()
 ```
+
+Player tracking data contains coordinates that reveal player movement, and these coordinates are always understood in context relative to reference points on the field, court, ice, or pitch for a particular sport. 
+Orienting these points graphically may require drawing a complex set of guidelines that provide that context to readers. 
+Thankfully, the \pkg{sportyR} package [@R-sportyR] contains generic playing surfaces for baseball, basketball, curling, American football, ice hockey, soccer, and tennis that can be added to \pkg{ggplot} graphics with a single function call. 
+Consider, for example, how much time the surfaces plotted in Figure \ref{fig:sportyR} would save you, and how helpful they would be in contextualizing player tracking data (such as those shown in Figure \ref{fig:epv-demo}).
+With the increased availability of player tracking data, this particular tool should see increased usage. 
+
+```{r sportyR, fig.show="hold", out.width="49%", fig.cap="At left, an NBA basketball court drawn by \\pkg{sportyR}. At right, an NHL hockey rink drawn by \\pkg{sportyR}."}
+library(sportyR)
+geom_basketball(league = "NBA")
+# geom_tennis(league = "USTA")
+geom_hockey(league = "NHL")
+```
+
 
 # Opportunities {#sec:opportunities}
 
@@ -731,7 +760,7 @@ Perhaps motivated by his success in the Kaggle March Madness competition, Michae
 This annual competition has similarly fueled new research directions in American football and a [*JQAS* special issue on player tracking data in the National Football League](https://www.degruyter.com/journal/key/jqas/16/2/html) [@lopez2020bigger].
 Successful entries and their corresponding publications [@DeshpandeEvans2020; @Yurko2020going; @ChuReyersThomsonWu2020] have launched the careers of several of the most prominent early-career researchers in sports analytics. 
 
-Similar competitions that provide opportunities for aspiring researchers to tackle sports analytics problems include the [Big Data Cup](https://www.stathletes.com/big-data-cup/) for ice hockey and the [SABR Diamond Dollars Case Competition](https://sabr.org/analytics/case) for baseball.
+Similar competitions that provide opportunities for aspiring researchers to tackle sports analytics problems include the [Big Data Cup](https://www.stathletes.com/big-data-cup/) for ice hockey and the [SABR Diamond Dollars Case Competition](https://sabr.org/analytics/case) for baseball, and the [Big Data Derby](https://www.kaggle.com/competitions/big-data-derby-2022) for horse racing.  
 
 # Conclusion
 
@@ -742,19 +771,14 @@ Sum up the key conclusions of your review, highlighting the most promising scien
 As an applied science, sports analytics may lack a [grand unified theory](https://en.wikipedia.org/wiki/Grand_Unified_Theory) that succinctly characterizes game play across all sports. 
 However, as a maturing discipline, sports analytics has been able to address fundamental questions common to many sports. 
 In this paper, we explore three of those big questions: 
+Who are the best teams and how good are they? 
+What is the likelihood of each team winning the game at any given juncture? 
+Is there a generic framework for evaluating strategies at any given juncture in a game? 
 
-- Who are the best teams and how good are they? 
-- What is the likelihood of each team winning the game at any given juncture? 
-- Is there a generic framework for evaluating strategies at any given juncture in a game? 
-
-Other fundamental questions, such as:
-
-- How significant is the element of chance in a particular sport? 
-- Given that we know who the best teams are, who are the best players and how can we quantify their relative contributions? 
-- What combinations of players work best together in a particular sport? 
-
-are addressed elsewhere. 
-In particular, see @Lopez2018 for estimations of the element of chance across four major sports. 
+Other fundamental questions are addressed elsewhere. 
+How significant is the element of chance in a particular sport? 
+Given that we know who the best teams are, who are the best players and how can we quantify their relative contributions? 
+What combinations of players work best together in a particular sport? In particular, see @Lopez2018 for estimations of the element of chance across four major sports. 
 The second question is often addressed using a formulation of *wins above replacement* (WAR)---see @baumer2015openwar and @Yurko2019nflwar for details in baseball and American football. 
 The third question is most compelling in sports like basketball, ice hockey, and soccer, where substitutions are common and it is obvious that different combinations of players with different sets of skills will result in squad of varying strengths and weaknesses.
 The concept of *plus-minus*, and then *adjusted* plus-minus is frequently applied to address this question (see @hvattum2019comprehensive for a comprehensive overview of applications). 
