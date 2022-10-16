@@ -718,8 +718,39 @@ Apart from sports gambling, having an accurate estimate of team strength is usef
 Analytical work in sports requires facility with an ever-changing set of computational tools for working with data. 
 Sources of authoritative data about sports are myriad, and are too numerous to list here. 
 Software tools for sports analytics are similarly numerous. 
-For R, we maintain a [CRAN Task View for Sports Analytics](https://CRAN.R-project.org/view=SportsAnalytics) that catalogs R packages published on the Comprehensive R Archive Network and organizes them by sport [@baumer2022ctv].
-A more general collection of software tools is being curated by the SportsDataverse initiative [@gilani2022sportsdataverse].
+For R, we maintain a [CRAN Task View for Sports Analytics](https://CRAN.R-project.org/view=SportsAnalytics) that catalogs R packages published on the Comprehensive R Archive Network (CRAN) and organizes them by sport [@baumer2022ctv].
+Table \ref{tab:ctv} provides an overview of the currently available sport-specific CRAN packages.
+Further, a more general collection of software tools is being curated by the SportsDataverse initiative [@gilani2022sportsdataverse].
+
+```{r}
+tibble(
+  "American Football" = "nflverse, nflfastR, nflreadr, nfl4th, nflseedR,\n nflplotR, NFLSimulatoR, fflr, ffscrapr, ffsimulator, gsisdecoder, cfbfastR",
+  "Association Football (Soccer)" = "worldfootballR, engsoccerdata, socceR, ggsoccer, footballpenaltiesBL, footBayes, itscalledsoccer, FPLdata, EUfootball",
+  "Australian Rules Football" = "fitzRoy",
+  "Baseball/Softball" = "Lahman, retrosheet, pitchRx, mlbstats, baseballDBR, baseballr, runexp",
+  "Basketball" = "BAwiR, AdvancedBasketballStats, uncmbb, BasketballAnalyzeR, NBAloveR, wehoop, hoopR, toRvik",
+  "Chess" = "chess, stockfish, bigchess, rchess, chessR",
+  "Cricket" = "yorkr, cricketr, cricketdata, howzatR",
+  "Esports" = "CSGo, rbedrock, ROpenData, opendotaR, RDota2",
+  "GPS Activity Tracking" = "trackeR, trackeRapp, rStrava",
+  "Hockey" = "hockeyR, NHLData, nhlapi, nhlscrape, fastRhockey",
+  "Swimming" = "SwimmeR",
+  "Track and Field" = "combinedevents, JumpeR",
+  "Volleyball" = "volleystat"
+) |> 
+  pivot_longer(everything(),
+               names_to = "Sport",
+               values_to = "Packages") |>
+  transmute(Sport,
+            "Number of Packages" = str_count(Packages, ",") + 1,
+            "List of Packages" = Packages) |>
+  kable(booktabs = TRUE,
+        linesep = "",
+        caption = "A summary of sport-specific packages available on the Comprehensive R Archive Network (CRAN). \\label{tab:ctv}") |> 
+  column_spec(3, width = "7cm")
+```
+
+
 
 In the remainder of this section, we highlight a few tools for sports analytics that are of general interest and illustrate a common paradigm for how these tools can be used in conjunction. 
 
@@ -779,6 +810,7 @@ geom_basketball(league = "NBA")
 # geom_tennis(league = "USTA")
 geom_hockey(league = "NHL")
 ```
+
 
 
 # Opportunities {#sec:opportunities}
