@@ -695,7 +695,7 @@ btm2 |>
   arrange(desc(estimate))
 ```
 
-## Elo ratings
+## Elo ratings {#sec:elo}
 
 <!-- a basic Elo probability model for estimating the probability of $A$ beating $B$ is -->
 <!-- $$ -->
@@ -722,6 +722,30 @@ $$
 where $S_i \in \{0, 0.5, 1\}$.
 When a tournament concludes, a post-tournament rating is obtained for each player based on the rating updates for all games played.
 
+
+```{r}
+library(chessR)
+us <- c("fatgreggy")
+greg <- get_raw_chessdotcom(
+  usernames = us,
+  year_month = 202206
+)
+# greg: black
+```
+
+To illustrate, we consider a chess game played on June 1, 2022 on [Chess.com](https://www.chess.com/) by one of the authors, with data obtained from the \pkg{chessR} package [@R-chessR]. 
+Prior to the game, the author was rated `r greg[6, "BlackElo"]`, whereas `r greg[6, "WhiteElo"]` was the opponent's rating.
+Since both ratings are below 2400, we apply a development coefficient of $K=20$ for this example.
+The probability of author ($a$) defeating their opponent ($b$) is
+<!-- don't know how to include `r` inside latex -->
+$$
+\Pi_{ab} = \frac{1}{1 + 20^{(1683 - 1732)/400}} = 0.591 \,.
+$$
+The author that played this game ended up with a victory, which means the associated score is $S_a = 1$.
+The post-game Elo rating for this author is
+$$
+R^*_a = 1732 + 20(1 - 0.591) = 1740 \,.
+$$
 
 Besides chess, the Elo system has also been implemented to estimate team strength in other sports. 
 See @koning2017rating for more information on applications of the Elo rating in soccer, and @kovalchik2019calibration and @kovalchik2016searching for Elo ratings in tennis. 
@@ -792,7 +816,7 @@ The \pkg{chess} package [@R-chess] provides R users with the ability to read, wr
 In chess, the \pkg{chessR} package [@R-chessR] allows R users to download game data from the Chess.com API. 
 This type of infrastructure, where one package is the "workhorse" that facilitates common generic data operations, and other packages layer on specific functionality, is common in sports analytics. 
 
-Figure \ref{fig:chess} shows a rendering of the starting chess board obtained via the \pkg{chess} package, along with the final position in a game recently won by one of the authors (downloaded via the \pkg{chessR} package). 
+Figure \ref{fig:chess} shows a rendering of the starting chess board obtained via the \pkg{chess} package, along with the final position in the game won by one of the authors mentioned earlier in Section \ref{sec:elo} (with data downloaded via the \pkg{chessR} package). 
 
 ```{r chess, eval=whoami::username() == 'bsbaumer', fig.show="hold", out.width="49%", fig.cap="At left, the starting chess board printed via the \\pkg{chess} package. At right, the final position for one of the authors' recent wins (a checkmate playing Black)."}
 library(chess)
