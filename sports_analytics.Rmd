@@ -696,9 +696,34 @@ btm2 |>
 
 ## Elo ratings
 
-Another widely known tool for measuring team strength is the Elo rating system [@Elo1978], which was originally developed for chess, but also has been used to estimate team strength in other sports. 
+<!-- a basic Elo probability model for estimating the probability of $A$ beating $B$ is -->
+<!-- $$ -->
+<!-- P(A) = W(R_A - R_B) \,. -->
+<!-- $$ -->
+<!-- Here, $W$ is a continuous and monotonically increasing function that maps the difference in strength to (0, 1).  -->
+
+Another widely known tool for measuring team strength is the Elo rating system [@Elo1978], which was originally developed for chess.
+Given two players $i$ and $j$ with unknown ratings $R_i$ and $R_j$, the probability $\Pi_{ij}$ of $i$ beating $j$ is defined as
+$$
+\Pi_{ij} = \frac{1}{1 + K^{(R_j - R_i)/400}} \,.
+$$
+In this formula, $K$ is commonly known as the $K$-factor (or development coefficient).
+The International Chess Federation (FIDE) chooses $K=10$ for the calculation of Elo ratings.
+
+Another interpretation for $\Pi_{ij}$ is the expected score of the game for player $i$.
+The scores of 0, 0.5, and 1 are associated with three possible game outcomes loss, tie, and win, respectively.
+After a game, the updated Elo rating $R^*_i$ for player $i$ is
+$$
+R^*_i = R_i + K(S_i - \Pi_{ij}) \,,
+$$
+where $S_i \in \{0, 0.5, 1\}$.
+When a tournament concludes, a post-tournament rating is obtained for each player based on the rating updates for all games played.
+
+[Mention glicko as an alternative to improve Elo]
+
+Besides chess, the Elo system has also been implemented to estimate team strength in other sports. 
 See @koning2017rating for more information on applications of the Elo rating in soccer, and @kovalchik2019calibration and @kovalchik2016searching for Elo ratings in tennis. 
-Elo ratings are used extensively for rankings of teams in numerous sports by the data journalists at [FiveThirtyEight.com](https://fivethirtyeight.com). 
+Furthermore, Elo ratings are used extensively for rankings of teams in numerous sports by the data journalists at [FiveThirtyEight.com](https://fivethirtyeight.com). 
 
 ## Bayesian state-space models
 
