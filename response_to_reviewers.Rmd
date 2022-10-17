@@ -20,11 +20,11 @@ Please see attached file for comments.
 
 >Likewise the Opportunities section should be expanded to include the proliferation of Sports Analytics conferences.  
 
-> My largest concern is that a cursory discussion of player contribution or player ratings is given and this seems a major oversight of one of the “big ideas” in sports analytics given the focus on this topic in many sports.  See, for example, Mark Glickman’s recent presentation on this at the 2022 Joint Statistical Meetings.  I don’t think that Hvattum (2019) is sufficient to cover the area of player contribution.
+> My largest concern is that a cursory discussion of player contribution or player ratings is given and this seems a major oversight of one of the "big ideas" in sports analytics given the focus on this topic in many sports.  See, for example, Mark Glickman's recent presentation on this at the 2022 Joint Statistical Meetings.  I don't think that Hvattum (2019) is sufficient to cover the area of player contribution.
 
 ## Minor comments from Reviewer 1
 
-> In the second sentence, baseball is introduced as a “naturally discrete” sport, but there are certainly many things about baseball which are not discrete, as talked about later in the article. It would be helpful to clarify what is meant by discrete in this setting.
+> In the second sentence, baseball is introduced as a "naturally discrete" sport, but there are certainly many things about baseball which are not discrete, as talked about later in the article. It would be helpful to clarify what is meant by discrete in this setting.
 
 We have added a paragraph clarify the distinction between "discrete" and "continuous" sports. In order to maintain the flow of the narrative, the paragraph does not appear here, but rather at the beginning of Section 2. 
 
@@ -32,21 +32,21 @@ We have added a paragraph clarify the distinction between "discrete" and "contin
 
 We believe that the last sentence of the first paragraph does exactly that. 
 
-> In Section 2.1, Figure 1 (George Lindsey’s calculations) is introduced before the reader even knows who George Lindsey is. 
+> In Section 2.1, Figure 1 (George Lindsey's calculations) is introduced before the reader even knows who George Lindsey is. 
 
 We think this is mainly due to LaTeX floating the figure suboptimally, and this can be corrected in the page proofs. We have moved the sentence introducing Figure 1 and Table 1 until after the mention of Lindsey's work in the text to mitigate this problem. 
 
-> Furthermore, the expected run matrix is displayed “in its more familiar form”, but I would venture for most readers of this article, no form would be familiar.
+> Furthermore, the expected run matrix is displayed "in its more familiar form", but I would venture for most readers of this article, no form would be familiar.
 
 We have replaced "more familiar" with "most common". 
 
-> I think the caption does explain the matrix nicely, although it might be useful to point out from which column in Lindsey’s table the matrix is derived.
+> I think the caption does explain the matrix nicely, although it might be useful to point out from which column in Lindsey's table the matrix is derived.
 
 Indeed, we note which column corresponds to the expected run matrix in the caption. 
 
-> In Figure 2, I found it quite surprising that the expected point value was so negative     at the 95 yard line. Were safeties very common in this era of American football? This might be worth mentioning/discussing.
+> In Figure 2, I found it quite surprising that the expected point value was so negative at the 95 yard line. Were safeties very common in this era of American football? This might be worth mentioning/discussing.
 
-XX: Greg or Quang to address?
+We have added a sentence to address this. The expected value was unrealistic because the model is linear, which is a flaw of this approach.
 
 > The title of Section 2.3 seems to indicate that the aforementioned sports have only discrete states, but this is not always the case. Some clarification would be useful here. In general, the organization of Section 2 is confusing. It first seems to be going sport by sport, but then 2.3 is about several different sports and then 2.4 is on a general topic altogether. As is, it reads somewhat disjointed and is hard to follow. Section 3 flows much better in this sense.
 
@@ -69,13 +69,13 @@ Thank you for this suggestion. We have added a reference to Koopman's paper.
 
 > As mentioned earlier, Section 5 seems sparse on details, and furthermore it seems odd to choose chess as the case study when it has barely been mentioned previously in the article. I think this section could use a table of some sort, perhaps something that summarizes the CRAN task view at a high level. Another potential would be a figure which shows a typical workflow of sports analytics as explained in the text.
 
+We have added a table summarizing the sport-specific packages that are available on CRAN.
+
+> Figure 6 doesn't add much to the text; I don't think the reader better understands sports analytics by visualizing many team colors. Instead, it would be better to show  how the theming can lead to a more impactful graphic for sports, i.e. show how that package might be used in a real-world setting.
+
 XX
 
-> Figure 6 doesn’t add much to the text; I don’t think the reader better understands sports analytics by visualizing many team colors. Instead, it would be better to show  how the theming can lead to a more impactful graphic for sports, i.e. show how that package might be used in a real-world setting.
-
-XX
-
-> For Section 6, there is also now a “Big Data Derby” in horse racing.
+> For Section 6, there is also now a "Big Data Derby" in horse racing.
 
 We thank the reviewer for this suggestion. We have added a reference to it. 
 
@@ -83,19 +83,19 @@ We thank the reviewer for this suggestion. We have added a reference to it.
 
 XX
 
-> Page 4, line 56: Needs to be some sort of separation between the “absorbing states” and “touchdown”
+> Page 4, line 56: Needs to be some sort of separation between the "absorbing states" and "touchdown"
 
 We have added "absorbing states that include touchdowns..."
 
-> Page 5, line 56: Typo for “causal”
+> Page 5, line 56: Typo for "causal"
 
 Fixed. 
 
-> Page 5, line 57: Should be “too conservative”
+> Page 5, line 57: Should be "too conservative"
 
 Fixed. 
 
-> Page 7, line 37: Should be “led” not “lead”
+> Page 7, line 37: Should be "led" not "lead"
 
 Fixed. 
 
@@ -105,11 +105,11 @@ Fixed.
 
 We share this concern. We are also uncertain about any licensing restrictions. We have left the images as is for now, and will wait direction from Wiley. 
 
-> Page 6, line 8:  “the effect may be overstated” is somewhat ambiguous.  Is it the
+> Page 6, line 8:  "the effect may be overstated" is somewhat ambiguous.  Is it the
 
 XX Quang or Greg to respond
 
-> Page 6, line 53: Is the “!” warranted here for conditioning on a 9-dimensional vector?
+> Page 6, line 53: Is the "!" warranted here for conditioning on a 9-dimensional vector?
 
 We have replaced the exclamation point with a period. 
 
@@ -127,7 +127,7 @@ Given that Albert (2015) previously published an article on this topic in this s
 
 We like the term too, but have changed this to "American football."
 
-> 10, 52: “In this paper”, the “this” seems ambiguous.
+> 10, 52: "In this paper", the "this" seems ambiguous.
 
 We have replaced this with "Deshpande & Jensen"
 
@@ -147,7 +147,7 @@ XX We could consider this.
 
 XX Yeah
 
-> 12, 37: Theming *teamcolors* is a great *R* package, not sure it is part of the “big ideas” in sports analytics.  A single line in the first paragraph of this section would seem to be better.
+> 12, 37: Theming *teamcolors* is a great *R* package, not sure it is part of the "big ideas" in sports analytics.  A single line in the first paragraph of this section would seem to be better.
 
 We have added examples from the `SportyR` package, which draws playing surfaces, to help flesh out this subsection.
 
@@ -155,6 +155,6 @@ We have added examples from the `SportyR` package, which draws playing surfaces,
 
 Thank you for these suggestions. We have added them. 
 
-> 13, 43-53: don’t think there is a need for a bulleted list here.
+> 13, 43-53: don't think there is a need for a bulleted list here.
 
 We have removed the bulleted lists. 

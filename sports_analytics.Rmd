@@ -257,7 +257,8 @@ For example, in American football, $s$ is determined by situational variables su
 The task of estimating expected points of possession in football goes back to @Carter1971operations, who estimate the expected points for 1st and 10 plays in the NFL, given any yard line on the football field. 
 Due to limitations regarding the amount of data collected, the authors divide football field into 10-yard buckets, centered at their midpoints (e.g. 5, 15, 25, 35, etc.), before averaging the value of the next scoring instance across the field to obtain the expected points.
 Figure \ref{fig:carter} shows a reproduction of @Carter1971operations's estimates. 
-As expected, the estimated expected points increases monotonically as the teams gets closer to the endzone. 
+As expected, the estimated expected points increases monotonically as the teams gets closer to the endzone.
+One limitation of this approach is the linearity assumption, which results in a high negative expected point value when the offensive team is 95 yards away from the opponent's goal line.
 
 ```{r carter, fig.cap="Table 1 from Carter and Machol's original paper. Note the monotonic increase in expected point values as the team gets closer to the endzone. ", out.width="100%"}
 knitr::include_graphics("carter_table1.png")
