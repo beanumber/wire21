@@ -48,6 +48,7 @@ knitr::opts_chunk$set(
   fig.align = 'center'
 )
 library(tidyverse)
+theme_set(theme_bw())
 library(kableExtra)
 ```
 
@@ -67,7 +68,8 @@ knitr::write_bib(
     "xgboost",
     "chess", 
     "chessR",
-    "sportyR"
+    "sportyR",
+    "nflplotR"
   ),
   file = "pkgs.bib"
 )
@@ -546,7 +548,6 @@ wp_plot <- ggplot(x, aes(game_seconds_remaining, wp, color = team)) +
     y = "Win Probability",
     color = NULL
   ) +
-  theme_bw() +
   theme(legend.position = "top")
 
 library(magick)
@@ -735,13 +736,13 @@ greg <- get_raw_chessdotcom(
 
 To illustrate, we consider a chess game played on June 1, 2022 on [Chess.com](https://www.chess.com/) by one of the authors, with data obtained from the \pkg{chessR} package [@R-chessR]. 
 Prior to the game, the author was rated `r greg[6, "BlackElo"]`, whereas `r greg[6, "WhiteElo"]` was the opponent's rating.
-Since both ratings are below 2400, we apply a development coefficient of $K=20$ for this example.
+Since both ratings are below 2400, we apply a development coefficient of $K=20$ to this example.
 The probability of author ($a$) defeating their opponent ($b$) is
 <!-- don't know how to include `r` inside latex -->
 $$
 \Pi_{ab} = \frac{1}{1 + 20^{(1683 - 1732)/400}} = 0.591 \,.
 $$
-The author that played this game ended up with a victory, which means the associated score is $S_a = 1$.
+The playing author finished with a victory, which is associated with a score of $S_a = 1$.
 The post-game Elo rating for this author is
 $$
 R^*_a = 1732 + 20(1 - 0.591) = 1740 \,.
@@ -847,6 +848,36 @@ Figure \ref{fig:teamcolors} illustrates the full array of team color palettes fo
 
 ```{r teamcolors, warning=FALSE, fig.cap="Professional sports team color palettes provided by the \\pkg{teamcolors} package. ", fig.height=9}
 teamcolors::show_team_col()
+```
+
+Sharing a similar goal with \pkg{teamcolors} is \pkg{nflplotR} [@R-nflplotR], which also provides \pkg{ggplot2} extensions but is designed specifically for the NFL.
+A great feature of \pkg{nflplotR} is the \pkg{ggplot2} "geom" (geometric object) functions that enhance high-quality plotting of NFL team logos and player images.
+Figure \ref{fig:nflplotr} shows a scatterplot of offensive and defensive expected points added for NFL teams in the 2021 regular season.
+The logos of all 32 American football clubs are plotted in place of the usual dots, giving a better description of which team each data point represents.
+
+```{r nflplotr, fig.cap="Offensive and defensive per play for the 2021 NFL regular season, plotted with \\pkg{nflplotR} using data from \\pkg{nflfastR}."}
+pbp <- nflreadr::load_pbp(2021) %>% 
+  dplyr::filter(season_type == "REG") %>%
+  dplyr::filter(!is.na(posteam) & (rush == 1 | pass == 1))
+
+offense <- pbp %>%
+  dplyr::group_by(team = posteam) %>%
+  dplyr::summarise(off_epa = mean(epa, na.rm = TRUE))
+
+defense <- pbp %>%
+  dplyr::group_by(team = defteam) %>%
+  dplyr::summarise(def_epa = mean(epa, na.rm = TRUE))
+
+combined <- offense %>%
+  dplyr::inner_join(defense, by = "team")
+
+combined |> 
+  ggplot(aes(off_epa, def_epa)) +
+  nflplotR::geom_mean_lines(aes(v_var = off_epa , h_var = def_epa)) +
+  nflplotR::geom_nfl_logos(aes(team_abbr = team), width = 0.08, alpha = 0.8) +
+  labs(x = "Offensive EPA/play",
+       y = "Defensive EPA/play") +
+  scale_y_reverse()
 ```
 
 Player tracking data contains coordinates that reveal player movement, and these coordinates are always understood in context relative to reference points on the field, court, ice, or pitch for a particular sport. 
