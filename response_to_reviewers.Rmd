@@ -143,7 +143,10 @@ XX We could consider this.
 
 > 12, 23: This is not much of a case study.  Perhaps some additional information on the data available, ways it could be used to calculate game state expected valued, win probability, player ratings….
 
-XX Yeah
+We have expanded the case study in chess to include Elo ratings...
+
+In addition, we have added new subsection with a case study in baseball about the evolution of data, tools, and statistical methodologies. We hope that these additional will help to flesh out the value of these tools. 
+
 
 > 12, 37: Theming *teamcolors* is a great *R* package, not sure it is part of the "big ideas" in sports analytics.  A single line in the first paragraph of this section would seem to be better.
 

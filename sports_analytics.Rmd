@@ -70,7 +70,8 @@ knitr::write_bib(
     "chess", 
     "chessR",
     "sportyR",
-    "nflplotR"
+    "nflplotR",
+    "baseballr"
   ),
   file = "pkgs.bib"
 )
@@ -791,15 +792,22 @@ tibble(
   "Track and Field" = "combinedevents, JumpeR",
   "Volleyball" = "volleystat"
 ) |> 
-  pivot_longer(everything(),
-               names_to = "Sport",
-               values_to = "Packages") |>
-  transmute(Sport,
-            "Number of Packages" = str_count(Packages, ",") + 1,
-            "List of Packages" = Packages) |>
-  kable(booktabs = TRUE,
-        linesep = "",
-        caption = "A summary of sport-specific packages available on the Comprehensive R Archive Network (CRAN). \\label{tab:ctv}") |> 
+  pivot_longer(
+    everything(),
+    names_to = "Sport",
+    values_to = "Packages"
+  ) |>
+  transmute(
+    Sport,
+    "Number of Packages" = str_count(Packages, ",") + 1,
+    "List of Packages" = Packages
+  ) |>
+  arrange(desc(`Number of Packages`)) |>
+  kable(
+    booktabs = TRUE,
+    linesep = "",
+    caption = "A summary of sport-specific packages available on the Comprehensive R Archive Network (CRAN). While the major North American sports dominate the list, perhaps the fastest-growing collection is for esports. \\label{tab:ctv}"
+  ) |> 
   column_spec(3, width = "7cm")
 ```
 
@@ -837,7 +845,9 @@ m <- extract_moves_as_game(greg[6, ])
 plot(m)
 ```
 
-## Graphical tools
+
+
+## Graphical tools {#sec:graphics}
 
 Creating effective data graphics is a key component of statistical communication, and sports is no exception. 
 We highlight a few packages that assist with the creation of data graphics about sports. 
@@ -949,7 +959,24 @@ geom_basketball(league = "NBA")
 geom_hockey(league = "NHL")
 ```
 
+## Case study in the evolution of tools and research: baseball
 
+As the granularity of baseball data has evolved over time, so too have the statistical methodologies for modeling that data, and the tools for working with it. 
+For example, before George Lindsay's work (see Section \ref{sec:ev}), most of the baseball data that was publicly available was seasonal: it showed only season totals for each player. 
+Over time, the resolution of baseball data has improved to include play-by-play data, pitch-by-pitch data, and now player tracking data. 
+The \pkg{Lahman} package [@R-Lahman] has provided seasonal data for years. 
+The \pkg{retrosheet} package [@R-retrosheet] now provides access to the historical play-by-play data available from Retrosheet (this is a comprehensive version of what Lindsay collected for his research). 
+The \pkg{pitchRx} package [@R-pitchRx] provides access to pitch-by-pitch data that fueled innovative research into catcher framing [@deshpande2017hierarchical], pitch values [@healey2019bayesian], and pitch classification [@sidle2018using].
+The \pkg{baseballr} package [@R-baseballr] now provides access to player tracking data from Statcast.
+These data have led to investigations into how defensive shifts affect batting performance [@bouzarth2021swing], as well as how launch angles affect the probability of hitting a home run [@marchi2018analyzing].
+
+As we saw above with chess, the packages in baseball fit together in creative ways. 
+In Figure \ref{fig:mlb_standings}, we showed how \pkg{teamcolors} can illuminate data pulled from \pkg{retrosheet} to make an informative data graphic. 
+One could just as easily use \pkg{sportyR} to generate a field graphic, and then overlay player tracking data obtained from \pkg{baseballr} to depict defensive shifts. 
+
+This, these R packages enable research by making data more easily available. 
+Moreover, because R is scriptable, they make it easier to share research that is reproducible. 
+[Recent conferences, such as the [Carnegie Mellon Sports Analytics Conference](https://www.stat.cmu.edu/cmsac/conference/2021/), have included a reproducible research competition to foster these efforts.]
 
 # Opportunities {#sec:opportunities}
 
