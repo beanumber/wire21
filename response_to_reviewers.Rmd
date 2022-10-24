@@ -147,7 +147,7 @@ XX Yeah
 
 > 12, 37: Theming *teamcolors* is a great *R* package, not sure it is part of the "big ideas" in sports analytics.  A single line in the first paragraph of this section would seem to be better.
 
-We have added examples from the `SportyR` package, which draws playing surfaces, to help flesh out this subsection.
+We have added examples from the `SportyR` package, which draws playing surfaces, to help flesh out this subsection. We also replaced the previous Figure 6 with a new Figure 5 that illustrates how the use of team colors is particularly impactful for sports-releated data graphics.  
 
 > 13, 35: Add a citation for Big Data Cup, https://www.stathletes.com/big-data-cup/, for SABR Diamond Dollars Case Competition, https://sabr.org/analytics/case, Big Data Derby https://www.kaggle.com/competitions/big-data-derby-2022, and maybe more. 
 

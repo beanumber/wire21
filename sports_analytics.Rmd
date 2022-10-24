@@ -845,18 +845,71 @@ We highlight a few packages that assist with the creation of data graphics about
 Each professional sports team has its own brand, most obviously identified by a team logo and set of colors. 
 The \pkg{teamcolors} R package [@R-teamcolors] provides color palettes and logos for men's and women's professional and collegiate sports teams, as well as color and fill scale functions compatible with \pkg{ggplot2} [@R-ggplot2].
 For example, the NFL teams' colors and logos shown in Figure \ref{fig:nflfastr-wp} were provided by the \pkg{teamcolors} package. 
-Figure \ref{fig:teamcolors} illustrates the full array of team color palettes for professional sports leagues. 
+Figure \ref{fig:mlb_standings} illustrates how the use of team colors, which have a natural association for many sports fans, can help to untangle what would otherwise be messy data graphics. 
+In Figure \ref{fig:mlb_standings}, 30 different lines are plotted on top of one another, crisscrossing and intersecting in various unpredictable ways. 
+However, the use of team colors to identify the lines makes it possible to follow the trajectory of most teams over the course of the season. 
 
-<!-- 
-```{r teamcolors, warning=FALSE, fig.cap="Professional sports team color palettes provided by the \\pkg{teamcolors} package. ", fig.height=9}
-teamcolors::show_team_col() 
-``` 
--->
+```{r}
+# remotes::install_github("beanumber/retro")
+library(retrosheet)
+retro_gl <- get_retrosheet("game", 2021)
+games_2021 <- retro_gl |>
+  mutate(home_win = HmRuns > VisRuns) %>%
+  select(Date, VisTm, HmTm, home_win) %>%
+  pivot_longer(
+    -c(Date, home_win),
+    names_to = "is_home", values_to = "team_id", 
+  ) %>%
+  mutate(
+    is_win = ifelse(
+      is_home == "HmTm", home_win, abs(1 - home_win))
+  ) %>%
+  group_by(team_id) %>%
+  mutate(
+    cum_W = cumsum(is_win), 
+    cum_L = cumsum(!is_win), 
+    cum_G = cum_W + cum_L, 
+    G_over_500 = cum_W - cum_L, 
+    last_game = cum_G == max(cum_G)
+  )
+retro_teams <- retrosheet::getTeamIDs(2021) |>
+  enframe(name = "mascot", value = "retro_id")
+mlb_pal <- teamcolors |>
+  filter(league == "mlb", str_detect(division, "NL")) |>
+  inner_join(retro_teams, by = "mascot") |>
+  select(retro_id, primary) |>
+  deframe()
+games_2021 <- games_2021 |>
+  filter(team_id %in% names(mlb_pal))
+```
 
-Sharing a similar goal with \pkg{teamcolors} is \pkg{nflplotR} [@R-nflplotR], which also provides \pkg{ggplot2} extensions but is designed specifically for the NFL.
-A great feature of \pkg{nflplotR} is the \pkg{ggplot2} "geom" (geometric object) functions that enhance high-quality plotting of NFL team logos and player images.
+```{r mlb_standings, fig.cap="The progression of National Leauge team standings during the 2021 Major League Baseball season. Note how the use of team colors makes it possible to untangle what would otherwise be a messy jumble of indistinguishable lines. Data provided by \\pkg{retrosheet} and colors provided by \\pkg{teamcolors}."}
+ggplot(
+    games_2021, 
+    aes(x = cum_G, y = G_over_500, color = team_id)
+  ) + 
+  geom_hline(yintercept = 18, color = "darkgray", lty = 2) + 
+  geom_line() +  
+  ggrepel::geom_label_repel(
+    data = filter(games_2021, last_game), 
+    aes(label = team_id)
+  ) + 
+  scale_color_manual(
+    guide = "none", name = "Team",
+    values = mlb_pal
+  ) +
+  scale_y_continuous("Games above .500") + 
+  scale_x_continuous("Cumulative Games Played") + 
+  labs(title = "Daily MLB Standings, 2021", 
+       caption = "Source: Retrosheet")
+```
+
+
+\pkg{nflplotR} [@R-nflplotR] has a similar goal to \pkg{teamcolors}.
+It also provides \pkg{ggplot2} extensions but is designed specifically for the NFL.
+A great feature of \pkg{nflplotR} is the collection of `geom_*()` (geometric object) functions that enhance high-quality plotting of NFL team logos and player images with \pkg{ggplot2}.
 Figure \ref{fig:nflplotr} shows a scatterplot of offensive and defensive expected points added for NFL teams in the 2021 regular season.
-The logos of all 32 American football clubs are plotted in place of the usual dots, giving a better description of which team each data point represents.
+The logos of all 32 American football clubs are plotted in place of the usual dots, making it easier for the reader to identify which team each data point represents.
 
 ```{r nflplotr, fig.cap="Offensive and defensive expected points added per play for the 2021 NFL regular season, plotted with \\pkg{nflplotR} using data from \\pkg{nflfastR}."}
 pbp <- nflreadr::load_pbp(2021) %>% 
