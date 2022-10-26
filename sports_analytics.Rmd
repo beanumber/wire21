@@ -297,7 +297,10 @@ They concluded that teams don't go for it enough if teams are trying to maximize
 
 Numerous other papers (see @lopez2020bigger for details) use the analysis of the expected number of points to improve fourth down strategy. In addition to @Romer2006, later work by @Yam2019 uses win probability (see Section \ref{sec:wp}), rather than expected points, and a causal inference framework to reach similar conclusions that NFL teams are too conservative in going for it on 4th down.  In addition, they estimate that a better strategy would be worth about 0.4 wins per season on average, a substantial amount in a season with only 16 games. 
 
-@lopez2020bigger presents an introduction to NFL tracking data, and as an example, examines 4th down behavior.  Rather than looking at the traditional distance to go, which is rounded, they have the exact position of the ball leading to an exact distance to go. They demonstrate that teams are still conservative when choosing to go for it or punting on 4th down, but the effect may be overstated. 
+@lopez2020bigger presents an introduction to NFL tracking data, and examines 4th down behavior as an example of the type of problem that can be more thoroughly studied with the increase in granularity of the tracking data over traditional NFL data.  In the past, when looking at down and distance data to study whether NFL coaches are making good decisions about whether to "got for it" or punt on 4th down, the distance data is really only a rounded approximation of the true distance "to go" (i.e. 1 yard, 1 foot, and 1 inch will all be recorded as 4th and 1).  Whereas a coach on the field during a game will be able to clearly see the difference between 1 inch and 1 yard.  With tracking data, the "to go" distance can be much more accurately assessed.        
+
+
+Rather than looking at the traditional distance to go, which is rounded, they have the exact position of the ball leading to an exact distance to go. They demonstrate that teams are still conservative when choosing to go for it or punting on 4th down, but the effect may be overstated. 
 
 ### Other applications of expected points in American football
 
