@@ -58,7 +58,7 @@ We have removed Table 2.
 
 > After the comprehensive views in Sections 2 and 3, Section 4 seems sparse on details. Much detail is given on the Bradley-Terry model, but only one example is given of a possible usage. Has this been used in other sports? Has it changed how we think about those sports or team strategies? An explanation of Elo rating should be given; I for one have no knowledge of how to compute it.
 
-We thank the reviewer for this suggestion. We have added a subsection on Elo rating, with a mathematical defination followed by a calculation example.
+We thank the reviewer for this excellent suggestion. We have added a subsection on Elo ratings, with a mathematical definition followed by a calculation example. This example uses the `chessR` package, which ties into and strengthens our discussion of tools in the next chapter. 
 
 > There is a large body of literature on Bayesian state-space models in sports outside of the Glickman and Stern paper, mainly in soccer/association football. See for example Koopman and Lit (2015) and the various references in its introduction.
 
@@ -135,7 +135,7 @@ We have ordered the rows of Table 3 by descending order of ability.
 
 > 11, 50: Given how much fivethirtyeight.com uses Elo ratings for all kinds of sports, it is probably worth mentioning their work as examples.
 
-We have added the sentence: "Elo ratings are used extensively for rankings of teams in numerous sports by the data journalists at FiveThirtyEight.com." But again, we acknowledge that Wiley policy may not allow such a reference. 
+We have added the sentence: "Elo ratings are used extensively for rankings of teams in numerous sports by the data journalists at FiveThirtyEight.com." 
 
 > 12, 1: As noted above, Section 4 feels much weaker than Sections 2 and 3 which are strong.  Perhaps a look at Pythagorean methods as a historical introduction to this topic.
 

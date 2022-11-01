@@ -804,16 +804,16 @@ greg <- get_raw_chessdotcom(
 # greg: black
 ```
 
-To illustrate, we consider a chess game played on June 1, 2022 on [Chess.com](https://www.chess.com/) by one of the authors, with data obtained from the \pkg{chessR} package [@R-chessR]. 
-Prior to the game, the author was rated `r greg[6, "BlackElo"]`, whereas `r greg[6, "WhiteElo"]` was the opponent's rating.
+To illustrate, we consider a chess game played on June 1, 2022 on [Chess.com](https://www.chess.com/) by one of the authors, with data obtained from the \pkg{chessR} package [@R-chessR] (see Section \ref{sec:chess}). 
+Prior to the game, the author was rated `r greg[6, "BlackElo"]`, whereas his opponent was rated `r greg[6, "WhiteElo"]`.
 Since both ratings are below 2400, we apply a development coefficient of $K=20$ to this example.
-The probability of author ($a$) defeating their opponent ($b$) is
+The probability of the author ($a$) defeating their opponent ($b$) was
 <!-- don't know how to include `r` inside latex -->
 $$
 \Pi_{ab} = \frac{1}{1 + 20^{(1683 - 1732)/400}} = 0.591 \,.
 $$
-The playing author finished with a victory, which is associated with a score of $S_a = 1$.
-The post-game Elo rating for this author is
+The author won the match: that outcome is associated with a score of $S_a = 1$.
+The post-game Elo rating for the author is thus
 $$
 R^*_a = 1732 + 20(1 - 0.591) = 1740 \,.
 $$
@@ -883,7 +883,7 @@ tibble(
 
 In the remainder of this section, we highlight a few tools for sports analytics that are of general interest and illustrate a common paradigm for how these tools can be used in conjunction. 
 
-## Case study in how tools fit together: chess
+## Case study in how tools fit together: chess {#sec:chess}
 
 Many tools in sports analytics provide the ability to read, write, and plot data stored in a sport-specific format. 
 For example, consider chess, where the sequence of moves in games is often recorded in [Portable Game Notation](https://en.wikipedia.org/wiki/Portable_Game_Notation) (PGN).
