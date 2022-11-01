@@ -139,7 +139,7 @@ We have added the sentence: "Elo ratings are used extensively for rankings of te
 
 > 12, 1: As noted above, Section 4 feels much weaker than Sections 2 and 3 which are strong.  Perhaps a look at Pythagorean methods as a historical introduction to this topic.
 
-XX We could consider this. 
+We thank the reviewer for this excellent idea. We have added a new subsection on Expected Winning Percentages models to the beginning of Section 4. 
 
 > 12, 23: This is not much of a case study.  Perhaps some additional information on the data available, ways it could be used to calculate game state expected valued, win probability, player ratings….
 
