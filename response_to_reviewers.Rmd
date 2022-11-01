@@ -65,7 +65,11 @@ We thank the reviewer for this excellent suggestion. We have added a subsection 
 Thank you for this suggestion. We have added a reference to Koopman's paper. 
 
 
-> As mentioned earlier, Section 5 seems sparse on details, and furthermore it seems odd to choose chess as the case study when it has barely been mentioned previously in the article. I think this section could use a table of some sort, perhaps something that summarizes the CRAN task view at a high level. Another potential would be a figure which shows a typical workflow of sports analytics as explained in the text.
+> As mentioned earlier, Section 5 seems sparse on details, and furthermore it seems odd to choose chess as the case study when it has barely been mentioned previously in the article. 
+
+Our new subsection on Elo ratings also discusses chess, so now, the reader has already seen a methodological application to chess by the time they get to the case study. We have also added a new subsection to this Section about baseball, in the hopes of fleshing it out. 
+
+> I think this section could use a table of some sort, perhaps something that summarizes the CRAN task view at a high level. Another potential would be a figure which shows a typical workflow of sports analytics as explained in the text.
 
 We have added a table summarizing the sport-specific packages that are available on CRAN.
 
@@ -143,9 +147,8 @@ We thank the reviewer for this excellent idea. We have added a new subsection on
 
 > 12, 23: This is not much of a case study.  Perhaps some additional information on the data available, ways it could be used to calculate game state expected valued, win probability, player ratings….
 
-We have expanded the case study in chess to include Elo ratings...
-
-In addition, we have added new subsection with a case study in baseball about the evolution of data, tools, and statistical methodologies. We hope that these additional will help to flesh out the value of these tools. 
+We have connected the case study in chess to the new subsection on Elo ratings and the subsequent subsection on graphical tools. We hope that these explicit connections to additional content will make this subsection feel more substantial. 
+In addition, we have added new subsection to this Section with a different case study in baseball about the evolution of data, tools, and statistical methodologies. We hope that this additional content will help to flesh out the value of these tools. 
 
 
 > 12, 37: Theming *teamcolors* is a great *R* package, not sure it is part of the "big ideas" in sports analytics.  A single line in the first paragraph of this section would seem to be better.

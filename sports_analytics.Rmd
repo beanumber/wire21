@@ -892,9 +892,13 @@ The \pkg{chess} package [@R-chess] provides R users with the ability to read, wr
 
 [Application programming interfaces](https://en.wikipedia.org/wiki/API) (APIs) are also a common source for data retrieval. 
 In chess, the \pkg{chessR} package [@R-chessR] allows R users to download game data from the Chess.com API. 
-This type of infrastructure, where one package is the "workhorse" that facilitates common generic data operations, and other packages layer on specific functionality, is common in sports analytics. 
+This type of infrastructure, where one package is the "workhorse" that facilitates common generic data operations, and other packages layer on specific functionality, is common in sports analytics.
+See Section \ref{sec:elo} for an example of how the \pkg{chessR} package can be used to compute Elo ratings. 
 
 Figure \ref{fig:chess} shows a rendering of the starting chess board obtained via the \pkg{chess} package, along with the final position in the game won by one of the authors mentioned earlier in Section \ref{sec:elo} (with data downloaded via the \pkg{chessR} package). 
+We note how the contextual information provided by the chessboard is instrumental in helping the reader contextualize the data. 
+(How many of us can visualize PGN directly?)
+In Section \ref{sec:graphics}, we outline a collection of graphical tools that provide similar context for different playing surfaces. 
 
 ```{r chess, eval=whoami::username() == 'bsbaumer', fig.show="hold", out.width="49%", fig.cap="At left, the starting chess board printed via the \\pkg{chess} package. At right, the final position for one of the authors' recent wins (a checkmate playing Black)."}
 library(chess)
@@ -1014,7 +1018,7 @@ combined |>
   scale_y_reverse()
 ```
 
-Player tracking data contains coordinates that reveal player movement, and these coordinates are always understood in context relative to reference points on the field, court, ice, or pitch for a particular sport. 
+Player tracking data contains coordinates that reveal player movement, and these coordinates are always understood in context relative to reference points on the field, court, ice, board, or pitch for a particular sport. 
 Orienting these points graphically may require drawing a complex set of guidelines that provide that context to readers. 
 Thankfully, the \pkg{sportyR} package [@R-sportyR] contains generic playing surfaces for baseball, basketball, curling, American football, ice hockey, soccer, and tennis that can be added to \pkg{ggplot} graphics with a single function call. 
 Consider, for example, how much time the surfaces plotted in Figure \ref{fig:sportyR} would save you, and how helpful they would be in contextualizing player tracking data (such as those shown in Figure \ref{fig:epv-demo}).
