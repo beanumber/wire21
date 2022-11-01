@@ -109,7 +109,7 @@ We share this concern. We are also uncertain about any licensing restrictions. W
 
 > Page 6, line 8:  "the effect may be overstated" is somewhat ambiguous.  Is it the
 
-XX Quang or Greg to respond
+We have clarified our language on this subject. The reason for the comment was related to the increased resolution of player tracking data. We have made this reasoning explicit. 
 
 > Page 6, line 53: Is the "!" warranted here for conditioning on a 9-dimensional vector?
 
