@@ -83,7 +83,9 @@ We thank the reviewer for this suggestion. We have added a reference to it.
 
 > All in all, I think the article explains the ideas well and covers a lot of ground, but more care should be taken towards the organization and what to include as figures. The last half of the paper has a very different pace than the first half. I think a common theme in the paper is the rise in tracking data and how that has impacted sports–perhaps that idea could be better unified and stated in a specific section of the article, or at the very least noted in the conclusion.
 
-XX
+We hope that this revision addresses the reviewer's concerns about the pacing of the second half of the paper. In particular, we have added new subsections to both Sections 4 and 5, and added language tying together other parts of these Sections to ideas explored earlier in the paper. 
+
+Respectfully, we do not see player tracking data as a theme of the paper. However, one of the new subsections we added traces the evolution of data alongside the evolution in methodology and insights made in baseball. In the conclusion, we have pointed to this discussion as representative of similar evolutions happening in other sports. We hope that his will satisfy the reviewer's desire for clarity on this issue. 
 
 > Page 4, line 56: Needs to be some sort of separation between the "absorbing states" and "touchdown"
 
