@@ -845,8 +845,8 @@ Apart from sports gambling, having an accurate estimate of team strength is usef
 
 @koopman2015dynamic uses a Bayesian state-space model to develop team ratings for English Premier League soccer that improves on bookmaker's odds. 
 
-# Sports Betting
-@LopezBaumerMatthews2018 uses betting market data to [describe paper]
+# Sports betting 
+While @lopez2018 uses betting market data to model team strengths, it does not directly address strategies for betting or inefficiencies in betting markets.  Work such as @lacey1990, @Boulier2006, 
 
 @Boulier2006: Testing the efficiency of the National Football League betting market: Look at 1994 - 2000.  Conclude there is no evidence to conclude the market was inefficient over this period of time.  
 
@@ -858,7 +858,7 @@ Analysis in Sports 12 87{98. : They demonstrate a method that produced a positiv
 Gandar, J., Zuber, R., O'brien, T. and Russo, B. (1988). Testing rationality in the point spread
 betting market. The Journal of Finance 43 995{1008. : They conclude that Stats test are too weak to reject the hypothesis of rationality.  But they do reject rationalist with ``economic tests".  
 
-Lacey, N. J. (1990). An estimation of market efficiency in the NFL point spread betting market. Applied Economics 22 117{129. : Finds the market to be efficient, though they did find some profitable betting rules over the period of time between 1984 and 1986
+@Lacey1990 : Finds the market to be efficient, though they did find some profitable betting rules over the period of time between 1984 and 1986
 
 Another popular type of betting pool is a survivor pool.  
 @Bergman2017SurvivingAN presents formal optimization approaches for NFL survivor pools and concludes that planning for only part of the season yields optimal results in terms of maximizing survival probability.
@@ -888,7 +888,7 @@ Description: The average number of winning survivor pool entries is computed for
 
 Nichols, M. W. (2012). The impact of visiting team travel on game outcome and biases in NFL betting markets. Journal of Sports Economics 15 78{96. : They conclude that the impact of travel os not completely incorporated into the betting markets, but that any effect is too small to find anye profitable advantage.  
 
-Paul, R. J. and Weinbach, A. P. (2014). Market efficiency and behavioral biases in the wnba betting market. International Journal of Financial Studies 2 193{202.: Over the period of 2007–2012, they find that the market is still hard to beat.  
+@PaulWeinbach2014 Market efficiency and behavioral biases in the wnba betting market
 
 Soebbing, B. P. and Humphreys, B. R. (2013). Do gamblers think that teams tank? Evidence from the NBA. Contemporary Economic Policy 31 301{313.
 Spann, M. and Skiera, B. (2009). Sports forecasting: a: NBA bettors believe that tanking is occurring.  
