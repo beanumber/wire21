@@ -768,6 +768,14 @@ Apart from sports gambling, having an accurate estimate of team strength is usef
 
 @koopman2015dynamic uses a Bayesian state-space model to develop team ratings for English Premier League soccer that improves on bookmaker's odds. 
 
+# Sports Betting
+@LopezBaumerMatthews2018 uses betting market data to [describe paper]
+
+@Boulier2017
+
+Another popular type of betting pool is a survivor pool.  
+@Bergman2017SurvivingAN presents formal optimization approaches for NFL survivor pools and concludes that planning for only part of the season yields optimal results in terms of maximizing survival probability.  
+
 # Tools {#sec:tools}
 
 Analytical work in sports requires facility with an ever-changing set of computational tools for working with data. 
