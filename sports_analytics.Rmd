@@ -1074,8 +1074,8 @@ Moreover, because R is scriptable, they make it easier to share research that is
 
 # Opportunities {#sec:opportunities}
 
-Public research in sports analytics is driven in part by several notable competitions. 
-These competitions have been an important source of new ideas and have contributed to the diversification of the field by breaking down barriers to entry. 
+Public research in sports analytics is driven in part by several notable competitions and conferences. 
+These venues have been an important source of new ideas and have contributed to the diversification of the field by breaking down barriers to entry. 
 
 In 2014, Kaggle launched its first March Machine Learning Mania competition for predicting the outcome of the NCAA men's basketball tournament. 
 243 entrants competed for the $15,000 cash prize by submitting predicted probabilities for every possible pairwise matchup among the 68 college basketball teams in the tournament [@GlickmanSonas2015]. 
@@ -1088,6 +1088,15 @@ This annual competition has similarly fueled new research directions in American
 Successful entries and their corresponding publications [@DeshpandeEvans2020; @Yurko2020going; @ChuReyersThomsonWu2020] have launched the careers of several of the most prominent early-career researchers in sports analytics. 
 
 Similar competitions that provide opportunities for aspiring researchers to tackle sports analytics problems include the [Big Data Cup](https://www.stathletes.com/big-data-cup/) for ice hockey and the [SABR Diamond Dollars Case Competition](https://sabr.org/analytics/case) for baseball, and the [Big Data Derby](https://www.kaggle.com/competitions/big-data-derby-2022) for horse racing.  
+
+The biennial [New England Symposium on Statistics in Sports](https://www.nessis.org/) is likely the longest-running academic conference devoted to sports analytics. 
+It's West Coast counterpart is [The Cascadia Symposium on Statistics in Sports](http://www.cascadiasports.com/). 
+Many influential results have been showcased for the first time at these conferences. 
+Other prominent sports analytics conferences include the  [Carnegie Mellon Sports Analytics Conference](https://www.stat.cmu.edu/cmsac/conference/2022/), [UConn Sports Analytics Symposium](https://statds.org/events/ucsas2022/), and [MathSport International](http://www.mathsportinternational.com/).
+
+The highest-profile sports analytics conference is undoubtedly the [Sloan Sports Analytics Conference](https://www.sloansportsconference.com/), which draws academics, industry professionals, vendors, and media organizations.
+While the conference holds a research competition and has certainly drawn attention to sports analytics, it has also been criticized for a variety of shortcomings. 
+These criticisms include a lack of emphasis on reproducibility in the research competition, high ticket prices, the large salaries taken by the organizers, and the lack of diversity among attendees and presenters [@funt2022].
 
 # Conclusion {#sec:conclusion}
 

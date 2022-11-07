@@ -27,7 +27,9 @@ Our revision includes a significant bolstering of Sections 4, 5, and 6. In parti
 
 As noted above, Sections 4 and 5 are significantly stronger in this revision. 
 
->Likewise the Opportunities section should be expanded to include the proliferation of Sports Analytics conferences.  
+> Likewise the Opportunities section should be expanded to include the proliferation of Sports Analytics conferences.  
+
+We thank the reviewer for this suggestion. We have added two paragraphs on sports analytics conferences to Section 6. 
 
 > My largest concern is that a cursory discussion of player contribution or player ratings is given and this seems a major oversight of one of the "big ideas" in sports analytics given the focus on this topic in many sports.  See, for example, Mark Glickman's recent presentation on this at the 2022 Joint Statistical Meetings.  I don't think that Hvattum (2019) is sufficient to cover the area of player contribution.
 
