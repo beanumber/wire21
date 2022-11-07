@@ -22,6 +22,18 @@ Please see attached file for comments.
 
 > My largest concern is that a cursory discussion of player contribution or player ratings is given and this seems a major oversight of one of the "big ideas" in sports analytics given the focus on this topic in many sports.  See, for example, Mark Glickman's recent presentation on this at the 2022 Joint Statistical Meetings.  I don't think that Hvattum (2019) is sufficient to cover the area of player contribution.
 
+We thank the reviewer for this comment. We have addressed this important concern in multiple ways:
+
+- We do not consider individual player ratings to be within the scope of this paper, because they are covered by Albert (2015) in this same journal, and because their inclusion would double the length of this paper. We have added the following clarification in scope to the Introduction:
+
+"Notably, we omit a treatment of individual player ratings for team sports, since this concept has been covered ably in these pages by Albert (2015), and its inclusion would double the length of this manuscript. We do, however, discuss individual player ratings in the context of one-person teams (e.g., chess, tennis) in Section 4."
+
+- We have added the following sentence to our Section on team strength: "The methods in this Section apply equally well to multiplayer teams and single-player teams."
+
+- We have added to the existing clarification in scope that we are not considering individual player ratings in team sports in the Conclusion by citing a recent paper from Glickman on this subject. "Recent work by Che & Glickman (2022) also addresses this question across sports."
+
+We hope that these changes will satisfy the reviewer's largest concern. 
+
 ## Minor comments from Reviewer 1
 
 > In the second sentence, baseball is introduced as a "naturally discrete" sport, but there are certainly many things about baseball which are not discrete, as talked about later in the article. It would be helpful to clarify what is meant by discrete in this setting.
