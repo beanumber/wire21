@@ -11,16 +11,39 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Major comments from Reviewer 1
 
-Comments to the Author(s)
-Please see attached file for comments.
+> Overall, I thought the authors were successful in introducing the big ideas in sports
+analytics at a general and non-technical level, and many interesting aspects of the literature
+were discussed. However, I think the second part of the title ”Statistical Tools for Their
+Investigation” was not properly explored. Several packages are mentioned throughout, and
+a brief sketch of a possible analysis workflow is given in Section 5, but I think it lacks sufficient
+detail. Beyond that, I think there are some extraneous figures and possible improvements
+with the overall flow.
+
+Our revision includes a significant bolstering of Sections 4, 5, and 6. In particular, we have added a subsection on Elo ratings, added a subsection on baseball tools, expanded and linked the discussion of graphical tools, and replaced some weak figures with more relevant substitutes. 
 
 ## Major comments from Reviewer 2
 
 > While Sections 2 and 3 are well done and complete, Sections 4 and 5 are weak and seem incomplete and unpolished.  
 
->Likewise the Opportunities section should be expanded to include the proliferation of Sports Analytics conferences.  
+As noted above, Sections 4 and 5 are significantly stronger in this revision. 
+
+> Likewise the Opportunities section should be expanded to include the proliferation of Sports Analytics conferences.  
+
+We thank the reviewer for this suggestion. We have added two paragraphs on sports analytics conferences to Section 6. 
 
 > My largest concern is that a cursory discussion of player contribution or player ratings is given and this seems a major oversight of one of the "big ideas" in sports analytics given the focus on this topic in many sports.  See, for example, Mark Glickman's recent presentation on this at the 2022 Joint Statistical Meetings.  I don't think that Hvattum (2019) is sufficient to cover the area of player contribution.
+
+We thank the reviewer for this comment. We have addressed this important concern in multiple ways:
+
+- We do not consider individual player ratings to be within the scope of this paper, because they are covered by Albert (2015) in this same journal, and because their inclusion would double the length of this paper. We have added the following clarification in scope to the Introduction:
+
+"Notably, we omit a treatment of individual player ratings for team sports, since this concept has been covered ably in these pages by Albert (2015), and its inclusion would double the length of this manuscript. We do, however, discuss individual player ratings in the context of one-person teams (e.g., chess, tennis) in Section 4."
+
+- We have added the following sentence to our Section on team strength: "The methods in this Section apply equally well to multiplayer teams and single-player teams."
+
+- We have added to the existing clarification in scope that we are not considering individual player ratings in team sports in the Conclusion by citing a recent paper from Glickman on this subject. "Recent work by Che & Glickman (2022) also addresses this question across sports."
+
+We hope that these changes will satisfy the reviewer's largest concern. 
 
 ## Minor comments from Reviewer 1
 
@@ -30,7 +53,7 @@ We have added a paragraph clarify the distinction between "discrete" and "contin
 
 > Also, later on in the first paragraph, it would be useful to have a citation or two about the changes being brought about in baseball due to analytics.
 
-We believe that the last sentence of the first paragraph does exactly that. 
+We have added a citation to Healey (2017) to this effect.  
 
 > In Section 2.1, Figure 1 (George Lindsey's calculations) is introduced before the reader even knows who George Lindsey is. 
 
@@ -58,20 +81,24 @@ We have removed Table 2.
 
 > After the comprehensive views in Sections 2 and 3, Section 4 seems sparse on details. Much detail is given on the Bradley-Terry model, but only one example is given of a possible usage. Has this been used in other sports? Has it changed how we think about those sports or team strategies? An explanation of Elo rating should be given; I for one have no knowledge of how to compute it.
 
-We thank the reviewer for this suggestion. We have added a subsection on Elo rating, with a mathematical defination followed by a calculation example.
+We thank the reviewer for this excellent suggestion. We have added a subsection on Elo ratings, with a mathematical definition followed by a calculation example. This example uses the `chessR` package, which ties into and strengthens our discussion of tools in the next chapter. 
 
 > There is a large body of literature on Bayesian state-space models in sports outside of the Glickman and Stern paper, mainly in soccer/association football. See for example Koopman and Lit (2015) and the various references in its introduction.
 
 Thank you for this suggestion. We have added a reference to Koopman's paper. 
 
 
-> As mentioned earlier, Section 5 seems sparse on details, and furthermore it seems odd to choose chess as the case study when it has barely been mentioned previously in the article. I think this section could use a table of some sort, perhaps something that summarizes the CRAN task view at a high level. Another potential would be a figure which shows a typical workflow of sports analytics as explained in the text.
+> As mentioned earlier, Section 5 seems sparse on details, and furthermore it seems odd to choose chess as the case study when it has barely been mentioned previously in the article. 
+
+Our new subsection on Elo ratings also discusses chess, so now, the reader has already seen a methodological application to chess by the time they get to the case study. We have also added a new subsection to this Section about baseball, in the hopes of fleshing it out. 
+
+> I think this section could use a table of some sort, perhaps something that summarizes the CRAN task view at a high level. Another potential would be a figure which shows a typical workflow of sports analytics as explained in the text.
 
 We have added a table summarizing the sport-specific packages that are available on CRAN.
 
 > Figure 6 doesn't add much to the text; I don't think the reader better understands sports analytics by visualizing many team colors. Instead, it would be better to show  how the theming can lead to a more impactful graphic for sports, i.e. show how that package might be used in a real-world setting.
 
-XX
+We thank the reviewer for this excellent suggestion. We have replaced Figure 6 with a new figure that illustrates in the `retrosheet` and `teamcolors` package can be combined to produce a meaningful data graphic. In particular, we note how the use of team colors clarifies what would otherwise be a messy jumble of indistinguishable lines. 
 
 > For Section 6, there is also now a "Big Data Derby" in horse racing.
 
@@ -79,7 +106,9 @@ We thank the reviewer for this suggestion. We have added a reference to it.
 
 > All in all, I think the article explains the ideas well and covers a lot of ground, but more care should be taken towards the organization and what to include as figures. The last half of the paper has a very different pace than the first half. I think a common theme in the paper is the rise in tracking data and how that has impacted sports–perhaps that idea could be better unified and stated in a specific section of the article, or at the very least noted in the conclusion.
 
-XX
+We hope that this revision addresses the reviewer's concerns about the pacing of the second half of the paper. In particular, we have added new subsections to both Sections 4 and 5, and added language tying together other parts of these Sections to ideas explored earlier in the paper. 
+
+Respectfully, we do not see player tracking data as a theme of the paper. However, one of the new subsections we added traces the evolution of data alongside the evolution in methodology and insights made in baseball. In the conclusion, we have pointed to this discussion as representative of similar evolutions happening in other sports. We hope that his will satisfy the reviewer's desire for clarity on this issue. 
 
 > Page 4, line 56: Needs to be some sort of separation between the "absorbing states" and "touchdown"
 
@@ -105,7 +134,7 @@ We share this concern. We are also uncertain about any licensing restrictions. W
 
 > Page 6, line 8:  "the effect may be overstated" is somewhat ambiguous.  Is it the
 
-XX Quang or Greg to respond
+We have clarified our language on this subject. The reason for the comment was related to the increased resolution of player tracking data. We have made this reasoning explicit. 
 
 > Page 6, line 53: Is the "!" warranted here for conditioning on a 9-dimensional vector?
 
@@ -135,22 +164,21 @@ We have ordered the rows of Table 3 by descending order of ability.
 
 > 11, 50: Given how much fivethirtyeight.com uses Elo ratings for all kinds of sports, it is probably worth mentioning their work as examples.
 
-We have added the sentence: "Elo ratings are used extensively for rankings of teams in numerous sports by the data journalists at FiveThirtyEight.com." But again, we acknowledge that Wiley policy may not allow such a reference. 
+We have added the sentence: "Elo ratings are used extensively for rankings of teams in numerous sports by the data journalists at FiveThirtyEight.com." 
 
 > 12, 1: As noted above, Section 4 feels much weaker than Sections 2 and 3 which are strong.  Perhaps a look at Pythagorean methods as a historical introduction to this topic.
 
-XX We could consider this. 
+We thank the reviewer for this excellent idea. We have added a new subsection on Expected Winning Percentages models to the beginning of Section 4. 
 
 > 12, 23: This is not much of a case study.  Perhaps some additional information on the data available, ways it could be used to calculate game state expected valued, win probability, player ratings….
 
-We have expanded the case study in chess to include Elo ratings...
-
-In addition, we have added new subsection with a case study in baseball about the evolution of data, tools, and statistical methodologies. We hope that these additional will help to flesh out the value of these tools. 
+We have connected the case study in chess to the new subsection on Elo ratings and the subsequent subsection on graphical tools. We hope that these explicit connections to additional content will make this subsection feel more substantial. 
+In addition, we have added new subsection to this Section with a different case study in baseball about the evolution of data, tools, and statistical methodologies. We hope that this additional content will help to flesh out the value of these tools. 
 
 
 > 12, 37: Theming *teamcolors* is a great *R* package, not sure it is part of the "big ideas" in sports analytics.  A single line in the first paragraph of this section would seem to be better.
 
-We have added examples from the `SportyR` package, which draws playing surfaces, to help flesh out this subsection. We also replaced the previous Figure 6 with a new Figure 5 that illustrates how the use of team colors is particularly impactful for sports-releated data graphics.  
+We have added examples from the `SportyR` package, which draws playing surfaces, to help flesh out this subsection. We also replaced the previous Figure 6 with a new Figure 6 that illustrates how the use of team colors is particularly impactful for sports-releated data graphics.  
 
 > 13, 35: Add a citation for Big Data Cup, https://www.stathletes.com/big-data-cup/, for SABR Diamond Dollars Case Competition, https://sabr.org/analytics/case, Big Data Derby https://www.kaggle.com/competitions/big-data-derby-2022, and maybe more. 
 
