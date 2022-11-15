@@ -900,6 +900,7 @@ Sources of authoritative data about sports are myriad, and are too numerous to l
 Software tools for sports analytics are similarly numerous. 
 For R, we maintain a [CRAN Task View for Sports Analytics](https://CRAN.R-project.org/view=SportsAnalytics) that catalogs R packages published on the Comprehensive R Archive Network (CRAN) and organizes them by sport [@baumer2022ctv].
 Table \ref{tab:ctv} provides an overview of the currently available sport-specific CRAN packages.
+@casals2022systematic offers a systematic review of sport-related packages on CRAN.
 Further, a more general collection of software tools is being curated by the SportsDataverse initiative [@gilani2022sportsdataverse].
 
 ```{r}

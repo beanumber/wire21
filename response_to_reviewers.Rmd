@@ -19,7 +19,7 @@ a brief sketch of a possible analysis workflow is given in Section 5, but I thin
 detail. Beyond that, I think there are some extraneous figures and possible improvements
 with the overall flow.
 
-Our revision includes a significant bolstering of Sections 4, 5, and 6. In particular, we have added a subsection on Elo ratings, added a subsection on baseball tools, expanded and linked the discussion of graphical tools, and replaced some weak figures with more relevant substitutes. 
+Our revision includes a significant bolstering of Sections 4, 5, and 6. In particular, we have added a subsection on Elo ratings, added a subsection on baseball tools, expanded and linked the discussion of graphical tools, replaced some weak figures with more relevant substitutes, and added supporting references. 
 
 ## Major comments from Reviewer 2
 
