@@ -868,8 +868,8 @@ This research has estimated probabilities, evaluated common strategies, and offe
 
 ## Sports betting market data {#sec:betting-market-data}
 
-While @Lopez2018 uses betting market data to model team strengths, it does not directly address strategies for betting or inefficiencies in betting markets. 
-Work such as @lacey1990estimation, @Boulier2006, 
+While @Lopez2018 uses betting market data to model team strengths, it does not directly address strategies for betting or inefficiencies in betting markets. Early work by @gandar1988testing examines 
+Related work such as @lacey1990estimation and @Boulier2006 both explore the efficiency of NFL betting markets in the mid-1980s and late-1990s, respectively.  Neither paper finds strong evidence for inefficiencies in the markets.  @boulier2003predicting compared the predictive performance of power rankings and media experts to the betting market for NFL games and found that the betting market was the best for predicting winners. More recently @Buttrey2016 explored the NHL betting market. They produced a model to predict win probabilities in given games, and games where the predicted probability differed from the market price bets were placed.  They find that using their methods, that they were able to produce a positive return on investment.  
 
 @Boulier2006 that there is insufficient evidence to conclude that betting markets were inefficient from 1994--2000.
 @boulier2003predicting test several predictors for NFL games and find that the betting market is the best predictor.
