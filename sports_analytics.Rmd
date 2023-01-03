@@ -876,7 +876,7 @@ Some researchers have then tried to demonstrate a positive return on some of the
 ## The use of betting market data for sports analytics {#sec:betting-market-data}
 
 While @Lopez2018 use betting market data to model team strengths, they do not directly address strategies for betting or inefficiencies in betting markets. 
-Early work by @gandar1988testing examines the rationality of NFL betting markets and concludes that statistical tests fail to reject the hypothesis of rationality.
+Early work by @gandar1988testing examine the rationality of NFL betting markets and concludes that statistical tests fail to reject the hypothesis of rationality.
 Related work such as @lacey1990estimation and @Boulier2006 explores the efficiency of NFL betting markets in the mid-1980s and late-1990s, respectively.
 Neither paper finds strong evidence for inefficiencies in the markets. 
 @boulier2003predicting compare the predictive performance of power rankings and media experts to the betting market for NFL games and found that the betting market is the best for predicting winners. 
@@ -926,7 +926,7 @@ Sources of authoritative data about sports are myriad, and are too numerous to l
 Software tools for sports analytics are similarly numerous. 
 For R, we maintain a [CRAN Task View for Sports Analytics](https://CRAN.R-project.org/view=SportsAnalytics) that catalogs R packages published on the Comprehensive R Archive Network (CRAN) and organizes them by sport [@baumer2022ctv].
 Table \ref{tab:ctv} provides an overview of the currently available sport-specific CRAN packages.
-@casals2022systematic offers a systematic review of sport-related packages on CRAN.
+Recently, @casals2022systematic offer a systematic review of sport-related packages on CRAN.
 Further, a more general collection of software tools is being curated by the SportsDataverse initiative [@gilani2022sportsdataverse].
 
 ```{r}
@@ -959,7 +959,7 @@ tibble(
   kable(
     booktabs = TRUE,
     linesep = "",
-    caption = "A summary of sport-specific packages available on the Comprehensive R Archive Network (CRAN). While the major North American sports dominate the list, perhaps the fastest-growing collection is for esports. \\label{tab:ctv}"
+    caption = "A summary of sport-specific packages available on the Comprehensive R Archive Network (CRAN) as of October 16, 2022. While the major North American sports dominate the list, perhaps the fastest-growing collection is for esports. \\label{tab:ctv}"
   ) |> 
   column_spec(3, width = "7cm")
 ```
