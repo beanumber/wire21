@@ -126,9 +126,11 @@ This revised version is a significant improvement over the previous version and 
 
 Suggested Changes:
 
-The authors have now made clearer the limitation in scope of this manuscript related to player evaluation. Perhaps, a statement regarding this can be added to the abstract.
+- The authors have now made clearer the limitation in scope of this manuscript related to player evaluation. Perhaps, a statement regarding this can be added to the abstract.
 
-I think that parts of the first paragraph of Section 5 regarding biometric data is a bit out of place. This could be moved to Section 7 (Opportunities). Likewise, Section 5 could be retitled something like‘Betting Data and Sports Analytics” or “Betting Data Analysis”.
+> We have a statement to this effect to the abstract. 
+
+- I think that parts of the first paragraph of Section 5 regarding biometric data is a bit out of place. This could be moved to Section 7 (Opportunities). Likewise, Section 5 could be retitled something like‘Betting Data and Sports Analytics” or “Betting Data Analysis”.
 
 ## Minor Changes from Reviewer 2
 

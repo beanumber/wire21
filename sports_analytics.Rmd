@@ -23,8 +23,9 @@ abstract: |
   Sports analytics---broadly defined as the pursuit of improvement in athletic performance through the analysis of data---has expanded its footprint both in the professional sports industry and in academia over the past 30 years. 
   In this paper, we connect three big ideas that are common across multiple sports: the expected value of a game state, win probability, and measures of team strength.
   For each, we explore both the shared similarities and individual idiosyncracies of analytical approaches in each sport. 
-  While our focus is on the concepts underlying each type of analysis, any implementation necessarily involves statistical methodologies, computational tools, and data sources. 
+  While our focus is on the concepts underlying each type of analysis, any implementation necessarily involves statistical methodologies, computational tools, and data sources.
   Where appropriate, we outline how data, models, tools, and knowledge of the sport combine to generate actionable insights. 
+  We also describe the use of non-performance data and opportunities to share analytical work, but omit an in-depth discussion of individual player evaluation as beyond our scope.
   This paper should serve as a useful overview for anyone becoming interested in the study of sports analytics. 
 keywords:
   - sports analytics
