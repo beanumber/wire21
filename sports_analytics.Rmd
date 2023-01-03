@@ -1112,7 +1112,7 @@ combined |>
 Player tracking data contains coordinates that reveal player movement, and these coordinates are always understood in context relative to reference points on the field, court, ice, board, or pitch for a particular sport. 
 Orienting these points graphically may require drawing a complex set of guidelines that provide that context to readers. 
 Thankfully, the \pkg{sportyR} package [@R-sportyR] contains generic playing surfaces for baseball, basketball, curling, American football, ice hockey, soccer, and tennis that can be added to \pkg{ggplot} graphics with a single function call. 
-Consider, for example, how much time the surfaces plotted in Figure \ref{fig:sportyR} would save you, and how helpful they would be in contextualizing player tracking data (such as those shown in Figure \ref{fig:epv-demo}).
+The surfaces plotted in Figure \ref{fig:sportyR} are helpful in contextualizing player tracking data (such as those shown in Figure \ref{fig:epv-demo}) and would be laborious for each analyst to have to create on their own.
 With the increased availability of player tracking data, this particular tool should see increased usage. 
 
 ```{r sportyR, fig.show="hold", out.width="49%", fig.cap="At left, an NBA basketball court drawn by \\pkg{sportyR}. At right, an NHL hockey rink drawn by \\pkg{sportyR}."}
