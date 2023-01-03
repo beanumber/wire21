@@ -253,7 +253,7 @@ Conversely, in a low run-scoring environment where hits are hard to come by, sto
 Thus, a careful estimate of $\mathbb{E}[X | s]$ would include a time parameter $t$, indicating when the estimate is appropriate. 
 
 Second, the characterization of $S$ as having 24 states is only the simplest possible. 
-The inning, or the score of the game, or even the weather, might reasonably be incorporated into $S$, as those conditions might reasonably affect the estimate of $\mathbb{E}[X | s]$. 
+The inning, or the score of the game, or even the weather, could be incorporated into $S$, as those conditions might reasonably affect the estimate of $\mathbb{E}[X | s]$. 
 More definitively, the identity of the current batter, pitcher, or batter on deck, might also affect the estimate of $\mathbb{E}[X | s]$. 
 Indeed, @Tango2007book show that when a particularly weak-hitting batter is up (i.e., the pitcher), a sacrifice bunt becomes a more effective strategy.  
 
@@ -295,7 +295,7 @@ They state that by failing to account for opponent strength appropriately, about
 
 ### In American football, 4th down strategy
 
-The concept of expected points in American football has many applications.  One of the most notable and well-studied topic is the evaluation of 4th down strategy.
+The concept of expected points in American football has many applications.  One of the most notable and well-studied topics is the evaluation of 4th down strategy.
 There is near universal consensus in the literature that NFL teams have been too conservative in the past when making 4th down decisions. 
 
 @Romer2006 examines 4th down decisions in the NFL using expected points by focusing only on examples from the first quarter of a game (to avoid issues with end-of-half and end-of-game decision making). 
@@ -304,10 +304,10 @@ They concluded that teams don't go for it enough if teams are trying to maximize
 Numerous other papers (see @lopez2020bigger for details) use the analysis of the expected number of points to improve fourth down strategy. In addition to @Romer2006, later work by @Yam2019 uses win probability (see Section \ref{sec:wp}), rather than expected points, and a causal inference framework to reach similar conclusions that NFL teams are too conservative in going for it on 4th down.  In addition, they estimate that a better strategy would be worth about 0.4 wins per season on average, a substantial amount in a season with only 16 games. 
 
 @lopez2020bigger presents an introduction to NFL tracking data, and examines 4th down behavior as an example of the type of problem that can be more thoroughly studied with the increase in granularity of the tracking data over traditional NFL data.
-In the past, when looking at down and distance data to study whether NFL coaches are making good decisions about whether to "got for it" or punt on 4th down, the distance data is only a rounded approximation of the true distance "to go" (i.e. 1 yard, 1 foot, and 1 inch will all be recorded as 4th and 1. 
+In the past, when looking at down and distance data to study whether NFL coaches are making good decisions about whether to "go for it" or punt on 4th down, the distance data is only a rounded approximation of the true distance "to go" (i.e. 1 yard, 1 foot, and 1 inch will all be recorded as 4th and 1. 
 In fact, anything up to 2 yard will recorded as 4th and 1 [@lopezDM]. However, a coach on the field during a game will be able to clearly see the difference between 1 inch and 1 yard, and this information will factor into their decision making. 
 With tracking data, the "to go" distance can be much more accurately assessed and therefore evaluation of 4th down coaching decisions can now account for this "extra" information that is available to a coach on the field of play, but not recorded in traditional NFL data. 
-Many past analyses of the decision to go for it or not on 4th down conclude that coached in the NFL are too conservative in their decisions making. 
+Many past analyses of the decision to go for it or not on 4th down conclude that coaches in the NFL are too conservative in their decision making. 
 @lopez2020bigger also concludes that coaches are too conservative on 4th down decision making, but the effect may be overstated due to the way in which to go yardage has been recorded in the past.  
 
 
@@ -320,7 +320,9 @@ For quarterback evaluation, @White2002 present a tiered logistic regression meth
 @Alamar2010 implements an expected points framework to examine play calling in the NFL. However, rather than assessing each play on its own, they evaluate the play in the context of the drive. 
 Based on play-by-play data from 2005 through 2008, they determine that teams are under-utilizing passing plays in some situations.  
 
-Another application of expected points is to evaluate kickoff decisions made by football coaches, as demonstrated by @urschel2011.  Specifically, they look at surprise on-sides kicks versus regular kickoff and the decision to accept a touchback versus returning the kickoff.  Using data from the 2009 NFL season, they conclude, as many have, that coaches in the NFL tend to make conservative decisions.
+Another application of expected points is to evaluate kickoff decisions made by football coaches, as demonstrated by @urschel2011. 
+Specifically, they look at surprise on-sides kicks versus regular kickoffs and the decision to accept a touchback versus returning the kickoff.  
+Using data from the 2009 NFL season, they conclude, as many have, that coaches in the NFL tend to make conservative decisions.
 
 <!-- decsions on kick offs (surprise on sides or regular kick off AND accept touchback or return kick) using an expected points frame work.  Shows that teams are moderately risk and loss averse. -->
 <!-- https://www.eng.buffalo.edu/~jzhuang/Papers/JQAS_NFL_2011.pdf -->
@@ -404,7 +406,7 @@ Many applications can be derived from this framework, including predicting which
 
 ## Optimal strategies that don't maximize expected points
 
-In Section \ref{sec:ev}, we defined the expected value of a possession based on the state $s$ of the game in terms of the expected number of points (runs) $X$ that would be scored in the remainder of some period of time. 
+Earlier in Section \ref{sec:ev}, we defined the expected value of a possession based on the state $s$ of the game in terms of the expected number of points (runs) $X$ that would be scored in the remainder of some period of time. 
 We then showed how this value could be used to analyze the relative effectiveness of certain strategies, with the simple idea that strategies that yield higher expected values are preferable. 
 Generally, the goal of any sport is to score more points than the other team, which most often means trying to score as many points as possible, leading to a general strategy of maximizing expected points. 
 However, there are situations in which maximizing the number of expected points is *not* the desired strategy. 
@@ -610,11 +612,11 @@ In this approach, the rugby play-by-play event data are treated as functional, a
 # Team strength {#sec:strength}
 
 A third crucial idea in sports analytics is the estimation of team strength. 
-First, we briefly introduce a simple method for estimating team strength based on won-loss record. 
+First, we briefly introduce a simple method for estimating team strength based on win-loss record. 
 Next, we detail three other more sophisticated methods for estimating team strength in sports through pairwise evaluations. 
 The methods in this Section apply equally well to multiplayer teams and single-player teams. 
 
-The impetus for all methods for estimating team strength is the realization that won-loss records are a noisy measure of team strength. 
+The impetus for all methods for estimating team strength is the realization that win-loss records are a noisy measure of team strength. 
 As binary outcomes, and with all sports (except perhaps chess) involving some element of chance, wins and losses carry some signal of team strength, but we can do better. 
 
 ## Expected winning percentage {#sec:wpct}
@@ -633,7 +635,7 @@ The resemblance to the formula for computing the length of the hypotenuse in a r
 Subsequent analysts have tried to find the optimal value of $\alpha$ for various time periods. 
 This can be done with a few lines of code, after observing that 
 $$
-  \frac{X^\alpha}{X^\alpha + Y^\alpha} = \frac{1}{1 + (Y/X)^2}
+  \frac{X^\alpha}{X^\alpha + Y^\alpha} = \frac{1}{1 + (Y/X)^\alpha}
 $$
 and fitting a non-linear model (see similar discussion in @baumer2021mdsr). 
 Figure \ref{fig:pythag} illustrates the quality of the fit in Major League Baseball since 1954, where the optimal value of $\alpha$ is 1.84. 
@@ -794,8 +796,7 @@ $$
 $$
 In this formula, $K$ is commonly known as the $K$-factor, or development coefficient.
 The International Chess Federation (FIDE) uses $K=10$ for players with any previously achieved rating of at least 2400.
-For those that have never reached a rating of 2400 or better, $K=20$ is assigned. 
-Finally, $K=40$ is given to new players with under 30 games played, and players under the age of 18 with rating fewer than 2300 [@fide2022rating].
+Finally, $K=40$ is given to new players with under 30 games played, and players under the age of 18 with rating less than than 2300 [@fide2022rating].
 
 Another interpretation for $\Pi_{ij}$ is the expected score of the game for player $i$.
 The scores of 0, 0.5, and 1 are associated with three possible game outcomes loss, tie, and win, respectively.
@@ -846,7 +847,7 @@ Betting moneylines are used in place of point differentials in order to estimate
 Both papers motivate the usefulness of model-based measures of team strength by demonstrating their superiority to low-resolution win-loss records. 
 Apart from sports gambling, having an accurate estimate of team strength is useful to team officials, who are constantly monitoring and forecasting their team's ability. 
 
-@koopman2015dynamic uses a Bayesian state-space model to develop team ratings for English Premier League soccer that improves on bookmaker's odds. 
+@koopman2015dynamic use a Bayesian state-space model to develop team ratings for English Premier League soccer that improves on bookmaker's odds. 
 
 # Non-performance data {#sec:betting}
 
@@ -871,7 +872,7 @@ Some researchers have then tried to demonstrate a positive return on some of the
 
 ## The use of betting market data for sports analytics {#sec:betting-market-data}
 
-While @Lopez2018 uses betting market data to model team strengths, they do not directly address strategies for betting or inefficiencies in betting markets. 
+While @Lopez2018 use betting market data to model team strengths, they do not directly address strategies for betting or inefficiencies in betting markets. 
 Early work by @gandar1988testing examines the rationality of NFL betting markets and concludes that statistical tests fail to reject the hypothesis of rationality.
 Related work such as @lacey1990estimation and @Boulier2006 explores the efficiency of NFL betting markets in the mid-1980s and late-1990s, respectively.
 Neither paper finds strong evidence for inefficiencies in the markets. 
@@ -972,8 +973,8 @@ This type of infrastructure, where one package is the "workhorse" that facilitat
 See Section \ref{sec:elo} for an example of how the \pkg{chessR} package can be used to compute Elo ratings. 
 
 Figure \ref{fig:chess} shows a rendering of the starting chess board obtained via the \pkg{chess} package, along with the final position in the game won by one of the authors mentioned earlier in Section \ref{sec:elo} (with data downloaded via the \pkg{chessR} package). 
-We note how the contextual information provided by the chessboard is instrumental in helping the reader understand the data. 
-(How many of us can visualize PGN directly?)
+We note how the contextual information provided by the chessboard is instrumental in helping the reader understand the data
+(How many of us can visualize PGN directly?).
 In Section \ref{sec:graphics}, we outline a collection of graphical tools that provide similar context for different playing surfaces. 
 
 ```{r chess-fig, eval=whoami::username() == 'bsbaumer'}
@@ -1123,7 +1124,7 @@ geom_hockey(league = "NHL")
 
 As the granularity of baseball data has evolved over time, so too have the statistical methodologies for modeling that data, and the tools for working with it. 
 
-For example, before George Lindsay's work (see Section \ref{sec:ev}), most of the baseball data that was publicly available was seasonal: it showed only season totals for each player. 
+For example, before George Lindsey's work (see Section \ref{sec:ev}), most of the baseball data that was publicly available was seasonal: it showed only season totals for each player. 
 These data, now available through the \pkg{Lahman} package [@R-Lahman], were sufficient to study broad trends in baseball, and led to insights such as the value of expected winning percentage (see Section \ref{sec:wpct}) and the importance of on-base percentage relative to batting average. 
 These relatively simple insights fueled the "Moneyball" [@lewis2004moneyball] era revolution in sports analytics [@baumer2014sabermetric]. 
 
@@ -1147,7 +1148,7 @@ One could just as easily use \pkg{sportyR} to generate a field graphic, and then
 
 Thus, these R packages enable research by making data more easily available. 
 Moreover, because R is scriptable, they make it easier to share research that is reproducible. 
-[Recent conferences, such as the [Carnegie Mellon Sports Analytics Conference](https://www.stat.cmu.edu/cmsac/conference/2021/), have included a reproducible research competition to foster these efforts (see Section \ref{sec:opportunities}).]
+Recent conferences, such as the [Carnegie Mellon Sports Analytics Conference](https://www.stat.cmu.edu/cmsac/conference/2021/), have included a reproducible research competition to foster these efforts (see Section \ref{sec:opportunities}).
 
 # Opportunities {#sec:opportunities}
 
@@ -1168,7 +1169,7 @@ Similar competitions that provide opportunities for aspiring researchers to tack
 
 As the field of sports analytics has grown, a proliferation of sports specific and regional sports analytics conferences have arisen.
 The biennial [New England Symposium on Statistics in Sports](https://www.nessis.org/) is likely the longest-running academic conference devoted to sports analytics. 
-It's West Coast counterpart is [The Cascadia Symposium on Statistics in Sports](http://www.cascadiasports.com/). 
+Its West Coast counterpart is [The Cascadia Symposium on Statistics in Sports](http://www.cascadiasports.com/). 
 Many influential results have been showcased for the first time at these conferences. 
 Other prominent sports analytics conferences include the  [Carnegie Mellon Sports Analytics Conference](https://www.stat.cmu.edu/cmsac/conference/2022/), [UConn Sports Analytics Symposium](https://statds.org/events/ucsas2022/), and [MathSport International](http://www.mathsportinternational.com/).
 

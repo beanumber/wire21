@@ -11,6 +11,109 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Major comments from Reviewer 1
 
+Overall, the paper is now much more comprehensive, complete, and clear; I think it
+will serve as a very useful introduction to the field of sports analytics. I have only a few
+suggestions and points of confusion to share, which I hope the authors will examine before
+submitting the final version. They are all fairly minor.
+
+
+- If there is still space allowed in the abstract, I think you could consider explicitly
+mentioning the three big ideas (expected value of a game state, win probability, and
+measures of team strength). This would give readers a better idea of what is to come
+and also allow people to find your article more easily if they are interested in one of
+those specific topics.
+- In Section 2.1.2, I am a little confused as to what Carroll et. al. did to extend the
+previous model of Carter and Machol, since both efforts seem to involve some sort of
+linearity assumption.
+- Also in Section 2.1.2, it might be worthwhile to briefly define absorbing states, as I for
+one didn’t know the definition before looking it up (and as it turns out the concept is
+quite simple)
+- In Section 2.1.3, you make the comment “they estimate that a better strategy would
+be worth about 0.4 wins per season on average, a substantial amount in a season with
+only 16 games.” This makes sense, but previously in Section 2.1.2 you mentioned
+a potential difference of 3.8 wins per season, yet didn’t comment on the significant
+magnitude of that effect. I’m not advocating for a particular change here, but the
+authors could consider adding a small comment about the size of the effect Pelechrinis
+et. al. estimated.
+- At the end of Section 2.1.3, you write “Lopez (2020) also concludes that coaches are
+too conservative on 4th down decision making, but the effect may be overstated due
+to the way in which to go yardage has been recorded in the past.” It’s unclear to me
+whether the overstated effect is the one Lopez estimates in his paper, or if you are
+referring to the estimated effects past studies which used less granular data.
+- In Section 2.3, you write “NHL coaches do not always employ the optimal strategies”,
+but it isn’t clear what those strategies are in reference to the previous discussion. Is
+pulling the goalie optimal?
+- In the second formula of Section 4.1, the right hand side of the equation has a 2, but
+it should be an α.
+
+> Thank you. This is fixed. 
+
+- I think Section 5.2 would benefit from a short introductory paragraph, perhaps which
+introduces different types of sports betting, thus leading into the betting pools discus-
+sion of Section 5.2.1.
+- I notice you have several hyperlinks throughout–I’m not sure what the Wiley standards
+are, but it might be helpful to distinguish links with a different color.
+
+> Indeed. We await Wiley's instructions when we reach the typesetting phase. 
+
+## Minor comments from Reviewer 1
+
+- Page 5, lines 33-34: ‘might reasonably’ is used twice in the same sentence
+
+> We have changed the first "might reasonably" to "could"
+
+- Page 6, line 23: ‘topics’ instead of ‘topic’
+
+> Fixed. 
+
+- Page 6, line 38: ‘go for it’ instead of ‘got for it’
+
+> Fixed. 
+
+- Page 6, lines 45-46: ‘coaches’ instead of ‘coached’ and ‘decision making’ instead of
+‘decisions making’
+
+> Fixed. 
+
+- Page 7, line 7: ‘kickoffs’ instead of ‘kickoff’
+
+> Fixed. 
+
+- Page 8, line 51: Might be better to say “Earlier in Section 2” as opposed to just “In
+Section 2”
+
+> Fixed. 
+
+- Page 11, line 56 and Page 12, line 5: ‘win-loss’ instead of ‘won-loss’
+
+> Fixed. 
+
+- Page 13, line 53: This is probably a matter of personal preference but “rating less than
+2300” sounds more natural than “rating fewer than 2300”
+
+> Fixed. 
+
+- Page 14, line 35: ‘use’ instead of ‘uses’
+
+> Fixed. 
+
+- Page 17, line 27: I think the question in parentheses should be placed before the period
+of the previous sentence
+
+> We moved this. 
+
+- Page 18, line 40: ‘Lindsey’ instead of ‘Lindsay’
+
+> Fixed. 
+
+- Page 20, lines 13-15: Not sure why there are brackets around this sentence.
+
+> We removed the brackets. 
+
+- Page 20, line 41: ‘Its’ not ‘It’s’
+
+> Fixed. 
+
 ## Major comments from Reviewer 2
 
 Overall Summary:
