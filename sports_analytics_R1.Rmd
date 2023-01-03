@@ -120,7 +120,7 @@ While baseball---a naturally discrete sport with more than a century's worth of 
 In basketball, analytics has driven a shift in the conventional wisdom about shot selection. 
 Most teams are shooting more three-pointers, settling for fewer long two-point shots, deploying more versatile defenders, and relying less on the strategy of pounding the ball into the paint in an attempt to get a high-percentage shot [@Schuhmann2021nba3point].
 In American football, teams are going for it on fourth down far more often than in the past, a direct result of statistical analysis showing that most teams were previously overly conservative [@lopez2020bigger].
-And, of course, in baseball, teams are using defensive shifts to maximize the probability of recording an out, encouraging hitters to improve their launch angles, and optimizing pitcher repertoires to minimize contact [@healey2017new]. 
+And of course in baseball, teams are using defensive shifts to maximize the probability of recording an out, encouraging hitters to improve their launch angles, and optimizing pitcher repertoires to minimize contact [@healey2017new]. 
 
 These are just the most obvious examples of strategic changes that are fueled by insights extracted from data by practitioners of sports analytics.
 Similar insights are now being made in less obvious settings, including esports [@clark2020bayesian; @maymin2021smart]. 
@@ -128,8 +128,8 @@ These insights come both from academia, where researchers typically use public d
 A growing pool of people move seamlessly between these two worlds, leading to the formation of partnerships and the cross-pollination of ideas. 
 
 Every sport is different, with its own set of rules, strategies, methods of data collection, number of players, and the magnitude of the role of chance. 
-At the same time, many sports are similar, either because one evolved from the other, or the structure of the games share certain attributes. 
-Sports that are closely related historically may or may not share common applications of analytical methods. 
+At the same time, many sports are similar, either because one evolved from the other, or the structure of the game shares certain attributes. 
+Sports that are closely related anthropologically may or may not share common applications of analytical methods. 
 For example, despite belonging to the same bat-and-ball family, baseball and cricket differ in strategies such as batting order or sacrifice plays.
 Conversely, with just a few small tweaks, analytical metrics might work just as well across sports that are unrelated and quite different.
 For instance, an Elo rating could be equally valid for chess players and ice hockey teams. 
@@ -399,7 +399,6 @@ The notion of expected possession value has also been extended to association fo
 This approach considers passes, ball drives, and shots in soccer as the main set of actions used to compute the EPV metric. 
 Many applications can be derived from this framework, including predicting which footballer on the pitch is most likely to receive the next pass from the current on-ball player.
 
-@macdonald2012expected uses expected goals to evaluate ice hockey players, but does not have access to player tracking data necessary to evaluate possessions.
 @kumagai2021hockey offer an EPV metric for ice hockey. 
 
 ## Optimal strategies that don't maximize expected points
@@ -972,11 +971,11 @@ This type of infrastructure, where one package is the "workhorse" that facilitat
 See Section \ref{sec:elo} for an example of how the \pkg{chessR} package can be used to compute Elo ratings. 
 
 Figure \ref{fig:chess} shows a rendering of the starting chess board obtained via the \pkg{chess} package, along with the final position in the game won by one of the authors mentioned earlier in Section \ref{sec:elo} (with data downloaded via the \pkg{chessR} package). 
-We note how the contextual information provided by the chessboard is instrumental in helping the reader understand the data. 
+We note how the contextual information provided by the chessboard is instrumental in helping the reader contextualize the data. 
 (How many of us can visualize PGN directly?)
 In Section \ref{sec:graphics}, we outline a collection of graphical tools that provide similar context for different playing surfaces. 
 
-```{r chess, eval=whoami::username() == 'bsbaumer', fig.show="hold", out.width="49%", fig.cap="At left, the starting chess board printed via the \\pkg{chess} package. At right, the final position for one of the authors' recent wins (a checkmate playing Black)."}
+```{r chess, eval=whoami::username() == 'bbaumer', fig.show="hold", out.width="49%", fig.cap="At left, the starting chess board printed via the \\pkg{chess} package. At right, the final position for one of the authors' recent wins (a checkmate playing Black)."}
 library(chess)
 # Sys.setenv(RETICULATE_PYTHON = "my_env/bin/python3")
 game() |> plot()
@@ -1155,7 +1154,6 @@ Successful entries and their corresponding publications [@DeshpandeEvans2020; @Y
 
 Similar competitions that provide opportunities for aspiring researchers to tackle sports analytics problems include the [Big Data Cup](https://www.stathletes.com/big-data-cup/) for ice hockey and the [SABR Diamond Dollars Case Competition](https://sabr.org/analytics/case) for baseball, and the [Big Data Derby](https://www.kaggle.com/competitions/big-data-derby-2022) for horse racing.  
 
-As the field of sports analytics has grown, a proliferation of sports specific and regional sports analytics conferences have arisen.
 The biennial [New England Symposium on Statistics in Sports](https://www.nessis.org/) is likely the longest-running academic conference devoted to sports analytics. 
 It's West Coast counterpart is [The Cascadia Symposium on Statistics in Sports](http://www.cascadiasports.com/). 
 Many influential results have been showcased for the first time at these conferences. 

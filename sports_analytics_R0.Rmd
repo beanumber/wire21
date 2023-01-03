@@ -31,7 +31,6 @@ keywords:
   - sports data
   - pairwise comparisons
   - datasets
-link-citations: yes
 bibliography: [refs.bib, pkgs.bib]
 biblio-style: unsrt   
 # use apa for WIRE
@@ -51,7 +50,6 @@ knitr::opts_chunk$set(
   fig.align = 'center'
 )
 library(tidyverse)
-theme_set(theme_bw())
 library(kableExtra)
 ```
 
@@ -70,10 +68,7 @@ knitr::write_bib(
     "nflverse",
     "xgboost",
     "chess", 
-    "chessR",
-    "sportyR",
-    "nflplotR",
-    "baseballr"
+    "chessR"
   ),
   file = "pkgs.bib"
 )
@@ -120,7 +115,7 @@ While baseball---a naturally discrete sport with more than a century's worth of 
 In basketball, analytics has driven a shift in the conventional wisdom about shot selection. 
 Most teams are shooting more three-pointers, settling for fewer long two-point shots, deploying more versatile defenders, and relying less on the strategy of pounding the ball into the paint in an attempt to get a high-percentage shot [@Schuhmann2021nba3point].
 In American football, teams are going for it on fourth down far more often than in the past, a direct result of statistical analysis showing that most teams were previously overly conservative [@lopez2020bigger].
-And, of course, in baseball, teams are using defensive shifts to maximize the probability of recording an out, encouraging hitters to improve their launch angles, and optimizing pitcher repertoires to minimize contact [@healey2017new]. 
+And of course in baseball, teams are using defensive shifts to maximize the probability of recording an out, encouraging hitters to improve their launch angles, and optimizing pitcher repertoires to minimize contact. 
 
 These are just the most obvious examples of strategic changes that are fueled by insights extracted from data by practitioners of sports analytics.
 Similar insights are now being made in less obvious settings, including esports [@clark2020bayesian; @maymin2021smart]. 
@@ -128,8 +123,8 @@ These insights come both from academia, where researchers typically use public d
 A growing pool of people move seamlessly between these two worlds, leading to the formation of partnerships and the cross-pollination of ideas. 
 
 Every sport is different, with its own set of rules, strategies, methods of data collection, number of players, and the magnitude of the role of chance. 
-At the same time, many sports are similar, either because one evolved from the other, or the structure of the games share certain attributes. 
-Sports that are closely related historically may or may not share common applications of analytical methods. 
+At the same time, many sports are similar, either because one evolved from the other, or the structure of the game shares certain attributes. 
+Sports that are closely related anthropologically may or may not share common applications of analytical methods. 
 For example, despite belonging to the same bat-and-ball family, baseball and cricket differ in strategies such as batting order or sacrifice plays.
 Conversely, with just a few small tweaks, analytical metrics might work just as well across sports that are unrelated and quite different.
 For instance, an Elo rating could be equally valid for chess players and ice hockey teams. 
@@ -140,11 +135,7 @@ Our goal is to unify the conceptual threads, while doing some justice to the cus
 We include copious references to original works of scholarship.
 
 Doing the work of sports analytics requires computing with data. 
-While the sources of sports data are too numerous to list, we discuss the use of non-performance data (most notably, sports market betting data) in Section \ref{sec:betting}, and in Section \ref{sec:tools} we highlight a few computational tools (including a table of R packages) that make this kind of work possible. 
-Section \ref{sec:opportunities} lists several opportunities for disseminating work publicly. 
-We conclude in Section \ref{sec:conclusion} with a short discussion of some ideas that are not explored in this paper. 
-Notably, we omit a treatment of individual player ratings for team sports, since this concept has been covered ably in these pages by @Albert2015, and its inclusion would double the length of this manuscript.
-We do, however, discuss individual player ratings in the context of one-person teams (e.g., chess, tennis) in Section \ref{sec:strength}.
+While the sources of sports data are too numerous to list, in Section \ref{sec:tools} we highlight a few computational tools that make this kind of work possible. 
 
 We encourage readers to explore @cochran2017oxford and @Albert2017handbook for collections of articles in sports analytics that provide broad coverage of the field. 
 
@@ -161,32 +152,14 @@ Then our task is to estimate:
 
 for any state $s \in S$, where $\Pr[X = x | s]$ is the probability of scoring $x$ points given that the game is in state $s$ and $S$ is the set of all possible states. 
 
-The concept of a state is easier to grasp in a sport that can be modeled as *discrete* (in the sense of [discrete event simulation](https://en.wikipedia.org/wiki/Discrete-event_simulation)). 
-By discrete, we mean a sport that can be easily broken into short, distinct segments of action which are typically summarized categorically. 
-Each of these segments might represent a state $s$. 
-For example, each pitch in baseball is either a ball or a strike. 
-If the ball is put in play, then there may be a complex sequence of movements by the players, but ultimately (within a few seconds) that sequence will end and no more action will be permitted until the next pitch. 
-At the beginning and end of each phase of action, we will know definitively which team is on offense and defense, which runners are on which bases, the score, how many outs there are, etc. 
-Tennis could similarly be viewed as a series of discrete actions defined by each point. 
-To say that a player is winning 6-2, 3-1, 40-15 and serving with one fault committed is to characterize the state of the match.
-In American football, the game can be broken down into a discrete sequence based on each down. 
-Contrast this to sports like lacrosse, soccer, or any variant of hockey, which feature largely running clocks and continuous player movement. 
-In these sports, it is not obvious how to break up the action into discrete chunks. 
+## In baseball, the expected run matrix
 
-In this Section, we illustrate how the fundamental concept of the expected value of a game state leads to compelling findings in a variety of sports.
-
-## Discrete event analysis
-
-First, we explore results derived from the expected value of a state in sports where discrete event analysis is common. 
-We draw primarily on baseball and American football, but applications in other sports (e.g., tennis) are common (see for example, @kovalchik2019calibration). 
-
-### In baseball, the expected run matrix
-
+For clarity, we start with baseball due to the discrete nature of the sport. 
 In baseball, $s$ is typically determined by two factors: the configuration of the runners on base (there are 8 possibilities) and the number of outs (3 possibilities). 
 Thus, there are $|S| = 24 = 8 \cdot 3$ basic states of an inning in baseball[^state], and we are often interested in the number of runs that will be scored from some state until the end of the inning. 
 In this example using baseball, $\mathbb{E}[X | s] \,$ is the expected number of runs scored between now and the end of the inning given that the inning is currently in state $s$. 
 The collection of estimates $\mathbb{E}[X | s]$ for all 24 states is called the *expected run matrix* [^matrix], and it is foundational in baseball analytics. 
-
+Figure \ref{fig:lindsey} shows a reproduction of George @lindsey1963investigation's original calculations, and Table \ref{tab:erm} shows the expected run matrix in its more familiar form. 
 
 [^state]: 25, if you include the absorbing state of 3 outs.
 
@@ -239,9 +212,7 @@ erm |>
 
 Early work on this topic can be found in @lindsey1963investigation, who used play-by-play data to compute an empirical estimate for the mean number of runs scored in the remainder of the inning for each of these 24 possible states of an inning. 
 This line of work led to analysis of all types of common baseball strategies. 
-For example, many baseball teams elect to attempt a sacrifice bunt with a runner on first and no one out in the inning, with the goal of moving the runner to second base, at the cost of the batter being out. Figure \ref{fig:lindsey} shows a reproduction of @lindsey1963investigation's original calculations, and Table \ref{tab:erm} shows the expected run matrix in its most common form. 
-
-
+For example, many baseball teams elect to attempt a sacrifice bunt with a runner on first and no one out in the inning, with the goal of moving the runner to second base, at the cost of the batter being out. 
 @Tango2007book (and many subsequent analyses) conclude that the sacrifice bunt is rarely worth it, because most teams would be expected to score more runs with a runner on first and no outs than they would with a runner on second and one out. 
 
 It is worth emphasizing that the values in $\mathbb{E}[X | s]$ are estimates, and the precision of those estimates has many subtleties. 
@@ -259,7 +230,7 @@ Indeed, @Tango2007book show that when a particularly weak-hitting batter is up (
 
 See @Albert2001curve for a fuller discussion of the use of the expected run matrix in baseball and @marchi2018analyzing for examples of how to estimate the expected run matrix using Retrosheet data and the R statistical computing language [@R-base]. 
 
-### In American football, expected points {#sec:football}
+## In American football {#sec:football}
 
 The concept of estimating the value of the state of a game is easily extended to other sports. 
 For example, in American football, $s$ is determined by situational variables such as down, yardage to the next first down, time remaining in the game, and field position. 
@@ -267,8 +238,7 @@ For example, in American football, $s$ is determined by situational variables su
 The task of estimating expected points of possession in football goes back to @Carter1971operations, who estimate the expected points for 1st and 10 plays in the NFL, given any yard line on the football field. 
 Due to limitations regarding the amount of data collected, the authors divide football field into 10-yard buckets, centered at their midpoints (e.g. 5, 15, 25, 35, etc.), before averaging the value of the next scoring instance across the field to obtain the expected points.
 Figure \ref{fig:carter} shows a reproduction of @Carter1971operations's estimates. 
-As expected, the estimated expected points increases monotonically as the teams gets closer to the endzone.
-One limitation of this approach is the linearity assumption, which results in a high negative expected point value when the offensive team is 95 yards away from the opponent's goal line.
+As expected, the estimated expected points increases monotonically as the teams gets closer to the endzone. 
 
 ```{r carter, fig.cap="Table 1 from Carter and Machol's original paper. Note the monotonic increase in expected point values as the team gets closer to the endzone. ", out.width="100%"}
 knitr::include_graphics("carter_table1.png")
@@ -279,7 +249,7 @@ In particular, the authors extend @Carter1971operations's work and propose a lin
 They determine that every extra 25 yards is associated with 2 more points scored on average for a football team.
 
 Other attempts at modeling expected points in football are @goldner2012markov and @goldner2017situational, who propose a Markov framework.
-In particular, the author considers a football drive as an *absorbing Markov chain*, consisting of distinct *absorbing states* that include touchdowns, field goals, and other play outcomes. 
+In particular, the author considers a football drive as an *absorbing Markov chain*, consisting of distinct *absorbing states* touchdowns, field goals, and other play outcomes. 
 For any given play, the expected points are calculated using the absorption probabilities for different scoring events.
 
 A more in-depth overview of the history of expected points in sports is provided in @Yurko2019nflwar (Section 1.1). 
@@ -293,7 +263,7 @@ They state that by failing to account for opponent strength appropriately, about
 
 <!-- XX Seems massive -->
 
-### In American football, 4th down strategy
+### 4th down strategy
 
 The concept of expected points in American football has many applications.  One of the most notable and well-studied topic is the evaluation of 4th down strategy.
 There is near universal consensus in the literature that NFL teams have been too conservative in the past when making 4th down decisions. 
@@ -301,15 +271,9 @@ There is near universal consensus in the literature that NFL teams have been too
 @Romer2006 examines 4th down decisions in the NFL using expected points by focusing only on examples from the first quarter of a game (to avoid issues with end-of-half and end-of-game decision making). 
 They concluded that teams don't go for it enough if teams are trying to maximize their probability of winning the game. 
 
-Numerous other papers (see @lopez2020bigger for details) use the analysis of the expected number of points to improve fourth down strategy. In addition to @Romer2006, later work by @Yam2019 uses win probability (see Section \ref{sec:wp}), rather than expected points, and a causal inference framework to reach similar conclusions that NFL teams are too conservative in going for it on 4th down.  In addition, they estimate that a better strategy would be worth about 0.4 wins per season on average, a substantial amount in a season with only 16 games. 
+Numerous other papers (see @lopez2020bigger for details) use the analysis of the expected number of points to improve fourth down strategy. In addition to @Romer2006, later work by @Yam2019 uses win probability (see Section \ref{sec:wp}), rather than expected points, and a casual inference framework to reach similar conclusions that NFL teams are to conservative in going for it on 4th down.  In addition, they estimate that a better strategy would be worth about 0.4 wins per season on average, a substantial amount in a season with only 16 games. 
 
-@lopez2020bigger presents an introduction to NFL tracking data, and examines 4th down behavior as an example of the type of problem that can be more thoroughly studied with the increase in granularity of the tracking data over traditional NFL data.
-In the past, when looking at down and distance data to study whether NFL coaches are making good decisions about whether to "got for it" or punt on 4th down, the distance data is only a rounded approximation of the true distance "to go" (i.e. 1 yard, 1 foot, and 1 inch will all be recorded as 4th and 1. 
-In fact, anything up to 2 yard will recorded as 4th and 1 [@lopezDM]. However, a coach on the field during a game will be able to clearly see the difference between 1 inch and 1 yard, and this information will factor into their decision making. 
-With tracking data, the "to go" distance can be much more accurately assessed and therefore evaluation of 4th down coaching decisions can now account for this "extra" information that is available to a coach on the field of play, but not recorded in traditional NFL data. 
-Many past analyses of the decision to go for it or not on 4th down conclude that coached in the NFL are too conservative in their decisions making. 
-@lopez2020bigger also concludes that coaches are too conservative on 4th down decision making, but the effect may be overstated due to the way in which to go yardage has been recorded in the past.  
-
+@lopez2020bigger presents an introduction to NFL tracking data, and as an example, examines 4th down behavior.  Rather than looking at the traditional distance to go, which is rounded, they have the exact position of the ball leading to an exact distance to go. They demonstrate that teams are still conservative when choosing to go for it or punting on 4th down, but the effect may be overstated. 
 
 ### Other applications of expected points in American football
 
@@ -340,11 +304,9 @@ Another application of expected points is to evaluate kickoff decisions made by 
 <!-- @urschel2011 Examines decsions on kick offs (surprise on sides or regular kick off AND accept touchback or return kick) using an expected points frame work.  Shows that teams are moderately risk and loss averse. -->
 <!-- https://www.eng.buffalo.edu/~jzhuang/Papers/JQAS_NFL_2011.pdf -->
 
-## Continuous event analysis
+## In sports with continuous states
 
 Even in sports where the concept of a state is more difficult to define, the value of a possession can be estimated with the help of tracking data.  Over the past decade or so, professional sports leagues have collected tracking data which record the locations of all players and the ball (or puck) throughout a game. This high-resolution data allows researchers to produce advanced analyses of the captured spatiotemporal information and better understand the game.  This is a great leap forward from older resources such as traditional box-score results and play-by-play data.
-
-### In basketball, expected point value
 
 In basketball, @cervone2014pointwise and @cervone2016multiresolution introduce expected possession value (EPV) as a means toward an assessment of a player's on-court performance. 
 This metric is a continuous-time estimate of the expected number of points for the offensive team on a given possession using player and ball locations. 
@@ -371,16 +333,14 @@ knitr::include_graphics("epv_snap.png")
 
 Note that Miami starts the play with an EPV of approximately 1.0 points, which indicates their implied average points per possession. 
 Chalmers' shot is worth 3 points, so the EPV of 1.276 points implies that the model estimate of the probability of Chalmers making this shot is 42.5\%. 
-A breakthrough in this work is that this estimate is conditional on the locations of the other 9 players on the basketball court.
+A breakthrough in this work is that this estimate is conditional on the locations of the other 9 players on the basketball court!
 
 Another framework for estimating expected points in basketball is proposed by @Sicilia2019DeepHoops. 
 The authors offer a different point of view on expected points, where they first consider a classification model which returns the probabilities for whether a player would commit a foul (shooting and non-shooting), turnover, or attempt a shot. 
 The values associated with each of those "terminal actions" are then used to compute the expected points within a basketball play.
 
 See also @bornn2017studying for more information on how tracking data have enabled advanced statistical analyses of basketball in recent years.
-The strategy of maximizing expected points in basketball has led directly to the proliferation of three-point shooting in the NBA. 
-
-### In American football, yards gained
+The strategy of maximizing expected points in basketball has lead directly to the proliferation of three-point shooting in the NBA. 
 
 In Section \ref{sec:football}, we discussed advances in American football analytics based on discrete game states defined by down, yards to first down, field position, etc. 
 The advent of player tracking data makes it possible to analyze American football using continuous states. 
@@ -392,15 +352,10 @@ Expected point value is also the main component of a novel NFL quarterback evalu
 The authors take advantage of player tracking data to account for different passing and running options on the football field that are available to the quarterback.
 The expected points and probabilities associated with the possible quarterback options are estimated using the method of ensemble learning via stacking.
 
-### In other sports
-
 The notion of expected possession value has also been extended to association football (soccer).
 @fernandez2021framework implement deep learning methods to examine the instantaneous expected value of soccer possessions. 
 This approach considers passes, ball drives, and shots in soccer as the main set of actions used to compute the EPV metric. 
 Many applications can be derived from this framework, including predicting which footballer on the pitch is most likely to receive the next pass from the current on-ball player.
-
-@macdonald2012expected uses expected goals to evaluate ice hockey players, but does not have access to player tracking data necessary to evaluate possessions.
-@kumagai2021hockey offer an EPV metric for ice hockey. 
 
 ## Optimal strategies that don't maximize expected points
 
@@ -415,12 +370,12 @@ $$
   \underset{u \in U}{\arg \max \,}{\Pr[X > 0 | s, u]} \neq \underset{u \in U}{\arg \max \,}{\mathbb{E}[X | s, u]} \,.
 $$
 Consider the situation where runners are on first and third base, and the score is tied in the bottom of the ninth inning with no one out. 
-Information derived from Table \ref{tab:erm} reveals that the expected number of runs scored in the remainder of the inning is 1.94 runs, while the probability of scoring zero runs is 0.13. 
+Table \ref{tab:tied} (derived from Table \ref{tab:erm}) reveals that the expected number of runs scored in the remainder of the inning is 1.94 runs, while the probability of scoring zero runs is 0.13. 
 The defense is in a tight spot, facing an 87% probability of losing the game. 
 However, by walking the hitter to load the bases, they create the opportunity to force the lead runner at home and thus reduce the chances of scoring to 82%, even though they raise the expected number of runs scored to 2.22. 
 In this case, the *defensive* team is wise to pursue the strategy of maximizing the expected number of runs scored, because it *minimizes* the probability of scoring at least one run. 
 
-```{r, eval=FALSE}
+```{r}
 erm <- erm |>
   mutate(
     Pr_0 = c(
@@ -507,7 +462,7 @@ According to this model, the difference in score between the two teams is the mo
 
 In addition, @Yurko2019nflwar estimate win probability in the NFL using a generalized additive model (GAM), as part of the **nflscrapR** package [@R-nflscrapR] and nflWAR framework. 
 This model takes into account the estimated expected points obtained from the model described in Section \ref{sec:ev}, along with other predictors for time, current half, and timeouts. 
-The two win probability frameworks proposed by @Lock2014 and @Yurko2019nflwar were also implemented in @Yam2019 with minimal modifications. Specifically, the authors combined both approaches to estimate the win probability for each play, with an overall goal of assessing fourth down decision-making in American football.
+The two win probability frameworks proposed by @Lock2014 and @Yurko2019nflwar were also implemented in @Yam2019 with minimal modifications. Specifically, the authors combined both approaches to estimate the win probability for each play, with an overall goal of assessing fourth down decision-making in gridiron football.
 
 A vital highlight of @Yurko2019nflwar's win probability model is that it is fully reproducible and uses publicly available data. 
 One of @Yurko2019nflwar's goals was also to encourage researchers to "use, explore, and improve upon our work," which ultimately inspired \pkg{nflfastR} (@R-nflfastR), now considered the successor to **nflscrapR**. 
@@ -557,12 +512,13 @@ wp_plot <- ggplot(x, aes(game_seconds_remaining, wp, color = team)) +
     linetype = "dashed", 
     color = "gray"
   ) + 
-  geom_line(linewidth = 1.5, alpha = 0.8) +
+  geom_line(size = 1.5, alpha = 0.8) +
   labs(
     x = "Time Remaining (seconds)",
     y = "Win Probability",
     color = NULL
   ) +
+  theme_bw() +
   theme(legend.position = "top")
 
 library(magick)
@@ -591,7 +547,7 @@ $$
 Here, a Brownian motion process with drift $\mu$ points advantage for the home team and variance $\sigma^2$ is used to model the score difference between the home and away teams. 
 
 On a related note, @Deshpande2016 extend @Stern1994's framework by applying it in a Bayesian setting. 
-@Deshpande2016 propose a Bayesian linear regression model to assess the impact of individual players on their team's chance of winning at any given time of a basketball game. 
+In this paper, the authors propose a Bayesian linear regression model to assess the impact of individual players on their team's chance of winning at any given time of a basketball game. 
 This model assumes independence of observations and constant variability in win probability.
 
 Moreover, @McFarlane2019 uses logistic regression to estimate win probability for evaluating end-of-game decisions in the NBA. 
@@ -610,85 +566,14 @@ In this approach, the rugby play-by-play event data are treated as functional, a
 # Team strength {#sec:strength}
 
 A third crucial idea in sports analytics is the estimation of team strength. 
-First, we briefly introduce a simple method for estimating team strength based on won-loss record. 
-Next, we detail three other more sophisticated methods for estimating team strength in sports through pairwise evaluations. 
-The methods in this Section apply equally well to multiplayer teams and single-player teams. 
-
-The impetus for all methods for estimating team strength is the realization that won-loss records are a noisy measure of team strength. 
-As binary outcomes, and with all sports (except perhaps chess) involving some element of chance, wins and losses carry some signal of team strength, but we can do better. 
-
-## Expected winning percentage {#sec:wpct}
-
-A simple method for estimating team strength that has become popular in sports analytics is expected winning percentage---often called Pythagorean expectation---developed by @james2003new. 
-Later, @miller2007derivation derived the formula as a consequence of assuming that runs (in baseball) are generated by two independent Weibull processes. 
-
-Expected winning percentage is just:
-$$
-  \widehat{wpct} = \frac{X^\alpha}{X^\alpha + Y^\alpha} \,,
-$$
-where $X$ is the number of points (runs) that a team has scored, and $Y$ is the number of points (runs) that they have allowed, over some specified time period. 
-James's work was originally in baseball, and he posited the value of $\alpha = 2$. 
-The resemblance to the formula for computing the length of the hypotenuse in a right triangle provides the nod to Pythagoras. 
-
-Subsequent analysts have tried to find the optimal value of $\alpha$ for various time periods. 
-This can be done with a few lines of code, after observing that 
-$$
-  \frac{X^\alpha}{X^\alpha + Y^\alpha} = \frac{1}{1 + (Y/X)^2}
-$$
-and fitting a non-linear model (see similar discussion in @baumer2021mdsr). 
-Figure \ref{fig:pythag} illustrates the quality of the fit in Major League Baseball since 1954, where the optimal value of $\alpha$ is 1.84. 
-
-```{r}
-library(tidyverse)
-library(Lahman)
-exp_wpct <- function(x, k = 2) { 
-  return(1/(1 + (1/x)^k))
-}
-
-TeamRuns <- Teams %>% 
-  filter(yearID >= 1954) %>%
-  rename(RS = R) %>% 
-  mutate(WPct = W / (W + L), run_ratio = RS/RA) %>%
-  select(yearID, teamID, lgID, WPct, run_ratio)
-
-data_space <- ggplot(
-  data = TeamRuns, aes(x = run_ratio, y = WPct)
-) +
-  geom_vline(xintercept = 1, color = "darkgray", linetype = 2) +
-  geom_hline(yintercept = 0.5, color = "darkgray", linetype = 2) +
-  geom_point(alpha = 0.2) + 
-  xlab("Ratio of Runs Scored to Runs Allowed") + 
-  ylab("Winning Percentage")
-```
-
-
-```{r}
-optimal <- TeamRuns %>%
-  nls(
-    formula = WPct ~ 1/(1 + (1/run_ratio)^k), 
-    start = list(k = 2)
-  ) %>%
-  coef()
-```
-
-```{r pythag, fig.cap="Winning percentages vs. runs scored and runs allowed in baseball, 1954--2021. The navy line represents the expected winning percentage model posited by James, with the exponent value of 2. The gold line shows the same model with an optimal exponent of 1.84."}
-data_space +
-  stat_function(fun = exp_wpct, args = list(2), linewidth = 2, color = "navy") +
-  stat_function(fun = exp_wpct, args = list(optimal), linewidth = 2, color = "gold")
-```
-
-Many authors have fit expected winning percentage models to other sports---too many to cite here. 
-See, for example, @hamilton2011extension for association football (soccer), @caro2013testing for Division I college football, and notably, future NBA general manager Daryl Morey for basketball [@dewan1993stats].
-
-## Bradley-Terry models
-
-Perhaps the most widely-used probability model for predicting the outcome of a paired comparison is the Bradley-Terry model (BTM) [@Bradley1952]. 
+A popular method for estimating team strength in sports is through pairwise evaluations. 
+Perhaps the most famous probability model for predicting the outcome of a paired comparison is the Bradley-Terry model (BTM) [@Bradley1952]. 
 For a pair of players (or teams) $i$ and $j$, let $\Pi_{ij}$ denote the probability that $i$ is preferred to $j$. 
 Then the BTM is a logistic regression model with parameters $\beta_i, \beta_j$ such that
 $$
 \log\left(\frac{\Pi_{ij}}{\Pi_{ji}}\right) = \beta_i - \beta_j \,.
 $$
-Here, $\exp{(\beta_i)}$ is often viewed as a representation of team $i$'s ability. 
+Here, $\exp{\beta_i}$ is often viewed as a representation of team $i$'s ability. 
 
 The BTM can be implemented in R via the \pkg{BradleyTerry2} package [@R-BradleyTerry2]. 
 As an example, we consider the data given in @agresti2018introduction (page 247) on tennis results from 2014--2018 for five men's professional players: Novak Djokovic, Roger Federer, Andy Murray, Rafael Nadal, and Stan Wawrinka. 
@@ -710,18 +595,10 @@ tennis_bt <- BradleyTerry2::BTm(cbind(win1, win2), player1, player2, data = tenn
 tennis_bt |>
   update(refcat = "Wawrinka") |> 
   BradleyTerry2::BTabilities() |> 
-  as_tibble(rownames = "Player") |>
-  arrange(desc(ability)) |>
-  mutate(
-    Ability = as.double(ability),
-    SE = as.double(s.e.)
-  ) |>
-  select(Player, Ability, SE) |>
-  kable(
-    booktabs = TRUE, 
-    digits = 3,
-    caption = "The estimated abilities (with standard errors) for each tennis player, relative to Wawrinka, obtained from the fitted Bradley-Terry model. \\label{tab:tennisbtm}"
-  ) |> 
+  round(3) |> 
+  kable(booktabs = TRUE, 
+        col.names = c("Ability", "SE"),
+        caption = "The estimated abilities (with standard errors) for each tennis player, relative to Wawrinka, obtained from the fitted Bradley-Terry model. \\label{tab:tennisbtm}") |> 
   kable_styling(latex_options = "hold_position")
 ```
 
@@ -731,7 +608,7 @@ In addition to an ordering, the magnitude of the coefficients in Table \ref{tab:
 
 To obtain win probabilities, as an illustration, for the Federer-Nadal matchup, an estimate for the probability of a Federer victory is:
 $$
-\hat\Pi_{24} = \frac{\exp(\hat\beta_2 - \hat\beta_4)}{1 + \exp(\hat\beta_2 - \hat\beta_4)} = \frac{\exp(1.136 + 0.062)}{1 + \exp(1.136 + 0.062)} = 0.768 \,.
+\hat\Pi_{24} = \frac{exp(\hat\beta_2 - \hat\beta_4)}{1 + exp(\hat\beta_2 - \hat\beta_4)} = \frac{exp(1.136 + 0.062)}{1 + exp(1.136 + 0.062)} = 0.768 \,.
 $$
 
 ```{r btm, eval=FALSE}
@@ -779,187 +656,28 @@ btm2 |>
   arrange(desc(estimate))
 ```
 
-## Elo ratings {#sec:elo}
-
-<!-- a basic Elo probability model for estimating the probability of $A$ beating $B$ is -->
-<!-- $$ -->
-<!-- P(A) = W(R_A - R_B) \,. -->
-<!-- $$ -->
-<!-- Here, $W$ is a continuous and monotonically increasing function that maps the difference in strength to (0, 1).  -->
-
-Another widely known tool for measuring team strength is the Elo rating system [@Elo1978], which was originally developed for chess.
-Given two players $i$ and $j$ with unknown ratings $R_i$ and $R_j$, the probability $\Pi_{ij}$ of $i$ beating $j$ is defined as
-$$
-\Pi_{ij} = \frac{1}{1 + K^{(R_j - R_i)/400}} \,.
-$$
-In this formula, $K$ is commonly known as the $K$-factor, or development coefficient.
-The International Chess Federation (FIDE) uses $K=10$ for players with any previously achieved rating of at least 2400.
-For those that have never reached a rating of 2400 or better, $K=20$ is assigned. 
-Finally, $K=40$ is given to new players with under 30 games played, and players under the age of 18 with rating fewer than 2300 [@fide2022rating].
-
-Another interpretation for $\Pi_{ij}$ is the expected score of the game for player $i$.
-The scores of 0, 0.5, and 1 are associated with three possible game outcomes loss, tie, and win, respectively.
-After a game, the updated Elo rating $R^*_i$ for player $i$ is
-$$
-R^*_i = R_i + K(S_i - \Pi_{ij}) \,,
-$$
-where $S_i \in \{0, 0.5, 1\}$.
-When a tournament concludes, a post-tournament rating is obtained for each player based on the rating updates for all games played.
-
-
-```{r}
-library(chessR)
-us <- c("fatgreggy")
-greg <- get_raw_chessdotcom(
-  usernames = us,
-  year_month = 202206
-)
-# greg: black
-```
-
-To illustrate, we consider a chess game played on June 1, 2022 on [Chess.com](https://www.chess.com/) by one of the authors, with data obtained from the \pkg{chessR} package [@R-chessR] (see Section \ref{sec:chess}). 
-Prior to the game, the author was rated `r greg[6, "BlackElo"]`, whereas his opponent was rated `r greg[6, "WhiteElo"]`.
-Since both ratings are below 2400, we apply a development coefficient of $K=20$ to this example.
-The probability of the author ($a$) defeating their opponent ($b$) was
-<!-- don't know how to include `r` inside latex -->
-$$
-\Pi_{ab} = \frac{1}{1 + 20^{(1683 - 1732)/400}} = 0.591 \,.
-$$
-The author won the match: that outcome is associated with a score of $S_a = 1$.
-The post-game Elo rating for the author is thus
-$$
-R^*_a = 1732 + 20(1 - 0.591) = 1740 \,.
-$$
-
-Besides chess, the Elo system has also been implemented to estimate team strength in other sports. 
-See @koning2017rating for more information on applications of the Elo rating in soccer, and @kovalchik2019calibration and @kovalchik2016searching for Elo ratings in tennis. 
-Furthermore, Elo ratings are used extensively for rankings of teams in numerous sports by the data journalists at [FiveThirtyEight.com](https://fivethirtyeight.com). 
-
-## Bayesian state-space models
+Another widely known tool for measuring team strength is the Elo rating system [@Elo1978], which was originally developed for chess, but also has been used to estimate team strength in other sports. 
+See @koning2017rating for more information on applications of the Elo rating in soccer. 
 
 @Glickman1998 propose a Bayesian state-space model for paired comparisons for predicting NFL games, allowing team strength parameters to vary over time. 
 In particular, they model point differential in the NFL by introducing week-to-week and season-to-season as the two primary sources of variation in team strengths. 
 See also @glickman2017estimating for more discussion on estimating team strengths in American football. 
-
 More recently, @Lopez2018 extend @Glickman1998's state-space model to understand randomness in the four major American sports leagues. 
 Betting moneylines are used in place of point differentials in order to estimate team strengths, and this framework also accounts for home advantage.
 Both papers motivate the usefulness of model-based measures of team strength by demonstrating their superiority to low-resolution win-loss records. 
 Apart from sports gambling, having an accurate estimate of team strength is useful to team officials, who are constantly monitoring and forecasting their team's ability. 
-
-@koopman2015dynamic uses a Bayesian state-space model to develop team ratings for English Premier League soccer that improves on bookmaker's odds. 
-
-# Non-performance data {#sec:betting}
-
-Most of the research in sports analytics is fueled by the analysis of data recorded from the outcome of sports contests.
-However, a growing body of literature is informed by non-performance data about sports. 
-This research appears in fields like sports economics and kinesiology that are subfields of mature disciplines (a treatment of either is well beyond the scope of the this paper).
-In addition to this body of research, we note that today, professional sports teams are collecting biometric data on their own players, and presumably using that data to learn about how their workouts, sleep patterns, and diets impact their athletic performance. 
-While this research may constitute "emerging methodologies," it will likely never be published, because each team will use it to their competitive advantage. 
-
-Nevertheless, in this Section we discuss concepts stemming from one notable, relatively new source of (semi-)public non-performance sports data: betting markets.
-Since the 2018 United States Supreme Court decision in [*Murphy v. National Collegiate Athletic Association*](https://en.wikipedia.org/wiki/Murphy_v._National_Collegiate_Athletic_Association), sports gambling has exploded in the U.S. 
-The increasing interest in sports gambling has led to increasing interest in sports gambling *data*, and that data has proven useful to researchers in at least two major ways. 
-
-First, betting market data is probably the best source for estimating the true probability of a team winning a game. 
-The efficiency of betting market data in this respect has been demonstrated time and time again.
-The utility of these estimates have then informed research that has helped us learn about the sports themselves.
-In this sense, data generated by sports gambling has been an important source of data useful for sports analytics (see Section \ref{sec:betting-market-data}). 
-
-Second, sports analytics researchers have studied various types of sports gambling outlets (including fantasy sports). 
-This research has estimated probabilities, evaluated common strategies, and offered optimized approaches for a variety of different games of chance (see Section \ref{sec:pools}). 
-Some researchers have then tried to demonstrate a positive return on some of these betting strategies, with very limited success.
-
-## The use of betting market data for sports analytics {#sec:betting-market-data}
-
-While @Lopez2018 uses betting market data to model team strengths, they do not directly address strategies for betting or inefficiencies in betting markets. 
-Early work by @gandar1988testing examines the rationality of NFL betting markets and concludes that statistical tests fail to reject the hypothesis of rationality.
-Related work such as @lacey1990estimation and @Boulier2006 explores the efficiency of NFL betting markets in the mid-1980s and late-1990s, respectively.
-Neither paper finds strong evidence for inefficiencies in the markets. 
-@boulier2003predicting compare the predictive performance of power rankings and media experts to the betting market for NFL games and found that the betting market is the best for predicting winners. 
-@lopez2015building show that betting market data was most useful in predicting men's college basketball tournament outcomes. 
-
-Sports betting market data has also been used to investigate competitive behavior within leagues. 
-@soebbing2013gamblers find evidence that sports bettors *think* tanking in the NBA is occurring, although the evidence for whether it actually is remains mixed. 
-
-## Analytics for sports betting {#sec:pools}
-
-### Betting pools
-
-One popular type of betting pool is a survivor pool, in which participants stay in the competition as long as they continue to successfully pick winners.
-@Bergman2017SurvivingAN present formal optimization approaches for NFL survivor pools and conclude that planning for only part of the season yields optimal results in terms of maximizing survival probability.
-@imbrogno2022computing estimate the probability of having to share the winning pot in NFL survivor pools. 
-
-Perhaps the most commonly-studied sports betting market surrounds the NCAA men's college basketball tournament. 
-@breiter1997play use Monte Carlo methods to study the standard "office pool."
-@kaplan2001march consider a variety of NCAA college basketball pools, and find that the simple strategy of picking the team with the better seed is generally, but not always, optimal. 
-@metrick1996march finds that bettors overback the heaviest favorites. 
-@niemi2008contrarian show an improved return on investment by picking an undervalued champion and then completing the rest of one's bracket by using published odds. 
-@clair2007optimal develop and test strategies for maximizing expected return in both survivor and tournament-style pools. 
-
-### Beating the market 
-
-Naturally, after studying the efficiency of sports betting markets, researchers try to find inefficiencies that can be exploited for financial gain. 
-Not surprisingly (given the efficiency of these markets), such gains are hard to come by. 
-
-@sauer1998economics finds that while racetrack betting markets are generally efficient, information asymmetry plays a role in creating inefficient markets. 
-@nichols2014impact concludes that the impact of travel is not completely incorporated into the betting markets, but that any effect is too small to find any profitable advantage. 
-@PaulWeinbach2014 investigate the less-saturated betting market for the WNBA and fail to find strategies for positive return on investment. 
-@spann2009sports show no way to beat the market in the German premier soccer league, given the high fees associated with placing bets. 
-
-More successfully, @Buttrey2016 explores the NHL betting market and produces a model to predict win probabilities in given games, then tests the model by placing market price bets in games where the predicted probability differs from the market. 
-They find that their methods were able to produce a positive return on investment. 
-
 
 # Tools {#sec:tools}
 
 Analytical work in sports requires facility with an ever-changing set of computational tools for working with data. 
 Sources of authoritative data about sports are myriad, and are too numerous to list here. 
 Software tools for sports analytics are similarly numerous. 
-For R, we maintain a [CRAN Task View for Sports Analytics](https://CRAN.R-project.org/view=SportsAnalytics) that catalogs R packages published on the Comprehensive R Archive Network (CRAN) and organizes them by sport [@baumer2022ctv].
-Table \ref{tab:ctv} provides an overview of the currently available sport-specific CRAN packages.
-@casals2022systematic offers a systematic review of sport-related packages on CRAN.
-Further, a more general collection of software tools is being curated by the SportsDataverse initiative [@gilani2022sportsdataverse].
-
-```{r}
-tibble(
-  "American Football" = "nflverse, nflfastR, nflreadr, nfl4th, nflseedR,\n nflplotR, NFLSimulatoR, fflr, ffscrapr, ffsimulator, gsisdecoder, cfbfastR",
-  "Association Football (Soccer)" = "worldfootballR, engsoccerdata, socceR, ggsoccer, footballpenaltiesBL, footBayes, itscalledsoccer, FPLdata, EUfootball",
-  "Australian Rules Football" = "fitzRoy",
-  "Baseball/Softball" = "Lahman, retrosheet, pitchRx, mlbstats, baseballDBR, baseballr, runexp",
-  "Basketball" = "BAwiR, AdvancedBasketballStats, uncmbb, BasketballAnalyzeR, NBAloveR, wehoop, hoopR, toRvik",
-  "Chess" = "chess, stockfish, bigchess, rchess, chessR",
-  "Cricket" = "yorkr, cricketr, cricketdata, howzatR",
-  "Esports" = "CSGo, rbedrock, ROpenData, opendotaR, RDota2",
-  "GPS Activity Tracking" = "trackeR, trackeRapp, rStrava",
-  "Hockey" = "hockeyR, NHLData, nhlapi, nhlscrape, fastRhockey",
-  "Swimming" = "SwimmeR",
-  "Track and Field" = "combinedevents, JumpeR",
-  "Volleyball" = "volleystat"
-) |> 
-  pivot_longer(
-    everything(),
-    names_to = "Sport",
-    values_to = "Packages"
-  ) |>
-  transmute(
-    Sport,
-    "Number of Packages" = str_count(Packages, ",") + 1,
-    "List of Packages" = Packages
-  ) |>
-  arrange(desc(`Number of Packages`)) |>
-  kable(
-    booktabs = TRUE,
-    linesep = "",
-    caption = "A summary of sport-specific packages available on the Comprehensive R Archive Network (CRAN). While the major North American sports dominate the list, perhaps the fastest-growing collection is for esports. \\label{tab:ctv}"
-  ) |> 
-  column_spec(3, width = "7cm")
-```
-
-
+For R, we maintain a [CRAN Task View for Sports Analytics](https://CRAN.R-project.org/view=SportsAnalytics) that catalogs R packages published on the Comprehensive R Archive Network and organizes them by sport [@baumer2022ctv].
+A more general collection of software tools is being curated by the SportsDataverse initiative [@gilani2022sportsdataverse].
 
 In the remainder of this section, we highlight a few tools for sports analytics that are of general interest and illustrate a common paradigm for how these tools can be used in conjunction. 
 
-## Case study in how tools fit together: chess {#sec:chess}
+## Case study in how tools fit together: chess
 
 Many tools in sports analytics provide the ability to read, write, and plot data stored in a sport-specific format. 
 For example, consider chess, where the sequence of moves in games is often recorded in [Portable Game Notation](https://en.wikipedia.org/wiki/Portable_Game_Notation) (PGN).
@@ -968,15 +686,11 @@ The \pkg{chess} package [@R-chess] provides R users with the ability to read, wr
 
 [Application programming interfaces](https://en.wikipedia.org/wiki/API) (APIs) are also a common source for data retrieval. 
 In chess, the \pkg{chessR} package [@R-chessR] allows R users to download game data from the Chess.com API. 
-This type of infrastructure, where one package is the "workhorse" that facilitates common generic data operations, and other packages layer on specific functionality, is common in sports analytics.
-See Section \ref{sec:elo} for an example of how the \pkg{chessR} package can be used to compute Elo ratings. 
+This type of infrastructure, where one package is the "workhorse" that facilitates common generic data operations, and other packages layer on specific functionality, is common in sports analytics. 
 
-Figure \ref{fig:chess} shows a rendering of the starting chess board obtained via the \pkg{chess} package, along with the final position in the game won by one of the authors mentioned earlier in Section \ref{sec:elo} (with data downloaded via the \pkg{chessR} package). 
-We note how the contextual information provided by the chessboard is instrumental in helping the reader understand the data. 
-(How many of us can visualize PGN directly?)
-In Section \ref{sec:graphics}, we outline a collection of graphical tools that provide similar context for different playing surfaces. 
+Figure \ref{fig:chess} shows a rendering of the starting chess board obtained via the \pkg{chess} package, along with the final position in a game recently won by one of the authors (downloaded via the \pkg{chessR} package). 
 
-```{r chess, eval=whoami::username() == 'bsbaumer', fig.show="hold", out.width="49%", fig.cap="At left, the starting chess board printed via the \\pkg{chess} package. At right, the final position for one of the authors' recent wins (a checkmate playing Black)."}
+```{r chess, eval=whoami::username() == 'bbaumer', fig.show="hold", out.width="49%", fig.cap="At left, the starting chess board printed via the \\pkg{chess} package. At right, the final position for one of the authors' recent wins (a checkmate playing Black)."}
 library(chess)
 # Sys.setenv(RETICULATE_PYTHON = "my_env/bin/python3")
 game() |> plot()
@@ -993,155 +707,21 @@ m <- extract_moves_as_game(greg[6, ])
 plot(m)
 ```
 
-
-
-## Graphical tools {#sec:graphics}
-
-Creating effective data graphics is a key component of statistical communication, and sports is no exception. 
-We highlight a few packages that assist with the creation of data graphics about sports. 
+## Theming
 
 Each professional sports team has its own brand, most obviously identified by a team logo and set of colors. 
 The \pkg{teamcolors} R package [@R-teamcolors] provides color palettes and logos for men's and women's professional and collegiate sports teams, as well as color and fill scale functions compatible with \pkg{ggplot2} [@R-ggplot2].
 For example, the NFL teams' colors and logos shown in Figure \ref{fig:nflfastr-wp} were provided by the \pkg{teamcolors} package. 
-Figure \ref{fig:mlb_standings} illustrates how the use of team colors, which have a natural association for many sports fans, can help to untangle what would otherwise be messy data graphics. 
-In Figure \ref{fig:mlb_standings}, 30 different lines are plotted on top of one another, crisscrossing and intersecting in various unpredictable ways. 
-However, the use of team colors to identify the lines makes it possible to follow the trajectory of most teams over the course of the season. 
+Figure \ref{fig:teamcolors} illustrates the full array of team color palettes for professional sports leagues. 
 
-```{r}
-# remotes::install_github("beanumber/retro")
-library(retrosheet)
-retro_gl <- get_retrosheet("game", 2021)
-games_2021 <- retro_gl |>
-  mutate(home_win = HmRuns > VisRuns) %>%
-  select(Date, VisTm, HmTm, home_win) %>%
-  pivot_longer(
-    -c(Date, home_win),
-    names_to = "is_home", values_to = "team_id", 
-  ) %>%
-  mutate(
-    is_win = ifelse(
-      is_home == "HmTm", home_win, abs(1 - home_win))
-  ) %>%
-  group_by(team_id) %>%
-  mutate(
-    cum_W = cumsum(is_win), 
-    cum_L = cumsum(!is_win), 
-    cum_G = cum_W + cum_L, 
-    G_over_500 = cum_W - cum_L, 
-    last_game = cum_G == max(cum_G)
-  )
-retro_teams <- retrosheet::getTeamIDs(2021) |>
-  enframe(name = "mascot", value = "retro_id")
-mlb_pal <- teamcolors |>
-  filter(league == "mlb", str_detect(division, "NL")) |>
-  inner_join(retro_teams, by = "mascot") |>
-  select(retro_id, primary) |>
-  deframe()
-games_2021 <- games_2021 |>
-  filter(team_id %in% names(mlb_pal))
+```{r teamcolors, warning=FALSE, fig.cap="Professional sports team color palettes provided by the \\pkg{teamcolors} package. ", fig.height=9}
+teamcolors::show_team_col()
 ```
-
-```{r mlb_standings, fig.cap="The progression of National Leauge team standings during the 2021 Major League Baseball season. Note how the use of team colors makes it possible to untangle what would otherwise be a messy jumble of indistinguishable lines. Data provided by \\pkg{retrosheet} and colors provided by \\pkg{teamcolors}."}
-ggplot(
-    games_2021, 
-    aes(x = cum_G, y = G_over_500, color = team_id)
-  ) + 
-  geom_hline(yintercept = 18, color = "darkgray", lty = 2) + 
-  geom_line() +  
-  ggrepel::geom_label_repel(
-    data = filter(games_2021, last_game), 
-    aes(label = team_id)
-  ) + 
-  annotate("text", x = 2, y = 22, label = "90 wins", color = "darkgray", hjust = "left") +
-  scale_color_manual(
-    guide = "none", name = "Team",
-    values = mlb_pal
-  ) +
-  scale_y_continuous("Games above .500") + 
-  scale_x_continuous("Cumulative Games Played") + 
-  labs(title = "Daily MLB Standings, 2021", 
-       caption = "Source: Retrosheet")
-```
-
-
-\pkg{nflplotR} [@R-nflplotR] has a similar goal to \pkg{teamcolors}.
-It also provides \pkg{ggplot2} extensions but is designed specifically for the NFL.
-A great feature of \pkg{nflplotR} is the collection of `geom_*()` (geometric object) functions that enhance high-quality plotting of NFL team logos and player images with \pkg{ggplot2}.
-Figure \ref{fig:nflplotr} shows a scatterplot of offensive and defensive expected points added for NFL teams in the 2021 regular season.
-The logos of all 32 American football clubs are plotted in place of the usual dots, making it easier for the reader to identify which team each data point represents.
-
-```{r nflplotr, fig.cap="Offensive and defensive expected points added per play for the 2021 NFL regular season, plotted with \\pkg{nflplotR} using data from \\pkg{nflfastR}."}
-pbp <- nflreadr::load_pbp(2021) %>% 
-  dplyr::filter(season_type == "REG") %>%
-  dplyr::filter(!is.na(posteam) & (rush == 1 | pass == 1))
-
-offense <- pbp %>%
-  dplyr::group_by(team = posteam) %>%
-  dplyr::summarise(off_epa = mean(epa, na.rm = TRUE))
-
-defense <- pbp %>%
-  dplyr::group_by(team = defteam) %>%
-  dplyr::summarise(def_epa = mean(epa, na.rm = TRUE))
-
-combined <- offense %>%
-  dplyr::inner_join(defense, by = "team")
-
-combined |> 
-  ggplot(aes(off_epa, def_epa)) +
-  nflplotR::geom_mean_lines(aes(v_var = off_epa , h_var = def_epa)) +
-  nflplotR::geom_nfl_logos(aes(team_abbr = team), width = 0.08, alpha = 0.8) +
-  labs(x = "Offensive EPA/play",
-       y = "Defensive EPA/play") +
-  scale_y_reverse()
-```
-
-Player tracking data contains coordinates that reveal player movement, and these coordinates are always understood in context relative to reference points on the field, court, ice, board, or pitch for a particular sport. 
-Orienting these points graphically may require drawing a complex set of guidelines that provide that context to readers. 
-Thankfully, the \pkg{sportyR} package [@R-sportyR] contains generic playing surfaces for baseball, basketball, curling, American football, ice hockey, soccer, and tennis that can be added to \pkg{ggplot} graphics with a single function call. 
-Consider, for example, how much time the surfaces plotted in Figure \ref{fig:sportyR} would save you, and how helpful they would be in contextualizing player tracking data (such as those shown in Figure \ref{fig:epv-demo}).
-With the increased availability of player tracking data, this particular tool should see increased usage. 
-
-```{r sportyR, fig.show="hold", out.width="49%", fig.cap="At left, an NBA basketball court drawn by \\pkg{sportyR}. At right, an NHL hockey rink drawn by \\pkg{sportyR}."}
-library(sportyR)
-geom_basketball(league = "NBA")
-# geom_tennis(league = "USTA")
-geom_hockey(league = "NHL")
-```
-
-## Case study in the evolution of tools and research: baseball {#sec:baseball}
-
-As the granularity of baseball data has evolved over time, so too have the statistical methodologies for modeling that data, and the tools for working with it. 
-
-For example, before George Lindsay's work (see Section \ref{sec:ev}), most of the baseball data that was publicly available was seasonal: it showed only season totals for each player. 
-These data, now available through the \pkg{Lahman} package [@R-Lahman], were sufficient to study broad trends in baseball, and led to insights such as the value of expected winning percentage (see Section \ref{sec:wpct}) and the importance of on-base percentage relative to batting average. 
-These relatively simple insights fueled the "Moneyball" [@lewis2004moneyball] era revolution in sports analytics [@baumer2014sabermetric]. 
-
-Over time, the resolution of baseball data has improved to include play-by-play data, pitch-by-pitch data, and now player tracking data. 
-
-The \pkg{retrosheet} package [@R-retrosheet] now provides access to the historical play-by-play data available from Retrosheet (this is a comprehensive version of what Lindsay collected for his research).
-This play-by-play data allowed researchers to learn about strategies, like those that we discussed in Section \ref{sec:ev}.
-In baseball, this deepened our understanding of bunting, stolen bases, handedness, batting order, and many other aspects of the game. 
-Play-by-play data underlies much of the analysis in @Tango2007book.
-
-The \pkg{pitchRx} package [@R-pitchRx] provides access to pitch-by-pitch data that fueled innovative research into catcher framing [@deshpande2017hierarchical], pitch values [@healey2019bayesian], and pitch classification [@sidle2018using].
-Catcher framing is a notable example of a concept that scouts talked about for decades, but that could not be quantified by analysts until data of the appropriate resolution became available. 
-
-While play-by-play data allows us to make valuations *between plays*, player tracking data allows us to make valuations *within plays*. 
-The \pkg{baseballr} package [@R-baseballr] now provides access to player tracking data from Statcast.
-These data have led to investigations into how defensive shifts affect batting performance [@bouzarth2021swing], as well as how launch angles affect the probability of hitting a home run [@marchi2018analyzing].
-
-As we saw above with chess, the packages in baseball fit together in creative ways. 
-In Figure \ref{fig:mlb_standings}, we showed how \pkg{teamcolors} can illuminate data pulled from \pkg{retrosheet} to make an informative data graphic. 
-One could just as easily use \pkg{sportyR} to generate a field graphic, and then overlay player tracking data obtained from \pkg{baseballr} to depict defensive shifts. 
-
-Thus, these R packages enable research by making data more easily available. 
-Moreover, because R is scriptable, they make it easier to share research that is reproducible. 
-[Recent conferences, such as the [Carnegie Mellon Sports Analytics Conference](https://www.stat.cmu.edu/cmsac/conference/2021/), have included a reproducible research competition to foster these efforts (see Section \ref{sec:opportunities}).]
 
 # Opportunities {#sec:opportunities}
 
-Public research in sports analytics is driven in part by several notable competitions and conferences. 
-These venues have been an important source of new ideas and have contributed to the diversification of the field by breaking down barriers to entry. 
+Public research in sports analytics is driven in part by several notable competitions. 
+These competitions have been an important source of new ideas and have contributed to the diversification of the field by breaking down barriers to entry. 
 
 In 2014, Kaggle launched its first March Machine Learning Mania competition for predicting the outcome of the NCAA men's basketball tournament. 
 243 entrants competed for the $15,000 cash prize by submitting predicted probabilities for every possible pairwise matchup among the 68 college basketball teams in the tournament [@GlickmanSonas2015]. 
@@ -1153,19 +733,9 @@ Perhaps motivated by his success in the Kaggle March Madness competition, Michae
 This annual competition has similarly fueled new research directions in American football and a [*JQAS* special issue on player tracking data in the National Football League](https://www.degruyter.com/journal/key/jqas/16/2/html) [@lopez2020bigger].
 Successful entries and their corresponding publications [@DeshpandeEvans2020; @Yurko2020going; @ChuReyersThomsonWu2020] have launched the careers of several of the most prominent early-career researchers in sports analytics. 
 
-Similar competitions that provide opportunities for aspiring researchers to tackle sports analytics problems include the [Big Data Cup](https://www.stathletes.com/big-data-cup/) for ice hockey and the [SABR Diamond Dollars Case Competition](https://sabr.org/analytics/case) for baseball, and the [Big Data Derby](https://www.kaggle.com/competitions/big-data-derby-2022) for horse racing.  
+Similar competitions that provide opportunities for aspiring researchers to tackle sports analytics problems include the [Big Data Cup](https://www.stathletes.com/big-data-cup/) for ice hockey and the [SABR Diamond Dollars Case Competition](https://sabr.org/analytics/case) for baseball.
 
-As the field of sports analytics has grown, a proliferation of sports specific and regional sports analytics conferences have arisen.
-The biennial [New England Symposium on Statistics in Sports](https://www.nessis.org/) is likely the longest-running academic conference devoted to sports analytics. 
-It's West Coast counterpart is [The Cascadia Symposium on Statistics in Sports](http://www.cascadiasports.com/). 
-Many influential results have been showcased for the first time at these conferences. 
-Other prominent sports analytics conferences include the  [Carnegie Mellon Sports Analytics Conference](https://www.stat.cmu.edu/cmsac/conference/2022/), [UConn Sports Analytics Symposium](https://statds.org/events/ucsas2022/), and [MathSport International](http://www.mathsportinternational.com/).
-
-The highest-profile sports analytics conference is undoubtedly the [Sloan Sports Analytics Conference](https://www.sloansportsconference.com/), which draws academics, industry professionals, vendors, and media organizations.
-While the conference holds a research competition and has certainly drawn attention to sports analytics, it has also been criticized for a variety of shortcomings. 
-These criticisms include a lack of emphasis on reproducibility in the research competition, high ticket prices, the large salaries taken by the organizers, and the lack of diversity among attendees and presenters [@funt2022].
-
-# Conclusion {#sec:conclusion}
+# Conclusion
 
 <!--
 Sum up the key conclusions of your review, highlighting the most promising scientific developments, directions for future research, applications, etc. The conclusion should be ~2 paragraphs, ~750 words total.
@@ -1174,21 +744,24 @@ Sum up the key conclusions of your review, highlighting the most promising scien
 As an applied science, sports analytics may lack a [grand unified theory](https://en.wikipedia.org/wiki/Grand_Unified_Theory) that succinctly characterizes game play across all sports. 
 However, as a maturing discipline, sports analytics has been able to address fundamental questions common to many sports. 
 In this paper, we explore three of those big questions: 
-Who are the best teams and how good are they? 
-What is the likelihood of each team winning the game at any given juncture? 
-Is there a generic framework for evaluating strategies at any given juncture in a game? 
 
-Other fundamental questions are addressed elsewhere. 
-How significant is the element of chance in a particular sport? 
-Given that we know who the best teams are, who are the best players and how can we quantify their relative contributions? 
-What combinations of players work best together in a particular sport? In particular, see @Lopez2018 for estimations of the element of chance across four major sports. 
+- Who are the best teams and how good are they? 
+- What is the likelihood of each team winning the game at any given juncture? 
+- Is there a generic framework for evaluating strategies at any given juncture in a game? 
+
+Other fundamental questions, such as:
+
+- How significant is the element of chance in a particular sport? 
+- Given that we know who the best teams are, who are the best players and how can we quantify their relative contributions? 
+- What combinations of players work best together in a particular sport? 
+
+are addressed elsewhere. 
+In particular, see @Lopez2018 for estimations of the element of chance across four major sports. 
 The second question is often addressed using a formulation of *wins above replacement* (WAR)---see @baumer2015openwar and @Yurko2019nflwar for details in baseball and American football. 
-Recent work by @che2022athlete also addresses this question across sports. 
 The third question is most compelling in sports like basketball, ice hockey, and soccer, where substitutions are common and it is obvious that different combinations of players with different sets of skills will result in squad of varying strengths and weaknesses.
 The concept of *plus-minus*, and then *adjusted* plus-minus is frequently applied to address this question (see @hvattum2019comprehensive for a comprehensive overview of applications). 
 
-In drawing together these three big ideas in sports analytics, we have also drawn attention to new uses of sports betting market data, some computational tools for doing sports analytics work, and opportunities to showcase that work. 
-Our discussion in Section \ref{sec:baseball} shows how the increased resolution of available data has catalyzed new research directions in baseball, but this same dynamic is playing out in all sports. 
+In drawing together these three big ideas in sports analytics, we have also drawn attention to some computational tools for doing the work and opportunities to showcase that work. 
 It is through these exchanges of ideas, tools, models, and data that analytics moves our collective understanding of sports forward.  
 
 # Acknowledgments {.unnumbered}
