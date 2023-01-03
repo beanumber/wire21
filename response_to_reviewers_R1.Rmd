@@ -42,6 +42,9 @@ I think that parts of the first paragraph of Section 5 regarding biometric data 
 > We have a added a citation to this work, but note that whereas Macdonald is using expected *goals*, he did not have access to player tracking data necessary to compute an EPV metric. 
 
 - Section 6.1, line 53, Figure ??
+
+> This is an artifact of the attempt to track changes and does not appear in the unannotated manuscript. 
+
 - Section 6.1, line 56, contextual is used twice in that sentence, perhaps “helping the reader visualize” or “helping the reader understand”
 
 > We have changed this to "understand". 
@@ -55,7 +58,13 @@ I think that parts of the first paragraph of Section 5 regarding biometric data 
 > This is a downstream consequence of the previous error with Figure ??
 
 - Figure 6, in my version the images are stacked rather than left/right
+
+> This is an artifact of the attempt to track changes and does not appear in the unannotated manuscript. 
+
 - Section 6.2, line 46 This sentence that starts “Consider, for example, “ seems out of place with the rest of the tone of this article
+
+> TODO
+
 - Section 7, line 7 or 8, it might be worth mentioning the growth of small conferences like UCSAS that have sprung up, something like “As the field of sports analytics has grown, there has been a proliferation of sports specific and regional sports analytics conferences.”
 
 > We have added a similar sentence to this effect. 
