@@ -277,7 +277,7 @@ knitr::include_graphics("carter_table1.png")
 ```
 
 Early work on expected point values in American football can also be found in @Carroll1988hidden.
-In particular, the authors extend @Carter1971operations's work and propose a linear model for expected points in the NFL.
+In particular, the authors consider a similar approach to @Carter1971operations and propose a linear model for expected points in the NFL.
 They determine that every extra 25 yards is associated with 2 more points scored on average for a football team.
 
 Other attempts at modeling expected points in football are @goldner2012markov and @goldner2017situational, who propose a Markov framework.

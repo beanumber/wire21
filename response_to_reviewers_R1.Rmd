@@ -29,6 +29,9 @@ those specific topics.
 - In Section 2.1.2, I am a little confused as to what Carroll et. al. did to extend the
 previous model of Carter and Machol, since both efforts seem to involve some sort of
 linearity assumption.
+
+> We have fixed the wording of this sentence. Instead of "extend", it now says "consider a similar approach".
+
 - Also in Section 2.1.2, it might be worthwhile to briefly define absorbing states, as I for
 one didn’t know the definition before looking it up (and as it turns out the concept is
 quite simple)
