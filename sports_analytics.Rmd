@@ -190,7 +190,7 @@ In this example using baseball, $\mathbb{E}[X | s] \,$ is the expected number of
 The collection of estimates $\mathbb{E}[X | s]$ for all 24 states is called the *expected run matrix* [^matrix], and it is foundational in baseball analytics. 
 
 
-[^state]: 25, if you include the absorbing state of 3 outs.
+[^state]: 25, if you include the absorbing state of 3 outs that describes the end of an inning.
 
 [^matrix]: There is no inherent dimensionality to $\mathbb{E}[X | s]$. The *matrix* nomenclature stems from its values typically being displayed in $8 \times 3$ grid. However, when computing with $\mathbb{E}[X | s]$, it is most often convenient to treat it as a $24 \times 1$ vector. 
 
@@ -281,7 +281,8 @@ In particular, the authors extend @Carter1971operations's work and propose a lin
 They determine that every extra 25 yards is associated with 2 more points scored on average for a football team.
 
 Other attempts at modeling expected points in football are @goldner2012markov and @goldner2017situational, who propose a Markov framework.
-In particular, the author considers a football drive as an *absorbing Markov chain*, consisting of distinct *absorbing states* that include touchdowns, field goals, and other play outcomes. 
+In particular, the author considers a football drive as an *absorbing Markov chain*, consisting of distinct *absorbing states* that include touchdowns, field goals, and other possession outcomes. 
+An absorbing state is a link in a Markov chain from which there are no possible transitions (i.e., it is the end of the chain).
 For any given play, the expected points are calculated using the absorption probabilities for different scoring events.
 
 A more in-depth overview of the history of expected points in sports is provided in @Yurko2019nflwar (Section 1.1). 
