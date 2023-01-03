@@ -16,12 +16,16 @@ will serve as a very useful introduction to the field of sports analytics. I hav
 suggestions and points of confusion to share, which I hope the authors will examine before
 submitting the final version. They are all fairly minor.
 
+> Thank you for your feedback.
 
 - If there is still space allowed in the abstract, I think you could consider explicitly
 mentioning the three big ideas (expected value of a game state, win probability, and
 measures of team strength). This would give readers a better idea of what is to come
 and also allow people to find your article more easily if they are interested in one of
 those specific topics.
+
+> Thank you for this suggestion. We have added the three ideas explicitly to the abstract. 
+
 - In Section 2.1.2, I am a little confused as to what Carroll et. al. did to extend the
 previous model of Carter and Machol, since both efforts seem to involve some sort of
 linearity assumption.
