@@ -50,6 +50,9 @@ referring to the estimated effects past studies which used less granular data.
 - In Section 2.3, you write “NHL coaches do not always employ the optimal strategies”,
 but it isn’t clear what those strategies are in reference to the previous discussion. Is
 pulling the goalie optimal?
+
+> We have added a clarification that coaches usually wait too long to pull their goalies. 
+
 - In the second formula of Section 4.1, the right hand side of the equation has a 2, but
 it should be an α.
 

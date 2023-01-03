@@ -456,7 +456,7 @@ The situation gets even more interesting when teams modify both their offensive 
 For example, in hockey teams will often pull their goalie when trailing in the final period. 
 This strategy severely weakens their defense but strengthens their offense. 
 The hope is to score a quick goal to get back in the game, but the risk is falling further behind. 
-@beaudoin2010strategies show that NHL coaches do not always employ the optimal strategies. 
+@beaudoin2010strategies show that NHL coaches do not always employ the optimal strategies, usually by waiting too long to pull their goalies. 
 @skinner2011scoring develops a general framework for these desperation strategies, which include the onside kick in American football, pulling the infield and/or outfield in baseball, and of course, the fabled Hack-a-Shaq strategy in basketball. 
 
 
