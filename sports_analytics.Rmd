@@ -323,8 +323,8 @@ For quarterback evaluation, @White2002 present a tiered logistic regression meth
 @Alamar2010 implements an expected points framework to examine play calling in the NFL. However, rather than assessing each play on its own, they evaluate the play in the context of the drive. 
 Based on play-by-play data from 2005 through 2008, they determine that teams are under-utilizing passing plays in some situations.  
 
-Another application of expected points is to evaluate kickoff decisions made by football coaches, as demonstrated by @urschel2011. 
-Specifically, they look at surprise on-sides kicks versus regular kickoffs and the decision to accept a touchback versus returning the kickoff.  
+Another application of expected points is to evaluate kickoff decisions made by football coaches, as demonstrated by @urschel2011.
+Specifically, they look at surprise on-sides kicks versus regular kickoffs and the decision to accept a touchback versus returning the kickoff.
 Using data from the 2009 NFL season, they conclude, as many have, that coaches in the NFL tend to make conservative decisions.
 
 <!-- decsions on kick offs (surprise on sides or regular kick off AND accept touchback or return kick) using an expected points frame work.  Shows that teams are moderately risk and loss averse. -->
