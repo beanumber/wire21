@@ -56,8 +56,10 @@ it should be an α.
 > Thank you. This is fixed. 
 
 - I think Section 5.2 would benefit from a short introductory paragraph, perhaps which
-introduces different types of sports betting, thus leading into the betting pools discus-
-sion of Section 5.2.1.
+introduces different types of sports betting, thus leading into the betting pools discussion of Section 5.2.1.
+
+> Thank you for this suggestion. We have a added a short paragraph to this effect. 
+
 - I notice you have several hyperlinks throughout–I’m not sure what the Wiley standards
 are, but it might be helpful to distinguish links with a different color.
 

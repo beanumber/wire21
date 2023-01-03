@@ -887,6 +887,11 @@ Sports betting market data has also been used to investigate competitive behavio
 
 ## Analytics for sports betting {#sec:pools}
 
+Many different types of bets can be placed on sports. 
+For individual contests, bets involve point spreads, moneylines, odds, or other ways of handicapping which team will win. 
+Money can also be wagered on futures, where odds are given in advance for events that may or may not transpire (e.g., a certain team making the playoffs, or a certain player winning the MVP award). 
+Here, we focus on betting pools, in which a group of people compete to predict winners in multiple contests (often a tournament), and the inevitable question of whether strategies exist that will consistently beat the market. 
+
 ### Betting pools
 
 One popular type of betting pool is a survivor pool, in which participants stay in the competition as long as they continue to successfully pick winners.
