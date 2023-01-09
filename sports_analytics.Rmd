@@ -851,7 +851,7 @@ Betting moneylines are used in place of point differentials in order to estimate
 Both papers motivate the usefulness of model-based measures of team strength by demonstrating their superiority to low-resolution win-loss records. 
 Apart from sports gambling, having an accurate estimate of team strength is useful to team officials, who are constantly monitoring and forecasting their team's ability. 
 
-In a similar Bayesian setting, @koopman2015dynamic studies English Premier League soccer match results by assuming a bivariate Poisson distribution with time-varying team abilities.
+In a similar Bayesian setting, @koopman2015dynamic study English Premier League soccer match results by assuming a bivariate Poisson distribution with time-varying team abilities.
 This state-space approach appears to improve on bookmaker's odds.
 
 # Sports betting market data {#sec:betting}
