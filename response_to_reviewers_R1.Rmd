@@ -45,6 +45,9 @@ a potential difference of 3.8 wins per season, yet didn’t comment on the signi
 magnitude of that effect. I’m not advocating for a particular change here, but the
 authors could consider adding a small comment about the size of the effect Pelechrinis
 et. al. estimated.
+
+> We have moved the comment up and connected the second comment to the first. 
+
 - At the end of Section 2.1.3, you write “Lopez (2020) also concludes that coaches are
 too conservative on 4th down decision making, but the effect may be overstated due
 to the way in which to go yardage has been recorded in the past.” It’s unclear to me

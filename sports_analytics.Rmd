@@ -292,7 +292,8 @@ Their model estimates the probabilities of the following possible scoring outcom
 The expected points for a play can then be calculated accordingly, by summing up the products of the scoring event point values and their associated probabilities (see Equation 1).
 
 In addition, @pelechrinis2019 develop an expected points framework in the same spirit as the previous work, but account for the strength of the opponents in their method.
-They state that by failing to account for opponent strength appropriately, about 124.8 points per team each season (or about 3.8 wins per season) are not credited correctly.  
+They state that by failing to account for opponent strength appropriately, about 124.8 points per team each season (or about 3.8 wins per season) are not credited correctly.
+This is a substantial amount in a 16-game season. 
 
 <!-- XX Seems massive -->
 
@@ -304,7 +305,7 @@ There is near universal consensus in the literature that NFL teams have been too
 @Romer2006 examines 4th down decisions in the NFL using expected points by focusing only on examples from the first quarter of a game (to avoid issues with end-of-half and end-of-game decision making). 
 They concluded that teams don't go for it enough if teams are trying to maximize their probability of winning the game. 
 
-Numerous other papers (see @lopez2020bigger for details) use the analysis of the expected number of points to improve fourth down strategy. In addition to @Romer2006, later work by @Yam2019 uses win probability (see Section \ref{sec:wp}), rather than expected points, and a causal inference framework to reach similar conclusions that NFL teams are too conservative in going for it on 4th down.  In addition, they estimate that a better strategy would be worth about 0.4 wins per season on average, a substantial amount in a season with only 16 games. 
+Numerous other papers (see @lopez2020bigger for details) use the analysis of the expected number of points to improve fourth down strategy. In addition to @Romer2006, later work by @Yam2019 uses win probability (see Section \ref{sec:wp}), rather than expected points, and a causal inference framework to reach similar conclusions that NFL teams are too conservative in going for it on 4th down.  In addition, they estimate that a better strategy would be worth about 0.4 wins per season on average, a substantial amount comparable to the effect size reported by @pelechrinis2019 above. 
 
 @lopez2020bigger presents an introduction to NFL tracking data, and examines 4th down behavior as an example of the type of problem that can be more thoroughly studied with the increase in granularity of the tracking data over traditional NFL data.
 In the past, when looking at down and distance data to study whether NFL coaches are making good decisions about whether to "go for it" or punt on 4th down, the distance data is only a rounded approximation of the true distance "to go" (i.e. 1 yard, 1 foot, and 1 inch will all be recorded as 4th and 1. 
