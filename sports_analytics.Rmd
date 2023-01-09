@@ -312,7 +312,7 @@ In the past, when looking at down and distance data to study whether NFL coaches
 In fact, anything up to 2 yard will recorded as 4th and 1 [@lopezDM]. However, a coach on the field during a game will be able to clearly see the difference between 1 inch and 1 yard, and this information will factor into their decision making. 
 With tracking data, the "to go" distance can be much more accurately assessed and therefore evaluation of 4th down coaching decisions can now account for this "extra" information that is available to a coach on the field of play, but not recorded in traditional NFL data. 
 Many past analyses of the decision to go for it or not on 4th down conclude that coaches in the NFL are too conservative in their decision making. 
-@lopez2020bigger also concludes that coaches are too conservative on 4th down decision making, but the effect may be overstated due to the way in which to go yardage has been recorded in the past.  
+@lopez2020bigger also concludes that coaches are too conservative on 4th down decision making, but further notes that past estimates of the magnitude of how conservative coaches are on 4th down may be overstated due to the way in which to go yardage was recorded only approximately in the past.  
 
 
 ### Other applications of expected points in American football
