@@ -143,6 +143,8 @@ Suggested Changes:
 
 - I think that parts of the first paragraph of Section 5 regarding biometric data is a bit out of place. This could be moved to Section 7 (Opportunities). Likewise, Section 5 could be retitled something like‘Betting Data and Sports Analytics” or “Betting Data Analysis”.
 
+> Thank you for this suggestion. We renamed Section 5: Sports betting market data and added this as a 4th "big idea". We moved the short discussion of the use of proprietary biometric data to the end of Section 7. We also added a short example of how betting lines could be used to compute implied team strengths.  
+
 ## Minor Changes from Reviewer 2
 
 - Page 1, line 47 “And, of course, in baseball” add commas before and - after “of course”

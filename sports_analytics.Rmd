@@ -21,11 +21,11 @@ authors:
     email: nmquang@cmu.edu
 abstract: |
   Sports analytics---broadly defined as the pursuit of improvement in athletic performance through the analysis of data---has expanded its footprint both in the professional sports industry and in academia over the past 30 years. 
-  In this paper, we connect three big ideas that are common across multiple sports: the expected value of a game state, win probability, and measures of team strength.
+  In this paper, we connect four big ideas that are common across multiple sports: the expected value of a game state, win probability, measures of team strength, and the use of sports betting market data.
   For each, we explore both the shared similarities and individual idiosyncracies of analytical approaches in each sport. 
   While our focus is on the concepts underlying each type of analysis, any implementation necessarily involves statistical methodologies, computational tools, and data sources.
   Where appropriate, we outline how data, models, tools, and knowledge of the sport combine to generate actionable insights. 
-  We also describe the use of non-performance data and opportunities to share analytical work, but omit an in-depth discussion of individual player evaluation as beyond our scope.
+  We also describe opportunities to share analytical work, but omit an in-depth discussion of individual player evaluation as beyond our scope.
   This paper should serve as a useful overview for anyone becoming interested in the study of sports analytics. 
 keywords:
   - sports analytics
@@ -136,13 +136,13 @@ For example, despite belonging to the same bat-and-ball family, baseball and cri
 Conversely, with just a few small tweaks, analytical metrics might work just as well across sports that are unrelated and quite different.
 For instance, an Elo rating could be equally valid for chess players and ice hockey teams. 
 
-In this paper, we explore three key ideas that have widespread applicability across many sports: the expected value of a game state (Section \ref{sec:ev}), win probability (Section \ref{sec:wp}), and measures of team strength (Section \ref{sec:strength}). 
+In this paper, we explore four key ideas that have widespread applicability across many sports: the expected value of a game state (Section \ref{sec:ev}), win probability (Section \ref{sec:wp}), measures of team strength (Section \ref{sec:strength}), and the use of sports betting market data (Section \ref{sec:betting}). 
 In each case, we define the concept mathematically, explain how it originated, and give examples of its applications in multiple sports. 
 Our goal is to unify the conceptual threads, while doing some justice to the customizations necessary to make a metric meaningful in a particular sport. 
 We include copious references to original works of scholarship.
 
 Doing the work of sports analytics requires computing with data. 
-While the sources of sports data are too numerous to list, we discuss the use of non-performance data (most notably, sports market betting data) in Section \ref{sec:betting}, and in Section \ref{sec:tools} we highlight a few computational tools (including a table of R packages) that make this kind of work possible. 
+While the sources of sports data are too numerous to list, in Section \ref{sec:tools} we highlight a few computational tools (including a table of R packages) that make this kind of work possible. 
 Section \ref{sec:opportunities} lists several opportunities for disseminating work publicly. 
 We conclude in Section \ref{sec:conclusion} with a short discussion of some ideas that are not explored in this paper. 
 Notably, we omit a treatment of individual player ratings for team sports, since this concept has been covered ably in these pages by @Albert2015, and its inclusion would double the length of this manuscript.
@@ -852,15 +852,10 @@ Apart from sports gambling, having an accurate estimate of team strength is usef
 
 @koopman2015dynamic use a Bayesian state-space model to develop team ratings for English Premier League soccer that improves on bookmaker's odds. 
 
-# Non-performance data {#sec:betting}
+# Sports betting market data {#sec:betting}
 
 Most of the research in sports analytics is fueled by the analysis of data recorded from the outcome of sports contests.
-However, a growing body of literature is informed by non-performance data about sports. 
-This research appears in fields like sports economics and kinesiology that are subfields of mature disciplines (a treatment of either is well beyond the scope of the this paper).
-In addition to this body of research, we note that today, professional sports teams are collecting biometric data on their own players, and presumably using that data to learn about how their workouts, sleep patterns, and diets impact their athletic performance. 
-While this research may constitute "emerging methodologies," it will likely never be published, because each team will use it to their competitive advantage. 
-
-Nevertheless, in this Section we discuss concepts stemming from one notable, relatively new source of (semi-)public non-performance sports data: betting markets.
+However, a growing body of literature is informed by data from sports betting markets. 
 Since the 2018 United States Supreme Court decision in [*Murphy v. National Collegiate Athletic Association*](https://en.wikipedia.org/wiki/Murphy_v._National_Collegiate_Athletic_Association), sports gambling has exploded in the U.S. 
 The increasing interest in sports gambling has led to increasing interest in sports gambling *data*, and that data has proven useful to researchers in at least two major ways. 
 
@@ -872,6 +867,43 @@ In this sense, data generated by sports gambling has been an important source of
 Second, sports analytics researchers have studied various types of sports gambling outlets (including fantasy sports). 
 This research has estimated probabilities, evaluated common strategies, and offered optimized approaches for a variety of different games of chance (see Section \ref{sec:pools}). 
 Some researchers have then tried to demonstrate a positive return on some of these betting strategies, with very limited success.
+
+## Example of how to use betting market data
+
+To see how betting market data can be used to estimate team strengths, consider the betting odds posted on [FanDuel Sportsbook for the 2023 NBA Champion](https://sportsbook.fanduel.com/navigation/nba?tab=nba-finals), posted on January 9, 2023 and shown in Figure \ref{tab:odds}. 
+This is a futures market, because the actual NBA champion will not be determined until June 2023. 
+The Boston Celtics are the favorite to win, with posted odds of $+390$, meaning that a \$100 bet on the Celtics to win the championship will pay out \$390 if the Celtics win it all. 
+Conversely, six teams share the lowest odds at $+50000$. 
+
+```{r odds}
+library(tidyverse)
+odds <- read_csv("odds.csv")
+odds |>
+  mutate(
+    prob = 100 / (100 + line),
+    `Prob. Normalized` = prob / sum(prob)
+  ) |>
+  rename(Team = team, Line = line, `Prob.` = prob) |>
+  mutate(Rank = row_number(), .before = Team) |>
+  janitor::adorn_totals() |>
+  slice(c(1:6, 25:31)) |>
+  knitr::kable(
+    booktabs = TRUE, 
+    linesep = c('', '', '', '', '', '\\addlinespace'),
+    digits = 3, 
+    caption = "2023 NBA Championship line odds for the top 6 and bottom 6 teams. Retrieved from FanDuel Sportsbook on January 9, 2023. ")
+```
+
+These lines ($\ell_i$) can be converted into an implied probability ($p_i$) using the formula:
+$$
+  p_i = \frac{100}{100 + \ell_i} \,.
+$$
+The sum of those probabilities is greater than one---this is why the sportsbook makes money regardless of who wins the championship. 
+However, the implied probabilities can be normalized by dividing by their sum to recover true probabilities of each team winning the championship. 
+Many different researchers have shown that these normalized implied probabilities are accurate, unbiased, and efficient estimates of the true unknowable probabilities (see @Lopez2018 for discussion and an extensive list of references). 
+
+In this case, the FanDuel futures market suggests that the Celtics have a 16.3\% chance of winning the championship, while the Milwaukee Bucks have the second best chance, at 13.3\%. 
+These implied probabilities can be used to fit various models for team strength, as described in Section \ref{sec:strength}.
 
 ## The use of betting market data for sports analytics {#sec:betting-market-data}
 
@@ -1184,6 +1216,12 @@ Other prominent sports analytics conferences include the  [Carnegie Mellon Sport
 The highest-profile sports analytics conference is undoubtedly the [Sloan Sports Analytics Conference](https://www.sloansportsconference.com/), which draws academics, industry professionals, vendors, and media organizations.
 While the conference holds a research competition and has certainly drawn attention to sports analytics, it has also been criticized for a variety of shortcomings. 
 These criticisms include a lack of emphasis on reproducibility in the research competition, high ticket prices, the large salaries taken by the organizers, and the lack of diversity among attendees and presenters [@funt2022].
+
+It is also worth noting that a significant, but unknown, proportion of the most innovative research is being conducted by professional sports teams. 
+This research will likely never be published, because each team will use it to their competitive advantage. 
+Part of what enables this research is better data. 
+For example, professional sports teams can collect biometric data on their own players, and use that data to learn about how their workouts, sleep patterns, and diets impact their athletic performance. 
+While this research may constitute "emerging methodologies," it unfortunately will take years, if at all, before the public benefits from it. 
 
 # Conclusion {#sec:conclusion}
 
