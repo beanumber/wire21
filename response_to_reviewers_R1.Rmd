@@ -53,6 +53,9 @@ too conservative on 4th down decision making, but the effect may be overstated d
 to the way in which to go yardage has been recorded in the past.” It’s unclear to me
 whether the overstated effect is the one Lopez estimates in his paper, or if you are
 referring to the estimated effects past studies which used less granular data.
+
+> We have clarified this language. It now reads: "Lopez (2020) also concludes that coaches are too conservative on 4th down decision making, but notes further that past estimates of the magnitude of how conservative coaches are on 4th down may be overstated due to the way in which to go yardage was recorded only approximately in the past."
+
 - In Section 2.3, you write “NHL coaches do not always employ the optimal strategies”,
 but it isn’t clear what those strategies are in reference to the previous discussion. Is
 pulling the goalie optimal?

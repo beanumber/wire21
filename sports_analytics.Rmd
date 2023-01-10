@@ -312,7 +312,7 @@ In the past, when looking at down and distance data to study whether NFL coaches
 In fact, anything up to 2 yard will recorded as 4th and 1 [@lopezDM]. However, a coach on the field during a game will be able to clearly see the difference between 1 inch and 1 yard, and this information will factor into their decision making. 
 With tracking data, the "to go" distance can be much more accurately assessed and therefore evaluation of 4th down coaching decisions can now account for this "extra" information that is available to a coach on the field of play, but not recorded in traditional NFL data. 
 Many past analyses of the decision to go for it or not on 4th down conclude that coaches in the NFL are too conservative in their decision making. 
-@lopez2020bigger also concludes that coaches are too conservative on 4th down decision making, but further notes that past estimates of the magnitude of how conservative coaches are on 4th down may be overstated due to the way in which to go yardage was recorded only approximately in the past.  
+@lopez2020bigger also concludes that coaches are too conservative on 4th down decision making, but notes further that past estimates of the magnitude of how conservative coaches are on 4th down may be overstated due to the way in which to go yardage was recorded only approximately in the past.
 
 
 ### Other applications of expected points in American football
@@ -870,11 +870,13 @@ Second, sports analytics researchers have studied various types of sports gambli
 This research has estimated probabilities, evaluated common strategies, and offered optimized approaches for a variety of different games of chance (see Section \ref{sec:pools}). 
 Some researchers have then tried to demonstrate a positive return on some of these betting strategies, with very limited success.
 
-## Example of how to use betting market data
+## Example: Win probabilities from betting market data
 
-To see how betting market data can be used to estimate team strengths, consider the betting odds posted on [FanDuel Sportsbook for the 2023 NBA Champion](https://sportsbook.fanduel.com/navigation/nba?tab=nba-finals), posted on January 9, 2023 and shown in Figure \ref{tab:odds}. 
+To see how betting market data can be used to estimate team strengths, consider the betting lines posted on [FanDuel Sportsbook for the 2023 NBA Champion](https://sportsbook.fanduel.com/navigation/nba?tab=nba-finals) on January 9, 2023 and shown in Table \ref{tab:odds}. 
 This is a futures market, because the actual NBA champion will not be determined until June 2023. 
-The Boston Celtics are the favorite to win, with posted odds of $+390$, meaning that a \$100 bet on the Celtics to win the championship will pay out \$390 if the Celtics win it all. 
+The Boston Celtics are the favorite to win, with a moneyline of $+390$, meaning that a \$100 bet on the Celtics to win the championship will pay back the original bet and an additional \$390 if the Celtics win it all. 
+This style of odds are sometimes called [*American odds*](https://en.wikipedia.org/wiki/Fixed-odds_betting#Moneyline_odds). 
+The corresponding fractional odds have the Celtics at 4.9:1 to win the championship. 
 Conversely, six teams share the lowest odds at $+50000$. 
 
 ```{r odds}
@@ -882,6 +884,7 @@ library(tidyverse)
 odds <- read_csv("odds.csv")
 odds |>
   mutate(
+    Odds = (line / 100) + 1,
     prob = 100 / (100 + line),
     `Prob. Normalized` = prob / sum(prob)
   ) |>
@@ -893,10 +896,10 @@ odds |>
     booktabs = TRUE, 
     linesep = c('', '', '', '', '', '\\addlinespace'),
     digits = 3, 
-    caption = "2023 NBA Championship line odds for the top 6 and bottom 6 teams. Retrieved from FanDuel Sportsbook on January 9, 2023. ")
+    caption = "2023 NBA Championship odds for the top 6 and bottom 6 teams. Retrieved from FanDuel Sportsbook on January 9, 2023. ")
 ```
 
-These lines ($\ell_i$) can be converted into an implied probability ($p_i$) using the formula:
+These moneylines ($\ell_i$) can be converted into an implied probability ($p_i$) using the formula:
 $$
   p_i = \frac{100}{100 + \ell_i} \,.
 $$
