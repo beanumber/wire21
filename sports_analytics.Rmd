@@ -367,7 +367,7 @@ The plot consists of two elements:
 and 2) (top) a line graph showing how the EPV changes continuously throughout the play until the three-point attempt. 
 For this possession, the estimated EPV for the Miami Heat reaches its peak at $1.276$ points at the moment the shot is taken.
 
-```{r epv-demo, out.width="100%", fig.cap="Player locations and estimated EPV for a possession during the Miami Heat (red) vs. Brooklyn Nets (black) NBA game on November 1, 2013. The captured moment is when Miami's Mario Chalmers just releases a three-point shot, which ends up as a missed field goal."}
+```{r epv-demo, out.width="100%", fig.cap="Player locations and estimated EPV for a possession during the Miami Heat (red) vs. Brooklyn Nets (black) NBA game on November 1, 2013. The captured moment is when Miami's Mario Chalmers just releases a three-point shot, which ends up as a missed field goal. Figure created by Cervone, et al. \\url{https://github.com/dcervone/EPVDemo}"}
 # Source: https://github.com/dcervone/EPVDemo/blob/master/gifs/poss_12.gif
 # library(magick)
 # epv <- image_read("https://github.com/dcervone/EPVDemo/blob/master/gifs/poss_12.gif?raw=true")

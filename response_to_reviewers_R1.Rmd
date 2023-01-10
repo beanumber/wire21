@@ -1,7 +1,9 @@
 ---
 title: "Response to Reviewers"
 date: "2023-01-03"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -63,7 +65,7 @@ pulling the goalie optimal?
 > We have added a clarification that coaches usually wait too long to pull their goalies. 
 
 - In the second formula of Section 4.1, the right hand side of the equation has a 2, but
-it should be an α.
+it should be an $\alpha$.
 
 > Thank you. This is fixed. 
 
