@@ -24,7 +24,7 @@ measures of team strength). This would give readers a better idea of what is to 
 and also allow people to find your article more easily if they are interested in one of
 those specific topics.
 
-> Thank you for this suggestion. We have added the three ideas explicitly to the abstract. 
+> Thank you for this suggestion. We have added the three (now four) big ideas explicitly to the abstract. 
 
 - In Section 2.1.2, I am a little confused as to what Carroll et. al. did to extend the
 previous model of Carter and Machol, since both efforts seem to involve some sort of
@@ -145,7 +145,8 @@ Suggested Changes:
 
 - The authors have now made clearer the limitation in scope of this manuscript related to player evaluation. Perhaps, a statement regarding this can be added to the abstract.
 
-> We have a statement to this effect to the abstract. 
+> We have a statement to this effect to the abstract. It now reads: "We also describe opportunities to share analytical work, but
+omit an in-depth discussion of individual player evaluation as beyond our scope."
 
 - I think that parts of the first paragraph of Section 5 regarding biometric data is a bit out of place. This could be moved to Section 7 (Opportunities). Likewise, Section 5 could be retitled something like‘Betting Data and Sports Analytics” or “Betting Data Analysis”.
 

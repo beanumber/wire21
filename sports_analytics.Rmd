@@ -870,7 +870,7 @@ Second, sports analytics researchers have studied various types of sports gambli
 This research has estimated probabilities, evaluated common strategies, and offered optimized approaches for a variety of different games of chance (see Section \ref{sec:pools}). 
 Some researchers have then tried to demonstrate a positive return on some of these betting strategies, with very limited success.
 
-## Example: Win probabilities from betting market data
+## Example: Win probabilities from betting market data {#sec:moneylines}
 
 To see how betting market data can be used to estimate team strengths, consider the betting lines posted on [FanDuel Sportsbook for the 2023 NBA Champion](https://sportsbook.fanduel.com/navigation/nba?tab=nba-finals) on January 9, 2023 and shown in Table \ref{tab:odds}. 
 This is a futures market, because the actual NBA champion will not be determined until June 2023. 
@@ -925,9 +925,10 @@ Sports betting market data has also been used to investigate competitive behavio
 ## Analytics for sports betting {#sec:pools}
 
 Many different types of bets can be placed on sports. 
-For individual contests, bets involve point spreads, moneylines, odds, or other ways of handicapping which team will win. 
+For individual contests, bets involve point spreads, moneylines (see Section \ref{sec:moneylines} for an example), odds, or other ways of handicapping which team will win. 
 Money can also be wagered on futures, where odds are given in advance for events that may or may not transpire (e.g., a certain team making the playoffs, or a certain player winning the MVP award). 
-Here, we focus on betting pools, in which a group of people compete to predict winners in multiple contests (often a tournament), and the inevitable question of whether strategies exist that will consistently beat the market. 
+Here, we focus on betting pools, in which a group of people compete to predict winners in multiple contests (often a tournament).
+We also address the inevitable question of whether strategies exist that will consistently beat the market. 
 
 ### Betting pools
 
