@@ -2,7 +2,7 @@
 title: "Big Ideas in Sports Analytics and Statistical Tools for their Investigation"
 authors:
   - name: Benjamin S. Baumer
-#    thanks: Use footnote for providing further information about author (webpage, alternative address)---*not* for acknowledging funding agencies. Optional.
+    thanks: "Corresponding author, <bbaumer@smith.edu>"
     department: Statistical & Data Sciences
     affiliation: Smith College
     location: Northampton, MA 01063
